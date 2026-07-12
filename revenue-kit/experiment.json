@@ -1,0 +1,13 @@
+{
+  "id": "revenue-leak-audit-v1",
+  "status": "ready_to_sell",
+  "offer": "Website Revenue Leak Audit",
+  "primary_niche": "auto dealerships",
+  "secondary_niches": ["home services", "med spas", "legal services", "other local lead-generation businesses"],
+  "prices": {"preview": 0, "scan": 249, "full_audit": 749, "weekly_monitoring_monthly": 299},
+  "first_sale_target_days": 14,
+  "leading_metrics": {"qualified_prospects": 30, "personalized_messages": 18, "free_previews": 6},
+  "success": "one paid scan",
+  "scale_signal": "two paid scans or one monitoring conversion",
+  "guardrail": "test public non-destructive paths; never submit false customer leads"
+}
