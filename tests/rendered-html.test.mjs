@@ -14,37 +14,36 @@ async function render() {
   );
 }
 
-test("server-renders the complete Revenue Leak Audit offer", async () => {
+test("server-renders the CAT Context Agent hackathon shell", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Revenue Leak Audit \| Find the clicks costing you customers<\/title>/i);
-  assert.match(html, /Your website may be/);
-  assert.match(html, /Get a 3-leak preview/);
-  assert.match(html, /Revenue Leak Scan/);
-  assert.match(html, /\$249/);
-  assert.match(html, /Weekly Monitoring/);
-  assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
+  assert.match(html, /<title>CAT Context Agent \| DataHub Hackathon Draft<\/title>/i);
+  assert.match(html, /Context before action/);
+  assert.match(html, /DataHub-backed workflow agent/);
+  assert.match(html, /Agents That Do Real Work/);
+  assert.match(html, /Apache 2\.0|public GitHub repo|under-3-minute video/);
+  assert.doesNotMatch(html, /Revenue Leak Audit|Get a 3-leak preview|Revenue Leak Scan/i);
 });
 
-test("keeps the finished offer responsive and evidence-led", async () => {
-  const [page, css, layout, packageJson] = await Promise.all([
+test("keeps the project shell responsive and repo-ready", async () => {
+  const [page, css, layout, packageJson, readme] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../README.md", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /Every tested path logged with evidence/);
-  assert.match(page, /No sales guarantee/);
-  assert.match(page, /Full Revenue Audit/);
-  assert.match(page, /\$749/);
-  assert.match(page, /\$299\/month/);
-  assert.match(css, /@media \(max-width:900px\)/);
-  assert.match(css, /@media \(max-width:620px\)/);
-  assert.match(layout, /Revenue Leak Audit \| Find the clicks costing you customers/);
-  assert.doesNotMatch(packageJson, /react-loading-skeleton/);
+  assert.match(page, /MCP Server/);
+  assert.match(page, /Agent Context Kit/);
+  assert.match(page, /receipt-backed action plan/);
+  assert.match(css, /@media \(max-width: 980px\)/);
+  assert.match(css, /@media \(max-width: 620px\)/);
+  assert.match(layout, /CAT Context Agent \| DataHub Hackathon Draft/);
+  assert.match(packageJson, /"name": "cat-context-agent"/);
+  assert.match(readme, /Apache 2\.0/);
   assert.doesNotMatch(page + layout, /codex-preview|_sites-preview|SkeletonPreview/);
 });

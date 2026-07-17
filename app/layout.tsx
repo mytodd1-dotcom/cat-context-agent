@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Revenue Leak Audit | Find the clicks costing you customers",
-  description: "An evidence-backed audit of your website's calls, forms, mobile paths, and customer handoffs—ranked by revenue risk.",
+  title: "CAT Context Agent | DataHub Hackathon Draft",
+  description: "A DataHub-backed agent concept for turning messy business data into trusted, traceable workflows with safe next-action receipts.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
