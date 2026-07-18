@@ -11,7 +11,7 @@ CAT Context Agent demonstrates context before action: the agent reads DataHub-st
 
 | Claim | Evidence | Files to inspect |
 | --- | --- | --- |
-| DataHub is the context layer, not a logo pasted onto the demo. | The demo produces datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects plus a dry-run DataHub bridge plan. | `examples/cat-context-agent/generated-datahub-metadata.json`<br>`examples/cat-context-agent/generated-datahub-bridge-plan.json`<br>`hackathon-assets/datahub-payload-preview.md` |
+| DataHub is the context layer, not a logo pasted onto the demo. | The demo produces datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects plus a dry-run DataHub bridge plan and an opt-in live DataHub runbook. | `examples/cat-context-agent/generated-datahub-metadata.json`<br>`examples/cat-context-agent/generated-datahub-bridge-plan.json`<br>`hackathon-assets/datahub-payload-preview.md`<br>`hackathon-assets/live-datahub-runbook.md` |
 | The agent reads context before it acts. | The MCP-style read plan includes datahub.get_entity, datahub.get_lineage, and cat.get_agent_context_packet before decisions are surfaced. | `examples/cat-context-agent/generated-mcp-context-read.json`<br>`hackathon-assets/context-tool-contracts.md` |
 | The demo shows real workflow behavior. | Three messy business requests are separated into safe internal task, approval-required, and blocked external outreach outcomes. | `examples/cat-context-agent/messy-business-requests.csv`<br>`examples/cat-context-agent/generated-agent-output.json`<br>`hackathon-assets/decision-trace.md`<br>`hackathon-assets/judge-evidence-pack.md` |
 | The safety boundary is explicit and inspectable. | The repo preserves blocked actions for unverified outreach and refuses to invent owners, scrape contacts, or act without verified context. | `examples/cat-context-agent/generated-mcp-context-read.json`<br>`hackathon-assets/artifact-validation-report.md` |
@@ -22,7 +22,8 @@ CAT Context Agent demonstrates context before action: the agent reads DataHub-st
 - It models the uncomfortable middle step most agent demos skip: deciding what the data means before taking action.
 - It treats missing ownership and missing verified contact as workflow state, not as prompts to hallucinate.
 - It emits receipts and regenerated reports, so the judge can audit both the recommendation and the context used to make it.
-- The current evidence chain is reproducible with 3 requests and 7 artifact validation checks.
+- It documents the local DataHub post command separately from the dry-run evidence, so mutation is explicit instead of hidden inside tests.
+- The current evidence chain is reproducible with 3 requests and 8 artifact validation checks.
 
 ## Judge command path
 

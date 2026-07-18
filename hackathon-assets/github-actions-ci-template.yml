@@ -34,6 +34,9 @@ jobs:
       - name: Verify submission evidence chain
         run: npm run submission:verify
 
+      - name: Generate live DataHub runbook
+        run: npm run datahub:runbook
+
       - name: Validate generated artifacts
         run: npm run artifacts:validate
 

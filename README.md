@@ -60,6 +60,14 @@ npm run datahub:payload
 
 That command writes [`hackathon-assets/datahub-payload-preview.md`](./hackathon-assets/datahub-payload-preview.md) and [`hackathon-assets/datahub-payload-preview.json`](./hackathon-assets/datahub-payload-preview.json), showing the dry-run datasetProperties, schemaMetadata, ownership, and glossaryTerms payloads that the bridge would post after local DataHub is running.
 
+To generate the live DataHub verification runbook:
+
+```bash
+npm run datahub:runbook
+```
+
+That command writes [`hackathon-assets/live-datahub-runbook.md`](./hackathon-assets/live-datahub-runbook.md) and [`hackathon-assets/live-datahub-runbook.json`](./hackathon-assets/live-datahub-runbook.json), documenting the local DataHub prerequisites, opt-in `--post` command, expected outputs, acceptance checks, fallback path, and safety boundary.
+
 To generate the request-by-request decision trace:
 
 ```bash
@@ -132,7 +140,7 @@ To run the local equivalent of that CI recipe:
 npm run ci:local
 ```
 
-That command checks `npm ci --dry-run`, regenerates the context contracts, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, and runs the full build/test suite.
+That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, and runs the full build/test suite.
 
 ## DataHub integration path
 
@@ -145,6 +153,8 @@ Next live DataHub step:
 3. Let the agent read `generated-mcp-context-read.json` as the MCP/DataHub-style context contract.
 4. Replace the static packet with DataHub MCP / Agent Context Kit reads.
 5. Write approval/blocked receipt outcomes back as metadata or workflow artifacts.
+
+The repo also includes a generated live-run checklist at [`hackathon-assets/live-datahub-runbook.md`](./hackathon-assets/live-datahub-runbook.md). It keeps the live mutation step separate from dry-run evidence so judges can verify the exact command before anything is posted.
 
 ## Planned stack
 
@@ -167,6 +177,7 @@ npm install
 npm run demo
 npm run datahub:bridge
 npm run datahub:payload
+npm run datahub:runbook
 npm run decision:trace
 npm run context:read
 npm run context:contracts

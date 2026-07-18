@@ -28,6 +28,11 @@
       "detail": "Tool contracts should cover DataHub reads, CAT context read, and guarded receipt write."
     },
     {
+      "name": "live DataHub runbook",
+      "ok": true,
+      "detail": "Live runbook should document the opt-in local DataHub post path and preserve the dry-run payload coverage."
+    },
+    {
       "name": "judge pack references generated evidence",
       "ok": true,
       "detail": "Judge pack should point to context contracts and include the blocked-action receipt."
@@ -44,6 +49,7 @@
     "examples/cat-context-agent/generated-datahub-bridge-plan.json",
     "examples/cat-context-agent/generated-mcp-context-read.json",
     "hackathon-assets/context-tool-contracts.json",
+    "hackathon-assets/live-datahub-runbook.json",
     "hackathon-assets/judge-evidence-pack.json",
     "hackathon-assets/submission-readiness-report.json"
   ]

@@ -37,6 +37,8 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /npm run judge:brief/);
   assert.match(html, /judge-scoring-brief\.md/);
   assert.match(html, /npm run datahub:bridge/);
+  assert.match(html, /npm run datahub:runbook/);
+  assert.match(html, /live-datahub-runbook\.md/);
   assert.match(html, /npm run judge:pack/);
   assert.match(html, /judge-evidence-pack\.md/);
   assert.doesNotMatch(html, /Revenue Leak Audit|Get a 3-leak preview|Revenue Leak Scan/i);
@@ -64,7 +66,9 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /datahub\.get_entity/);
   assert.match(page, /reproduction-receipt\.md/);
   assert.match(page, /judge-scoring-brief\.md/);
+  assert.match(page, /live-datahub-runbook\.md/);
   assert.match(packageJson, /"datahub:payload": "node scripts\/datahub-payload-preview\.mjs"/);
+  assert.match(packageJson, /"datahub:runbook": "node scripts\/live-datahub-runbook\.mjs"/);
   assert.match(packageJson, /"decision:trace": "node scripts\/decision-trace\.mjs"/);
   assert.match(css, /@media \(max-width: 980px\)/);
   assert.match(css, /@media \(max-width: 620px\)/);
@@ -75,12 +79,13 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"artifacts:validate": "node scripts\/validate-artifacts\.mjs"/);
   assert.match(packageJson, /"evidence:reproduce": "node scripts\/reproduce-evidence\.mjs"/);
   assert.match(packageJson, /"judge:brief": "node scripts\/judge-scoring-brief\.mjs"/);
-  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm test"/);
+  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm test"/);
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /examples\/cat-context-agent/);
   assert.match(readme, /DataHub-style context map/);
   assert.match(readme, /generated-datahub-metadata\.json/);
   assert.match(readme, /datahub-payload-preview\.md/);
+  assert.match(readme, /live-datahub-runbook\.md/);
   assert.match(readme, /decision-trace\.md/);
   assert.match(readme, /generated-mcp-context-read\.json/);
   assert.match(readme, /context-tool-contracts\.md/);
@@ -98,6 +103,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(judgeNotes, /machine-readable tool contract/);
   assert.match(judgeNotes, /generated-datahub-bridge-plan\.json/);
   assert.match(judgeNotes, /DataHub payload preview/);
+  assert.match(judgeNotes, /live DataHub runbook/);
   assert.match(judgeNotes, /decision trace/);
   assert.match(judgeNotes, /submission readiness report/);
   assert.match(judgeNotes, /artifact validation report/);
@@ -108,6 +114,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(judgeNotes, /DATAHUB_GMS_URL=http:\/\/localhost:8080 npm run datahub:bridge -- --post/);
   assert.match(ciWorkflow, /npm ci/);
   assert.match(ciWorkflow, /npm run submission:verify/);
+  assert.match(ciWorkflow, /npm run datahub:runbook/);
   assert.match(ciWorkflow, /npm run artifacts:validate/);
   assert.match(ciWorkflow, /npm test/);
   assert.match(ciWorkflow, /npm run ci:local/);
@@ -266,7 +273,10 @@ test("builds a judge evidence pack from generated artifacts", async () => {
   assert.ok(pack.summary.datahub_aspects.includes("ownership"));
   assert.ok(pack.summary.mcp_style_tool_reads.includes("cat.get_agent_context_packet"));
   assert.ok(pack.safety_claims.some((claim) => /External outreach/.test(claim)));
+  assert.ok(pack.judge_commands.includes("npm run datahub:runbook"));
+  assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/live-datahub-runbook.md"));
   assert.match(packMarkdown, /REQ-1042/);
+  assert.match(packMarkdown, /live-datahub-runbook\.md/);
   assert.match(packMarkdown, /Do not guess, scrape, or invent contact details/);
 });
 
@@ -321,6 +331,9 @@ test("validates generated evidence artifacts", async () => {
   await execFileAsync("node", ["scripts/context-tool-contracts.mjs"], {
     cwd: new URL("..", import.meta.url),
   });
+  await execFileAsync("node", ["scripts/live-datahub-runbook.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
   await execFileAsync("node", ["scripts/verify-submission.mjs"], {
     cwd: new URL("..", import.meta.url),
   });
@@ -338,11 +351,13 @@ test("validates generated evidence artifacts", async () => {
   ]);
 
   assert.equal(report.status, "valid");
-  assert.equal(report.checks.length, 7);
+  assert.equal(report.checks.length, 8);
   assert.ok(report.checks.every((check) => check.ok));
   assert.ok(report.validated_files.includes("hackathon-assets/context-tool-contracts.json"));
+  assert.ok(report.validated_files.includes("hackathon-assets/live-datahub-runbook.json"));
   assert.match(markdown, /Artifact Validation Report/);
   assert.match(markdown, /✅ \*\*tool contract coverage\*\*/);
+  assert.match(markdown, /✅ \*\*live DataHub runbook\*\*/);
 });
 
 test("reproduces the judge evidence chain with one command", async () => {
@@ -359,10 +374,12 @@ test("reproduces the judge evidence chain with one command", async () => {
   ]);
 
   assert.equal(receipt.status, "reproducible");
-  assert.equal(receipt.checks.length, 6);
+  assert.equal(receipt.checks.length, 7);
   assert.equal(receipt.summary.total_requests, 3);
-  assert.equal(receipt.summary.artifact_validation_checks, 7);
+  assert.equal(receipt.summary.artifact_validation_checks, 8);
+  assert.equal(receipt.summary.live_datahub_commands, 5);
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-payload-preview.md"));
+  assert.ok(receipt.reports.includes("hackathon-assets/live-datahub-runbook.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/decision-trace.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/artifact-validation-report.md"));
   assert.match(markdown, /One-command proof/);
@@ -385,11 +402,36 @@ test("generates a judge scoring brief from reproduced evidence", async () => {
   assert.equal(brief.evidence_status, "reproducible");
   assert.equal(brief.claims.length, 5);
   assert.ok(brief.claims.some((claim) => claim.claim.includes("DataHub is the context layer")));
+  assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/live-datahub-runbook.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/decision-trace.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/reproduction-receipt.md")));
   assert.match(markdown, /Claim-to-evidence map/);
   assert.match(markdown, /DataHub is the context layer/);
   assert.match(markdown, /npm run judge:brief/);
+});
+
+test("generates a live DataHub runbook for opt-in local posting", async () => {
+  const { stdout } = await execFileAsync("node", ["scripts/live-datahub-runbook.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /cat-live-datahub-runbook-v0/);
+  assert.match(stdout, /ready_for_local_datahub/);
+  assert.match(stdout, /live-datahub-runbook\.md/);
+
+  const [runbook, markdown] = await Promise.all([
+    readFile(new URL("../hackathon-assets/live-datahub-runbook.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../hackathon-assets/live-datahub-runbook.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(runbook.protocol, "cat-live-datahub-runbook-v0");
+  assert.equal(runbook.status, "ready_for_local_datahub");
+  assert.equal(runbook.dry_run_payloads.length, 4);
+  assert.ok(runbook.commands.some((command) => command.command.includes("--post")));
+  assert.ok(runbook.safety_boundary.some((item) => item.includes("Do not post to a remote or production DataHub")));
+  assert.match(markdown, /Live DataHub Runbook/);
+  assert.match(markdown, /DATAHUB_GMS_URL=http:\/\/localhost:8080 npm run datahub:bridge -- --post/);
+  assert.match(markdown, /Fallback if DataHub is not running/);
 });
 
 test("generates a dry-run DataHub payload preview", async () => {

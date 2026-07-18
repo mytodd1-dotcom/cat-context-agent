@@ -37,6 +37,8 @@ CAT Context Agent turns messy business requests into safe, traceable workflow de
 npm install
 npm run demo
 npm run datahub:bridge
+npm run datahub:payload
+npm run datahub:runbook
 npm run context:read
 npm run judge:pack
 npm test
@@ -49,6 +51,7 @@ npm test
 - `examples/cat-context-agent/generated-datahub-metadata.json`
 - `examples/cat-context-agent/generated-datahub-bridge-plan.json`
 - `hackathon-assets/datahub-payload-preview.md`
+- `hackathon-assets/live-datahub-runbook.md`
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/decision-trace.md`
 - `hackathon-assets/context-tool-contracts.md`

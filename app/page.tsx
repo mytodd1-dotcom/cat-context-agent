@@ -58,6 +58,12 @@ const runnableArtifacts = [
     text: "Shows datasetProperties, schemaMetadata, ownership, and glossaryTerms ready for DataHub.",
   },
   {
+    label: "Live DataHub runbook",
+    command: "npm run datahub:runbook",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/live-datahub-runbook.md",
+    text: "Documents the local GMS prerequisites, opt-in post command, acceptance checks, fallback, and safety boundary.",
+  },
+  {
     label: "MCP-style context read",
     command: "npm run context:read",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/examples/cat-context-agent/generated-mcp-context-read.json",

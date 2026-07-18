@@ -12,6 +12,8 @@ const paths = {
   bridgePlan: resolve(exampleDir, "generated-datahub-bridge-plan.json"),
   contextRead: resolve(exampleDir, "generated-mcp-context-read.json"),
   contracts: resolve(assetDir, "context-tool-contracts.json"),
+  liveRunbook: resolve(assetDir, "live-datahub-runbook.json"),
+  liveRunbookMarkdown: resolve(assetDir, "live-datahub-runbook.md"),
   judgePack: resolve(assetDir, "judge-evidence-pack.json"),
   readiness: resolve(assetDir, "submission-readiness-report.json"),
   judgePackMarkdown: resolve(assetDir, "judge-evidence-pack.md"),
@@ -54,6 +56,8 @@ export async function runArtifactValidation() {
     bridgePlan,
     contextRead,
     contracts,
+    liveRunbook,
+    liveRunbookMarkdown,
     judgePack,
     readiness,
     judgePackMarkdown,
@@ -63,6 +67,8 @@ export async function runArtifactValidation() {
     readJson(paths.bridgePlan),
     readJson(paths.contextRead),
     readJson(paths.contracts),
+    readJson(paths.liveRunbook),
+    readFile(paths.liveRunbookMarkdown, "utf8"),
     readJson(paths.judgePack),
     readJson(paths.readiness),
     readFile(paths.judgePackMarkdown, "utf8"),
@@ -106,6 +112,15 @@ export async function runArtifactValidation() {
       "Tool contracts should cover DataHub reads, CAT context read, and guarded receipt write.",
     ),
     result(
+      "live DataHub runbook",
+      liveRunbook.protocol === "cat-live-datahub-runbook-v0" &&
+        liveRunbook.status === "ready_for_local_datahub" &&
+        liveRunbook.dry_run_payloads.length === 4 &&
+        liveRunbook.commands.some((command) => command.command.includes("--post")) &&
+        liveRunbookMarkdown.includes("DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post"),
+      "Live runbook should document the opt-in local DataHub post path and preserve the dry-run payload coverage.",
+    ),
+    result(
       "judge pack references generated evidence",
       judgePack.artifacts_to_inspect.includes("hackathon-assets/context-tool-contracts.md") &&
         judgePackMarkdown.includes("Do not guess, scrape, or invent contact details"),
@@ -130,6 +145,7 @@ export async function runArtifactValidation() {
       "examples/cat-context-agent/generated-datahub-bridge-plan.json",
       "examples/cat-context-agent/generated-mcp-context-read.json",
       "hackathon-assets/context-tool-contracts.json",
+      "hackathon-assets/live-datahub-runbook.json",
       "hackathon-assets/judge-evidence-pack.json",
       "hackathon-assets/submission-readiness-report.json",
     ],

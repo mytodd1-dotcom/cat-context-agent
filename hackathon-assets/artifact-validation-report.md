@@ -10,6 +10,7 @@ Generated: `demo-static-run`
 - ✅ **bridge plan mirrors DataHub aspects** — Bridge plan should remain dry-run and map all expected aspects.
 - ✅ **context read tool path** — Context read should include DataHub/CAT read tools and preserve the blocked customer action.
 - ✅ **tool contract coverage** — Tool contracts should cover DataHub reads, CAT context read, and guarded receipt write.
+- ✅ **live DataHub runbook** — Live runbook should document the opt-in local DataHub post path and preserve the dry-run payload coverage.
 - ✅ **judge pack references generated evidence** — Judge pack should point to context contracts and include the blocked-action receipt.
 - ✅ **readiness report** — Readiness report should be ready, all checks passing, and include context tool contracts.
 
@@ -20,5 +21,6 @@ Generated: `demo-static-run`
 - `examples/cat-context-agent/generated-datahub-bridge-plan.json`
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/context-tool-contracts.json`
+- `hackathon-assets/live-datahub-runbook.json`
 - `hackathon-assets/judge-evidence-pack.json`
 - `hackathon-assets/submission-readiness-report.json`

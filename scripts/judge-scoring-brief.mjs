@@ -52,11 +52,12 @@ export async function runJudgeScoringBrief() {
       {
         claim: "DataHub is the context layer, not a logo pasted onto the demo.",
         evidence:
-          "The demo produces datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects plus a dry-run DataHub bridge plan.",
+          "The demo produces datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects plus a dry-run DataHub bridge plan and an opt-in live DataHub runbook.",
         files: [
           "examples/cat-context-agent/generated-datahub-metadata.json",
           "examples/cat-context-agent/generated-datahub-bridge-plan.json",
           "hackathon-assets/datahub-payload-preview.md",
+          "hackathon-assets/live-datahub-runbook.md",
         ],
       },
       {
@@ -103,6 +104,7 @@ export async function runJudgeScoringBrief() {
       "It models the uncomfortable middle step most agent demos skip: deciding what the data means before taking action.",
       "It treats missing ownership and missing verified contact as workflow state, not as prompts to hallucinate.",
       "It emits receipts and regenerated reports, so the judge can audit both the recommendation and the context used to make it.",
+      "It documents the local DataHub post command separately from the dry-run evidence, so mutation is explicit instead of hidden inside tests.",
       `The current evidence chain is ${reproduction.status} with ${reproduction.summary.total_requests} requests and ${reproduction.summary.artifact_validation_checks} artifact validation checks.`,
     ],
   };

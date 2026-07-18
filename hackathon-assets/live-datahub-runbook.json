@@ -1,0 +1,93 @@
+{
+  "protocol": "cat-live-datahub-runbook-v0",
+  "project": "CAT Context Agent",
+  "challenge": "Build with DataHub: The Agent Hackathon",
+  "generated_at": "demo-static-run",
+  "status": "ready_for_local_datahub",
+  "goal": "Post CAT's generated datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects to a local DataHub GMS, then use the same context to justify safe, approval-gated, and blocked agent actions.",
+  "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+  "dry_run_payloads": [
+    {
+      "id": "cat-datahub-upsert-datasetProperties",
+      "aspectName": "datasetProperties",
+      "endpoint": "http://localhost:8080/openapi/entities/v1/",
+      "purpose": "Identify the messy business request dataset and expose CAT decision totals as metadata."
+    },
+    {
+      "id": "cat-datahub-upsert-schemaMetadata",
+      "aspectName": "schemaMetadata",
+      "endpoint": "http://localhost:8080/openapi/entities/v1/",
+      "purpose": "Describe the CSV schema and field confidence before the agent acts."
+    },
+    {
+      "id": "cat-datahub-upsert-ownership",
+      "aspectName": "ownership",
+      "endpoint": "http://localhost:8080/openapi/entities/v1/",
+      "purpose": "Attach a known CAT demo data owner so missing ownership can be detected instead of invented."
+    },
+    {
+      "id": "cat-datahub-upsert-glossaryTerms",
+      "aspectName": "glossaryTerms",
+      "endpoint": "http://localhost:8080/openapi/entities/v1/",
+      "purpose": "Mark policy terms such as context-before-action and no unverified outreach."
+    }
+  ],
+  "prerequisites": [
+    "Node 22+ dependencies installed with npm install or npm ci.",
+    "A local DataHub GMS instance reachable at DATAHUB_GMS_URL, usually http://localhost:8080.",
+    "No cloud credentials are required for the repo evidence path.",
+    "Live posting is intentionally blocked unless the operator passes --post."
+  ],
+  "commands": [
+    {
+      "name": "Regenerate the local CAT decision artifacts",
+      "command": "npm run demo",
+      "expected": "generated-agent-output.json, generated-datahub-metadata.json, and generated-agent-context-packet.json are updated."
+    },
+    {
+      "name": "Preview the DataHub metadata payloads",
+      "command": "npm run datahub:payload",
+      "expected": "hackathon-assets/datahub-payload-preview.md lists four DataHub aspects without contacting GMS."
+    },
+    {
+      "name": "Post to local DataHub only after GMS is running",
+      "command": "DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post",
+      "expected": "The bridge posts four UPSERT proposals to /openapi/entities/v1/ and leaves generated-datahub-bridge-plan.json as a receipt."
+    },
+    {
+      "name": "Read context before agent action",
+      "command": "npm run context:read -- --request-id REQ-1042",
+      "expected": "generated-mcp-context-read.json shows datahub.get_entity, datahub.get_lineage, and cat.get_agent_context_packet before the approval decision."
+    },
+    {
+      "name": "Reproduce the judge evidence chain",
+      "command": "npm run evidence:reproduce",
+      "expected": "The reproduction receipt confirms payload preview, live runbook, decision trace, readiness, validation, and safety checks."
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "name": "aspect coverage",
+      "detail": "4 DataHub aspect payloads are prepared: datasetProperties, schemaMetadata, ownership, glossaryTerms."
+    },
+    {
+      "name": "local-first verification",
+      "detail": "Judges can inspect every generated artifact without external credentials or a hosted service."
+    },
+    {
+      "name": "live mutation is explicit",
+      "detail": "Only the documented DATAHUB_GMS_URL + --post command mutates a local DataHub instance."
+    },
+    {
+      "name": "agent safety remains preserved",
+      "detail": "The blocked external outreach case remains blocked even after the DataHub post path is enabled."
+    }
+  ],
+  "safety_boundary": [
+    "Do not post to a remote or production DataHub instance from the demo unless the operator intentionally changes DATAHUB_GMS_URL.",
+    "Do not add secrets, tokens, or customer data to the generated artifacts.",
+    "Do not let the agent send external outreach when contact ownership or approval context is missing.",
+    "Treat failed DataHub posting as a setup issue, not permission to bypass context reads."
+  ],
+  "fallback": "If local DataHub is not available during judging, use npm run datahub:payload plus npm run decision:trace. Those commands prove the same aspect payloads and read-before-action decisions in dry-run mode."
+}

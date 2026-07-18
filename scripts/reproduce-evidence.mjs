@@ -3,6 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { runDataHubPayloadPreview } from "./datahub-payload-preview.mjs";
 import { runDecisionTrace } from "./decision-trace.mjs";
+import { runLiveDataHubRunbook } from "./live-datahub-runbook.mjs";
 import { runArtifactValidation } from "./validate-artifacts.mjs";
 import { runSubmissionVerify } from "./verify-submission.mjs";
 
@@ -34,6 +35,7 @@ ${receipt.checks.map((check) => `- ✅ **${check.name}** — ${check.detail}`).j
 - Approval-required tasks: ${receipt.summary.needs_approval}
 - Blocked tasks: ${receipt.summary.blocked}
 - DataHub aspects: ${receipt.summary.datahub_aspects.map((aspect) => `\`${aspect}\``).join(", ")}
+- Live DataHub runbook commands: ${receipt.summary.live_datahub_commands}
 - MCP-style reads: ${receipt.summary.mcp_style_tool_reads.map((tool) => `\`${tool}\``).join(", ")}
 - Artifact validation checks: ${receipt.summary.artifact_validation_checks}
 
@@ -45,6 +47,7 @@ ${receipt.reports.map((report) => `- \`${report}\``).join("\n")}
 
 export async function runEvidenceReproduction() {
   const payloadPreview = await runDataHubPayloadPreview();
+  const liveRunbook = await runLiveDataHubRunbook();
   const decisionTrace = await runDecisionTrace();
   const readiness = await runSubmissionVerify();
   const artifactValidation = await runArtifactValidation();
@@ -57,6 +60,10 @@ export async function runEvidenceReproduction() {
     {
       name: "decision trace",
       detail: `${decisionTrace.traces.length} request-level traces connect source rows, context reads, decisions, and receipts.`,
+    },
+    {
+      name: "live DataHub runbook",
+      detail: `${liveRunbook.commands.length} operator commands document the opt-in local DataHub post and verification path.`,
     },
     {
       name: "submission readiness",
@@ -88,12 +95,14 @@ export async function runEvidenceReproduction() {
       needs_approval: readiness.summary.needs_approval,
       blocked: readiness.summary.blocked,
       datahub_aspects: readiness.summary.datahub_aspects,
+      live_datahub_commands: liveRunbook.commands.length,
       mcp_style_tool_reads: readiness.summary.mcp_style_tool_reads,
       artifact_validation_checks: artifactValidation.checks.length,
     },
     reports: [
       "hackathon-assets/judge-evidence-pack.md",
       "hackathon-assets/datahub-payload-preview.md",
+      "hackathon-assets/live-datahub-runbook.md",
       "hackathon-assets/decision-trace.md",
       "hackathon-assets/submission-readiness-report.md",
       "hackathon-assets/artifact-validation-report.md",
