@@ -46,6 +46,12 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /If you only have ten minutes, start here/);
   assert.match(html, /Watch the two-minute video/);
   assert.match(html, /Run one proof command/);
+  assert.match(html, /SUBMISSION READINESS/);
+  assert.match(html, /Clear enough to judge without guessing/);
+  assert.match(html, /Live \+ local/);
+  assert.match(html, /Context contract/);
+  assert.match(html, /Guarded actions/);
+  assert.match(html, /Documented next/);
   assert.match(html, /DATAHUB → AGENT MAP/);
   assert.match(html, /DataHub is the context layer, not a logo on the slide/);
   assert.match(html, /Dataset identity/);
@@ -133,6 +139,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /judgePath/);
   assert.match(page, /FAST JUDGE PATH/);
   assert.match(page, /If you only have ten minutes, start here/);
+  assert.match(page, /readinessChecks/);
+  assert.match(page, /readinessSection/);
   assert.match(page, /datahubUsage/);
   assert.match(page, /datahubMap/);
   assert.match(page, /judgeScorecard/);
@@ -163,6 +171,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(css, /artifactGrid/);
   assert.match(css, /scopeGrid/);
   assert.match(css, /judgePathGrid/);
+  assert.match(css, /readinessGrid/);
   assert.match(css, /datahubMapGrid/);
   assert.match(css, /scorecardList/);
   assert.match(css, /verifyGrid/);

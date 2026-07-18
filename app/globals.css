@@ -339,6 +339,42 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   word-break: break-word;
 }
 
+.readinessSection { padding-block: 74px 68px; }
+.readinessGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 2px solid var(--ink);
+  background: #fffdf8;
+  box-shadow: 10px 10px 0 rgba(255, 211, 77, .55);
+}
+.readinessCard {
+  min-height: 235px;
+  padding: 26px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.readinessCard:last-child { border-right: 0; }
+.readinessCard span {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.readinessCard strong {
+  color: var(--ink);
+  font-size: 24px;
+  letter-spacing: -.045em;
+  line-height: 1.05;
+}
+.readinessCard p {
+  color: var(--muted);
+  line-height: 1.58;
+  margin: auto 0 0;
+}
+
 .verifySection { padding-block: 76px 92px; }
 .verifyGrid {
   display: grid;
@@ -753,6 +789,9 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   .scorecardItem { grid-template-columns: 1fr; }
   .scorecardItem > * { min-height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
   .scorecardItem > *:last-child { border-bottom: 0; }
+  .readinessGrid { grid-template-columns: repeat(2, 1fr); }
+  .readinessCard:nth-child(2) { border-right: 0; }
+  .readinessCard:nth-child(1), .readinessCard:nth-child(2) { border-bottom: 1px solid var(--line); }
   .verifyGrid { grid-template-columns: 1fr; }
   .demoGrid, .queueGrid, .artifactGrid, .scopeGrid, .faqGrid { grid-template-columns: 1fr; }
   .deltaRow { grid-template-columns: 1fr; }
@@ -780,6 +819,9 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   .judgePathCard span { margin-bottom: 20px; }
   .datahubMapGrid { grid-template-columns: 1fr; }
   .datahubMapCard { min-height: auto; }
+  .readinessGrid { grid-template-columns: 1fr; }
+  .readinessCard, .readinessCard:nth-child(2) { min-height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .readinessCard:last-child { border-bottom: 0; }
   .verifyCard { min-height: auto; }
   .proofGrid, .stepGrid { grid-template-columns: 1fr; }
   .proofGrid div, .proofGrid div:first-child { border-left: 1px solid rgba(255,255,255,.24); }

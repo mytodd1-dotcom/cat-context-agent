@@ -110,6 +110,29 @@ const verificationCommands = [
   },
 ];
 
+const readinessChecks = [
+  {
+    label: "Runnability",
+    status: "Live + local",
+    detail: "Public page, demo video, repo commands, and generated evidence artifacts are available now.",
+  },
+  {
+    label: "DataHub use",
+    status: "Context contract",
+    detail: "Dataset identity, schema, ownership, glossary, lineage, and policy signals drive the agent decision path.",
+  },
+  {
+    label: "Safety boundary",
+    status: "Guarded actions",
+    detail: "External outreach is blocked or approval-gated when owner, contact, or policy context is missing.",
+  },
+  {
+    label: "Live integration",
+    status: "Documented next",
+    detail: "The opt-in runbook shows how to post the same DataHub aspects to a local GMS when judges want the live path.",
+  },
+];
+
 const judgePath = [
   {
     step: "1",
@@ -428,6 +451,25 @@ export default function Home() {
               <strong>{item.title}</strong>
               <p>{item.text}</p>
             </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="section shell readinessSection" aria-labelledby="readiness-heading">
+        <p className="sectionTag">SUBMISSION READINESS</p>
+        <div className="sectionIntro">
+          <h2 id="readiness-heading">Clear enough to judge without guessing.</h2>
+          <p>
+            CAT separates what is working in the submitted artifact from the documented live DataHub integration path, so the evaluation does not depend on hidden services or hand-waving.
+          </p>
+        </div>
+        <div className="readinessGrid">
+          {readinessChecks.map((item) => (
+            <article className="readinessCard" key={item.label}>
+              <span>{item.label}</span>
+              <strong>{item.status}</strong>
+              <p>{item.detail}</p>
+            </article>
           ))}
         </div>
       </section>
