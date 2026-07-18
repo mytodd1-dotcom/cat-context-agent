@@ -38,6 +38,11 @@
       "detail": "Integration checklist should separate no-credential judging from optional local DataHub posting."
     },
     {
+      "name": "DataHub claim audit",
+      "ok": true,
+      "detail": "DataHub claim audit should pass every DataHub-specific claim check."
+    },
+    {
       "name": "judge pack references generated evidence",
       "ok": true,
       "detail": "Judge pack should point to context contracts and include the blocked-action receipt."
@@ -66,6 +71,7 @@
     "hackathon-assets/context-tool-contracts.json",
     "hackathon-assets/live-datahub-runbook.json",
     "hackathon-assets/datahub-integration-checklist.json",
+    "hackathon-assets/datahub-claim-audit.json",
     "hackathon-assets/lineage-decision-map.json",
     "hackathon-assets/safety-policy-matrix.json",
     "hackathon-assets/judge-evidence-pack.json",

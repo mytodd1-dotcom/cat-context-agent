@@ -1,0 +1,73 @@
+{
+  "protocol": "cat-datahub-claim-audit-v0",
+  "project": "CAT Context Agent",
+  "generated_at": "demo-static-run",
+  "status": "passed",
+  "claims": [
+    {
+      "name": "DataHub aspect coverage",
+      "ok": true,
+      "evidence": "Dataset identity plus datasetProperties, schemaMetadata, ownership, and glossaryTerms are generated for the CAT source asset.",
+      "files": [
+        "examples/cat-context-agent/generated-datahub-metadata.json",
+        "examples/cat-context-agent/generated-datahub-bridge-plan.json"
+      ]
+    },
+    {
+      "name": "DataHub context read path",
+      "ok": true,
+      "evidence": "The agent reads entity, lineage, and CAT context packet data before surfacing decisions.",
+      "files": [
+        "examples/cat-context-agent/generated-mcp-context-read.json",
+        "hackathon-assets/context-tool-contracts.md"
+      ]
+    },
+    {
+      "name": "Local-only live posting boundary",
+      "ok": true,
+      "evidence": "The current submission is judgeable without credentials, and the only live mutation command targets a local GMS explicitly.",
+      "files": [
+        "hackathon-assets/datahub-integration-checklist.md",
+        "hackathon-assets/live-datahub-runbook.md"
+      ]
+    },
+    {
+      "name": "Guarded action policy",
+      "ok": true,
+      "evidence": "Unsafe outreach remains blocked when verified contact context is missing.",
+      "files": [
+        "hackathon-assets/safety-policy-matrix.md",
+        "examples/cat-context-agent/generated-agent-output.json"
+      ]
+    },
+    {
+      "name": "Receipt write is bounded",
+      "ok": true,
+      "evidence": "The guarded write path records a receipt without external side effects.",
+      "files": [
+        "hackathon-assets/context-tool-contracts.md",
+        "examples/cat-context-agent/generated-agent-output.json"
+      ]
+    }
+  ],
+  "summary": {
+    "datahub_aspects": [
+      "datasetProperties",
+      "schemaMetadata",
+      "ownership",
+      "glossaryTerms"
+    ],
+    "context_reads": [
+      "datahub.get_entity",
+      "datahub.get_lineage",
+      "cat.get_agent_context_packet"
+    ],
+    "live_datahub_required_for_submission": false,
+    "secrets_required": false,
+    "blocked_actions": [
+      "send_external_outreach_without_verified_contact",
+      "invent_missing_owner",
+      "scrape_contact_details"
+    ]
+  }
+}

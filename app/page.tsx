@@ -101,7 +101,7 @@ const verificationCommands = [
   {
     label: "Full local check",
     command: "npm run ci:local",
-    expected: "Runs the full artifact pipeline, build, and 21 render/evidence tests.",
+    expected: "Runs the full artifact pipeline, build, and 22 render/evidence tests.",
   },
   {
     label: "Context read",
@@ -226,6 +226,12 @@ const runnableArtifacts = [
     command: "npm run datahub:checklist",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/datahub-integration-checklist.md",
     text: "Separates what judges can verify without credentials from the optional local DataHub posting path.",
+  },
+  {
+    label: "DataHub claim audit",
+    command: "npm run datahub:audit",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/datahub-claim-audit.md",
+    text: "Gives judges a compact pass/fail audit of the DataHub-specific claims in the submission.",
   },
   {
     label: "MCP-style context read",

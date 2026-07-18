@@ -90,6 +90,14 @@ npm run datahub:checklist
 
 That command writes [`hackathon-assets/datahub-integration-checklist.md`](./hackathon-assets/datahub-integration-checklist.md) and [`hackathon-assets/datahub-integration-checklist.json`](./hackathon-assets/datahub-integration-checklist.json), separating what judges can verify without credentials from the optional local DataHub posting path.
 
+To generate the DataHub claim audit:
+
+```bash
+npm run datahub:audit
+```
+
+That command writes [`hackathon-assets/datahub-claim-audit.md`](./hackathon-assets/datahub-claim-audit.md) and [`hackathon-assets/datahub-claim-audit.json`](./hackathon-assets/datahub-claim-audit.json), giving judges a compact pass/fail audit of aspect coverage, context reads, local-only posting, safety gates, and bounded receipt writes.
+
 To generate the request-by-request decision trace:
 
 ```bash
@@ -202,7 +210,7 @@ To run the local equivalent of that CI recipe:
 npm run ci:local
 ```
 
-That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub integration checklist, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
+That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub integration checklist, DataHub claim audit, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
 
 ## DataHub integration path
 
@@ -241,6 +249,7 @@ npm run datahub:bridge
 npm run datahub:payload
 npm run datahub:runbook
 npm run datahub:checklist
+npm run datahub:audit
 npm run decision:trace
 npm run policy:matrix
 npm run context:read

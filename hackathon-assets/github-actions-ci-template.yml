@@ -40,6 +40,9 @@ jobs:
       - name: Generate DataHub integration checklist
         run: npm run datahub:checklist
 
+      - name: Generate DataHub claim audit
+        run: npm run datahub:audit
+
       - name: Validate generated artifacts
         run: npm run artifacts:validate
 

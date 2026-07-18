@@ -54,13 +54,20 @@
     },
     {
       "step": 8,
+      "title": "Inspect the DataHub claim audit",
+      "artifact": "hackathon-assets/datahub-claim-audit.md",
+      "command": "npm run datahub:audit",
+      "why": "Gives a compact pass/fail audit of the submission's DataHub-specific claims."
+    },
+    {
+      "step": 9,
       "title": "Inspect the lineage decision map",
       "artifact": "hackathon-assets/lineage-decision-map.md",
       "command": "npm run lineage:map",
       "why": "Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph."
     },
     {
-      "step": 9,
+      "step": 10,
       "title": "Inspect the safety policy matrix",
       "artifact": "hackathon-assets/safety-policy-matrix.md",
       "command": "npm run policy:matrix",
@@ -72,6 +79,7 @@
     "npm run demo",
     "npm run submission:verify",
     "npm run datahub:checklist",
+    "npm run datahub:audit",
     "npm run lineage:map",
     "npm run policy:matrix",
     "npm run evidence:reproduce",
@@ -86,7 +94,8 @@
         "examples/cat-context-agent/generated-datahub-metadata.json",
         "examples/cat-context-agent/generated-datahub-bridge-plan.json",
         "hackathon-assets/datahub-payload-preview.md",
-        "hackathon-assets/datahub-integration-checklist.md"
+        "hackathon-assets/datahub-integration-checklist.md",
+        "hackathon-assets/datahub-claim-audit.md"
       ]
     },
     {

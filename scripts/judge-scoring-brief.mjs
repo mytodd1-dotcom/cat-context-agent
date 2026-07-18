@@ -66,6 +66,7 @@ export async function runJudgeScoringBrief() {
           "hackathon-assets/datahub-payload-preview.md",
           "hackathon-assets/live-datahub-runbook.md",
           "hackathon-assets/datahub-integration-checklist.md",
+          "hackathon-assets/datahub-claim-audit.md",
         ],
       },
       {

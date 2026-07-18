@@ -13,6 +13,10 @@
       "detail": "5 verification phases separate runnable evidence from optional local DataHub posting."
     },
     {
+      "name": "DataHub claim audit",
+      "detail": "5 DataHub-specific claims passed aspect, context-read, local-posting, safety, and receipt checks."
+    },
+    {
       "name": "decision trace",
       "detail": "3 request-level traces connect source rows, context reads, decisions, and receipts."
     },
@@ -30,11 +34,11 @@
     },
     {
       "name": "submission readiness",
-      "detail": "9 readiness checks passed."
+      "detail": "10 readiness checks passed."
     },
     {
       "name": "artifact validation",
-      "detail": "11 generated-artifact checks passed."
+      "detail": "12 generated-artifact checks passed."
     },
     {
       "name": "safety boundary",
@@ -62,11 +66,12 @@
       "datahub.get_lineage",
       "cat.get_agent_context_packet"
     ],
-    "artifact_validation_checks": 11
+    "artifact_validation_checks": 12
   },
   "reports": [
     "hackathon-assets/judge-evidence-pack.md",
     "hackathon-assets/datahub-integration-checklist.md",
+    "hackathon-assets/datahub-claim-audit.md",
     "hackathon-assets/datahub-payload-preview.md",
     "hackathon-assets/live-datahub-runbook.md",
     "hackathon-assets/decision-trace.md",

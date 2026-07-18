@@ -35,6 +35,7 @@ npm run datahub:bridge
 npm run datahub:payload
 npm run datahub:runbook
 npm run datahub:checklist
+npm run datahub:audit
 npm run decision:trace
 npm run policy:matrix
 npm run context:read
@@ -56,6 +57,7 @@ Those commands produce:
 - a DataHub payload preview that shows the aspect bodies prepared for local GMS posting;
 - a live DataHub runbook with prerequisites, exact opt-in post command, acceptance checks, fallback path, and safety boundary;
 - a DataHub integration checklist that separates no-credential judging from optional local posting;
+- a DataHub claim audit that gives a pass/fail view of aspect coverage, context reads, local-only posting, safety gates, and bounded receipt writes;
 - a request-level decision trace that joins messy rows to context reads, decisions, safe next steps, blocked actions, and receipts;
 - a safety policy matrix that defines allowed, approval-required, and blocked action classes;
 - an MCP-style context read showing the agent’s pre-action context checks;
@@ -76,6 +78,7 @@ messy-business-requests.csv
   → generated-datahub-metadata.json
   → generated-datahub-bridge-plan.json
   → datahub-integration-checklist.md
+  → datahub-claim-audit.md
   → generated-mcp-context-read.json
   → safety-policy-matrix.md
   → judge-evidence-pack.md
@@ -94,6 +97,7 @@ The important behavior is not just the transformation. The agent separates actio
 - [`hackathon-assets/datahub-payload-preview.md`](./hackathon-assets/datahub-payload-preview.md)
 - [`hackathon-assets/live-datahub-runbook.md`](./hackathon-assets/live-datahub-runbook.md)
 - [`hackathon-assets/datahub-integration-checklist.md`](./hackathon-assets/datahub-integration-checklist.md)
+- [`hackathon-assets/datahub-claim-audit.md`](./hackathon-assets/datahub-claim-audit.md)
 - [`examples/cat-context-agent/generated-mcp-context-read.json`](./examples/cat-context-agent/generated-mcp-context-read.json)
 - [`hackathon-assets/decision-trace.md`](./hackathon-assets/decision-trace.md)
 - [`hackathon-assets/safety-policy-matrix.md`](./hackathon-assets/safety-policy-matrix.md)

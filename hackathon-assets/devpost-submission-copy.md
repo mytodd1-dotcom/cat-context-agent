@@ -28,7 +28,7 @@ The demo ingests messy business request data, maps it into DataHub-style metadat
 
 ## How we built it
 
-We built a runnable local evidence chain around one focused workflow. The repo includes a sample messy CSV, a DataHub-style context map, generated DataHub metadata aspects, a dry-run DataHub bridge plan, a DataHub integration checklist, an MCP-style context read artifact, a lineage-to-decision map, a safety policy matrix, a decision trace, a judge evidence pack, and a public Next.js landing page. The key design choice was to make the context boundary inspectable instead of hiding it inside a black-box prompt.
+We built a runnable local evidence chain around one focused workflow. The repo includes a sample messy CSV, a DataHub-style context map, generated DataHub metadata aspects, a dry-run DataHub bridge plan, a DataHub integration checklist, a DataHub claim audit, an MCP-style context read artifact, a lineage-to-decision map, a safety policy matrix, a decision trace, a judge evidence pack, and a public Next.js landing page. The key design choice was to make the context boundary inspectable instead of hiding it inside a black-box prompt.
 
 ## Challenges we ran into
 

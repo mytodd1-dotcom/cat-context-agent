@@ -45,6 +45,11 @@
       "details": "Expected local evidence to be judgeable without credentials while preserving the optional local GMS post path."
     },
     {
+      "name": "DataHub claim audit",
+      "ok": true,
+      "details": "Expected all DataHub-specific claims to pass the generated audit."
+    },
+    {
       "name": "safety boundary",
       "ok": true,
       "details": "Expected unverified external outreach to remain blocked."
@@ -72,6 +77,7 @@
     "examples/cat-context-agent/generated-mcp-context-read.json",
     "hackathon-assets/context-tool-contracts.md",
     "hackathon-assets/datahub-integration-checklist.md",
+    "hackathon-assets/datahub-claim-audit.md",
     "hackathon-assets/lineage-decision-map.md",
     "hackathon-assets/safety-policy-matrix.md",
     "hackathon-assets/judge-evidence-pack.md",

@@ -3,6 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { runContextProvider } from "./cat-context-provider.mjs";
 import { runContextToolContracts } from "./context-tool-contracts.mjs";
+import { runDataHubClaimAudit } from "./datahub-claim-audit.mjs";
 import { runDataHubIntegrationChecklist } from "./datahub-integration-checklist.mjs";
 import { runDemo } from "./cat-context-demo.mjs";
 import { runBridge } from "./datahub-local-bridge.mjs";
@@ -62,6 +63,7 @@ export async function runSubmissionVerify() {
   const contextRead = await runContextProvider();
   const toolContracts = await runContextToolContracts();
   const datahubChecklist = await runDataHubIntegrationChecklist();
+  const datahubClaimAudit = await runDataHubClaimAudit();
   const lineageMap = await runLineageDecisionMap();
   const safetyPolicyMatrix = await runSafetyPolicyMatrix();
   const pack = await runJudgeEvidencePack();
@@ -108,6 +110,13 @@ export async function runSubmissionVerify() {
         datahubChecklist.decision_gates.live_datahub_required_for_submission === false &&
         datahubChecklist.phases.some((phase) => phase.mode === "optional_local_datahub"),
       "Expected local evidence to be judgeable without credentials while preserving the optional local GMS post path.",
+    ),
+    check(
+      "DataHub claim audit",
+      datahubClaimAudit.status === "passed" &&
+        datahubClaimAudit.claims.length === 5 &&
+        datahubClaimAudit.claims.every((claim) => claim.ok),
+      "Expected all DataHub-specific claims to pass the generated audit.",
     ),
     check(
       "safety boundary",
@@ -161,6 +170,7 @@ export async function runSubmissionVerify() {
       "examples/cat-context-agent/generated-mcp-context-read.json",
       "hackathon-assets/context-tool-contracts.md",
       "hackathon-assets/datahub-integration-checklist.md",
+      "hackathon-assets/datahub-claim-audit.md",
       "hackathon-assets/lineage-decision-map.md",
       "hackathon-assets/safety-policy-matrix.md",
       "hackathon-assets/judge-evidence-pack.md",

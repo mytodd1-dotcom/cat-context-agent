@@ -20,8 +20,9 @@ A judge-first index for verifying the DataHub Agent Hackathon submission without
 | 5. Inspect DataHub context artifacts | `examples/cat-context-agent/generated-datahub-bridge-plan.json` | Shows the datasetProperties, schemaMetadata, ownership, and glossaryTerms handoff. |
 | 6. Inspect the MCP-style read contract | `examples/cat-context-agent/generated-mcp-context-read.json` | Shows the agent reading entity, lineage, and CAT context before action. |
 | 7. Inspect the DataHub integration checklist | `hackathon-assets/datahub-integration-checklist.md`<br><code>npm run datahub:checklist</code> | Shows what is judgeable now, what requires local DataHub, and what is intentionally out of scope. |
-| 8. Inspect the lineage decision map | `hackathon-assets/lineage-decision-map.md`<br><code>npm run lineage:map</code> | Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph. |
-| 9. Inspect the safety policy matrix | `hackathon-assets/safety-policy-matrix.md`<br><code>npm run policy:matrix</code> | Shows which agent actions are allowed, approval-required, or blocked based on context quality. |
+| 8. Inspect the DataHub claim audit | `hackathon-assets/datahub-claim-audit.md`<br><code>npm run datahub:audit</code> | Gives a compact pass/fail audit of the submission's DataHub-specific claims. |
+| 9. Inspect the lineage decision map | `hackathon-assets/lineage-decision-map.md`<br><code>npm run lineage:map</code> | Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph. |
+| 10. Inspect the safety policy matrix | `hackathon-assets/safety-policy-matrix.md`<br><code>npm run policy:matrix</code> | Shows which agent actions are allowed, approval-required, or blocked based on context quality. |
 
 ## Proof commands
 
@@ -30,6 +31,7 @@ npm install
 npm run demo
 npm run submission:verify
 npm run datahub:checklist
+npm run datahub:audit
 npm run lineage:map
 npm run policy:matrix
 npm run evidence:reproduce
@@ -46,6 +48,7 @@ npm run ci:local
 - `examples/cat-context-agent/generated-datahub-bridge-plan.json`
 - `hackathon-assets/datahub-payload-preview.md`
 - `hackathon-assets/datahub-integration-checklist.md`
+- `hackathon-assets/datahub-claim-audit.md`
 
 ### The agent reads context before action.
 
