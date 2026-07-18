@@ -94,7 +94,7 @@ export async function runJudgeQuickCard(inputs = {}) {
     canonical_links: {
       live_demo: "https://cat-context-agent.flyguy.chatgpt.site",
       repository: "https://github.com/mytodd1-dotcom/cat-context-agent",
-      demo_video: "https://youtu.be/Gcbhl5_YlSM",
+      demo_video: "https://youtu.be/_4qvnsGBbtA",
     },
     open_first: [
       {
@@ -106,7 +106,7 @@ export async function runJudgeQuickCard(inputs = {}) {
       {
         step: 2,
         label: "Demo video",
-        url: "https://youtu.be/Gcbhl5_YlSM",
+        url: "https://youtu.be/_4qvnsGBbtA",
         why: "Two-minute narrated walkthrough of the context-before-action loop.",
       },
       {

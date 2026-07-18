@@ -48,7 +48,7 @@ function buildEvidencePack({ output, metadata, bridge, contextRead }) {
     category: "Agents That Do Real Work",
     repo_url: "https://github.com/mytodd1-dotcom/cat-context-agent",
     live_demo_url: "https://cat-context-agent.flyguy.chatgpt.site",
-    demo_video: "https://youtu.be/Gcbhl5_YlSM",
+    demo_video: "https://youtu.be/_4qvnsGBbtA",
     evidence_generated_at: "demo-static-run",
     summary: {
       source_asset: output.source_asset,

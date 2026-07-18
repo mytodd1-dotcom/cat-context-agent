@@ -10,12 +10,12 @@ const copyMarkdownPath = resolve(assetDir, "devpost-submission-copy.md");
 const submissionCopy = {
   project_name: "CAT Context Agent",
   tagline:
-    "Context before action for messy business data: a DataHub-aware agent that turns scattered files into safe next steps, approval questions, and traceable receipts.",
+    "Context before action. Receipts before trust. A DataHub-aware agent that turns messy business requests into safe queues, approval gates, and traceable receipts.",
   event: "Build with DataHub: The Agent Hackathon",
   category: "Agents That Do Real Work",
   live_demo_url: "https://cat-context-agent.flyguy.chatgpt.site",
   repository_url: "https://github.com/mytodd1-dotcom/cat-context-agent",
-  demo_video_url: "https://youtu.be/Gcbhl5_YlSM",
+  demo_video_url: "https://youtu.be/_4qvnsGBbtA",
   built_with: [
     "DataHub OSS context model",
     "DataHub MCP-style read plan",

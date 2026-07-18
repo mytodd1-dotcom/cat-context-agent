@@ -12,7 +12,7 @@ Use this as the canonical copy pack if the Devpost draft needs edits.
 
 ## Tagline
 
-Context before action for messy business data: a DataHub-aware agent that turns scattered files into safe next steps, approval questions, and traceable receipts.
+Context before action. Receipts before trust. A DataHub-aware agent that turns messy business requests into safe queues, approval gates, and traceable receipts.
 
 ## Elevator pitch
 

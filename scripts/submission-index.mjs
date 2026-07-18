@@ -14,14 +14,14 @@ const submissionIndex = {
   canonical_links: {
     live_demo: "https://cat-context-agent.flyguy.chatgpt.site",
     repository: "https://github.com/mytodd1-dotcom/cat-context-agent",
-    demo_video: "https://youtu.be/Gcbhl5_YlSM",
+    demo_video: "https://youtu.be/_4qvnsGBbtA",
     devpost_copy: "hackathon-assets/devpost-submission-copy.md",
   },
   suggested_review_order: [
     {
       step: 1,
       title: "Watch the demo video",
-      artifact: "https://youtu.be/Gcbhl5_YlSM",
+      artifact: "https://youtu.be/_4qvnsGBbtA",
       why: "Fastest visual pass through the CAT Context Agent story.",
     },
     {

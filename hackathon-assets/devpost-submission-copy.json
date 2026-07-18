@@ -1,6 +1,6 @@
 {
   "project_name": "CAT Context Agent",
-  "tagline": "Context before action for messy business data: a DataHub-aware agent that turns scattered files into safe next steps, approval questions, and traceable receipts.",
+  "tagline": "Context before action. Receipts before trust. A DataHub-aware agent that turns messy business requests into safe queues, approval gates, and traceable receipts.",
   "event": "Build with DataHub: The Agent Hackathon",
   "category": "Agents That Do Real Work",
   "live_demo_url": "https://cat-context-agent.flyguy.chatgpt.site",

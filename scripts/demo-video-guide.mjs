@@ -9,7 +9,7 @@ const guideMarkdownPath = resolve(assetDir, "demo-video-guide.md");
 
 const videoGuide = {
   project: "CAT Context Agent",
-  video_url: "https://youtu.be/Gcbhl5_YlSM",
+  video_url: "https://youtu.be/_4qvnsGBbtA",
   purpose:
     "Accessibility and judge companion for the demo video, so the project can be reviewed quickly even without audio.",
   timestamps: [

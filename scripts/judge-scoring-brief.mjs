@@ -50,7 +50,7 @@ export async function runJudgeScoringBrief() {
     challenge: "Build with DataHub: The Agent Hackathon",
     live_demo_url: "https://cat-context-agent.flyguy.chatgpt.site",
     repo_url: "https://github.com/mytodd1-dotcom/cat-context-agent",
-    demo_video: "https://youtu.be/Gcbhl5_YlSM",
+    demo_video: "https://youtu.be/_4qvnsGBbtA",
     generated_at: "demo-static-run",
     evidence_status: reproduction.status,
     fast_read:

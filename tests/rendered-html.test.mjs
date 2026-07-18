@@ -25,13 +25,13 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>CAT Context Agent \| DataHub Hackathon Submission<\/title>/i);
-  assert.match(html, /<meta name="description" content="CAT Context Agent turns messy business data into trusted, traceable workflows by reading DataHub-style context before taking action\."/i);
+  assert.match(html, /<meta name="description" content="A submitted DataHub Agent Hackathon project that turns messy business requests into safe queues, approval gates, and receipt-backed decisions\."/i);
   assert.match(html, /<meta property="og:title" content="CAT Context Agent \| DataHub Hackathon Submission"\/?>/i);
   assert.match(html, /<meta property="og:image" content="https:\/\/cat-context-agent\.flyguy\.chatgpt\.site\/og\.png"\/?>/i);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/?>/i);
   assert.match(html, /Context before action/);
   assert.match(html, /cat-context-agent\.flyguy\.chatgpt\.site/);
-  assert.match(html, /Watch demo/);
+  assert.match(html, /Watch public demo/);
   assert.match(html, /Open repo/);
   assert.match(html, /Try live slice/);
   assert.match(html, /Demo outcome snapshot/);
@@ -67,11 +67,11 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /npm run ci:local/);
   assert.match(html, /npm run context:read/);
   assert.match(html, /30 render\/evidence tests/);
-  assert.match(html, /youtu\.be\/Gcbhl5_YlSM/);
+  assert.match(html, /youtu\.be\/_4qvnsGBbtA/);
   assert.match(html, /watch the 2-minute walkthrough/);
   assert.match(html, /npm run demo:guide/);
   assert.match(html, /demo-video-guide\.md/);
-  assert.match(html, /DataHub-backed workflow agent/);
+  assert.match(html, /DataHub-style schema, ownership, lineage, glossary, and policy context/);
   assert.match(html, /Agents That Do Real Work/);
   assert.match(html, /Messy business requests/);
   assert.match(html, /CONTEXT CHANGES THE DECISION/);
@@ -170,12 +170,12 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /Agent Context Kit/);
   assert.match(page, /JUDGE_START_HERE\.md/);
   assert.match(page, /cat-context-agent\.flyguy\.chatgpt\.site/);
-  assert.match(page, /Watch demo/);
+  assert.match(page, /Watch public demo/);
   assert.match(page, /Open repo/);
   assert.match(page, /Try live slice/);
   assert.match(page, /outcomeStats/);
   assert.match(page, /outcomeStrip/);
-  assert.match(page, /youtu\.be\/Gcbhl5_YlSM/);
+  assert.match(page, /youtu\.be\/_4qvnsGBbtA/);
   assert.match(page, /receipt-backed action plan/);
   assert.match(page, /judgePath/);
   assert.match(page, /FAST JUDGE PATH/);
@@ -262,7 +262,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /JUDGE_START_HERE\.md/);
   assert.match(readme, /cat-context-agent\.flyguy\.chatgpt\.site/);
-  assert.match(readme, /youtu\.be\/Gcbhl5_YlSM/);
+  assert.match(readme, /youtu\.be\/_4qvnsGBbtA/);
   assert.match(readme, /examples\/cat-context-agent/);
   assert.match(readme, /DataHub-style context map/);
   assert.match(readme, /generated-datahub-metadata\.json/);
@@ -305,7 +305,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /DEVPOST_JUDGE_NOTES\.md/);
   assert.match(readme, /DataHub MCP \/ Agent Context Kit reads/);
   assert.match(judgeStart, /Judge Start Here/);
-  assert.match(judgeStart, /https:\/\/youtu\.be\/Gcbhl5_YlSM/);
+  assert.match(judgeStart, /https:\/\/youtu\.be\/_4qvnsGBbtA/);
   assert.match(judgeStart, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(judgeStart, /judge-walkthrough\.md/);
   assert.match(judgeStart, /judge-faq\.md/);
@@ -962,12 +962,12 @@ test("generates canonical Devpost submission copy", async () => {
   assert.equal(copy.category, "Agents That Do Real Work");
   assert.equal(copy.live_demo_url, "https://cat-context-agent.flyguy.chatgpt.site");
   assert.equal(copy.repository_url, "https://github.com/mytodd1-dotcom/cat-context-agent");
-  assert.equal(copy.demo_video_url, "https://youtu.be/Gcbhl5_YlSM");
+  assert.equal(copy.demo_video_url, "https://youtu.be/_4qvnsGBbtA");
   assert.ok(copy.built_with.includes("DataHub MCP-style read plan"));
   assert.match(copy.feedback_for_datahub, /context-aware agents/);
   assert.match(markdown, /Feedback for DataHub \/ organizers/);
   assert.match(markdown, /DataHub MCP \/ Agent Context Kit/);
-  assert.match(markdown, /https:\/\/youtu\.be\/Gcbhl5_YlSM/);
+  assert.match(markdown, /https:\/\/youtu\.be\/_4qvnsGBbtA/);
 });
 
 test("generates a judge-first submission index", async () => {
@@ -1031,7 +1031,7 @@ test("generates a demo video accessibility guide", async () => {
   ]);
 
   assert.equal(guide.project, "CAT Context Agent");
-  assert.equal(guide.video_url, "https://youtu.be/Gcbhl5_YlSM");
+  assert.equal(guide.video_url, "https://youtu.be/_4qvnsGBbtA");
   assert.equal(guide.timestamps.length, 6);
   assert.ok(guide.judge_takeaways.some((item) => item.includes("DataHub")));
   assert.match(markdown, /Timestamp guide/);
