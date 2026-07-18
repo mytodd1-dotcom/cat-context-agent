@@ -23,7 +23,8 @@
     "judge:brief": "node scripts/judge-scoring-brief.mjs",
     "devpost:copy": "node scripts/devpost-submission-copy.mjs",
     "submission:index": "node scripts/submission-index.mjs",
-    "ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm run devpost:copy && npm run submission:index && npm test",
+    "demo:guide": "node scripts/demo-video-guide.mjs",
+    "ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm run devpost:copy && npm run submission:index && npm run demo:guide && npm test",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"

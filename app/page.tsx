@@ -42,6 +42,12 @@ const runnableArtifacts = [
     text: "A quick judge-facing walkthrough of the context-before-action workflow and evidence chain.",
   },
   {
+    label: "Video guide",
+    command: "npm run demo:guide",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/demo-video-guide.md",
+    text: "Timestamped companion notes and a transcript summary for judges reviewing without audio.",
+  },
+  {
     label: "One-command proof",
     command: "npm run evidence:reproduce",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/reproduction-receipt.md",
