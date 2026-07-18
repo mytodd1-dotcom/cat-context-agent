@@ -49,4 +49,5 @@ npm test
 - `examples/cat-context-agent/generated-datahub-metadata.json`
 - `examples/cat-context-agent/generated-datahub-bridge-plan.json`
 - `examples/cat-context-agent/generated-mcp-context-read.json`
+- `hackathon-assets/context-tool-contracts.md`
 - `hackathon-assets/cat-context-agent-demo-preview.mp4`

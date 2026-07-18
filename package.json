@@ -12,9 +12,10 @@
     "demo": "node scripts/cat-context-demo.mjs",
     "datahub:bridge": "node scripts/datahub-local-bridge.mjs",
     "context:read": "node scripts/cat-context-provider.mjs",
+    "context:contracts": "node scripts/context-tool-contracts.mjs",
     "judge:pack": "node scripts/judge-evidence-pack.mjs",
     "submission:verify": "node scripts/verify-submission.mjs",
-    "ci:local": "npm ci --dry-run && npm run submission:verify && npm test",
+    "ci:local": "npm ci --dry-run && npm run context:contracts && npm run submission:verify && npm test",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"

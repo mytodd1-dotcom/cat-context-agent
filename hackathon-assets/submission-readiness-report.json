@@ -35,6 +35,11 @@
       "details": "Expected the agent read path to include DataHub entity, DataHub lineage, and CAT context packet reads."
     },
     {
+      "name": "context tool contracts",
+      "ok": true,
+      "details": "Expected machine-readable contracts for the DataHub reads, CAT context packet read, and receipt write."
+    },
+    {
       "name": "safety boundary",
       "ok": true,
       "details": "Expected unverified external outreach to remain blocked."
@@ -50,6 +55,7 @@
     "examples/cat-context-agent/generated-datahub-metadata.json",
     "examples/cat-context-agent/generated-datahub-bridge-plan.json",
     "examples/cat-context-agent/generated-mcp-context-read.json",
+    "hackathon-assets/context-tool-contracts.md",
     "hackathon-assets/judge-evidence-pack.md",
     "hackathon-assets/submission-readiness-report.md"
   ]

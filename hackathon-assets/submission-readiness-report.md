@@ -8,6 +8,7 @@ Generated: `demo-static-run`
 - ✅ **demo decision totals** — Expected 3 requests: 1 safe internal task, 1 approval-required task, and 1 blocked task.
 - ✅ **DataHub metadata payload** — Expected dataset URN plus datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects.
 - ✅ **MCP-style context reads** — Expected the agent read path to include DataHub entity, DataHub lineage, and CAT context packet reads.
+- ✅ **context tool contracts** — Expected machine-readable contracts for the DataHub reads, CAT context packet read, and receipt write.
 - ✅ **safety boundary** — Expected unverified external outreach to remain blocked.
 - ✅ **judge pack** — Expected judge evidence pack to summarize commands, safety claims, and inspectable artifacts.
 
@@ -26,5 +27,6 @@ Generated: `demo-static-run`
 - `examples/cat-context-agent/generated-datahub-metadata.json`
 - `examples/cat-context-agent/generated-datahub-bridge-plan.json`
 - `examples/cat-context-agent/generated-mcp-context-read.json`
+- `hackathon-assets/context-tool-contracts.md`
 - `hackathon-assets/judge-evidence-pack.md`
 - `hackathon-assets/submission-readiness-report.md`

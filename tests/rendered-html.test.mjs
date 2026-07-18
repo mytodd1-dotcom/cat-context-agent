@@ -40,7 +40,7 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
 });
 
 test("keeps the project shell responsive and repo-ready", async () => {
-  const [page, css, layout, packageJson, readme, judgeNotes, ciWorkflow] = await Promise.all([
+  const [page, css, layout, packageJson, readme, judgeNotes, ciWorkflow, toolContracts] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
@@ -48,6 +48,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
     readFile(new URL("../README.md", import.meta.url), "utf8"),
     readFile(new URL("../DEVPOST_JUDGE_NOTES.md", import.meta.url), "utf8"),
     readFile(new URL("../hackathon-assets/github-actions-ci-template.yml", import.meta.url), "utf8"),
+    readFile(new URL("../hackathon-assets/context-tool-contracts.md", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /MCP Server/);
@@ -63,12 +64,14 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(css, /artifactGrid/);
   assert.match(layout, /CAT Context Agent \| DataHub Hackathon Draft/);
   assert.match(packageJson, /"name": "cat-context-agent"/);
-  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run submission:verify && npm test"/);
+  assert.match(packageJson, /"context:contracts": "node scripts\/context-tool-contracts\.mjs"/);
+  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run submission:verify && npm test"/);
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /examples\/cat-context-agent/);
   assert.match(readme, /DataHub-style context map/);
   assert.match(readme, /generated-datahub-metadata\.json/);
   assert.match(readme, /generated-mcp-context-read\.json/);
+  assert.match(readme, /context-tool-contracts\.md/);
   assert.match(readme, /judge-evidence-pack\.md/);
   assert.match(readme, /submission-readiness-report\.md/);
   assert.match(readme, /github-actions-ci-template\.yml/);
@@ -77,6 +80,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(judgeNotes, /github-actions-ci-template\.yml/);
   assert.match(judgeNotes, /30-second version/);
   assert.match(judgeNotes, /context before action/);
+  assert.match(judgeNotes, /machine-readable tool contract/);
   assert.match(judgeNotes, /generated-datahub-bridge-plan\.json/);
   assert.match(judgeNotes, /submission readiness report/);
   assert.match(judgeNotes, /local CI-equivalent command/);
@@ -87,6 +91,9 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(ciWorkflow, /npm test/);
   assert.match(ciWorkflow, /npm run ci:local/);
   assert.match(ciWorkflow, /node-version: 22/);
+  assert.match(toolContracts, /datahub\.get_entity/);
+  assert.match(toolContracts, /cat\.write_receipt/);
+  assert.match(toolContracts, /send_external_outreach_without_verified_contact/);
   assert.doesNotMatch(page + layout, /codex-preview|_sites-preview|SkeletonPreview/);
 });
 
@@ -258,11 +265,33 @@ test("verifies the complete submission evidence chain", async () => {
   ]);
 
   assert.equal(report.status, "ready");
-  assert.equal(report.checks.length, 5);
+  assert.equal(report.checks.length, 6);
   assert.ok(report.checks.every((item) => item.ok));
   assert.equal(report.summary.total_requests, 3);
   assert.ok(report.summary.datahub_aspects.includes("glossaryTerms"));
   assert.ok(report.summary.mcp_style_tool_reads.includes("cat.get_agent_context_packet"));
   assert.match(reportMarkdown, /Submission Readiness Report/);
+  assert.match(reportMarkdown, /✅ \*\*context tool contracts\*\*/);
   assert.match(reportMarkdown, /✅ \*\*safety boundary\*\*/);
+});
+
+test("generates machine-readable context tool contracts", async () => {
+  const { stdout } = await execFileAsync("node", ["scripts/context-tool-contracts.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /cat-context-tool-contracts-v0/);
+  assert.match(stdout, /datahub\.get_entity/);
+  assert.match(stdout, /cat\.write_receipt/);
+  assert.match(stdout, /context-tool-contracts\.md/);
+
+  const contracts = await readFile(
+    new URL("../hackathon-assets/context-tool-contracts.json", import.meta.url),
+    "utf8",
+  ).then(JSON.parse);
+
+  assert.equal(contracts.protocol, "cat-context-tool-contracts-v0");
+  assert.ok(contracts.tools.some((tool) => tool.name === "datahub.get_lineage"));
+  assert.ok(contracts.tools.some((tool) => tool.name === "cat.get_agent_context_packet"));
+  assert.ok(contracts.safety_boundary.blocked_without_verified_context.includes("invent_missing_owner"));
 });

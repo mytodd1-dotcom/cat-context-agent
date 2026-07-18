@@ -60,6 +60,14 @@ npm run context:read
 
 That command writes [`examples/cat-context-agent/generated-mcp-context-read.json`](./examples/cat-context-agent/generated-mcp-context-read.json), a local MCP/DataHub-style read plan showing which context the agent checks before queueing, approval-gating, or blocking work.
 
+To generate the explicit MCP/DataHub tool contract:
+
+```bash
+npm run context:contracts
+```
+
+That command writes [`hackathon-assets/context-tool-contracts.md`](./hackathon-assets/context-tool-contracts.md) and [`hackathon-assets/context-tool-contracts.json`](./hackathon-assets/context-tool-contracts.json), describing the DataHub reads, CAT context packet read, and guarded receipt write.
+
 To generate the judge evidence pack:
 
 ```bash
@@ -119,6 +127,7 @@ npm install
 npm run demo
 npm run datahub:bridge
 npm run context:read
+npm run context:contracts
 npm run judge:pack
 npm run submission:verify
 npm run ci:local

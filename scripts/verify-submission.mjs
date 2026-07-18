@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { runContextProvider } from "./cat-context-provider.mjs";
+import { runContextToolContracts } from "./context-tool-contracts.mjs";
 import { runDemo } from "./cat-context-demo.mjs";
 import { runBridge } from "./datahub-local-bridge.mjs";
 import { runJudgeEvidencePack } from "./judge-evidence-pack.mjs";
@@ -56,6 +57,7 @@ export async function runSubmissionVerify() {
   const demo = await runDemo();
   const bridge = await runBridge();
   const contextRead = await runContextProvider();
+  const toolContracts = await runContextToolContracts();
   const pack = await runJudgeEvidencePack();
 
   const datahubMetadata = await readJson(resolve(root, "examples/cat-context-agent/generated-datahub-metadata.json"));
@@ -86,6 +88,13 @@ export async function runSubmissionVerify() {
         toolReads.includes(tool),
       ),
       "Expected the agent read path to include DataHub entity, DataHub lineage, and CAT context packet reads.",
+    ),
+    check(
+      "context tool contracts",
+      ["datahub.get_entity", "datahub.get_lineage", "cat.get_agent_context_packet", "cat.write_receipt"].every(
+        (tool) => toolContracts.tools.some((contract) => contract.name === tool),
+      ),
+      "Expected machine-readable contracts for the DataHub reads, CAT context packet read, and receipt write.",
     ),
     check(
       "safety boundary",
@@ -123,6 +132,7 @@ export async function runSubmissionVerify() {
       "examples/cat-context-agent/generated-datahub-metadata.json",
       "examples/cat-context-agent/generated-datahub-bridge-plan.json",
       "examples/cat-context-agent/generated-mcp-context-read.json",
+      "hackathon-assets/context-tool-contracts.md",
       "hackathon-assets/judge-evidence-pack.md",
       "hackathon-assets/submission-readiness-report.md",
     ],
