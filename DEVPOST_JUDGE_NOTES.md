@@ -29,6 +29,7 @@ npm run datahub:bridge
 npm run context:read
 npm run judge:pack
 npm run submission:verify
+npm run ci:local
 npm test
 ```
 
@@ -40,6 +41,7 @@ Those commands produce:
 - an MCP-style context read showing the agent’s pre-action context checks;
 - a judge evidence pack with commands, claims, and outcomes.
 - a submission readiness report that validates the demo totals, DataHub aspects, MCP-style reads, blocked-action policy, and judge evidence pack.
+- a local CI-equivalent command that checks fresh-install readiness and the full build/test suite.
 
 ## Architecture
 

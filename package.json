@@ -14,6 +14,7 @@
     "context:read": "node scripts/cat-context-provider.mjs",
     "judge:pack": "node scripts/judge-evidence-pack.mjs",
     "submission:verify": "node scripts/verify-submission.mjs",
+    "ci:local": "npm ci --dry-run && npm run submission:verify && npm test",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"

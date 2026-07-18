@@ -63,6 +63,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(css, /artifactGrid/);
   assert.match(layout, /CAT Context Agent \| DataHub Hackathon Draft/);
   assert.match(packageJson, /"name": "cat-context-agent"/);
+  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run submission:verify && npm test"/);
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /examples\/cat-context-agent/);
   assert.match(readme, /DataHub-style context map/);
@@ -78,11 +79,13 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(judgeNotes, /context before action/);
   assert.match(judgeNotes, /generated-datahub-bridge-plan\.json/);
   assert.match(judgeNotes, /submission readiness report/);
+  assert.match(judgeNotes, /local CI-equivalent command/);
   assert.match(judgeNotes, /What is simulated vs\. live/);
   assert.match(judgeNotes, /DATAHUB_GMS_URL=http:\/\/localhost:8080 npm run datahub:bridge -- --post/);
   assert.match(ciWorkflow, /npm ci/);
   assert.match(ciWorkflow, /npm run submission:verify/);
   assert.match(ciWorkflow, /npm test/);
+  assert.match(ciWorkflow, /npm run ci:local/);
   assert.match(ciWorkflow, /node-version: 22/);
   assert.doesNotMatch(page + layout, /codex-preview|_sites-preview|SkeletonPreview/);
 });

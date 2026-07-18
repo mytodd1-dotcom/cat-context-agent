@@ -36,3 +36,6 @@ jobs:
 
       - name: Build and test
         run: npm test
+
+# Local equivalent:
+# npm run ci:local

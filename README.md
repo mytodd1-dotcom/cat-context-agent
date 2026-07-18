@@ -78,6 +78,14 @@ That command reruns the demo, DataHub bridge plan, MCP-style context read, and j
 
 A GitHub Actions template for the same checks is available at [`hackathon-assets/github-actions-ci-template.yml`](./hackathon-assets/github-actions-ci-template.yml). It is kept as a template because the current OAuth token cannot publish workflow files without GitHub's `workflow` scope.
 
+To run the local equivalent of that CI recipe:
+
+```bash
+npm run ci:local
+```
+
+That command checks `npm ci --dry-run`, regenerates the submission readiness report, and runs the full build/test suite.
+
 ## DataHub integration path
 
 The current demo is intentionally runnable without Docker or credentials. It produces DataHub-ready metadata so judges can inspect the context layer before the full live integration is wired.
@@ -113,6 +121,7 @@ npm run datahub:bridge
 npm run context:read
 npm run judge:pack
 npm run submission:verify
+npm run ci:local
 npm run dev
 npm run build
 ```
