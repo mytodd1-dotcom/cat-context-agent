@@ -27,7 +27,7 @@ CAT Context Agent demonstrates context before action: the agent reads DataHub-st
 - It treats missing ownership and missing verified contact as workflow state, not as prompts to hallucinate.
 - It emits receipts and regenerated reports, so the judge can audit both the recommendation and the context used to make it.
 - It documents the local DataHub post command separately from the dry-run evidence, so mutation is explicit instead of hidden inside tests.
-- The current evidence chain is reproducible with 3 requests and 20 artifact validation checks.
+- The current evidence chain is reproducible with 3 requests and 21 artifact validation checks.
 
 ## Judge command path
 

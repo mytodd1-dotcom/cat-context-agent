@@ -16,6 +16,8 @@ const paths = {
   liveRunbookMarkdown: resolve(assetDir, "live-datahub-runbook.md"),
   datahubReadinessDoctor: resolve(assetDir, "datahub-readiness-doctor.json"),
   datahubReadinessDoctorMarkdown: resolve(assetDir, "datahub-readiness-doctor.md"),
+  datahubLiveRoundtrip: resolve(assetDir, "datahub-live-roundtrip.json"),
+  datahubLiveRoundtripMarkdown: resolve(assetDir, "datahub-live-roundtrip.md"),
   datahubChecklist: resolve(assetDir, "datahub-integration-checklist.json"),
   datahubChecklistMarkdown: resolve(assetDir, "datahub-integration-checklist.md"),
   datahubClaimAudit: resolve(assetDir, "datahub-claim-audit.json"),
@@ -84,6 +86,8 @@ export async function runArtifactValidation() {
     liveRunbookMarkdown,
     datahubReadinessDoctor,
     datahubReadinessDoctorMarkdown,
+    datahubLiveRoundtrip,
+    datahubLiveRoundtripMarkdown,
     datahubChecklist,
     datahubChecklistMarkdown,
     datahubClaimAudit,
@@ -119,6 +123,8 @@ export async function runArtifactValidation() {
     readFile(paths.liveRunbookMarkdown, "utf8"),
     readJson(paths.datahubReadinessDoctor),
     readFile(paths.datahubReadinessDoctorMarkdown, "utf8"),
+    readJson(paths.datahubLiveRoundtrip),
+    readFile(paths.datahubLiveRoundtripMarkdown, "utf8"),
     readJson(paths.datahubChecklist),
     readFile(paths.datahubChecklistMarkdown, "utf8"),
     readJson(paths.datahubClaimAudit),
@@ -206,6 +212,19 @@ export async function runArtifactValidation() {
         datahubReadinessDoctor.probe.required_for_judging === false &&
         datahubReadinessDoctorMarkdown.includes("DataHub Readiness Doctor"),
       "Readiness doctor should prove dry-run DataHub artifacts are ready while live GMS remains optional.",
+    ),
+    result(
+      "DataHub live roundtrip harness",
+      datahubLiveRoundtrip.protocol === "cat-datahub-live-roundtrip-v0" &&
+        datahubLiveRoundtrip.status === "ready_for_local_roundtrip" &&
+        datahubLiveRoundtrip.mode === "dry-run" &&
+        datahubLiveRoundtrip.mutations_performed === false &&
+        datahubLiveRoundtrip.readback_plan.entity_endpoint.includes("/entitiesV2/") &&
+        datahubLiveRoundtrip.readback_plan.aspect_endpoints.length === 4 &&
+        datahubLiveRoundtrip.checks.every((item) => item.ok) &&
+        datahubLiveRoundtripMarkdown.includes("DataHub Live Roundtrip Harness") &&
+        datahubLiveRoundtripMarkdown.includes("No metadata was posted"),
+      "Roundtrip harness should document the local DataHub write/readback path without mutating anything in CI.",
     ),
     result(
       "DataHub integration checklist",
@@ -347,6 +366,7 @@ export async function runArtifactValidation() {
       "hackathon-assets/context-tool-contracts.json",
       "hackathon-assets/live-datahub-runbook.json",
       "hackathon-assets/datahub-readiness-doctor.json",
+      "hackathon-assets/datahub-live-roundtrip.json",
       "hackathon-assets/datahub-integration-checklist.json",
       "hackathon-assets/datahub-claim-audit.json",
       "hackathon-assets/datahub-mcp-handoff.json",

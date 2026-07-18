@@ -90,6 +90,14 @@ npm run datahub:doctor
 
 That command writes [`hackathon-assets/datahub-readiness-doctor.md`](./hackathon-assets/datahub-readiness-doctor.md) and [`hackathon-assets/datahub-readiness-doctor.json`](./hackathon-assets/datahub-readiness-doctor.json), confirming the dry-run evidence is ready, probing the local GMS health endpoint when available, and keeping live DataHub optional for judging.
 
+To generate the local DataHub write/readback roundtrip harness:
+
+```bash
+npm run datahub:roundtrip
+```
+
+That command writes [`hackathon-assets/datahub-live-roundtrip.md`](./hackathon-assets/datahub-live-roundtrip.md) and [`hackathon-assets/datahub-live-roundtrip.json`](./hackathon-assets/datahub-live-roundtrip.json). In normal dry-run mode it posts nothing; after a local DataHub GMS is running, `DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:roundtrip -- --post` writes the four `ingestProposal` bodies and verifies the `entitiesV2` readback path. The script refuses non-local GMS mutation targets.
+
 To generate the DataHub integration checklist:
 
 ```bash
@@ -274,7 +282,7 @@ To run the local equivalent of that CI recipe:
 npm run ci:local
 ```
 
-That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub readiness doctor, DataHub integration checklist, DataHub claim audit, DataHub MCP handoff, MCP adapter smoke test, Devpost copy pack, submission honesty audit, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, regenerates the judge walkthrough, judge FAQ, judge quick card, judge rubric matrix, validates artifacts, regenerates the judge scoring brief, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
+That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub readiness doctor, DataHub roundtrip harness, DataHub integration checklist, DataHub claim audit, DataHub MCP handoff, MCP adapter smoke test, Devpost copy pack, submission honesty audit, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, regenerates the judge walkthrough, judge FAQ, judge quick card, judge rubric matrix, validates artifacts, regenerates the judge scoring brief, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
 
 ## DataHub integration path
 
@@ -283,9 +291,9 @@ The current demo is intentionally runnable without Docker or credentials. It pro
 Next live DataHub step:
 
 1. Start a local DataHub quickstart.
-2. Run `DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post` to post four Metadata Change Proposal bodies to `/aspects?action=ingestProposal`.
+2. Run `DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:roundtrip -- --post` to post four Metadata Change Proposal bodies to `/aspects?action=ingestProposal` and verify the `entitiesV2` readback path.
 3. Let the agent read `generated-mcp-context-read.json` as the MCP/DataHub-style context contract.
-4. Replace the static packet with DataHub MCP / Agent Context Kit reads.
+4. Replace the static packet with live DataHub MCP / Agent Context Kit reads.
 5. Write approval/blocked receipt outcomes back as metadata or workflow artifacts.
 
 The repo also includes a generated live-run checklist at [`hackathon-assets/live-datahub-runbook.md`](./hackathon-assets/live-datahub-runbook.md). It keeps the live mutation step separate from dry-run evidence so judges can verify the exact command before anything is posted.
@@ -302,7 +310,7 @@ The repo also includes a generated live-run checklist at [`hackathon-assets/live
 
 ## Current status
 
-This repository contains the public submission foundation, Apache 2.0 license, landing page, local demo runner, DataHub-ready metadata artifacts, Rest.li ingestProposal bridge plan, MCP-style context read artifact, and demo-preview video asset. The next milestone is replacing the static context packet with live DataHub MCP / Agent Context Kit reads after the local ingest path is exercised.
+This repository contains the public submission foundation, Apache 2.0 license, landing page, local demo runner, DataHub-ready metadata artifacts, Rest.li ingestProposal bridge plan, a local write/readback roundtrip harness, MCP-style context read artifact, and demo-preview video asset. The next milestone is replacing the static context packet with live DataHub MCP / Agent Context Kit reads after the local ingest/readback path is exercised.
 
 ## Local development
 

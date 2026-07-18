@@ -13,6 +13,10 @@
       "detail": "6 checks confirm dry-run DataHub readiness and keep local GMS optional."
     },
     {
+      "name": "DataHub live roundtrip harness",
+      "detail": "6 checks prepare a local ingestProposal write plus entitiesV2 readback loop without posting in dry-run mode."
+    },
+    {
       "name": "DataHub integration checklist",
       "detail": "5 verification phases separate runnable evidence from optional local DataHub posting."
     },
@@ -70,7 +74,7 @@
     },
     {
       "name": "artifact validation",
-      "detail": "20 generated-artifact checks passed."
+      "detail": "21 generated-artifact checks passed."
     },
     {
       "name": "safety boundary",
@@ -93,16 +97,18 @@
       "glossaryTerms"
     ],
     "live_datahub_commands": 5,
+    "live_roundtrip_mode": "dry-run",
     "mcp_style_tool_reads": [
       "datahub.get_entity",
       "datahub.get_lineage",
       "cat.get_agent_context_packet"
     ],
-    "artifact_validation_checks": 20
+    "artifact_validation_checks": 21
   },
   "reports": [
     "hackathon-assets/judge-evidence-pack.md",
     "hackathon-assets/datahub-readiness-doctor.md",
+    "hackathon-assets/datahub-live-roundtrip.md",
     "hackathon-assets/datahub-integration-checklist.md",
     "hackathon-assets/datahub-claim-audit.md",
     "hackathon-assets/datahub-mcp-handoff.md",

@@ -5,6 +5,7 @@ import { runDataHubPayloadPreview } from "./datahub-payload-preview.mjs";
 import { runDataHubClaimAudit } from "./datahub-claim-audit.mjs";
 import { runDataHubIntegrationChecklist } from "./datahub-integration-checklist.mjs";
 import { runDataHubMcpHandoff } from "./datahub-mcp-handoff.mjs";
+import { runDataHubLiveRoundtrip } from "./datahub-live-roundtrip.mjs";
 import { runDataHubReadinessDoctor } from "./datahub-readiness-doctor.mjs";
 import { runDecisionTrace } from "./decision-trace.mjs";
 import { runDevpostSubmissionCopy } from "./devpost-submission-copy.mjs";
@@ -61,6 +62,7 @@ ${receipt.reports.map((report) => `- \`${report}\``).join("\n")}
 export async function runEvidenceReproduction() {
   const payloadPreview = await runDataHubPayloadPreview();
   const readinessDoctor = await runDataHubReadinessDoctor();
+  const liveRoundtrip = await runDataHubLiveRoundtrip();
   const integrationChecklist = await runDataHubIntegrationChecklist();
   await runDevpostSubmissionCopy();
   const claimAudit = await runDataHubClaimAudit();
@@ -105,6 +107,10 @@ export async function runEvidenceReproduction() {
     {
       name: "DataHub readiness doctor",
       detail: `${readinessDoctor.checks.length} checks confirm dry-run DataHub readiness and keep local GMS optional.`,
+    },
+    {
+      name: "DataHub live roundtrip harness",
+      detail: `${liveRoundtrip.checks.length} checks prepare a local ingestProposal write plus entitiesV2 readback loop without posting in dry-run mode.`,
     },
     {
       name: "DataHub integration checklist",
@@ -189,12 +195,14 @@ export async function runEvidenceReproduction() {
       blocked: readiness.summary.blocked,
       datahub_aspects: readiness.summary.datahub_aspects,
       live_datahub_commands: liveRunbook.commands.length,
+      live_roundtrip_mode: liveRoundtrip.mode,
       mcp_style_tool_reads: readiness.summary.mcp_style_tool_reads,
       artifact_validation_checks: artifactValidation.checks.length,
     },
     reports: [
       "hackathon-assets/judge-evidence-pack.md",
       "hackathon-assets/datahub-readiness-doctor.md",
+      "hackathon-assets/datahub-live-roundtrip.md",
       "hackathon-assets/datahub-integration-checklist.md",
       "hackathon-assets/datahub-claim-audit.md",
       "hackathon-assets/datahub-mcp-handoff.md",

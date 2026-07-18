@@ -40,6 +40,9 @@ jobs:
       - name: Run DataHub readiness doctor
         run: npm run datahub:doctor
 
+      - name: Generate DataHub live roundtrip harness
+        run: npm run datahub:roundtrip
+
       - name: Generate DataHub integration checklist
         run: npm run datahub:checklist
 

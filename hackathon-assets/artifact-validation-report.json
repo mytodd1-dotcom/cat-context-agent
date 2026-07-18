@@ -38,6 +38,11 @@
       "detail": "Readiness doctor should prove dry-run DataHub artifacts are ready while live GMS remains optional."
     },
     {
+      "name": "DataHub live roundtrip harness",
+      "ok": true,
+      "detail": "Roundtrip harness should document the local DataHub write/readback path without mutating anything in CI."
+    },
+    {
       "name": "DataHub integration checklist",
       "ok": true,
       "detail": "Integration checklist should separate no-credential judging from optional local DataHub ingestProposal posting."
@@ -111,6 +116,7 @@
     "hackathon-assets/context-tool-contracts.json",
     "hackathon-assets/live-datahub-runbook.json",
     "hackathon-assets/datahub-readiness-doctor.json",
+    "hackathon-assets/datahub-live-roundtrip.json",
     "hackathon-assets/datahub-integration-checklist.json",
     "hackathon-assets/datahub-claim-audit.json",
     "hackathon-assets/datahub-mcp-handoff.json",

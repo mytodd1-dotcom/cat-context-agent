@@ -12,6 +12,7 @@ Generated: `demo-static-run`
 - ✅ **tool contract coverage** — Tool contracts should cover DataHub reads, CAT context read, and guarded receipt write.
 - ✅ **live DataHub runbook** — Live runbook should document the opt-in local DataHub Rest.li ingestProposal path and preserve the dry-run payload coverage.
 - ✅ **DataHub readiness doctor** — Readiness doctor should prove dry-run DataHub artifacts are ready while live GMS remains optional.
+- ✅ **DataHub live roundtrip harness** — Roundtrip harness should document the local DataHub write/readback path without mutating anything in CI.
 - ✅ **DataHub integration checklist** — Integration checklist should separate no-credential judging from optional local DataHub ingestProposal posting.
 - ✅ **DataHub claim audit** — DataHub claim audit should pass every DataHub-specific claim check.
 - ✅ **DataHub MCP handoff** — DataHub MCP handoff should map read-before-action tools to bounded receipt writes.
@@ -35,6 +36,7 @@ Generated: `demo-static-run`
 - `hackathon-assets/context-tool-contracts.json`
 - `hackathon-assets/live-datahub-runbook.json`
 - `hackathon-assets/datahub-readiness-doctor.json`
+- `hackathon-assets/datahub-live-roundtrip.json`
 - `hackathon-assets/datahub-integration-checklist.json`
 - `hackathon-assets/datahub-claim-audit.json`
 - `hackathon-assets/datahub-mcp-handoff.json`

@@ -1,0 +1,96 @@
+{
+  "protocol": "cat-datahub-live-roundtrip-v0",
+  "project": "CAT Context Agent",
+  "generated_at": "demo-static-run",
+  "status": "ready_for_local_roundtrip",
+  "mode": "dry-run",
+  "datahub_gms_url": "http://localhost:8080",
+  "mutations_performed": false,
+  "safety": {
+    "local_only_gms_required": true,
+    "remote_or_production_posting_allowed": false,
+    "secrets_required_for_dry_run": false
+  },
+  "write_plan": {
+    "endpoint": "http://localhost:8080/aspects?action=ingestProposal",
+    "action": "ingestProposal",
+    "headers": {
+      "content-type": "application/json",
+      "X-RestLi-Protocol-Version": "2.0.0"
+    },
+    "aspects": [
+      "datasetProperties",
+      "schemaMetadata",
+      "ownership",
+      "glossaryTerms"
+    ]
+  },
+  "readback_plan": {
+    "entity_endpoint": "http://localhost:8080/entitiesV2/urn%3Ali%3Adataset%3A(cat%2Cmessy_business_requests%2CPROD)?aspects=List(datasetProperties,schemaMetadata,ownership,glossaryTerms)",
+    "aspect_endpoints": [
+      {
+        "aspectName": "datasetProperties",
+        "endpoint": "http://localhost:8080/aspects/urn%3Ali%3Adataset%3A(cat%2Cmessy_business_requests%2CPROD)?aspect=datasetProperties&version=0"
+      },
+      {
+        "aspectName": "schemaMetadata",
+        "endpoint": "http://localhost:8080/aspects/urn%3Ali%3Adataset%3A(cat%2Cmessy_business_requests%2CPROD)?aspect=schemaMetadata&version=0"
+      },
+      {
+        "aspectName": "ownership",
+        "endpoint": "http://localhost:8080/aspects/urn%3Ali%3Adataset%3A(cat%2Cmessy_business_requests%2CPROD)?aspect=ownership&version=0"
+      },
+      {
+        "aspectName": "glossaryTerms",
+        "endpoint": "http://localhost:8080/aspects/urn%3Ali%3Adataset%3A(cat%2Cmessy_business_requests%2CPROD)?aspect=glossaryTerms&version=0"
+      }
+    ],
+    "expected_aspects": [
+      "datasetProperties",
+      "schemaMetadata",
+      "ownership",
+      "glossaryTerms"
+    ],
+    "acceptance": [
+      "GMS accepts all four Metadata Change Proposal UPSERT bodies.",
+      "entitiesV2 readback returns the CAT dataset URN.",
+      "Readback includes datasetProperties, schemaMetadata, ownership, and glossaryTerms.",
+      "Agent decisions still preserve one safe, one approval-required, and one blocked request."
+    ]
+  },
+  "posted": [],
+  "readback": null,
+  "checks": [
+    {
+      "name": "roundtrip payload coverage",
+      "ok": true,
+      "detail": "The same four DataHub aspects are available for dry-run, post, and readback verification."
+    },
+    {
+      "name": "write path is explicit",
+      "ok": true,
+      "detail": "The write path is DataHub Rest.li ingestProposal, not a hidden side effect."
+    },
+    {
+      "name": "readback path is explicit",
+      "ok": true,
+      "detail": "The readback path points to DataHub entitiesV2 plus per-aspect latest-version reads."
+    },
+    {
+      "name": "mutation guard is local-only",
+      "ok": true,
+      "detail": "Dry-run mode performs no mutation and still documents the local-only mutation gate."
+    },
+    {
+      "name": "agent decision boundary preserved",
+      "ok": true,
+      "detail": "The local DataHub path does not weaken CAT's safe, approval-required, and blocked decisions."
+    },
+    {
+      "name": "dry-run has no external side effects",
+      "ok": true,
+      "detail": "No metadata was posted and no local GMS readback was attempted without --post or --readback."
+    }
+  ],
+  "optional_live_command": "DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:roundtrip -- --post"
+}

@@ -14,6 +14,7 @@
     "datahub:payload": "node scripts/datahub-payload-preview.mjs",
     "datahub:runbook": "node scripts/live-datahub-runbook.mjs",
     "datahub:doctor": "node scripts/datahub-readiness-doctor.mjs",
+    "datahub:roundtrip": "node scripts/datahub-live-roundtrip.mjs",
     "datahub:checklist": "node scripts/datahub-integration-checklist.mjs",
     "datahub:audit": "node scripts/datahub-claim-audit.mjs",
     "datahub:mcp": "node scripts/datahub-mcp-handoff.mjs",
@@ -36,7 +37,7 @@
     "devpost:copy": "node scripts/devpost-submission-copy.mjs",
     "submission:index": "node scripts/submission-index.mjs",
     "demo:guide": "node scripts/demo-video-guide.mjs",
-    "ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run datahub:doctor && npm run datahub:checklist && npm run datahub:audit && npm run datahub:mcp && npm run mcp:smoke && npm run devpost:copy && npm run submission:honesty && npm run decision:trace && npm run lineage:map && npm run policy:matrix && npm run submission:verify && npm run judge:walkthrough && npm run judge:faq && npm run judge:quick && npm run judge:rubric && npm run artifacts:validate && npm run judge:brief && npm run submission:index && npm run demo:guide && npm test",
+    "ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run datahub:doctor && npm run datahub:roundtrip && npm run datahub:checklist && npm run datahub:audit && npm run datahub:mcp && npm run mcp:smoke && npm run devpost:copy && npm run submission:honesty && npm run decision:trace && npm run lineage:map && npm run policy:matrix && npm run submission:verify && npm run judge:walkthrough && npm run judge:faq && npm run judge:quick && npm run judge:rubric && npm run artifacts:validate && npm run judge:brief && npm run submission:index && npm run demo:guide && npm test",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"

@@ -216,6 +216,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"datahub:payload": "node scripts\/datahub-payload-preview\.mjs"/);
   assert.match(packageJson, /"datahub:runbook": "node scripts\/live-datahub-runbook\.mjs"/);
   assert.match(packageJson, /"datahub:doctor": "node scripts\/datahub-readiness-doctor\.mjs"/);
+  assert.match(packageJson, /"datahub:roundtrip": "node scripts\/datahub-live-roundtrip\.mjs"/);
   assert.match(packageJson, /"datahub:checklist": "node scripts\/datahub-integration-checklist\.mjs"/);
   assert.match(packageJson, /"datahub:audit": "node scripts\/datahub-claim-audit\.mjs"/);
   assert.match(packageJson, /"datahub:mcp": "node scripts\/datahub-mcp-handoff\.mjs"/);
@@ -257,7 +258,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"devpost:copy": "node scripts\/devpost-submission-copy\.mjs"/);
   assert.match(packageJson, /"submission:index": "node scripts\/submission-index\.mjs"/);
   assert.match(packageJson, /"demo:guide": "node scripts\/demo-video-guide\.mjs"/);
-  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run datahub:doctor && npm run datahub:checklist && npm run datahub:audit && npm run datahub:mcp && npm run mcp:smoke && npm run devpost:copy && npm run submission:honesty && npm run decision:trace && npm run lineage:map && npm run policy:matrix && npm run submission:verify && npm run judge:walkthrough && npm run judge:faq && npm run judge:quick && npm run judge:rubric && npm run artifacts:validate && npm run judge:brief && npm run submission:index && npm run demo:guide && npm test"/);
+  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run datahub:doctor && npm run datahub:roundtrip && npm run datahub:checklist && npm run datahub:audit && npm run datahub:mcp && npm run mcp:smoke && npm run devpost:copy && npm run submission:honesty && npm run decision:trace && npm run lineage:map && npm run policy:matrix && npm run submission:verify && npm run judge:walkthrough && npm run judge:faq && npm run judge:quick && npm run judge:rubric && npm run artifacts:validate && npm run judge:brief && npm run submission:index && npm run demo:guide && npm test"/);
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /JUDGE_START_HERE\.md/);
   assert.match(readme, /cat-context-agent\.flyguy\.chatgpt\.site/);
@@ -269,6 +270,9 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /live-datahub-runbook\.md/);
   assert.match(readme, /datahub-readiness-doctor\.md/);
   assert.match(readme, /npm run datahub:doctor/);
+  assert.match(readme, /datahub-live-roundtrip\.md/);
+  assert.match(readme, /npm run datahub:roundtrip/);
+  assert.match(readme, /entitiesV2/);
   assert.match(readme, /datahub-integration-checklist\.md/);
   assert.match(readme, /datahub-claim-audit\.md/);
   assert.match(readme, /datahub-mcp-handoff\.md/);
@@ -357,6 +361,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(ciWorkflow, /npm run submission:verify/);
   assert.match(ciWorkflow, /npm run datahub:runbook/);
   assert.match(ciWorkflow, /npm run datahub:doctor/);
+  assert.match(ciWorkflow, /npm run datahub:roundtrip/);
   assert.match(ciWorkflow, /npm run datahub:checklist/);
   assert.match(ciWorkflow, /npm run datahub:audit/);
   assert.match(ciWorkflow, /npm run datahub:mcp/);
@@ -542,6 +547,7 @@ test("builds a judge evidence pack from generated artifacts", async () => {
   assert.ok(pack.safety_claims.some((claim) => /External outreach/.test(claim)));
   assert.ok(pack.judge_commands.includes("npm run datahub:runbook"));
   assert.ok(pack.judge_commands.includes("npm run datahub:doctor"));
+  assert.ok(pack.judge_commands.includes("npm run datahub:roundtrip"));
   assert.ok(pack.judge_commands.includes("npm run datahub:checklist"));
   assert.ok(pack.judge_commands.includes("npm run datahub:audit"));
   assert.ok(pack.judge_commands.includes("npm run datahub:mcp"));
@@ -554,6 +560,7 @@ test("builds a judge evidence pack from generated artifacts", async () => {
   assert.ok(pack.judge_commands.includes("npm run policy:matrix"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/live-datahub-runbook.md"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/datahub-readiness-doctor.md"));
+  assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/datahub-live-roundtrip.md"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/datahub-integration-checklist.md"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/datahub-claim-audit.md"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/datahub-mcp-handoff.md"));
@@ -643,6 +650,9 @@ test("validates generated evidence artifacts", async () => {
   await execFileAsync("node", ["scripts/live-datahub-runbook.mjs"], {
     cwd: new URL("..", import.meta.url),
   });
+  await execFileAsync("node", ["scripts/datahub-live-roundtrip.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
   await execFileAsync("node", ["scripts/verify-submission.mjs"], {
     cwd: new URL("..", import.meta.url),
   });
@@ -675,11 +685,12 @@ test("validates generated evidence artifacts", async () => {
   ]);
 
   assert.equal(report.status, "valid");
-  assert.equal(report.checks.length, 20);
+  assert.equal(report.checks.length, 21);
   assert.ok(report.checks.every((check) => check.ok));
   assert.ok(report.validated_files.includes("hackathon-assets/context-tool-contracts.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/live-datahub-runbook.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/datahub-readiness-doctor.json"));
+  assert.ok(report.validated_files.includes("hackathon-assets/datahub-live-roundtrip.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/datahub-integration-checklist.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/datahub-claim-audit.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/datahub-mcp-handoff.json"));
@@ -694,6 +705,7 @@ test("validates generated evidence artifacts", async () => {
   assert.match(markdown, /Artifact Validation Report/);
   assert.match(markdown, /✅ \*\*tool contract coverage\*\*/);
   assert.match(markdown, /✅ \*\*DataHub readiness doctor\*\*/);
+  assert.match(markdown, /✅ \*\*DataHub live roundtrip harness\*\*/);
   assert.match(markdown, /✅ \*\*DataHub integration checklist\*\*/);
   assert.match(markdown, /✅ \*\*DataHub claim audit\*\*/);
   assert.match(markdown, /✅ \*\*DataHub MCP handoff\*\*/);
@@ -722,12 +734,14 @@ test("reproduces the judge evidence chain with one command", async () => {
   ]);
 
   assert.equal(receipt.status, "reproducible");
-  assert.equal(receipt.checks.length, 19);
+  assert.equal(receipt.checks.length, 20);
   assert.equal(receipt.summary.total_requests, 3);
-  assert.equal(receipt.summary.artifact_validation_checks, 20);
+  assert.equal(receipt.summary.artifact_validation_checks, 21);
+  assert.equal(receipt.summary.live_roundtrip_mode, "dry-run");
   assert.equal(receipt.summary.live_datahub_commands, 5);
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-payload-preview.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-readiness-doctor.md"));
+  assert.ok(receipt.reports.includes("hackathon-assets/datahub-live-roundtrip.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-integration-checklist.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-claim-audit.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-mcp-handoff.md"));
@@ -1076,6 +1090,36 @@ test("runs a DataHub readiness doctor without posting metadata", async () => {
   assert.match(markdown, /DataHub Readiness Doctor/);
   assert.match(markdown, /without posting any metadata/);
   assert.match(markdown, /Required for judging: `false`/);
+});
+
+test("generates a local DataHub roundtrip harness without posting metadata", async () => {
+  const { stdout } = await execFileAsync("node", ["scripts/datahub-live-roundtrip.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /cat-datahub-live-roundtrip-v0/);
+  assert.match(stdout, /ready_for_local_roundtrip/);
+  assert.match(stdout, /datahub-live-roundtrip\.md/);
+
+  const [roundtrip, markdown] = await Promise.all([
+    readFile(new URL("../hackathon-assets/datahub-live-roundtrip.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../hackathon-assets/datahub-live-roundtrip.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(roundtrip.protocol, "cat-datahub-live-roundtrip-v0");
+  assert.equal(roundtrip.status, "ready_for_local_roundtrip");
+  assert.equal(roundtrip.mode, "dry-run");
+  assert.equal(roundtrip.mutations_performed, false);
+  assert.equal(roundtrip.safety.remote_or_production_posting_allowed, false);
+  assert.equal(roundtrip.write_plan.action, "ingestProposal");
+  assert.deepEqual(roundtrip.write_plan.aspects, ["datasetProperties", "schemaMetadata", "ownership", "glossaryTerms"]);
+  assert.match(roundtrip.readback_plan.entity_endpoint, /\/entitiesV2\//);
+  assert.equal(roundtrip.readback_plan.aspect_endpoints.length, 4);
+  assert.ok(roundtrip.checks.every((check) => check.ok));
+  assert.equal(roundtrip.optional_live_command, "DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:roundtrip -- --post");
+  assert.match(markdown, /DataHub Live Roundtrip Harness/);
+  assert.match(markdown, /No metadata was posted/);
+  assert.match(markdown, /entitiesV2/);
 });
 
 test("generates a DataHub integration checklist", async () => {
