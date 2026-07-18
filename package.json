@@ -12,6 +12,7 @@
     "demo": "node scripts/cat-context-demo.mjs",
     "datahub:bridge": "node scripts/datahub-local-bridge.mjs",
     "datahub:payload": "node scripts/datahub-payload-preview.mjs",
+    "decision:trace": "node scripts/decision-trace.mjs",
     "context:read": "node scripts/cat-context-provider.mjs",
     "context:contracts": "node scripts/context-tool-contracts.mjs",
     "judge:pack": "node scripts/judge-evidence-pack.mjs",
@@ -19,7 +20,7 @@
     "artifacts:validate": "node scripts/validate-artifacts.mjs",
     "evidence:reproduce": "node scripts/reproduce-evidence.mjs",
     "judge:brief": "node scripts/judge-scoring-brief.mjs",
-    "ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm test",
+    "ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm test",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"

@@ -1,0 +1,98 @@
+{
+  "protocol": "cat-decision-trace-v0",
+  "generated_at": "demo-static-run",
+  "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+  "source_file": "examples/cat-context-agent/messy-business-requests.csv",
+  "tool_read_plan": [
+    "datahub.get_entity",
+    "datahub.get_lineage",
+    "cat.get_agent_context_packet"
+  ],
+  "traces": [
+    {
+      "request_id": "REQ-1042",
+      "account": "Acme HVAC",
+      "request_type": "renewal follow-up",
+      "data_issue": "owner context missing",
+      "context_reads": [
+        "datahub.get_entity",
+        "datahub.get_lineage",
+        "cat.get_agent_context_packet"
+      ],
+      "context_sources": [
+        "urn:li:dataset:(cat,messy_business_requests,PROD)",
+        "context:schema",
+        "context:owner",
+        "context:contact",
+        "context:lineage",
+        "context:policy",
+        "policy:cat-agent-context-v0"
+      ],
+      "missing_context": [
+        "owner"
+      ],
+      "decision": "needs_approval",
+      "status": "Needs human approval",
+      "safe_next_step": "Ask for missing customer contact owner before follow-up",
+      "blocked_action": "Do not send external follow-up",
+      "receipt_id": "cat-demo-REQ-1042",
+      "confidence": 0.78
+    },
+    {
+      "request_id": "REQ-1043",
+      "account": "Northline Dental",
+      "request_type": "invoice mismatch",
+      "data_issue": "internal finance review",
+      "context_reads": [
+        "datahub.get_entity",
+        "datahub.get_lineage",
+        "cat.get_agent_context_packet"
+      ],
+      "context_sources": [
+        "urn:li:dataset:(cat,messy_business_requests,PROD)",
+        "context:schema",
+        "context:owner",
+        "context:contact",
+        "context:lineage",
+        "context:policy",
+        "policy:cat-agent-context-v0"
+      ],
+      "missing_context": [],
+      "decision": "safe_to_queue_internal_task",
+      "status": "Safe to queue",
+      "safe_next_step": "Create finance review task for invoice mismatch",
+      "blocked_action": null,
+      "receipt_id": "cat-demo-REQ-1043",
+      "confidence": 0.91
+    },
+    {
+      "request_id": "REQ-1044",
+      "account": "Cedar Auto",
+      "request_type": "churn risk",
+      "data_issue": "verified contact missing",
+      "context_reads": [
+        "datahub.get_entity",
+        "datahub.get_lineage",
+        "cat.get_agent_context_packet"
+      ],
+      "context_sources": [
+        "urn:li:dataset:(cat,messy_business_requests,PROD)",
+        "context:schema",
+        "context:owner",
+        "context:contact",
+        "context:lineage",
+        "context:policy",
+        "policy:cat-agent-context-v0"
+      ],
+      "missing_context": [
+        "verified_contact"
+      ],
+      "decision": "blocked",
+      "status": "Blocked",
+      "safe_next_step": "Request a verified contact before customer action",
+      "blocked_action": "Do not guess, scrape, or invent contact details",
+      "receipt_id": "cat-demo-REQ-1044",
+      "confidence": 0.69
+    }
+  ]
+}

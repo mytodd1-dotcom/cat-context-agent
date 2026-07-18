@@ -2,6 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { runDataHubPayloadPreview } from "./datahub-payload-preview.mjs";
+import { runDecisionTrace } from "./decision-trace.mjs";
 import { runArtifactValidation } from "./validate-artifacts.mjs";
 import { runSubmissionVerify } from "./verify-submission.mjs";
 
@@ -44,6 +45,7 @@ ${receipt.reports.map((report) => `- \`${report}\``).join("\n")}
 
 export async function runEvidenceReproduction() {
   const payloadPreview = await runDataHubPayloadPreview();
+  const decisionTrace = await runDecisionTrace();
   const readiness = await runSubmissionVerify();
   const artifactValidation = await runArtifactValidation();
 
@@ -51,6 +53,10 @@ export async function runEvidenceReproduction() {
     {
       name: "DataHub payload preview",
       detail: `${payloadPreview.requests.length} dry-run aspect payloads prepared for local GMS posting.`,
+    },
+    {
+      name: "decision trace",
+      detail: `${decisionTrace.traces.length} request-level traces connect source rows, context reads, decisions, and receipts.`,
     },
     {
       name: "submission readiness",
@@ -88,6 +94,7 @@ export async function runEvidenceReproduction() {
     reports: [
       "hackathon-assets/judge-evidence-pack.md",
       "hackathon-assets/datahub-payload-preview.md",
+      "hackathon-assets/decision-trace.md",
       "hackathon-assets/submission-readiness-report.md",
       "hackathon-assets/artifact-validation-report.md",
       "hackathon-assets/reproduction-receipt.md",

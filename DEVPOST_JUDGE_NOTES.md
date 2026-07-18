@@ -27,6 +27,7 @@ npm install
 npm run demo
 npm run datahub:bridge
 npm run datahub:payload
+npm run decision:trace
 npm run context:read
 npm run context:contracts
 npm run judge:pack
@@ -44,6 +45,7 @@ Those commands produce:
 - DataHub-ready dataset properties, schema metadata, ownership, and glossary terms;
 - a dry-run DataHub bridge plan;
 - a DataHub payload preview that shows the aspect bodies prepared for local GMS posting;
+- a request-level decision trace that joins messy rows to context reads, decisions, safe next steps, blocked actions, and receipts;
 - an MCP-style context read showing the agent’s pre-action context checks;
 - a machine-readable tool contract for DataHub reads, CAT context reads, and guarded receipt writes;
 - a judge evidence pack with commands, claims, and outcomes.
@@ -77,6 +79,7 @@ The important behavior is not just the transformation. The agent separates actio
 - [`examples/cat-context-agent/generated-datahub-bridge-plan.json`](./examples/cat-context-agent/generated-datahub-bridge-plan.json)
 - [`hackathon-assets/datahub-payload-preview.md`](./hackathon-assets/datahub-payload-preview.md)
 - [`examples/cat-context-agent/generated-mcp-context-read.json`](./examples/cat-context-agent/generated-mcp-context-read.json)
+- [`hackathon-assets/decision-trace.md`](./hackathon-assets/decision-trace.md)
 - [`hackathon-assets/context-tool-contracts.md`](./hackathon-assets/context-tool-contracts.md)
 - [`hackathon-assets/judge-evidence-pack.md`](./hackathon-assets/judge-evidence-pack.md)
 - [`hackathon-assets/submission-readiness-report.md`](./hackathon-assets/submission-readiness-report.md)

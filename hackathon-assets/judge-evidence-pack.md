@@ -50,6 +50,7 @@ npm test
 - `examples/cat-context-agent/generated-datahub-bridge-plan.json`
 - `hackathon-assets/datahub-payload-preview.md`
 - `examples/cat-context-agent/generated-mcp-context-read.json`
+- `hackathon-assets/decision-trace.md`
 - `hackathon-assets/context-tool-contracts.md`
 - `hackathon-assets/artifact-validation-report.md`
 - `hackathon-assets/reproduction-receipt.md`

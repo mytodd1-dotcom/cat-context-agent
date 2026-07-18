@@ -60,6 +60,14 @@ npm run datahub:payload
 
 That command writes [`hackathon-assets/datahub-payload-preview.md`](./hackathon-assets/datahub-payload-preview.md) and [`hackathon-assets/datahub-payload-preview.json`](./hackathon-assets/datahub-payload-preview.json), showing the dry-run datasetProperties, schemaMetadata, ownership, and glossaryTerms payloads that the bridge would post after local DataHub is running.
 
+To generate the request-by-request decision trace:
+
+```bash
+npm run decision:trace
+```
+
+That command writes [`hackathon-assets/decision-trace.md`](./hackathon-assets/decision-trace.md) and [`hackathon-assets/decision-trace.json`](./hackathon-assets/decision-trace.json), connecting each messy source row to the context reads, decision, safe next step, blocked action, and receipt.
+
 To preview the agent-side context read contract:
 
 ```bash
@@ -159,6 +167,7 @@ npm install
 npm run demo
 npm run datahub:bridge
 npm run datahub:payload
+npm run decision:trace
 npm run context:read
 npm run context:contracts
 npm run judge:pack

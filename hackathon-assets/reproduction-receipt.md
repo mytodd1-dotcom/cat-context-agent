@@ -12,6 +12,7 @@ npm run evidence:reproduce
 ## Checks reproduced
 
 - ✅ **DataHub payload preview** — 4 dry-run aspect payloads prepared for local GMS posting.
+- ✅ **decision trace** — 3 request-level traces connect source rows, context reads, decisions, and receipts.
 - ✅ **submission readiness** — 6 readiness checks passed.
 - ✅ **artifact validation** — 7 generated-artifact checks passed.
 - ✅ **safety boundary** — Blocked action remains preserved for unverified external outreach.
@@ -31,6 +32,7 @@ npm run evidence:reproduce
 
 - `hackathon-assets/judge-evidence-pack.md`
 - `hackathon-assets/datahub-payload-preview.md`
+- `hackathon-assets/decision-trace.md`
 - `hackathon-assets/submission-readiness-report.md`
 - `hackathon-assets/artifact-validation-report.md`
 - `hackathon-assets/reproduction-receipt.md`

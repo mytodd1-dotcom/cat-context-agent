@@ -65,6 +65,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /reproduction-receipt\.md/);
   assert.match(page, /judge-scoring-brief\.md/);
   assert.match(packageJson, /"datahub:payload": "node scripts\/datahub-payload-preview\.mjs"/);
+  assert.match(packageJson, /"decision:trace": "node scripts\/decision-trace\.mjs"/);
   assert.match(css, /@media \(max-width: 980px\)/);
   assert.match(css, /@media \(max-width: 620px\)/);
   assert.match(css, /artifactGrid/);
@@ -74,12 +75,13 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"artifacts:validate": "node scripts\/validate-artifacts\.mjs"/);
   assert.match(packageJson, /"evidence:reproduce": "node scripts\/reproduce-evidence\.mjs"/);
   assert.match(packageJson, /"judge:brief": "node scripts\/judge-scoring-brief\.mjs"/);
-  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm test"/);
+  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm test"/);
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /examples\/cat-context-agent/);
   assert.match(readme, /DataHub-style context map/);
   assert.match(readme, /generated-datahub-metadata\.json/);
   assert.match(readme, /datahub-payload-preview\.md/);
+  assert.match(readme, /decision-trace\.md/);
   assert.match(readme, /generated-mcp-context-read\.json/);
   assert.match(readme, /context-tool-contracts\.md/);
   assert.match(readme, /judge-evidence-pack\.md/);
@@ -96,6 +98,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(judgeNotes, /machine-readable tool contract/);
   assert.match(judgeNotes, /generated-datahub-bridge-plan\.json/);
   assert.match(judgeNotes, /DataHub payload preview/);
+  assert.match(judgeNotes, /decision trace/);
   assert.match(judgeNotes, /submission readiness report/);
   assert.match(judgeNotes, /artifact validation report/);
   assert.match(judgeNotes, /reproduction receipt/);
@@ -356,10 +359,11 @@ test("reproduces the judge evidence chain with one command", async () => {
   ]);
 
   assert.equal(receipt.status, "reproducible");
-  assert.equal(receipt.checks.length, 5);
+  assert.equal(receipt.checks.length, 6);
   assert.equal(receipt.summary.total_requests, 3);
   assert.equal(receipt.summary.artifact_validation_checks, 7);
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-payload-preview.md"));
+  assert.ok(receipt.reports.includes("hackathon-assets/decision-trace.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/artifact-validation-report.md"));
   assert.match(markdown, /One-command proof/);
   assert.match(markdown, /npm run evidence:reproduce/);
@@ -381,6 +385,7 @@ test("generates a judge scoring brief from reproduced evidence", async () => {
   assert.equal(brief.evidence_status, "reproducible");
   assert.equal(brief.claims.length, 5);
   assert.ok(brief.claims.some((claim) => claim.claim.includes("DataHub is the context layer")));
+  assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/decision-trace.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/reproduction-receipt.md")));
   assert.match(markdown, /Claim-to-evidence map/);
   assert.match(markdown, /DataHub is the context layer/);
@@ -415,4 +420,27 @@ test("generates a dry-run DataHub payload preview", async () => {
   assert.ok(preview.requests.every((request) => request.method === "POST"));
   assert.match(markdown, /DataHub Payload Preview/);
   assert.match(markdown, /DATAHUB_GMS_URL=http:\/\/localhost:8080 npm run datahub:bridge -- --post/);
+});
+
+test("generates an end-to-end request decision trace", async () => {
+  const { stdout } = await execFileAsync("node", ["scripts/decision-trace.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /cat-decision-trace-v0/);
+  assert.match(stdout, /decision-trace\.md/);
+
+  const [trace, markdown] = await Promise.all([
+    readFile(new URL("../hackathon-assets/decision-trace.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../hackathon-assets/decision-trace.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(trace.protocol, "cat-decision-trace-v0");
+  assert.equal(trace.traces.length, 3);
+  assert.deepEqual(trace.tool_read_plan, ["datahub.get_entity", "datahub.get_lineage", "cat.get_agent_context_packet"]);
+  assert.ok(trace.traces.some((item) => item.request_id === "REQ-1042" && item.decision === "needs_approval"));
+  assert.ok(trace.traces.some((item) => item.request_id === "REQ-1043" && item.decision === "safe_to_queue_internal_task"));
+  assert.ok(trace.traces.some((item) => item.request_id === "REQ-1044" && item.blocked_action));
+  assert.match(markdown, /Decision Trace/);
+  assert.match(markdown, /messy row → DataHub\/MCP context read → agent decision → receipt/);
 });
