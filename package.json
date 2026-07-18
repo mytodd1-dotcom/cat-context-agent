@@ -22,7 +22,7 @@
     "evidence:reproduce": "node scripts/reproduce-evidence.mjs",
     "judge:brief": "node scripts/judge-scoring-brief.mjs",
     "devpost:copy": "node scripts/devpost-submission-copy.mjs",
-    "ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm test",
+    "ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm run devpost:copy && npm test",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"

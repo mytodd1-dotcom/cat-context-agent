@@ -37,6 +37,8 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /npm run evidence:reproduce/);
   assert.match(html, /npm run judge:brief/);
   assert.match(html, /judge-scoring-brief\.md/);
+  assert.match(html, /npm run devpost:copy/);
+  assert.match(html, /devpost-submission-copy\.md/);
   assert.match(html, /npm run datahub:bridge/);
   assert.match(html, /npm run datahub:runbook/);
   assert.match(html, /live-datahub-runbook\.md/);
@@ -68,6 +70,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /datahub\.get_entity/);
   assert.match(page, /reproduction-receipt\.md/);
   assert.match(page, /judge-scoring-brief\.md/);
+  assert.match(page, /devpost-submission-copy\.md/);
   assert.match(page, /live-datahub-runbook\.md/);
   assert.match(packageJson, /"datahub:payload": "node scripts\/datahub-payload-preview\.mjs"/);
   assert.match(packageJson, /"datahub:runbook": "node scripts\/live-datahub-runbook\.mjs"/);
@@ -82,7 +85,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"evidence:reproduce": "node scripts\/reproduce-evidence\.mjs"/);
   assert.match(packageJson, /"judge:brief": "node scripts\/judge-scoring-brief\.mjs"/);
   assert.match(packageJson, /"devpost:copy": "node scripts\/devpost-submission-copy\.mjs"/);
-  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm test"/);
+  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm run devpost:copy && npm test"/);
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(readme, /youtu\.be\/Gcbhl5_YlSM/);

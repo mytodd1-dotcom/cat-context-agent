@@ -151,7 +151,7 @@ To run the local equivalent of that CI recipe:
 npm run ci:local
 ```
 
-That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, and runs the full build/test suite.
+That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, and runs the full build/test suite.
 
 ## DataHub integration path
 

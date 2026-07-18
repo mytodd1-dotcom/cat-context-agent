@@ -47,6 +47,12 @@ const runnableArtifacts = [
     text: "Maps each major claim to inspectable repo evidence: DataHub context, read-before-action, safety, and reproducibility.",
   },
   {
+    label: "Devpost copy pack",
+    command: "npm run devpost:copy",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/devpost-submission-copy.md",
+    text: "Keeps the final submission story, links, built-with list, next steps, and organizer feedback in one canonical file.",
+  },
+  {
     label: "Local decision runner",
     command: "npm run demo",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/examples/cat-context-agent/generated-agent-output.json",
