@@ -24,7 +24,7 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>CAT Context Agent \| DataHub Hackathon Draft<\/title>/i);
+  assert.match(html, /<title>CAT Context Agent \| DataHub Hackathon Submission<\/title>/i);
   assert.match(html, /Context before action/);
   assert.match(html, /DataHub-backed workflow agent/);
   assert.match(html, /Agents That Do Real Work/);
@@ -33,6 +33,9 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /cat-demo-REQ-1042/);
   assert.match(html, /messy CSV, context map, approval queue, receipt JSON/);
   assert.match(html, /RUNNABLE EVIDENCE/);
+  assert.match(html, /npm run evidence:reproduce/);
+  assert.match(html, /npm run judge:brief/);
+  assert.match(html, /judge-scoring-brief\.md/);
   assert.match(html, /npm run datahub:bridge/);
   assert.match(html, /npm run judge:pack/);
   assert.match(html, /judge-evidence-pack\.md/);
@@ -59,10 +62,12 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /runnableArtifacts/);
   assert.match(page, /generated-mcp-context-read\.json/);
   assert.match(page, /datahub\.get_entity/);
+  assert.match(page, /reproduction-receipt\.md/);
+  assert.match(page, /judge-scoring-brief\.md/);
   assert.match(css, /@media \(max-width: 980px\)/);
   assert.match(css, /@media \(max-width: 620px\)/);
   assert.match(css, /artifactGrid/);
-  assert.match(layout, /CAT Context Agent \| DataHub Hackathon Draft/);
+  assert.match(layout, /CAT Context Agent \| DataHub Hackathon Submission/);
   assert.match(packageJson, /"name": "cat-context-agent"/);
   assert.match(packageJson, /"context:contracts": "node scripts\/context-tool-contracts\.mjs"/);
   assert.match(packageJson, /"artifacts:validate": "node scripts\/validate-artifacts\.mjs"/);

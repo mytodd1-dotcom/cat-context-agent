@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CAT Context Agent | DataHub Hackathon Draft",
+  title: "CAT Context Agent | DataHub Hackathon Submission",
   description: "A DataHub-backed agent concept for turning messy business data into trusted, traceable workflows with safe next-action receipts.",
   icons: {
     icon: "/favicon.svg",

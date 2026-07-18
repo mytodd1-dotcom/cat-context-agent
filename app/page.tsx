@@ -34,6 +34,18 @@ const buildTracks = [
 
 const runnableArtifacts = [
   {
+    label: "One-command proof",
+    command: "npm run evidence:reproduce",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/reproduction-receipt.md",
+    text: "Reruns submission verification and artifact validation, then writes a reproduction receipt for judges.",
+  },
+  {
+    label: "Judge scoring brief",
+    command: "npm run judge:brief",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/judge-scoring-brief.md",
+    text: "Maps each major claim to inspectable repo evidence: DataHub context, read-before-action, safety, and reproducibility.",
+  },
+  {
     label: "Local decision runner",
     command: "npm run demo",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/examples/cat-context-agent/generated-agent-output.json",
@@ -131,7 +143,7 @@ export default function Home() {
 
       <section className="hero shell" id="top">
         <div className="heroCopy">
-          <p className="eyebrow"><span /> DataHub Agent Hackathon draft</p>
+          <p className="eyebrow"><span /> DataHub Agent Hackathon submission</p>
           <h1>Context before action for messy business data.</h1>
           <p className="heroLead">
             CAT Context Agent is a DataHub-backed workflow agent that helps small teams turn scattered files into trusted next steps, missing-info questions, and traceable receipts.
@@ -141,14 +153,14 @@ export default function Home() {
             <a className="button ghost" href="#artifacts">Run the evidence</a>
           </div>
           <p className="micro">
-            Submission foundation is live. This page now includes the first concrete demo slice: sample messy data, DataHub-style context, an approval queue, and receipt output.
+            Submission foundation is live and reproducible. This page includes the concrete demo slice, proof commands, DataHub-style context, an approval queue, and receipt output.
           </p>
         </div>
 
         <div className="contextCard" aria-label="Example context receipt">
           <div className="contextHead">
             <span>AGENT RECEIPT</span>
-            <span className="status"><i /> DRAFT</span>
+            <span className="status"><i /> REPRODUCIBLE</span>
           </div>
           <div className="assetPath">
             <b>CSV</b><span>→</span><b>DataHub</b><span>→</span><b>Agent</b><span>→</span><b>Approval</b>
@@ -336,14 +348,14 @@ export default function Home() {
           <p className="sectionTag lime">NEXT MILESTONE</p>
           <h2>Wire this demo slice to a live DataHub-backed run.</h2>
           <p>
-            Next up: replace the static context map with a local DataHub quickstart run, add generated example artifacts, and record the final under-3-minute walkthrough.
+            Next up: replace the static context map with a local DataHub quickstart run, post metadata change proposals to DataHub GMS, and swap the generated context packet for live MCP / Agent Context Kit reads.
           </p>
         </div>
       </section>
 
       <footer className="shell footer">
         <span>CAT Context Agent</span>
-        <span>Context-aware automation · DataHub hackathon draft</span>
+        <span>Context-aware automation · DataHub hackathon submission</span>
       </footer>
     </main>
   );
