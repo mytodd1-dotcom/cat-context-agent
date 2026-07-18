@@ -81,6 +81,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"artifacts:validate": "node scripts\/validate-artifacts\.mjs"/);
   assert.match(packageJson, /"evidence:reproduce": "node scripts\/reproduce-evidence\.mjs"/);
   assert.match(packageJson, /"judge:brief": "node scripts\/judge-scoring-brief\.mjs"/);
+  assert.match(packageJson, /"devpost:copy": "node scripts\/devpost-submission-copy\.mjs"/);
   assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm test"/);
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /cat-context-agent\.flyguy\.chatgpt\.site/);
@@ -98,6 +99,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /artifact-validation-report\.md/);
   assert.match(readme, /reproduction-receipt\.md/);
   assert.match(readme, /judge-scoring-brief\.md/);
+  assert.match(readme, /devpost-submission-copy\.md/);
   assert.match(readme, /github-actions-ci-template\.yml/);
   assert.match(readme, /DEVPOST_JUDGE_NOTES\.md/);
   assert.match(readme, /DataHub MCP \/ Agent Context Kit reads/);
@@ -420,6 +422,32 @@ test("generates a judge scoring brief from reproduced evidence", async () => {
   assert.match(markdown, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(markdown, /DataHub is the context layer/);
   assert.match(markdown, /npm run judge:brief/);
+});
+
+test("generates canonical Devpost submission copy", async () => {
+  const { stdout } = await execFileAsync("node", ["scripts/devpost-submission-copy.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /CAT Context Agent/);
+  assert.match(stdout, /cat-context-agent\.flyguy\.chatgpt\.site/);
+  assert.match(stdout, /devpost-submission-copy\.md/);
+
+  const [copy, markdown] = await Promise.all([
+    readFile(new URL("../hackathon-assets/devpost-submission-copy.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../hackathon-assets/devpost-submission-copy.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(copy.project_name, "CAT Context Agent");
+  assert.equal(copy.category, "Agents That Do Real Work");
+  assert.equal(copy.live_demo_url, "https://cat-context-agent.flyguy.chatgpt.site");
+  assert.equal(copy.repository_url, "https://github.com/mytodd1-dotcom/cat-context-agent");
+  assert.equal(copy.demo_video_url, "https://youtu.be/Gcbhl5_YlSM");
+  assert.ok(copy.built_with.includes("DataHub MCP-style read plan"));
+  assert.match(copy.feedback_for_datahub, /context-aware agents/);
+  assert.match(markdown, /Feedback for DataHub \/ organizers/);
+  assert.match(markdown, /DataHub MCP \/ Agent Context Kit/);
+  assert.match(markdown, /https:\/\/youtu\.be\/Gcbhl5_YlSM/);
 });
 
 test("generates a live DataHub runbook for opt-in local posting", async () => {

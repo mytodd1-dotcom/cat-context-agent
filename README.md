@@ -135,6 +135,14 @@ npm run judge:brief
 
 That command reruns the one-command proof path and writes a claim-to-evidence map at [`hackathon-assets/judge-scoring-brief.md`](./hackathon-assets/judge-scoring-brief.md) and [`hackathon-assets/judge-scoring-brief.json`](./hackathon-assets/judge-scoring-brief.json).
 
+To generate canonical Devpost submission copy:
+
+```bash
+npm run devpost:copy
+```
+
+That command writes [`hackathon-assets/devpost-submission-copy.md`](./hackathon-assets/devpost-submission-copy.md) and [`hackathon-assets/devpost-submission-copy.json`](./hackathon-assets/devpost-submission-copy.json), including the final links, project story, built-with list, next steps, and organizer feedback text.
+
 A GitHub Actions template for the same checks is available at [`hackathon-assets/github-actions-ci-template.yml`](./hackathon-assets/github-actions-ci-template.yml). It is kept as a template because the current OAuth token cannot publish workflow files without GitHub's `workflow` scope.
 
 To run the local equivalent of that CI recipe:
@@ -189,6 +197,7 @@ npm run submission:verify
 npm run artifacts:validate
 npm run evidence:reproduce
 npm run judge:brief
+npm run devpost:copy
 npm run ci:local
 npm run dev
 npm run build
