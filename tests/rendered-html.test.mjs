@@ -79,6 +79,11 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /Without trusted context/);
   assert.match(html, /With DataHub context/);
   assert.match(html, /owner metadata \+ outreach policy/);
+  assert.match(html, /INTERACTIVE JUDGE SIMULATOR/);
+  assert.match(html, /Pick a messy request and watch the guardrail move/);
+  assert.match(html, /Current decision/);
+  assert.match(html, /Needs human approval/);
+  assert.match(html, /Do not send external renewal outreach yet/);
   assert.match(html, /APPROVAL QUEUE|approval queue/i);
   assert.match(html, /cat-demo-REQ-1042/);
   assert.match(html, /messy CSV, context map, approval queue, receipt JSON/);
@@ -187,6 +192,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /approvalQueue/);
   assert.match(page, /decisionComparison/);
   assert.match(page, /contextDelta/);
+  assert.match(page, /DemoSimulator/);
   assert.match(page, /scopeCards/);
   assert.match(page, /judgeFaq/);
   assert.match(page, /evidenceMatrix/);
@@ -232,6 +238,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(css, /faqGrid/);
   assert.match(css, /evidenceMatrix/);
   assert.match(css, /deltaMatrix/);
+  assert.match(css, /simulatorGrid/);
+  assert.match(css, /simulatorReceipt/);
   assert.match(layout, /CAT Context Agent \| DataHub Hackathon Submission/);
   assert.match(layout, /metadataBase: siteUrl/);
   assert.match(layout, /openGraph/);

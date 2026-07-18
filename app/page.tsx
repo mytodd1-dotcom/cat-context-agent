@@ -1,3 +1,5 @@
+import DemoSimulator from "./demo-simulator";
+
 const contextSteps = [
   {
     title: "Catalog the messy inputs",
@@ -698,6 +700,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <DemoSimulator />
 
       <section className="proofBar">
         <div className="shell proofGrid">
