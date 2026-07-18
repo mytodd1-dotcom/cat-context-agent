@@ -209,6 +209,25 @@ const scopeCards = [
   },
 ];
 
+const judgeFaq = [
+  {
+    question: "Is this connected to a live DataHub instance?",
+    answer: "The submitted demo is intentionally runnable without credentials or Docker. It ships DataHub-ready metadata, a dry-run bridge plan, and a live-runbook for posting the same aspects to a local DataHub GMS.",
+  },
+  {
+    question: "What does the agent actually decide?",
+    answer: "It classifies each messy request as safe to queue, approval required, or blocked. The decision changes when owner, contact, schema, or policy context is missing.",
+  },
+  {
+    question: "Why is DataHub important here?",
+    answer: "DataHub is the context layer: dataset identity, schema meaning, ownership, lineage, glossary terms, and policy signals become the evidence the agent must read before action.",
+  },
+  {
+    question: "How can judges reproduce the claim?",
+    answer: "Run npm run evidence:reproduce for the short proof or npm run ci:local for the full validation chain. The repo writes receipts and generated artifacts judges can inspect.",
+  },
+];
+
 const receiptJson = `{
   "receipt_id": "cat-demo-REQ-1042",
   "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
@@ -444,6 +463,24 @@ export default function Home() {
               <ul>
                 {card.items.map((item) => <li key={item}><span>•</span>{item}</li>)}
               </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section shell" id="faq">
+        <p className="sectionTag">JUDGE FAQ</p>
+        <div className="sectionIntro">
+          <h2>Short answers to the reviewer questions we expect.</h2>
+          <p>
+            CAT is strongest when it is honest about boundaries. This section separates the runnable submission from the documented live DataHub path.
+          </p>
+        </div>
+        <div className="faqGrid">
+          {judgeFaq.map((item) => (
+            <article className="faqCard" key={item.question}>
+              <h3>{item.question}</h3>
+              <p>{item.answer}</p>
             </article>
           ))}
         </div>
