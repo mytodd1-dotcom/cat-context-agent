@@ -14,6 +14,10 @@ function renderMarkdown(brief) {
 Generated: \`${brief.generated_at}\`  
 Evidence status: **${brief.evidence_status}**
 
+Live demo / test URL: [${brief.live_demo_url}](${brief.live_demo_url})  
+Repository: [${brief.repo_url}](${brief.repo_url})  
+Demo video: [${brief.demo_video}](${brief.demo_video})
+
 ## Fast read
 
 ${brief.fast_read}
@@ -44,6 +48,9 @@ export async function runJudgeScoringBrief() {
   const brief = {
     project: "CAT Context Agent",
     challenge: "Build with DataHub: The Agent Hackathon",
+    live_demo_url: "https://cat-context-agent.flyguy.chatgpt.site",
+    repo_url: "https://github.com/mytodd1-dotcom/cat-context-agent",
+    demo_video: "https://youtu.be/Gcbhl5_YlSM",
     generated_at: "demo-static-run",
     evidence_status: reproduction.status,
     fast_read:

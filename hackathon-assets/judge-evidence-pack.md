@@ -1,6 +1,7 @@
 # CAT Context Agent — Judge Evidence Pack
 
 Repo: [https://github.com/mytodd1-dotcom/cat-context-agent](https://github.com/mytodd1-dotcom/cat-context-agent)  
+Live demo / test URL: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)  
 Demo video: [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)  
 Challenge: Build with DataHub: The Agent Hackathon / Agents That Do Real Work
 

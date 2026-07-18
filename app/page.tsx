@@ -26,6 +26,7 @@ const demoArtifacts = [
 ];
 
 const buildTracks = [
+  ["Live demo", "cat-context-agent.flyguy.chatgpt.site"],
   ["Challenge", "Agents That Do Real Work"],
   ["Core platform", "DataHub OSS + MCP Server"],
   ["Agent context", "Agent Context Kit + DataHub Skills"],
@@ -156,7 +157,7 @@ export default function Home() {
           </p>
           <div className="heroActions">
             <a className="button primary" href="#workflow">See the workflow</a>
-            <a className="button ghost" href="#artifacts">Run the evidence</a>
+            <a className="button ghost" href="https://github.com/mytodd1-dotcom/cat-context-agent">Run the evidence</a>
           </div>
           <p className="micro">
             Submission foundation is live and reproducible. This page includes the concrete demo slice, proof commands, DataHub-style context, an approval queue, and receipt output.

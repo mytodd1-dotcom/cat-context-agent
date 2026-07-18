@@ -26,6 +26,7 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   const html = await response.text();
   assert.match(html, /<title>CAT Context Agent \| DataHub Hackathon Submission<\/title>/i);
   assert.match(html, /Context before action/);
+  assert.match(html, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(html, /DataHub-backed workflow agent/);
   assert.match(html, /Agents That Do Real Work/);
   assert.match(html, /Messy business requests/);
@@ -58,6 +59,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
 
   assert.match(page, /MCP Server/);
   assert.match(page, /Agent Context Kit/);
+  assert.match(page, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(page, /receipt-backed action plan/);
   assert.match(page, /messyRows/);
   assert.match(page, /approvalQueue/);
@@ -81,6 +83,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"judge:brief": "node scripts\/judge-scoring-brief\.mjs"/);
   assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm test"/);
   assert.match(readme, /Apache 2\.0/);
+  assert.match(readme, /cat-context-agent\.flyguy\.chatgpt\.site/);
+  assert.match(readme, /youtu\.be\/Gcbhl5_YlSM/);
   assert.match(readme, /examples\/cat-context-agent/);
   assert.match(readme, /DataHub-style context map/);
   assert.match(readme, /generated-datahub-metadata\.json/);
@@ -98,6 +102,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /DEVPOST_JUDGE_NOTES\.md/);
   assert.match(readme, /DataHub MCP \/ Agent Context Kit reads/);
   assert.match(judgeNotes, /github-actions-ci-template\.yml/);
+  assert.match(judgeNotes, /cat-context-agent\.flyguy\.chatgpt\.site/);
+  assert.match(judgeNotes, /github\.com\/mytodd1-dotcom\/cat-context-agent/);
   assert.match(judgeNotes, /30-second version/);
   assert.match(judgeNotes, /context before action/);
   assert.match(judgeNotes, /machine-readable tool contract/);
@@ -268,6 +274,8 @@ test("builds a judge evidence pack from generated artifacts", async () => {
   ]);
 
   assert.equal(pack.summary.total_requests, 3);
+  assert.equal(pack.live_demo_url, "https://cat-context-agent.flyguy.chatgpt.site");
+  assert.equal(pack.repo_url, "https://github.com/mytodd1-dotcom/cat-context-agent");
   assert.equal(pack.summary.decisions.needs_approval, 1);
   assert.equal(pack.summary.decisions.blocked, 1);
   assert.ok(pack.summary.datahub_aspects.includes("ownership"));
@@ -276,6 +284,7 @@ test("builds a judge evidence pack from generated artifacts", async () => {
   assert.ok(pack.judge_commands.includes("npm run datahub:runbook"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/live-datahub-runbook.md"));
   assert.match(packMarkdown, /REQ-1042/);
+  assert.match(packMarkdown, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(packMarkdown, /live-datahub-runbook\.md/);
   assert.match(packMarkdown, /Do not guess, scrape, or invent contact details/);
 });
@@ -400,12 +409,15 @@ test("generates a judge scoring brief from reproduced evidence", async () => {
   ]);
 
   assert.equal(brief.evidence_status, "reproducible");
+  assert.equal(brief.live_demo_url, "https://cat-context-agent.flyguy.chatgpt.site");
+  assert.equal(brief.repo_url, "https://github.com/mytodd1-dotcom/cat-context-agent");
   assert.equal(brief.claims.length, 5);
   assert.ok(brief.claims.some((claim) => claim.claim.includes("DataHub is the context layer")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/live-datahub-runbook.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/decision-trace.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/reproduction-receipt.md")));
   assert.match(markdown, /Claim-to-evidence map/);
+  assert.match(markdown, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(markdown, /DataHub is the context layer/);
   assert.match(markdown, /npm run judge:brief/);
 });

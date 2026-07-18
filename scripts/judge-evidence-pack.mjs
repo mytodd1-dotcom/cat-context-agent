@@ -47,6 +47,7 @@ function buildEvidencePack({ output, metadata, bridge, contextRead }) {
     challenge: "Build with DataHub: The Agent Hackathon",
     category: "Agents That Do Real Work",
     repo_url: "https://github.com/mytodd1-dotcom/cat-context-agent",
+    live_demo_url: "https://cat-context-agent.flyguy.chatgpt.site",
     demo_video: "https://youtu.be/Gcbhl5_YlSM",
     evidence_generated_at: "demo-static-run",
     summary: {
@@ -105,6 +106,7 @@ function renderMarkdown(pack) {
   return `# CAT Context Agent — Judge Evidence Pack
 
 Repo: [${pack.repo_url}](${pack.repo_url})  
+Live demo / test URL: [${pack.live_demo_url}](${pack.live_demo_url})  
 Demo video: [${pack.demo_video}](${pack.demo_video})  
 Challenge: ${pack.challenge} / ${pack.category}
 

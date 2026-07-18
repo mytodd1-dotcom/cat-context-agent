@@ -8,6 +8,9 @@ The goal is simple: messy business data should become safe, traceable next actio
 
 - Event: Build with DataHub: The Agent Hackathon
 - Challenge category: Agents That Do Real Work
+- Live demo / test URL: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)
+- Demo video: [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)
+- Repository: [https://github.com/mytodd1-dotcom/cat-context-agent](https://github.com/mytodd1-dotcom/cat-context-agent)
 - Submission concept: small-business messy data → DataHub context → agent reasoning → approval queue → receipt-backed action plan
 
 ## Demo flow

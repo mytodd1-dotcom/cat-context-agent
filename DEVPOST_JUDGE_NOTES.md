@@ -2,6 +2,10 @@
 
 [`hackathon-assets/github-actions-ci-template.yml`](./hackathon-assets/github-actions-ci-template.yml) contains a GitHub Actions recipe for verifying the submission evidence chain and test suite.
 
+- Live demo / test URL: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)
+- Demo video: [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)
+- Repository: [https://github.com/mytodd1-dotcom/cat-context-agent](https://github.com/mytodd1-dotcom/cat-context-agent)
+
 ## 30-second version
 
 CAT Context Agent helps small businesses turn messy operational files into safe, traceable next steps. The core idea is context before action: the agent reads DataHub-style metadata, schema confidence, ownership, lineage, and governance rules before deciding whether to queue work, ask for approval, or block an unsafe action.

@@ -3,6 +3,10 @@
 Generated: `demo-static-run`  
 Evidence status: **reproducible**
 
+Live demo / test URL: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)  
+Repository: [https://github.com/mytodd1-dotcom/cat-context-agent](https://github.com/mytodd1-dotcom/cat-context-agent)  
+Demo video: [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)
+
 ## Fast read
 
 CAT Context Agent demonstrates context before action: the agent reads DataHub-style schema, ownership, lineage, and policy context before deciding whether work is safe, approval-gated, or blocked.
