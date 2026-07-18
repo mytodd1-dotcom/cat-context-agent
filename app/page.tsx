@@ -85,6 +85,13 @@ const judgeScorecard = [
   },
 ];
 
+const outcomeStats = [
+  ["3", "messy requests"],
+  ["6/7", "fields mapped"],
+  ["1", "safe internal task"],
+  ["1", "approval + 1 block"],
+];
+
 const judgePath = [
   {
     step: "1",
@@ -354,6 +361,14 @@ export default function Home() {
             <a className="button primary" href="https://youtu.be/Gcbhl5_YlSM">Watch demo</a>
             <a className="button dark" href="https://github.com/mytodd1-dotcom/cat-context-agent">Open repo</a>
             <a className="button ghost" href="#demo">Try live slice</a>
+          </div>
+          <div className="outcomeStrip" aria-label="Demo outcome snapshot">
+            {outcomeStats.map(([value, label]) => (
+              <div className="outcomeStat" key={label}>
+                <strong>{value}</strong>
+                <span>{label}</span>
+              </div>
+            ))}
           </div>
           <p className="micro">
             Submission foundation is live and reproducible. Start with the <a href="https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/JUDGE_START_HERE.md">judge guide</a>, then inspect the concrete demo slice, proof commands, DataHub-style context, approval queue, and receipt output.
