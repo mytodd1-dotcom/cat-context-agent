@@ -25,6 +25,10 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>CAT Context Agent \| DataHub Hackathon Submission<\/title>/i);
+  assert.match(html, /<meta name="description" content="CAT Context Agent turns messy business data into trusted, traceable workflows by reading DataHub-style context before taking action\."/i);
+  assert.match(html, /<meta property="og:title" content="CAT Context Agent \| DataHub Hackathon Submission"\/?>/i);
+  assert.match(html, /<meta property="og:image" content="https:\/\/cat-context-agent\.flyguy\.chatgpt\.site\/og\.png"\/?>/i);
+  assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/?>/i);
   assert.match(html, /Context before action/);
   assert.match(html, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(html, /Judge start here/);
@@ -87,6 +91,10 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(css, /@media \(max-width: 620px\)/);
   assert.match(css, /artifactGrid/);
   assert.match(layout, /CAT Context Agent \| DataHub Hackathon Submission/);
+  assert.match(layout, /metadataBase: siteUrl/);
+  assert.match(layout, /openGraph/);
+  assert.match(layout, /twitter/);
+  assert.match(layout, /\/og\.png/);
   assert.match(packageJson, /"name": "cat-context-agent"/);
   assert.match(packageJson, /"context:contracts": "node scripts\/context-tool-contracts\.mjs"/);
   assert.match(packageJson, /"artifacts:validate": "node scripts\/validate-artifacts\.mjs"/);
