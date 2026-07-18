@@ -101,7 +101,7 @@ const verificationCommands = [
   {
     label: "Full local check",
     command: "npm run ci:local",
-    expected: "Runs the full artifact pipeline, build, and 24 render/evidence tests.",
+    expected: "Runs the full artifact pipeline, build, and 25 render/evidence tests.",
   },
   {
     label: "Context read",
@@ -220,6 +220,12 @@ const runnableArtifacts = [
     command: "npm run datahub:runbook",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/live-datahub-runbook.md",
     text: "Documents the local GMS prerequisites, opt-in post command, acceptance checks, fallback, and safety boundary.",
+  },
+  {
+    label: "DataHub readiness doctor",
+    command: "npm run datahub:doctor",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/datahub-readiness-doctor.md",
+    text: "Checks generated DataHub artifacts and optional local GMS reachability without posting metadata.",
   },
   {
     label: "DataHub integration checklist",

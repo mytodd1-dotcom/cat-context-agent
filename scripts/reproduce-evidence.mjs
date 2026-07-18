@@ -5,6 +5,7 @@ import { runDataHubPayloadPreview } from "./datahub-payload-preview.mjs";
 import { runDataHubClaimAudit } from "./datahub-claim-audit.mjs";
 import { runDataHubIntegrationChecklist } from "./datahub-integration-checklist.mjs";
 import { runDataHubMcpHandoff } from "./datahub-mcp-handoff.mjs";
+import { runDataHubReadinessDoctor } from "./datahub-readiness-doctor.mjs";
 import { runDecisionTrace } from "./decision-trace.mjs";
 import { runLineageDecisionMap } from "./lineage-decision-map.mjs";
 import { runLiveDataHubRunbook } from "./live-datahub-runbook.mjs";
@@ -53,6 +54,7 @@ ${receipt.reports.map((report) => `- \`${report}\``).join("\n")}
 
 export async function runEvidenceReproduction() {
   const payloadPreview = await runDataHubPayloadPreview();
+  const readinessDoctor = await runDataHubReadinessDoctor();
   const integrationChecklist = await runDataHubIntegrationChecklist();
   const claimAudit = await runDataHubClaimAudit();
   const mcpHandoff = await runDataHubMcpHandoff();
@@ -68,6 +70,10 @@ export async function runEvidenceReproduction() {
     {
       name: "DataHub payload preview",
       detail: `${payloadPreview.requests.length} dry-run aspect payloads prepared for local GMS posting.`,
+    },
+    {
+      name: "DataHub readiness doctor",
+      detail: `${readinessDoctor.checks.length} checks confirm dry-run DataHub readiness and keep local GMS optional.`,
     },
     {
       name: "DataHub integration checklist",
@@ -137,6 +143,7 @@ export async function runEvidenceReproduction() {
     },
     reports: [
       "hackathon-assets/judge-evidence-pack.md",
+      "hackathon-assets/datahub-readiness-doctor.md",
       "hackathon-assets/datahub-integration-checklist.md",
       "hackathon-assets/datahub-claim-audit.md",
       "hackathon-assets/datahub-mcp-handoff.md",

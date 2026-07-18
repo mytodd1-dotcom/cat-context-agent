@@ -37,6 +37,9 @@ jobs:
       - name: Generate live DataHub runbook
         run: npm run datahub:runbook
 
+      - name: Run DataHub readiness doctor
+        run: npm run datahub:doctor
+
       - name: Generate DataHub integration checklist
         run: npm run datahub:checklist
 

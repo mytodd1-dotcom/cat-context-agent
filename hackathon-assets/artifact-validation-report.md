@@ -11,6 +11,7 @@ Generated: `demo-static-run`
 - ✅ **context read tool path** — Context read should include DataHub/CAT read tools and preserve the blocked customer action.
 - ✅ **tool contract coverage** — Tool contracts should cover DataHub reads, CAT context read, and guarded receipt write.
 - ✅ **live DataHub runbook** — Live runbook should document the opt-in local DataHub post path and preserve the dry-run payload coverage.
+- ✅ **DataHub readiness doctor** — Readiness doctor should prove dry-run DataHub artifacts are ready while live GMS remains optional.
 - ✅ **DataHub integration checklist** — Integration checklist should separate no-credential judging from optional local DataHub posting.
 - ✅ **DataHub claim audit** — DataHub claim audit should pass every DataHub-specific claim check.
 - ✅ **DataHub MCP handoff** — DataHub MCP handoff should map read-before-action tools to bounded receipt writes.
@@ -28,6 +29,7 @@ Generated: `demo-static-run`
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/context-tool-contracts.json`
 - `hackathon-assets/live-datahub-runbook.json`
+- `hackathon-assets/datahub-readiness-doctor.json`
 - `hackathon-assets/datahub-integration-checklist.json`
 - `hackathon-assets/datahub-claim-audit.json`
 - `hackathon-assets/datahub-mcp-handoff.json`

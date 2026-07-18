@@ -82,6 +82,14 @@ npm run datahub:runbook
 
 That command writes [`hackathon-assets/live-datahub-runbook.md`](./hackathon-assets/live-datahub-runbook.md) and [`hackathon-assets/live-datahub-runbook.json`](./hackathon-assets/live-datahub-runbook.json), documenting the local DataHub prerequisites, opt-in `--post` command, expected outputs, acceptance checks, fallback path, and safety boundary.
 
+To check optional local DataHub readiness without posting anything:
+
+```bash
+npm run datahub:doctor
+```
+
+That command writes [`hackathon-assets/datahub-readiness-doctor.md`](./hackathon-assets/datahub-readiness-doctor.md) and [`hackathon-assets/datahub-readiness-doctor.json`](./hackathon-assets/datahub-readiness-doctor.json), confirming the dry-run evidence is ready, probing the local GMS health endpoint when available, and keeping live DataHub optional for judging.
+
 To generate the DataHub integration checklist:
 
 ```bash
@@ -226,7 +234,7 @@ To run the local equivalent of that CI recipe:
 npm run ci:local
 ```
 
-That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub integration checklist, DataHub claim audit, DataHub MCP handoff, MCP adapter smoke test, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
+That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub readiness doctor, DataHub integration checklist, DataHub claim audit, DataHub MCP handoff, MCP adapter smoke test, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
 
 ## DataHub integration path
 

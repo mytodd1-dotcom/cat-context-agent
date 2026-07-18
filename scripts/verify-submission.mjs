@@ -6,6 +6,7 @@ import { runContextToolContracts } from "./context-tool-contracts.mjs";
 import { runDataHubClaimAudit } from "./datahub-claim-audit.mjs";
 import { runDataHubIntegrationChecklist } from "./datahub-integration-checklist.mjs";
 import { runDataHubMcpHandoff } from "./datahub-mcp-handoff.mjs";
+import { runDataHubReadinessDoctor } from "./datahub-readiness-doctor.mjs";
 import { runDemo } from "./cat-context-demo.mjs";
 import { runBridge } from "./datahub-local-bridge.mjs";
 import { runJudgeEvidencePack } from "./judge-evidence-pack.mjs";
@@ -64,6 +65,7 @@ export async function runSubmissionVerify() {
   const bridge = await runBridge();
   const contextRead = await runContextProvider();
   const toolContracts = await runContextToolContracts();
+  const datahubReadinessDoctor = await runDataHubReadinessDoctor();
   const datahubChecklist = await runDataHubIntegrationChecklist();
   const datahubClaimAudit = await runDataHubClaimAudit();
   const datahubMcpHandoff = await runDataHubMcpHandoff();
@@ -114,6 +116,13 @@ export async function runSubmissionVerify() {
         datahubChecklist.decision_gates.live_datahub_required_for_submission === false &&
         datahubChecklist.phases.some((phase) => phase.mode === "optional_local_datahub"),
       "Expected local evidence to be judgeable without credentials while preserving the optional local GMS post path.",
+    ),
+    check(
+      "DataHub readiness doctor",
+      datahubReadinessDoctor.status.startsWith("ready_") &&
+        datahubReadinessDoctor.checks.every((item) => item.ok) &&
+        datahubReadinessDoctor.probe.required_for_judging === false,
+      "Expected the doctor to verify dry-run readiness while keeping local DataHub optional.",
     ),
     check(
       "DataHub claim audit",
@@ -189,6 +198,7 @@ export async function runSubmissionVerify() {
       "examples/cat-context-agent/generated-datahub-bridge-plan.json",
       "examples/cat-context-agent/generated-mcp-context-read.json",
       "hackathon-assets/context-tool-contracts.md",
+      "hackathon-assets/datahub-readiness-doctor.md",
       "hackathon-assets/datahub-integration-checklist.md",
       "hackathon-assets/datahub-claim-audit.md",
       "hackathon-assets/datahub-mcp-handoff.md",

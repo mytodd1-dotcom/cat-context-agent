@@ -10,6 +10,7 @@ Generated: `demo-static-run`
 - ✅ **MCP-style context reads** — Expected the agent read path to include DataHub entity, DataHub lineage, and CAT context packet reads.
 - ✅ **context tool contracts** — Expected machine-readable contracts for the DataHub reads, CAT context packet read, and receipt write.
 - ✅ **DataHub integration checklist** — Expected local evidence to be judgeable without credentials while preserving the optional local GMS post path.
+- ✅ **DataHub readiness doctor** — Expected the doctor to verify dry-run readiness while keeping local DataHub optional.
 - ✅ **DataHub claim audit** — Expected all DataHub-specific claims to pass the generated audit.
 - ✅ **DataHub MCP handoff** — Expected an MCP handoff artifact that connects DataHub reads, CAT policy, and bounded receipt writes.
 - ✅ **MCP adapter smoke test** — Expected the local adapter smoke test to prove read-before-write ordering and bounded receipt writes.
@@ -34,6 +35,7 @@ Generated: `demo-static-run`
 - `examples/cat-context-agent/generated-datahub-bridge-plan.json`
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/context-tool-contracts.md`
+- `hackathon-assets/datahub-readiness-doctor.md`
 - `hackathon-assets/datahub-integration-checklist.md`
 - `hackathon-assets/datahub-claim-audit.md`
 - `hackathon-assets/datahub-mcp-handoff.md`

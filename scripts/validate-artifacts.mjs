@@ -14,6 +14,8 @@ const paths = {
   contracts: resolve(assetDir, "context-tool-contracts.json"),
   liveRunbook: resolve(assetDir, "live-datahub-runbook.json"),
   liveRunbookMarkdown: resolve(assetDir, "live-datahub-runbook.md"),
+  datahubReadinessDoctor: resolve(assetDir, "datahub-readiness-doctor.json"),
+  datahubReadinessDoctorMarkdown: resolve(assetDir, "datahub-readiness-doctor.md"),
   datahubChecklist: resolve(assetDir, "datahub-integration-checklist.json"),
   datahubChecklistMarkdown: resolve(assetDir, "datahub-integration-checklist.md"),
   datahubClaimAudit: resolve(assetDir, "datahub-claim-audit.json"),
@@ -70,6 +72,8 @@ export async function runArtifactValidation() {
     contracts,
     liveRunbook,
     liveRunbookMarkdown,
+    datahubReadinessDoctor,
+    datahubReadinessDoctorMarkdown,
     datahubChecklist,
     datahubChecklistMarkdown,
     datahubClaimAudit,
@@ -93,6 +97,8 @@ export async function runArtifactValidation() {
     readJson(paths.contracts),
     readJson(paths.liveRunbook),
     readFile(paths.liveRunbookMarkdown, "utf8"),
+    readJson(paths.datahubReadinessDoctor),
+    readFile(paths.datahubReadinessDoctorMarkdown, "utf8"),
     readJson(paths.datahubChecklist),
     readFile(paths.datahubChecklistMarkdown, "utf8"),
     readJson(paths.datahubClaimAudit),
@@ -155,6 +161,16 @@ export async function runArtifactValidation() {
         liveRunbook.commands.some((command) => command.command.includes("--post")) &&
         liveRunbookMarkdown.includes("DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post"),
       "Live runbook should document the opt-in local DataHub post path and preserve the dry-run payload coverage.",
+    ),
+    result(
+      "DataHub readiness doctor",
+      datahubReadinessDoctor.protocol === "cat-datahub-readiness-doctor-v0" &&
+        datahubReadinessDoctor.status.startsWith("ready_") &&
+        datahubReadinessDoctor.checks.length === 6 &&
+        datahubReadinessDoctor.checks.every((item) => item.ok) &&
+        datahubReadinessDoctor.probe.required_for_judging === false &&
+        datahubReadinessDoctorMarkdown.includes("DataHub Readiness Doctor"),
+      "Readiness doctor should prove dry-run DataHub artifacts are ready while live GMS remains optional.",
     ),
     result(
       "DataHub integration checklist",
@@ -245,6 +261,7 @@ export async function runArtifactValidation() {
       "examples/cat-context-agent/generated-mcp-context-read.json",
       "hackathon-assets/context-tool-contracts.json",
       "hackathon-assets/live-datahub-runbook.json",
+      "hackathon-assets/datahub-readiness-doctor.json",
       "hackathon-assets/datahub-integration-checklist.json",
       "hackathon-assets/datahub-claim-audit.json",
       "hackathon-assets/datahub-mcp-handoff.json",

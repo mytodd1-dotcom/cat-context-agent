@@ -33,6 +33,11 @@
       "detail": "Live runbook should document the opt-in local DataHub post path and preserve the dry-run payload coverage."
     },
     {
+      "name": "DataHub readiness doctor",
+      "ok": true,
+      "detail": "Readiness doctor should prove dry-run DataHub artifacts are ready while live GMS remains optional."
+    },
+    {
       "name": "DataHub integration checklist",
       "ok": true,
       "detail": "Integration checklist should separate no-credential judging from optional local DataHub posting."
@@ -80,6 +85,7 @@
     "examples/cat-context-agent/generated-mcp-context-read.json",
     "hackathon-assets/context-tool-contracts.json",
     "hackathon-assets/live-datahub-runbook.json",
+    "hackathon-assets/datahub-readiness-doctor.json",
     "hackathon-assets/datahub-integration-checklist.json",
     "hackathon-assets/datahub-claim-audit.json",
     "hackathon-assets/datahub-mcp-handoff.json",

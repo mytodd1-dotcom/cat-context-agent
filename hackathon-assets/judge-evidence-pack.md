@@ -40,6 +40,7 @@ npm run demo
 npm run datahub:bridge
 npm run datahub:payload
 npm run datahub:runbook
+npm run datahub:doctor
 npm run datahub:checklist
 npm run datahub:audit
 npm run datahub:mcp
@@ -59,6 +60,7 @@ npm test
 - `examples/cat-context-agent/generated-datahub-bridge-plan.json`
 - `hackathon-assets/datahub-payload-preview.md`
 - `hackathon-assets/live-datahub-runbook.md`
+- `hackathon-assets/datahub-readiness-doctor.md`
 - `hackathon-assets/datahub-integration-checklist.md`
 - `hackathon-assets/datahub-claim-audit.md`
 - `hackathon-assets/datahub-mcp-handoff.md`

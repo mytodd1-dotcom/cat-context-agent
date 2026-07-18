@@ -47,41 +47,48 @@
     },
     {
       "step": 7,
+      "title": "Run the DataHub readiness doctor",
+      "artifact": "hackathon-assets/datahub-readiness-doctor.md",
+      "command": "npm run datahub:doctor",
+      "why": "Checks generated DataHub artifacts and optional local GMS reachability without posting metadata."
+    },
+    {
+      "step": 8,
       "title": "Inspect the DataHub integration checklist",
       "artifact": "hackathon-assets/datahub-integration-checklist.md",
       "command": "npm run datahub:checklist",
       "why": "Shows what is judgeable now, what requires local DataHub, and what is intentionally out of scope."
     },
     {
-      "step": 8,
+      "step": 9,
       "title": "Inspect the DataHub claim audit",
       "artifact": "hackathon-assets/datahub-claim-audit.md",
       "command": "npm run datahub:audit",
       "why": "Gives a compact pass/fail audit of the submission's DataHub-specific claims."
     },
     {
-      "step": 9,
+      "step": 10,
       "title": "Inspect the DataHub MCP handoff",
       "artifact": "hackathon-assets/datahub-mcp-handoff.md",
       "command": "npm run datahub:mcp",
       "why": "Shows how DataHub reads, CAT policy context, and bounded receipt writes connect in the live path."
     },
     {
-      "step": 10,
+      "step": 11,
       "title": "Run the MCP adapter smoke test",
       "artifact": "hackathon-assets/mcp-adapter-smoke-report.md",
       "command": "npm run mcp:smoke",
       "why": "Proves the local adapter reads DataHub/CAT context before writing bounded receipts."
     },
     {
-      "step": 11,
+      "step": 12,
       "title": "Inspect the lineage decision map",
       "artifact": "hackathon-assets/lineage-decision-map.md",
       "command": "npm run lineage:map",
       "why": "Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph."
     },
     {
-      "step": 12,
+      "step": 13,
       "title": "Inspect the safety policy matrix",
       "artifact": "hackathon-assets/safety-policy-matrix.md",
       "command": "npm run policy:matrix",
@@ -92,6 +99,7 @@
     "npm install",
     "npm run demo",
     "npm run submission:verify",
+    "npm run datahub:doctor",
     "npm run datahub:checklist",
     "npm run datahub:audit",
     "npm run datahub:mcp",
@@ -110,6 +118,7 @@
         "examples/cat-context-agent/generated-datahub-metadata.json",
         "examples/cat-context-agent/generated-datahub-bridge-plan.json",
         "hackathon-assets/datahub-payload-preview.md",
+        "hackathon-assets/datahub-readiness-doctor.md",
         "hackathon-assets/datahub-integration-checklist.md",
         "hackathon-assets/datahub-claim-audit.md",
         "hackathon-assets/datahub-mcp-handoff.md",

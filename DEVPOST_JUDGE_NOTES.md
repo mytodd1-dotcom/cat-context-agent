@@ -34,6 +34,7 @@ npm run demo
 npm run datahub:bridge
 npm run datahub:payload
 npm run datahub:runbook
+npm run datahub:doctor
 npm run datahub:checklist
 npm run datahub:audit
 npm run datahub:mcp
@@ -58,6 +59,7 @@ Those commands produce:
 - a dry-run DataHub bridge plan;
 - a DataHub payload preview that shows the aspect bodies prepared for local GMS posting;
 - a live DataHub runbook with prerequisites, exact opt-in post command, acceptance checks, fallback path, and safety boundary;
+- a DataHub readiness doctor that checks the optional local GMS path without posting anything;
 - a DataHub integration checklist that separates no-credential judging from optional local posting;
 - a DataHub claim audit that gives a pass/fail view of aspect coverage, context reads, local-only posting, safety gates, and bounded receipt writes;
 - a DataHub MCP handoff that maps DataHub reads, CAT policy context, request outcomes, and bounded receipt writes;
@@ -81,6 +83,7 @@ messy-business-requests.csv
   → generated-agent-output.json
   → generated-datahub-metadata.json
   → generated-datahub-bridge-plan.json
+  → datahub-readiness-doctor.md
   → datahub-integration-checklist.md
   → datahub-claim-audit.md
   → datahub-mcp-handoff.md
@@ -102,6 +105,7 @@ The important behavior is not just the transformation. The agent separates actio
 - [`examples/cat-context-agent/generated-datahub-bridge-plan.json`](./examples/cat-context-agent/generated-datahub-bridge-plan.json)
 - [`hackathon-assets/datahub-payload-preview.md`](./hackathon-assets/datahub-payload-preview.md)
 - [`hackathon-assets/live-datahub-runbook.md`](./hackathon-assets/live-datahub-runbook.md)
+- [`hackathon-assets/datahub-readiness-doctor.md`](./hackathon-assets/datahub-readiness-doctor.md)
 - [`hackathon-assets/datahub-integration-checklist.md`](./hackathon-assets/datahub-integration-checklist.md)
 - [`hackathon-assets/datahub-claim-audit.md`](./hackathon-assets/datahub-claim-audit.md)
 - [`hackathon-assets/datahub-mcp-handoff.md`](./hackathon-assets/datahub-mcp-handoff.md)

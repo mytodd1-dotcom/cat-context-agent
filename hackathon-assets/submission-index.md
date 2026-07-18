@@ -19,12 +19,13 @@ A judge-first index for verifying the DataHub Agent Hackathon submission without
 | 4. Run the one-command proof | `hackathon-assets/reproduction-receipt.md`<br><code>npm run evidence:reproduce</code> | Regenerates the evidence chain and receipt from local source. |
 | 5. Inspect DataHub context artifacts | `examples/cat-context-agent/generated-datahub-bridge-plan.json` | Shows the datasetProperties, schemaMetadata, ownership, and glossaryTerms handoff. |
 | 6. Inspect the MCP-style read contract | `examples/cat-context-agent/generated-mcp-context-read.json` | Shows the agent reading entity, lineage, and CAT context before action. |
-| 7. Inspect the DataHub integration checklist | `hackathon-assets/datahub-integration-checklist.md`<br><code>npm run datahub:checklist</code> | Shows what is judgeable now, what requires local DataHub, and what is intentionally out of scope. |
-| 8. Inspect the DataHub claim audit | `hackathon-assets/datahub-claim-audit.md`<br><code>npm run datahub:audit</code> | Gives a compact pass/fail audit of the submission's DataHub-specific claims. |
-| 9. Inspect the DataHub MCP handoff | `hackathon-assets/datahub-mcp-handoff.md`<br><code>npm run datahub:mcp</code> | Shows how DataHub reads, CAT policy context, and bounded receipt writes connect in the live path. |
-| 10. Run the MCP adapter smoke test | `hackathon-assets/mcp-adapter-smoke-report.md`<br><code>npm run mcp:smoke</code> | Proves the local adapter reads DataHub/CAT context before writing bounded receipts. |
-| 11. Inspect the lineage decision map | `hackathon-assets/lineage-decision-map.md`<br><code>npm run lineage:map</code> | Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph. |
-| 12. Inspect the safety policy matrix | `hackathon-assets/safety-policy-matrix.md`<br><code>npm run policy:matrix</code> | Shows which agent actions are allowed, approval-required, or blocked based on context quality. |
+| 7. Run the DataHub readiness doctor | `hackathon-assets/datahub-readiness-doctor.md`<br><code>npm run datahub:doctor</code> | Checks generated DataHub artifacts and optional local GMS reachability without posting metadata. |
+| 8. Inspect the DataHub integration checklist | `hackathon-assets/datahub-integration-checklist.md`<br><code>npm run datahub:checklist</code> | Shows what is judgeable now, what requires local DataHub, and what is intentionally out of scope. |
+| 9. Inspect the DataHub claim audit | `hackathon-assets/datahub-claim-audit.md`<br><code>npm run datahub:audit</code> | Gives a compact pass/fail audit of the submission's DataHub-specific claims. |
+| 10. Inspect the DataHub MCP handoff | `hackathon-assets/datahub-mcp-handoff.md`<br><code>npm run datahub:mcp</code> | Shows how DataHub reads, CAT policy context, and bounded receipt writes connect in the live path. |
+| 11. Run the MCP adapter smoke test | `hackathon-assets/mcp-adapter-smoke-report.md`<br><code>npm run mcp:smoke</code> | Proves the local adapter reads DataHub/CAT context before writing bounded receipts. |
+| 12. Inspect the lineage decision map | `hackathon-assets/lineage-decision-map.md`<br><code>npm run lineage:map</code> | Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph. |
+| 13. Inspect the safety policy matrix | `hackathon-assets/safety-policy-matrix.md`<br><code>npm run policy:matrix</code> | Shows which agent actions are allowed, approval-required, or blocked based on context quality. |
 
 ## Proof commands
 
@@ -32,6 +33,7 @@ A judge-first index for verifying the DataHub Agent Hackathon submission without
 npm install
 npm run demo
 npm run submission:verify
+npm run datahub:doctor
 npm run datahub:checklist
 npm run datahub:audit
 npm run datahub:mcp
@@ -51,6 +53,7 @@ npm run ci:local
 - `examples/cat-context-agent/generated-datahub-metadata.json`
 - `examples/cat-context-agent/generated-datahub-bridge-plan.json`
 - `hackathon-assets/datahub-payload-preview.md`
+- `hackathon-assets/datahub-readiness-doctor.md`
 - `hackathon-assets/datahub-integration-checklist.md`
 - `hackathon-assets/datahub-claim-audit.md`
 - `hackathon-assets/datahub-mcp-handoff.md`
