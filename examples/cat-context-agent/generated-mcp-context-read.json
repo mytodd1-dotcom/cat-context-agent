@@ -1,0 +1,108 @@
+{
+  "protocol": "cat-mcp-context-read-v0",
+  "generated_at": "demo-static-run",
+  "mode": "local-dry-run",
+  "request_filter": "REQ-1042",
+  "provider_boundary": "This artifact simulates the MCP/DataHub read contract while keeping the hackathon demo runnable without Docker, credentials, or external network access.",
+  "tool_read_plan": [
+    {
+      "name": "datahub.get_entity",
+      "purpose": "Read cataloged dataset identity, schema, ownership, and glossary context before the agent chooses an action.",
+      "arguments": {
+        "urn": "urn:li:dataset:(cat,messy_business_requests,PROD)"
+      },
+      "expected_reads": [
+        "datasetProperties",
+        "schemaMetadata",
+        "ownership",
+        "glossaryTerms"
+      ]
+    },
+    {
+      "name": "datahub.get_lineage",
+      "purpose": "Confirm the data came from the uploaded CSV through CAT's context mapper and decision loop.",
+      "arguments": {
+        "urn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+        "direction": "downstream"
+      },
+      "expected_reads": [
+        "uploaded_csv",
+        "cat_context_mapper",
+        "agent_decision_loop",
+        "approval_queue"
+      ]
+    },
+    {
+      "name": "cat.get_agent_context_packet",
+      "purpose": "Read CAT's minimum action-safety contract derived from DataHub context.",
+      "arguments": {
+        "asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+        "request_id": "REQ-1042"
+      },
+      "expected_reads": [
+        "governance",
+        "schema_confidence",
+        "allowed_actions",
+        "blocked_actions",
+        "receipts"
+      ]
+    }
+  ],
+  "context": {
+    "asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+    "provider": "local-datahub-mcp-adapter",
+    "owner_required_for_external_outreach": true,
+    "verified_contact_required_for_external_outreach": true,
+    "approval_required_when_confidence_below": 0.8,
+    "low_confidence_fields": [
+      {
+        "field": "contact_email",
+        "confidence": 0.62
+      },
+      {
+        "field": "owner",
+        "confidence": 0.57
+      }
+    ],
+    "allowed_actions": [
+      "create_internal_review_task",
+      "ask_missing_context_question",
+      "write_receipt"
+    ],
+    "blocked_actions": [
+      "send_external_outreach_without_verified_contact",
+      "invent_missing_owner",
+      "scrape_contact_details"
+    ],
+    "policy_summary": "Internal review tasks may be queued from trusted context; external outreach is blocked unless owner and verified contact context exist."
+  },
+  "decisions": [
+    {
+      "request_id": "REQ-1042",
+      "decision": "needs_approval",
+      "missing_context": [
+        "owner"
+      ],
+      "safe_next_step": "Ask for missing customer contact owner before follow-up",
+      "blocked_action": "Do not send external follow-up",
+      "confidence": 0.78,
+      "context_sources": [
+        "urn:li:dataset:(cat,messy_business_requests,PROD)",
+        "context:schema",
+        "context:owner",
+        "context:contact",
+        "context:lineage",
+        "context:policy",
+        "policy:cat-agent-context-v0"
+      ]
+    }
+  ],
+  "approval_queue": [
+    {
+      "request_id": "REQ-1042",
+      "question": "Who owns this customer contact and is external follow-up approved?",
+      "reason": "Ask for missing customer contact owner before follow-up"
+    }
+  ],
+  "blocked": []
+}

@@ -50,6 +50,14 @@ npm run datahub:bridge
 
 That command writes [`examples/cat-context-agent/generated-datahub-bridge-plan.json`](./examples/cat-context-agent/generated-datahub-bridge-plan.json), a dry-run list of DataHub metadata change proposals plus the agent context summary.
 
+To preview the agent-side context read contract:
+
+```bash
+npm run context:read
+```
+
+That command writes [`examples/cat-context-agent/generated-mcp-context-read.json`](./examples/cat-context-agent/generated-mcp-context-read.json), a local MCP/DataHub-style read plan showing which context the agent checks before queueing, approval-gating, or blocking work.
+
 ## DataHub integration path
 
 The current demo is intentionally runnable without Docker or credentials. It produces DataHub-ready metadata so judges can inspect the context layer before the full live integration is wired.
@@ -58,7 +66,7 @@ Next live DataHub step:
 
 1. Start a local DataHub quickstart.
 2. Run `DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post`.
-3. Let the agent read `generated-agent-context-packet.json` as the minimum context contract.
+3. Let the agent read `generated-mcp-context-read.json` as the MCP/DataHub-style context contract.
 4. Replace the static packet with DataHub MCP / Agent Context Kit reads.
 5. Write approval/blocked receipt outcomes back as metadata or workflow artifacts.
 
@@ -74,7 +82,7 @@ Next live DataHub step:
 
 ## Current status
 
-This repository contains the public submission foundation, Apache 2.0 license, landing page, local demo runner, DataHub-ready metadata artifacts, dry-run DataHub bridge plan, and demo-preview video asset. The next milestone is replacing the static context packet with a local DataHub quickstart run and MCP/Agent Context Kit reads.
+This repository contains the public submission foundation, Apache 2.0 license, landing page, local demo runner, DataHub-ready metadata artifacts, dry-run DataHub bridge plan, MCP-style context read artifact, and demo-preview video asset. The next milestone is replacing the static context packet with a local DataHub quickstart run and MCP/Agent Context Kit reads.
 
 ## Local development
 
@@ -82,6 +90,7 @@ This repository contains the public submission foundation, Apache 2.0 license, l
 npm install
 npm run demo
 npm run datahub:bridge
+npm run context:read
 npm run dev
 npm run build
 ```

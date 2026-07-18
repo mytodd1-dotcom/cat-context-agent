@@ -57,6 +57,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /examples\/cat-context-agent/);
   assert.match(readme, /DataHub-style context map/);
   assert.match(readme, /generated-datahub-metadata\.json/);
+  assert.match(readme, /generated-mcp-context-read\.json/);
   assert.match(readme, /DataHub MCP \/ Agent Context Kit reads/);
   assert.doesNotMatch(page + layout, /codex-preview|_sites-preview|SkeletonPreview/);
 });
@@ -140,4 +141,40 @@ test("builds a dry-run DataHub bridge plan from generated context", async () => 
       "send_external_outreach_without_verified_contact",
     ),
   );
+});
+
+test("builds an MCP-style context read plan before agent action", async () => {
+  await execFileAsync("node", ["scripts/cat-context-demo.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+  await execFileAsync("node", ["scripts/datahub-local-bridge.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  const { stdout } = await execFileAsync("node", ["scripts/cat-context-provider.mjs", "--request-id", "REQ-1042"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /local-datahub-mcp-adapter/);
+  assert.match(stdout, /datahub\.get_entity/);
+  assert.match(stdout, /datahub\.get_lineage/);
+  assert.match(stdout, /cat\.get_agent_context_packet/);
+  assert.match(stdout, /generated-mcp-context-read\.json/);
+
+  const contextRead = await readFile(
+    new URL("../examples/cat-context-agent/generated-mcp-context-read.json", import.meta.url),
+    "utf8",
+  ).then(JSON.parse);
+
+  assert.equal(contextRead.protocol, "cat-mcp-context-read-v0");
+  assert.equal(contextRead.request_filter, "REQ-1042");
+  assert.equal(contextRead.decisions.length, 1);
+  assert.equal(contextRead.decisions[0].decision, "needs_approval");
+  assert.equal(contextRead.approval_queue.length, 1);
+  assert.deepEqual(
+    contextRead.tool_read_plan.map((tool) => tool.name),
+    ["datahub.get_entity", "datahub.get_lineage", "cat.get_agent_context_packet"],
+  );
+  assert.ok(contextRead.context.low_confidence_fields.some((field) => field.field === "owner"));
+  assert.ok(contextRead.context.blocked_actions.includes("send_external_outreach_without_verified_contact"));
 });
