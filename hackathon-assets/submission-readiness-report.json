@@ -65,6 +65,11 @@
       "details": "Expected the local adapter smoke test to prove read-before-write ordering and bounded receipt writes."
     },
     {
+      "name": "submission honesty audit",
+      "ok": true,
+      "details": "Expected public copy and generated artifacts to avoid overclaims and disclose optional live DataHub boundaries."
+    },
+    {
       "name": "safety boundary",
       "ok": true,
       "details": "Expected unverified external outreach to remain blocked."
@@ -96,6 +101,7 @@
     "hackathon-assets/datahub-claim-audit.md",
     "hackathon-assets/datahub-mcp-handoff.md",
     "hackathon-assets/mcp-adapter-smoke-report.md",
+    "hackathon-assets/submission-honesty-audit.md",
     "hackathon-assets/lineage-decision-map.md",
     "hackathon-assets/safety-policy-matrix.md",
     "hackathon-assets/judge-evidence-pack.md",

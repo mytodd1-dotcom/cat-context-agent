@@ -45,6 +45,7 @@ npm run datahub:checklist
 npm run datahub:audit
 npm run datahub:mcp
 npm run mcp:smoke
+npm run submission:honesty
 npm run context:read
 npm run judge:walkthrough
 npm run lineage:map
@@ -66,6 +67,7 @@ npm test
 - `hackathon-assets/datahub-claim-audit.md`
 - `hackathon-assets/datahub-mcp-handoff.md`
 - `hackathon-assets/mcp-adapter-smoke-report.md`
+- `hackathon-assets/submission-honesty-audit.md`
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/judge-walkthrough.md`
 - `hackathon-assets/decision-trace.md`

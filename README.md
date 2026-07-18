@@ -178,6 +178,14 @@ npm run judge:walkthrough
 
 That command writes [`hackathon-assets/judge-walkthrough.md`](./hackathon-assets/judge-walkthrough.md) and [`hackathon-assets/judge-walkthrough.json`](./hackathon-assets/judge-walkthrough.json), showing the shortest terminal path, what each command proves, expected outputs, and the safety boundary.
 
+To generate the submission honesty audit:
+
+```bash
+npm run submission:honesty
+```
+
+That command writes [`hackathon-assets/submission-honesty-audit.md`](./hackathon-assets/submission-honesty-audit.md) and [`hackathon-assets/submission-honesty-audit.json`](./hackathon-assets/submission-honesty-audit.json), checking that public copy separates runnable evidence from optional live DataHub work, avoids overclaims, and preserves the safety boundary.
+
 To regenerate and verify the full submission evidence chain:
 
 ```bash
@@ -242,7 +250,7 @@ To run the local equivalent of that CI recipe:
 npm run ci:local
 ```
 
-That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub readiness doctor, DataHub integration checklist, DataHub claim audit, DataHub MCP handoff, MCP adapter smoke test, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, regenerates the judge walkthrough, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
+That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub readiness doctor, DataHub integration checklist, DataHub claim audit, DataHub MCP handoff, MCP adapter smoke test, Devpost copy pack, submission honesty audit, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, regenerates the judge walkthrough, validates artifacts, regenerates the judge scoring brief, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
 
 ## DataHub integration path
 
@@ -283,6 +291,7 @@ npm run datahub:runbook
 npm run datahub:checklist
 npm run datahub:audit
 npm run datahub:mcp
+npm run submission:honesty
 npm run decision:trace
 npm run policy:matrix
 npm run context:read

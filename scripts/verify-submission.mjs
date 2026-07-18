@@ -7,12 +7,14 @@ import { runDataHubClaimAudit } from "./datahub-claim-audit.mjs";
 import { runDataHubIntegrationChecklist } from "./datahub-integration-checklist.mjs";
 import { runDataHubMcpHandoff } from "./datahub-mcp-handoff.mjs";
 import { runDataHubReadinessDoctor } from "./datahub-readiness-doctor.mjs";
+import { runDevpostSubmissionCopy } from "./devpost-submission-copy.mjs";
 import { runDemo } from "./cat-context-demo.mjs";
 import { runBridge } from "./datahub-local-bridge.mjs";
 import { runJudgeEvidencePack } from "./judge-evidence-pack.mjs";
 import { runLineageDecisionMap } from "./lineage-decision-map.mjs";
 import { runMcpAdapterSmoke } from "./mcp-adapter-smoke.mjs";
 import { runSafetyPolicyMatrix } from "./safety-policy-matrix.mjs";
+import { runSubmissionHonestyAudit } from "./submission-honesty-audit.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const assetDir = resolve(root, "hackathon-assets");
@@ -70,6 +72,8 @@ export async function runSubmissionVerify() {
   const datahubClaimAudit = await runDataHubClaimAudit();
   const datahubMcpHandoff = await runDataHubMcpHandoff();
   const mcpAdapterSmoke = await runMcpAdapterSmoke();
+  await runDevpostSubmissionCopy();
+  const submissionHonestyAudit = await runSubmissionHonestyAudit();
   const lineageMap = await runLineageDecisionMap();
   const safetyPolicyMatrix = await runSafetyPolicyMatrix();
   const pack = await runJudgeEvidencePack();
@@ -148,6 +152,13 @@ export async function runSubmissionVerify() {
       "Expected the local adapter smoke test to prove read-before-write ordering and bounded receipt writes.",
     ),
     check(
+      "submission honesty audit",
+      submissionHonestyAudit.status === "passed" &&
+        submissionHonestyAudit.audits.length === 5 &&
+        submissionHonestyAudit.audits.every((item) => item.ok),
+      "Expected public copy and generated artifacts to avoid overclaims and disclose optional live DataHub boundaries.",
+    ),
+    check(
       "safety boundary",
       contextRead.context.blocked_actions.includes("send_external_outreach_without_verified_contact") &&
         contextRead.blocked.some((item) => item.request_id === "REQ-1044"),
@@ -203,6 +214,7 @@ export async function runSubmissionVerify() {
       "hackathon-assets/datahub-claim-audit.md",
       "hackathon-assets/datahub-mcp-handoff.md",
       "hackathon-assets/mcp-adapter-smoke-report.md",
+      "hackathon-assets/submission-honesty-audit.md",
       "hackathon-assets/lineage-decision-map.md",
       "hackathon-assets/safety-policy-matrix.md",
       "hackathon-assets/judge-evidence-pack.md",

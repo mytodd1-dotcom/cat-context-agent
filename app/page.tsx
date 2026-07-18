@@ -101,7 +101,7 @@ const verificationCommands = [
   {
     label: "Full local check",
     command: "npm run ci:local",
-    expected: "Runs the full artifact pipeline, build, and 26 render/evidence tests.",
+    expected: "Runs the full artifact pipeline, build, and 27 render/evidence tests.",
   },
   {
     label: "Context read",
@@ -256,6 +256,12 @@ const runnableArtifacts = [
     command: "npm run mcp:smoke",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/mcp-adapter-smoke-report.md",
     text: "Runs the local read-before-write adapter sequence for DataHub reads, CAT context, and bounded receipt writes.",
+  },
+  {
+    label: "Submission honesty audit",
+    command: "npm run submission:honesty",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/submission-honesty-audit.md",
+    text: "Checks public copy for optional live DataHub boundaries, no-overclaim language, and external-side-effect disclosure.",
   },
   {
     label: "MCP-style context read",

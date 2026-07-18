@@ -18,6 +18,7 @@
     "datahub:audit": "node scripts/datahub-claim-audit.mjs",
     "datahub:mcp": "node scripts/datahub-mcp-handoff.mjs",
     "mcp:smoke": "node scripts/mcp-adapter-smoke.mjs",
+    "submission:honesty": "node scripts/submission-honesty-audit.mjs",
     "decision:trace": "node scripts/decision-trace.mjs",
     "lineage:map": "node scripts/lineage-decision-map.mjs",
     "policy:matrix": "node scripts/safety-policy-matrix.mjs",
@@ -32,7 +33,7 @@
     "devpost:copy": "node scripts/devpost-submission-copy.mjs",
     "submission:index": "node scripts/submission-index.mjs",
     "demo:guide": "node scripts/demo-video-guide.mjs",
-    "ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run datahub:doctor && npm run datahub:checklist && npm run datahub:audit && npm run datahub:mcp && npm run mcp:smoke && npm run decision:trace && npm run lineage:map && npm run policy:matrix && npm run submission:verify && npm run judge:walkthrough && npm run artifacts:validate && npm run judge:brief && npm run devpost:copy && npm run submission:index && npm run demo:guide && npm test",
+    "ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run datahub:doctor && npm run datahub:checklist && npm run datahub:audit && npm run datahub:mcp && npm run mcp:smoke && npm run devpost:copy && npm run submission:honesty && npm run decision:trace && npm run lineage:map && npm run policy:matrix && npm run submission:verify && npm run judge:walkthrough && npm run artifacts:validate && npm run judge:brief && npm run submission:index && npm run demo:guide && npm test",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"

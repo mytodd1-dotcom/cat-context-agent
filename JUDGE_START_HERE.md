@@ -54,6 +54,7 @@ The current submission is runnable without Docker or credentials, but it makes t
 - DataHub claim audit: [`hackathon-assets/datahub-claim-audit.md`](./hackathon-assets/datahub-claim-audit.md)
 - DataHub MCP handoff: [`hackathon-assets/datahub-mcp-handoff.md`](./hackathon-assets/datahub-mcp-handoff.md)
 - MCP adapter smoke report: [`hackathon-assets/mcp-adapter-smoke-report.md`](./hackathon-assets/mcp-adapter-smoke-report.md)
+- submission honesty audit: [`hackathon-assets/submission-honesty-audit.md`](./hackathon-assets/submission-honesty-audit.md)
 - MCP-style context read: [`examples/cat-context-agent/generated-mcp-context-read.json`](./examples/cat-context-agent/generated-mcp-context-read.json)
 - lineage decision map: [`hackathon-assets/lineage-decision-map.md`](./hackathon-assets/lineage-decision-map.md)
 - safety policy matrix: [`hackathon-assets/safety-policy-matrix.md`](./hackathon-assets/safety-policy-matrix.md)
@@ -61,6 +62,8 @@ The current submission is runnable without Docker or credentials, but it makes t
 ## Safety claim
 
 The prototype intentionally refuses to invent owners, scrape missing contact details, or send external outreach when verified context is missing. It converts uncertainty into approval-gated work or blocked receipts.
+
+The generated [`hackathon-assets/submission-honesty-audit.md`](./hackathon-assets/submission-honesty-audit.md) also checks that the public copy does not overclaim live DataHub posting, credential requirements, or automatic customer outreach.
 
 ## Scope note
 

@@ -7,10 +7,12 @@ import { runDataHubIntegrationChecklist } from "./datahub-integration-checklist.
 import { runDataHubMcpHandoff } from "./datahub-mcp-handoff.mjs";
 import { runDataHubReadinessDoctor } from "./datahub-readiness-doctor.mjs";
 import { runDecisionTrace } from "./decision-trace.mjs";
+import { runDevpostSubmissionCopy } from "./devpost-submission-copy.mjs";
 import { runLineageDecisionMap } from "./lineage-decision-map.mjs";
 import { runLiveDataHubRunbook } from "./live-datahub-runbook.mjs";
 import { runMcpAdapterSmoke } from "./mcp-adapter-smoke.mjs";
 import { runSafetyPolicyMatrix } from "./safety-policy-matrix.mjs";
+import { runSubmissionHonestyAudit } from "./submission-honesty-audit.mjs";
 import { runArtifactValidation } from "./validate-artifacts.mjs";
 import { runJudgeWalkthrough } from "./judge-walkthrough.mjs";
 import { runSubmissionVerify } from "./verify-submission.mjs";
@@ -57,9 +59,11 @@ export async function runEvidenceReproduction() {
   const payloadPreview = await runDataHubPayloadPreview();
   const readinessDoctor = await runDataHubReadinessDoctor();
   const integrationChecklist = await runDataHubIntegrationChecklist();
+  await runDevpostSubmissionCopy();
   const claimAudit = await runDataHubClaimAudit();
   const mcpHandoff = await runDataHubMcpHandoff();
   const mcpAdapterSmoke = await runMcpAdapterSmoke();
+  const submissionHonestyAudit = await runSubmissionHonestyAudit();
   const liveRunbook = await runLiveDataHubRunbook();
   const decisionTrace = await runDecisionTrace();
   const lineageMap = await runLineageDecisionMap();
@@ -92,6 +96,10 @@ export async function runEvidenceReproduction() {
     {
       name: "MCP adapter smoke test",
       detail: `${mcpAdapterSmoke.request_flows.length} local adapter flows proved read-before-write ordering and bounded receipt writes.`,
+    },
+    {
+      name: "submission honesty audit",
+      detail: `${submissionHonestyAudit.audits.length} honesty checks passed for public copy, optional DataHub posting, safety boundaries, and no-overclaim language.`,
     },
     {
       name: "decision trace",
@@ -154,6 +162,7 @@ export async function runEvidenceReproduction() {
       "hackathon-assets/datahub-claim-audit.md",
       "hackathon-assets/datahub-mcp-handoff.md",
       "hackathon-assets/mcp-adapter-smoke-report.md",
+      "hackathon-assets/submission-honesty-audit.md",
       "hackathon-assets/datahub-payload-preview.md",
       "hackathon-assets/live-datahub-runbook.md",
       "hackathon-assets/decision-trace.md",

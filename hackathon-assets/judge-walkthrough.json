@@ -67,7 +67,7 @@
     "Missing owner/contact context still produces approval-required or blocked outcomes."
   ],
   "evidence_snapshot": {
-    "submission_readiness_checks": 13,
+    "submission_readiness_checks": 14,
     "datahub_doctor_status": "ready_without_live_datahub",
     "local_datahub_required_for_judging": false,
     "mcp_adapter_request_flows": 3,

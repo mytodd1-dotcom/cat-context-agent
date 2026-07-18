@@ -58,6 +58,11 @@
       "detail": "MCP adapter smoke test should prove read-before-write ordering and bounded local receipt writes."
     },
     {
+      "name": "submission honesty audit",
+      "ok": true,
+      "detail": "Honesty audit should prove public copy separates runnable evidence from optional live DataHub work and avoids overclaims."
+    },
+    {
       "name": "judge pack references generated evidence",
       "ok": true,
       "detail": "Judge pack should point to context contracts and include the blocked-action receipt."
@@ -95,6 +100,7 @@
     "hackathon-assets/datahub-claim-audit.json",
     "hackathon-assets/datahub-mcp-handoff.json",
     "hackathon-assets/mcp-adapter-smoke-report.json",
+    "hackathon-assets/submission-honesty-audit.json",
     "hackathon-assets/lineage-decision-map.json",
     "hackathon-assets/safety-policy-matrix.json",
     "hackathon-assets/judge-evidence-pack.json",

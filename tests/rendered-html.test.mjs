@@ -66,7 +66,7 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /Three commands prove the submission path/);
   assert.match(html, /npm run ci:local/);
   assert.match(html, /npm run context:read/);
-  assert.match(html, /26 render\/evidence tests/);
+  assert.match(html, /27 render\/evidence tests/);
   assert.match(html, /youtu\.be\/Gcbhl5_YlSM/);
   assert.match(html, /watch the 2-minute walkthrough/);
   assert.match(html, /npm run demo:guide/);
@@ -111,6 +111,9 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /MCP adapter smoke test/);
   assert.match(html, /npm run mcp:smoke/);
   assert.match(html, /mcp-adapter-smoke-report\.md/);
+  assert.match(html, /Submission honesty audit/);
+  assert.match(html, /npm run submission:honesty/);
+  assert.match(html, /submission-honesty-audit\.md/);
   assert.match(html, /Lineage decision map/);
   assert.match(html, /npm run lineage:map/);
   assert.match(html, /lineage-decision-map\.md/);
@@ -191,6 +194,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /datahub-claim-audit\.md/);
   assert.match(page, /datahub-mcp-handoff\.md/);
   assert.match(page, /mcp-adapter-smoke-report\.md/);
+  assert.match(page, /submission-honesty-audit\.md/);
   assert.match(page, /lineage-decision-map\.md/);
   assert.match(page, /safety-policy-matrix\.md/);
   assert.match(packageJson, /"datahub:payload": "node scripts\/datahub-payload-preview\.mjs"/);
@@ -200,6 +204,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"datahub:audit": "node scripts\/datahub-claim-audit\.mjs"/);
   assert.match(packageJson, /"datahub:mcp": "node scripts\/datahub-mcp-handoff\.mjs"/);
   assert.match(packageJson, /"mcp:smoke": "node scripts\/mcp-adapter-smoke\.mjs"/);
+  assert.match(packageJson, /"submission:honesty": "node scripts\/submission-honesty-audit\.mjs"/);
   assert.match(packageJson, /"decision:trace": "node scripts\/decision-trace\.mjs"/);
   assert.match(packageJson, /"lineage:map": "node scripts\/lineage-decision-map\.mjs"/);
   assert.match(packageJson, /"policy:matrix": "node scripts\/safety-policy-matrix\.mjs"/);
@@ -231,7 +236,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"devpost:copy": "node scripts\/devpost-submission-copy\.mjs"/);
   assert.match(packageJson, /"submission:index": "node scripts\/submission-index\.mjs"/);
   assert.match(packageJson, /"demo:guide": "node scripts\/demo-video-guide\.mjs"/);
-  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run datahub:doctor && npm run datahub:checklist && npm run datahub:audit && npm run datahub:mcp && npm run mcp:smoke && npm run decision:trace && npm run lineage:map && npm run policy:matrix && npm run submission:verify && npm run judge:walkthrough && npm run artifacts:validate && npm run judge:brief && npm run devpost:copy && npm run submission:index && npm run demo:guide && npm test"/);
+  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run datahub:doctor && npm run datahub:checklist && npm run datahub:audit && npm run datahub:mcp && npm run mcp:smoke && npm run devpost:copy && npm run submission:honesty && npm run decision:trace && npm run lineage:map && npm run policy:matrix && npm run submission:verify && npm run judge:walkthrough && npm run artifacts:validate && npm run judge:brief && npm run submission:index && npm run demo:guide && npm test"/);
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /JUDGE_START_HERE\.md/);
   assert.match(readme, /cat-context-agent\.flyguy\.chatgpt\.site/);
@@ -248,6 +253,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /datahub-mcp-handoff\.md/);
   assert.match(readme, /mcp-adapter-smoke-report\.md/);
   assert.match(readme, /npm run mcp:smoke/);
+  assert.match(readme, /submission-honesty-audit\.md/);
+  assert.match(readme, /npm run submission:honesty/);
   assert.match(readme, /decision-trace\.md/);
   assert.match(readme, /lineage-decision-map\.md/);
   assert.match(readme, /safety-policy-matrix\.md/);
@@ -278,6 +285,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(judgeStart, /datahub-claim-audit\.md/);
   assert.match(judgeStart, /datahub-mcp-handoff\.md/);
   assert.match(judgeStart, /mcp-adapter-smoke-report\.md/);
+  assert.match(judgeStart, /submission-honesty-audit\.md/);
   assert.match(judgeStart, /lineage-decision-map\.md/);
   assert.match(judgeStart, /safety-policy-matrix\.md/);
   assert.match(judgeStart, /refuses to invent owners/);
@@ -299,6 +307,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(judgeNotes, /DataHub MCP handoff/);
   assert.match(judgeNotes, /MCP adapter smoke report/);
   assert.match(judgeNotes, /npm run mcp:smoke/);
+  assert.match(judgeNotes, /submission honesty audit/);
+  assert.match(judgeNotes, /npm run submission:honesty/);
   assert.match(judgeNotes, /decision trace/);
   assert.match(judgeNotes, /submission readiness report/);
   assert.match(judgeNotes, /artifact validation report/);
@@ -315,6 +325,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(ciWorkflow, /npm run datahub:audit/);
   assert.match(ciWorkflow, /npm run datahub:mcp/);
   assert.match(ciWorkflow, /npm run mcp:smoke/);
+  assert.match(ciWorkflow, /npm run submission:honesty/);
   assert.match(ciWorkflow, /npm run judge:walkthrough/);
   assert.match(ciWorkflow, /npm run artifacts:validate/);
   assert.match(ciWorkflow, /npm test/);
@@ -524,7 +535,7 @@ test("verifies the complete submission evidence chain", async () => {
   ]);
 
   assert.equal(report.status, "ready");
-  assert.equal(report.checks.length, 13);
+  assert.equal(report.checks.length, 14);
   assert.ok(report.checks.every((item) => item.ok));
   assert.equal(report.summary.total_requests, 3);
   assert.ok(report.summary.datahub_aspects.includes("glossaryTerms"));
@@ -536,6 +547,7 @@ test("verifies the complete submission evidence chain", async () => {
   assert.match(reportMarkdown, /✅ \*\*DataHub claim audit\*\*/);
   assert.match(reportMarkdown, /✅ \*\*DataHub MCP handoff\*\*/);
   assert.match(reportMarkdown, /✅ \*\*MCP adapter smoke test\*\*/);
+  assert.match(reportMarkdown, /✅ \*\*submission honesty audit\*\*/);
   assert.match(reportMarkdown, /✅ \*\*lineage decision map\*\*/);
   assert.match(reportMarkdown, /✅ \*\*safety policy matrix\*\*/);
   assert.match(reportMarkdown, /✅ \*\*safety boundary\*\*/);
@@ -575,6 +587,9 @@ test("validates generated evidence artifacts", async () => {
   await execFileAsync("node", ["scripts/judge-walkthrough.mjs"], {
     cwd: new URL("..", import.meta.url),
   });
+  await execFileAsync("node", ["scripts/submission-honesty-audit.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
 
   const { stdout } = await execFileAsync("node", ["scripts/validate-artifacts.mjs"], {
     cwd: new URL("..", import.meta.url),
@@ -589,7 +604,7 @@ test("validates generated evidence artifacts", async () => {
   ]);
 
   assert.equal(report.status, "valid");
-  assert.equal(report.checks.length, 16);
+  assert.equal(report.checks.length, 17);
   assert.ok(report.checks.every((check) => check.ok));
   assert.ok(report.validated_files.includes("hackathon-assets/context-tool-contracts.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/live-datahub-runbook.json"));
@@ -598,6 +613,7 @@ test("validates generated evidence artifacts", async () => {
   assert.ok(report.validated_files.includes("hackathon-assets/datahub-claim-audit.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/datahub-mcp-handoff.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/mcp-adapter-smoke-report.json"));
+  assert.ok(report.validated_files.includes("hackathon-assets/submission-honesty-audit.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/lineage-decision-map.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/safety-policy-matrix.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/judge-walkthrough.json"));
@@ -608,6 +624,7 @@ test("validates generated evidence artifacts", async () => {
   assert.match(markdown, /✅ \*\*DataHub claim audit\*\*/);
   assert.match(markdown, /✅ \*\*DataHub MCP handoff\*\*/);
   assert.match(markdown, /✅ \*\*MCP adapter smoke test\*\*/);
+  assert.match(markdown, /✅ \*\*submission honesty audit\*\*/);
   assert.match(markdown, /✅ \*\*lineage decision map\*\*/);
   assert.match(markdown, /✅ \*\*safety policy matrix\*\*/);
   assert.match(markdown, /✅ \*\*live DataHub runbook\*\*/);
@@ -628,9 +645,9 @@ test("reproduces the judge evidence chain with one command", async () => {
   ]);
 
   assert.equal(receipt.status, "reproducible");
-  assert.equal(receipt.checks.length, 15);
+  assert.equal(receipt.checks.length, 16);
   assert.equal(receipt.summary.total_requests, 3);
-  assert.equal(receipt.summary.artifact_validation_checks, 16);
+  assert.equal(receipt.summary.artifact_validation_checks, 17);
   assert.equal(receipt.summary.live_datahub_commands, 5);
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-payload-preview.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-readiness-doctor.md"));
@@ -638,6 +655,7 @@ test("reproduces the judge evidence chain with one command", async () => {
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-claim-audit.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-mcp-handoff.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/mcp-adapter-smoke-report.md"));
+  assert.ok(receipt.reports.includes("hackathon-assets/submission-honesty-audit.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/live-datahub-runbook.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/decision-trace.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/lineage-decision-map.md"));
@@ -673,6 +691,35 @@ test("generates a five-minute judge walkthrough", async () => {
   assert.match(markdown, /No command in the five-minute path posts to DataHub/);
 });
 
+test("generates a submission honesty audit", async () => {
+  await execFileAsync("node", ["scripts/devpost-submission-copy.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  const { stdout } = await execFileAsync("node", ["scripts/submission-honesty-audit.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /cat-submission-honesty-audit-v0/);
+  assert.match(stdout, /"status": "passed"/);
+  assert.match(stdout, /submission-honesty-audit\.md/);
+
+  const [audit, markdown] = await Promise.all([
+    readFile(new URL("../hackathon-assets/submission-honesty-audit.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../hackathon-assets/submission-honesty-audit.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(audit.protocol, "cat-submission-honesty-audit-v0");
+  assert.equal(audit.status, "passed");
+  assert.equal(audit.audits.length, 5);
+  assert.ok(audit.audits.every((item) => item.ok));
+  assert.ok(audit.disallowed_overclaims.includes("sends customer outreach automatically"));
+  assert.ok(audit.explicit_boundaries.some((boundary) => boundary.includes("runnable without DataHub credentials")));
+  assert.match(markdown, /Submission Honesty Audit/);
+  assert.match(markdown, /no-overclaim language/);
+  assert.match(markdown, /external_side_effects as none/);
+});
+
 test("generates a judge scoring brief from reproduced evidence", async () => {
   const { stdout } = await execFileAsync("node", ["scripts/judge-scoring-brief.mjs"], {
     cwd: new URL("..", import.meta.url),
@@ -700,6 +747,7 @@ test("generates a judge scoring brief from reproduced evidence", async () => {
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/decision-trace.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/safety-policy-matrix.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/judge-walkthrough.md")));
+  assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/submission-honesty-audit.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/reproduction-receipt.md")));
   assert.match(markdown, /Claim-to-evidence map/);
   assert.match(markdown, /cat-context-agent\.flyguy\.chatgpt\.site/);
@@ -747,7 +795,7 @@ test("generates a judge-first submission index", async () => {
   ]);
 
   assert.equal(index.project, "CAT Context Agent");
-  assert.equal(index.suggested_review_order.length, 14);
+  assert.equal(index.suggested_review_order.length, 15);
   assert.equal(index.canonical_links.live_demo, "https://cat-context-agent.flyguy.chatgpt.site");
   assert.ok(index.proof_commands.includes("npm run ci:local"));
   assert.ok(index.proof_commands.includes("npm run judge:walkthrough"));
@@ -756,6 +804,7 @@ test("generates a judge-first submission index", async () => {
   assert.ok(index.proof_commands.includes("npm run datahub:audit"));
   assert.ok(index.proof_commands.includes("npm run datahub:mcp"));
   assert.ok(index.proof_commands.includes("npm run mcp:smoke"));
+  assert.ok(index.proof_commands.includes("npm run submission:honesty"));
   assert.ok(index.proof_commands.includes("npm run lineage:map"));
   assert.ok(index.proof_commands.includes("npm run policy:matrix"));
   assert.ok(index.claim_shortlist.some((item) => item.claim === "DataHub is the context layer."));
@@ -766,6 +815,7 @@ test("generates a judge-first submission index", async () => {
   assert.match(markdown, /datahub-claim-audit\.md/);
   assert.match(markdown, /datahub-mcp-handoff\.md/);
   assert.match(markdown, /mcp-adapter-smoke-report\.md/);
+  assert.match(markdown, /submission-honesty-audit\.md/);
   assert.match(markdown, /lineage-decision-map\.md/);
   assert.match(markdown, /safety-policy-matrix\.md/);
   assert.match(markdown, /npm run evidence:reproduce/);

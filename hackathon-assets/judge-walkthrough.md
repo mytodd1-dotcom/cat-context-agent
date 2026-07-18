@@ -86,7 +86,7 @@ Inspect:
 
 ## Current evidence snapshot
 
-- Submission readiness checks: 13
+- Submission readiness checks: 14
 - DataHub doctor status: `ready_without_live_datahub`
 - Local DataHub required for judging: `false`
 - MCP adapter request flows: 3

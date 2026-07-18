@@ -105,6 +105,7 @@ export async function runJudgeScoringBrief() {
           "examples/cat-context-agent/generated-mcp-context-read.json",
           "hackathon-assets/artifact-validation-report.md",
           "hackathon-assets/safety-policy-matrix.md",
+          "hackathon-assets/submission-honesty-audit.md",
         ],
       },
       {
@@ -116,6 +117,7 @@ export async function runJudgeScoringBrief() {
           "hackathon-assets/judge-walkthrough.md",
           "hackathon-assets/submission-readiness-report.md",
           "hackathon-assets/artifact-validation-report.md",
+          "hackathon-assets/submission-honesty-audit.md",
         ],
       },
     ],

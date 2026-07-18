@@ -16,6 +16,7 @@ Generated: `demo-static-run`
 - ✅ **DataHub claim audit** — DataHub claim audit should pass every DataHub-specific claim check.
 - ✅ **DataHub MCP handoff** — DataHub MCP handoff should map read-before-action tools to bounded receipt writes.
 - ✅ **MCP adapter smoke test** — MCP adapter smoke test should prove read-before-write ordering and bounded local receipt writes.
+- ✅ **submission honesty audit** — Honesty audit should prove public copy separates runnable evidence from optional live DataHub work and avoids overclaims.
 - ✅ **judge pack references generated evidence** — Judge pack should point to context contracts and include the blocked-action receipt.
 - ✅ **lineage decision map** — Lineage map should show the DataHub asset, context reads, decision loop, and all three decision branches.
 - ✅ **safety policy matrix** — Safety policy matrix should define allowed, approval-required, and blocked action boundaries for all three requests.
@@ -35,6 +36,7 @@ Generated: `demo-static-run`
 - `hackathon-assets/datahub-claim-audit.json`
 - `hackathon-assets/datahub-mcp-handoff.json`
 - `hackathon-assets/mcp-adapter-smoke-report.json`
+- `hackathon-assets/submission-honesty-audit.json`
 - `hackathon-assets/lineage-decision-map.json`
 - `hackathon-assets/safety-policy-matrix.json`
 - `hackathon-assets/judge-evidence-pack.json`

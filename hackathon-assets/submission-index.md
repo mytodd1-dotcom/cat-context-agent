@@ -25,8 +25,9 @@ A judge-first index for verifying the DataHub Agent Hackathon submission without
 | 10. Inspect the DataHub claim audit | `hackathon-assets/datahub-claim-audit.md`<br><code>npm run datahub:audit</code> | Gives a compact pass/fail audit of the submission's DataHub-specific claims. |
 | 11. Inspect the DataHub MCP handoff | `hackathon-assets/datahub-mcp-handoff.md`<br><code>npm run datahub:mcp</code> | Shows how DataHub reads, CAT policy context, and bounded receipt writes connect in the live path. |
 | 12. Run the MCP adapter smoke test | `hackathon-assets/mcp-adapter-smoke-report.md`<br><code>npm run mcp:smoke</code> | Proves the local adapter reads DataHub/CAT context before writing bounded receipts. |
-| 13. Inspect the lineage decision map | `hackathon-assets/lineage-decision-map.md`<br><code>npm run lineage:map</code> | Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph. |
-| 14. Inspect the safety policy matrix | `hackathon-assets/safety-policy-matrix.md`<br><code>npm run policy:matrix</code> | Shows which agent actions are allowed, approval-required, or blocked based on context quality. |
+| 13. Inspect the submission honesty audit | `hackathon-assets/submission-honesty-audit.md`<br><code>npm run submission:honesty</code> | Checks that public copy does not overclaim live DataHub, credentials, or external automation. |
+| 14. Inspect the lineage decision map | `hackathon-assets/lineage-decision-map.md`<br><code>npm run lineage:map</code> | Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph. |
+| 15. Inspect the safety policy matrix | `hackathon-assets/safety-policy-matrix.md`<br><code>npm run policy:matrix</code> | Shows which agent actions are allowed, approval-required, or blocked based on context quality. |
 
 ## Proof commands
 
@@ -40,6 +41,7 @@ npm run datahub:checklist
 npm run datahub:audit
 npm run datahub:mcp
 npm run mcp:smoke
+npm run submission:honesty
 npm run lineage:map
 npm run policy:matrix
 npm run evidence:reproduce
@@ -67,6 +69,7 @@ npm run ci:local
 - `hackathon-assets/datahub-mcp-handoff.md`
 - `hackathon-assets/mcp-adapter-smoke-report.md`
 - `hackathon-assets/context-tool-contracts.md`
+- `hackathon-assets/submission-honesty-audit.md`
 - `hackathon-assets/lineage-decision-map.md`
 - `hackathon-assets/safety-policy-matrix.md`
 
@@ -81,6 +84,7 @@ npm run ci:local
 ### The submission is reproducible.
 
 - `hackathon-assets/judge-walkthrough.md`
+- `hackathon-assets/submission-honesty-audit.md`
 - `hackathon-assets/reproduction-receipt.md`
 - `hackathon-assets/submission-readiness-report.md`
 - `hackathon-assets/artifact-validation-report.md`

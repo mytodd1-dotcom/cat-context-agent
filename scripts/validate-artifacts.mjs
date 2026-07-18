@@ -24,6 +24,8 @@ const paths = {
   datahubMcpHandoffMarkdown: resolve(assetDir, "datahub-mcp-handoff.md"),
   mcpAdapterSmoke: resolve(assetDir, "mcp-adapter-smoke-report.json"),
   mcpAdapterSmokeMarkdown: resolve(assetDir, "mcp-adapter-smoke-report.md"),
+  submissionHonestyAudit: resolve(assetDir, "submission-honesty-audit.json"),
+  submissionHonestyAuditMarkdown: resolve(assetDir, "submission-honesty-audit.md"),
   lineageMap: resolve(assetDir, "lineage-decision-map.json"),
   lineageMapMarkdown: resolve(assetDir, "lineage-decision-map.md"),
   safetyPolicyMatrix: resolve(assetDir, "safety-policy-matrix.json"),
@@ -84,6 +86,8 @@ export async function runArtifactValidation() {
     datahubMcpHandoffMarkdown,
     mcpAdapterSmoke,
     mcpAdapterSmokeMarkdown,
+    submissionHonestyAudit,
+    submissionHonestyAuditMarkdown,
     lineageMap,
     lineageMapMarkdown,
     safetyPolicyMatrix,
@@ -111,6 +115,8 @@ export async function runArtifactValidation() {
     readFile(paths.datahubMcpHandoffMarkdown, "utf8"),
     readJson(paths.mcpAdapterSmoke),
     readFile(paths.mcpAdapterSmokeMarkdown, "utf8"),
+    readJson(paths.submissionHonestyAudit),
+    readFile(paths.submissionHonestyAuditMarkdown, "utf8"),
     readJson(paths.lineageMap),
     readFile(paths.lineageMapMarkdown, "utf8"),
     readJson(paths.safetyPolicyMatrix),
@@ -223,6 +229,15 @@ export async function runArtifactValidation() {
       "MCP adapter smoke test should prove read-before-write ordering and bounded local receipt writes.",
     ),
     result(
+      "submission honesty audit",
+      submissionHonestyAudit.protocol === "cat-submission-honesty-audit-v0" &&
+        submissionHonestyAudit.status === "passed" &&
+        submissionHonestyAudit.audits.length === 5 &&
+        submissionHonestyAudit.audits.every((item) => item.ok) &&
+        submissionHonestyAuditMarkdown.includes("Submission Honesty Audit"),
+      "Honesty audit should prove public copy separates runnable evidence from optional live DataHub work and avoids overclaims.",
+    ),
+    result(
       "judge pack references generated evidence",
       judgePack.artifacts_to_inspect.includes("hackathon-assets/context-tool-contracts.md") &&
         judgePack.artifacts_to_inspect.includes("hackathon-assets/lineage-decision-map.md") &&
@@ -281,6 +296,7 @@ export async function runArtifactValidation() {
       "hackathon-assets/datahub-claim-audit.json",
       "hackathon-assets/datahub-mcp-handoff.json",
       "hackathon-assets/mcp-adapter-smoke-report.json",
+      "hackathon-assets/submission-honesty-audit.json",
       "hackathon-assets/lineage-decision-map.json",
       "hackathon-assets/safety-policy-matrix.json",
       "hackathon-assets/judge-evidence-pack.json",
