@@ -79,6 +79,7 @@ function buildEvidencePack({ output, metadata, bridge, contextRead }) {
       "examples/cat-context-agent/generated-datahub-bridge-plan.json",
       "examples/cat-context-agent/generated-mcp-context-read.json",
       "hackathon-assets/context-tool-contracts.md",
+      "hackathon-assets/artifact-validation-report.md",
       "hackathon-assets/cat-context-agent-demo-preview.mp4",
     ],
     decisions: output.receipts.map((receipt) => ({

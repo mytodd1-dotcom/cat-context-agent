@@ -65,7 +65,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(layout, /CAT Context Agent \| DataHub Hackathon Draft/);
   assert.match(packageJson, /"name": "cat-context-agent"/);
   assert.match(packageJson, /"context:contracts": "node scripts\/context-tool-contracts\.mjs"/);
-  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run submission:verify && npm test"/);
+  assert.match(packageJson, /"artifacts:validate": "node scripts\/validate-artifacts\.mjs"/);
+  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run submission:verify && npm run artifacts:validate && npm test"/);
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /examples\/cat-context-agent/);
   assert.match(readme, /DataHub-style context map/);
@@ -74,6 +75,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /context-tool-contracts\.md/);
   assert.match(readme, /judge-evidence-pack\.md/);
   assert.match(readme, /submission-readiness-report\.md/);
+  assert.match(readme, /artifact-validation-report\.md/);
   assert.match(readme, /github-actions-ci-template\.yml/);
   assert.match(readme, /DEVPOST_JUDGE_NOTES\.md/);
   assert.match(readme, /DataHub MCP \/ Agent Context Kit reads/);
@@ -83,11 +85,13 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(judgeNotes, /machine-readable tool contract/);
   assert.match(judgeNotes, /generated-datahub-bridge-plan\.json/);
   assert.match(judgeNotes, /submission readiness report/);
+  assert.match(judgeNotes, /artifact validation report/);
   assert.match(judgeNotes, /local CI-equivalent command/);
   assert.match(judgeNotes, /What is simulated vs\. live/);
   assert.match(judgeNotes, /DATAHUB_GMS_URL=http:\/\/localhost:8080 npm run datahub:bridge -- --post/);
   assert.match(ciWorkflow, /npm ci/);
   assert.match(ciWorkflow, /npm run submission:verify/);
+  assert.match(ciWorkflow, /npm run artifacts:validate/);
   assert.match(ciWorkflow, /npm test/);
   assert.match(ciWorkflow, /npm run ci:local/);
   assert.match(ciWorkflow, /node-version: 22/);
@@ -294,4 +298,32 @@ test("generates machine-readable context tool contracts", async () => {
   assert.ok(contracts.tools.some((tool) => tool.name === "datahub.get_lineage"));
   assert.ok(contracts.tools.some((tool) => tool.name === "cat.get_agent_context_packet"));
   assert.ok(contracts.safety_boundary.blocked_without_verified_context.includes("invent_missing_owner"));
+});
+
+test("validates generated evidence artifacts", async () => {
+  await execFileAsync("node", ["scripts/context-tool-contracts.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+  await execFileAsync("node", ["scripts/verify-submission.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  const { stdout } = await execFileAsync("node", ["scripts/validate-artifacts.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /"status": "valid"/);
+  assert.match(stdout, /artifact-validation-report\.md/);
+
+  const [report, markdown] = await Promise.all([
+    readFile(new URL("../hackathon-assets/artifact-validation-report.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../hackathon-assets/artifact-validation-report.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(report.status, "valid");
+  assert.equal(report.checks.length, 7);
+  assert.ok(report.checks.every((check) => check.ok));
+  assert.ok(report.validated_files.includes("hackathon-assets/context-tool-contracts.json"));
+  assert.match(markdown, /Artifact Validation Report/);
+  assert.match(markdown, /✅ \*\*tool contract coverage\*\*/);
 });
