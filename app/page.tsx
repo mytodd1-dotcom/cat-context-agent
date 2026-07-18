@@ -57,6 +57,34 @@ const datahubUsage = [
   },
 ];
 
+const judgeScorecard = [
+  {
+    criterion: "Agents That Do Real Work",
+    proof: "The demo turns messy requests into safe-to-queue, approval-required, and blocked workflow outcomes.",
+    receipt: "generated-agent-output.json",
+  },
+  {
+    criterion: "Meaningful DataHub use",
+    proof: "Dataset identity, schema metadata, ownership, glossary terms, and policy signals shape the decision boundary.",
+    receipt: "generated-datahub-bridge-plan.json",
+  },
+  {
+    criterion: "Context before action",
+    proof: "The agent simulates DataHub/MCP reads before recommending or blocking any next step.",
+    receipt: "generated-mcp-context-read.json",
+  },
+  {
+    criterion: "Safety and governance",
+    proof: "Missing owner/contact context creates approval tasks or blocks external outreach.",
+    receipt: "agent-receipts.json",
+  },
+  {
+    criterion: "Reproducible submission",
+    proof: "A one-command evidence run regenerates the artifacts and validation receipt.",
+    receipt: "reproduction-receipt.md",
+  },
+];
+
 const judgePath = [
   {
     step: "1",
@@ -385,6 +413,25 @@ export default function Home() {
               <span>{item.aspect}</span>
               <code>{item.datahubInput}</code>
               <p>{item.agentEffect}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section shell scorecardSection" aria-labelledby="scorecard-heading">
+        <p className="sectionTag">JUDGE SCORECARD</p>
+        <div className="sectionIntro">
+          <h2 id="scorecard-heading">The scoring case, compressed.</h2>
+          <p>
+            CAT is intentionally narrow: one realistic workflow, one context layer, one auditable decision loop, and inspectable proof for every claim.
+          </p>
+        </div>
+        <div className="scorecardList">
+          {judgeScorecard.map((item) => (
+            <article className="scorecardItem" key={item.criterion}>
+              <strong>{item.criterion}</strong>
+              <p>{item.proof}</p>
+              <code>{item.receipt}</code>
             </article>
           ))}
         </div>

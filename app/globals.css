@@ -267,6 +267,47 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   margin: 0;
 }
 
+.scorecardSection { padding-block: 78px; }
+.scorecardList {
+  display: grid;
+  border: 2px solid var(--ink);
+  background: #fffdf8;
+  box-shadow: 10px 10px 0 rgba(96, 233, 255, .35);
+}
+.scorecardItem {
+  display: grid;
+  grid-template-columns: 270px 1fr 250px;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+.scorecardItem:last-child { border-bottom: 0; }
+.scorecardItem > * {
+  min-height: 92px;
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  border-right: 1px solid var(--line);
+}
+.scorecardItem > *:last-child { border-right: 0; }
+.scorecardItem strong {
+  color: var(--ink);
+  font-size: 18px;
+  letter-spacing: -.03em;
+}
+.scorecardItem p {
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+}
+.scorecardItem code {
+  color: #0b1220;
+  background: #f3ffe4;
+  font-family: var(--font-geist-mono), "SFMono-Regular", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
 .stepGrid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); background: rgba(255,255,255,.3); }
 .stepCard { padding: 30px; min-height: 300px; border-right: 1px solid var(--line); position: relative; }
 .stepCard:last-child { border-right: 0; }
@@ -635,6 +676,9 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   .judgePathIntro { grid-template-columns: 1fr; gap: 10px; }
   .judgePathGrid { grid-template-columns: repeat(2, 1fr); }
   .datahubMapGrid { grid-template-columns: repeat(2, 1fr); }
+  .scorecardItem { grid-template-columns: 1fr; }
+  .scorecardItem > * { min-height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .scorecardItem > *:last-child { border-bottom: 0; }
   .demoGrid, .queueGrid, .artifactGrid, .scopeGrid, .faqGrid { grid-template-columns: 1fr; }
   .deltaRow { grid-template-columns: 1fr; }
   .deltaRow > * { border-right: 0; border-bottom: 1px solid var(--line); }

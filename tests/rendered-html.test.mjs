@@ -46,6 +46,11 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /Dataset identity/);
   assert.match(html, /Schema metadata/);
   assert.match(html, /Glossary \+ policy/);
+  assert.match(html, /JUDGE SCORECARD/);
+  assert.match(html, /The scoring case, compressed/);
+  assert.match(html, /Meaningful DataHub use/);
+  assert.match(html, /Safety and governance/);
+  assert.match(html, /generated-datahub-bridge-plan\.json/);
   assert.match(html, /youtu\.be\/Gcbhl5_YlSM/);
   assert.match(html, /watch the 2-minute walkthrough/);
   assert.match(html, /npm run demo:guide/);
@@ -118,6 +123,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /If you only have ten minutes, start here/);
   assert.match(page, /datahubUsage/);
   assert.match(page, /datahubMap/);
+  assert.match(page, /judgeScorecard/);
+  assert.match(page, /scorecardSection/);
   assert.match(page, /messyRows/);
   assert.match(page, /approvalQueue/);
   assert.match(page, /decisionComparison/);
@@ -142,6 +149,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(css, /scopeGrid/);
   assert.match(css, /judgePathGrid/);
   assert.match(css, /datahubMapGrid/);
+  assert.match(css, /scorecardList/);
   assert.match(css, /faqGrid/);
   assert.match(css, /evidenceMatrix/);
   assert.match(css, /deltaMatrix/);
