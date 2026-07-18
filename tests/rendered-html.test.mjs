@@ -27,6 +27,7 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /<title>CAT Context Agent \| DataHub Hackathon Submission<\/title>/i);
   assert.match(html, /Context before action/);
   assert.match(html, /cat-context-agent\.flyguy\.chatgpt\.site/);
+  assert.match(html, /Judge start here/);
   assert.match(html, /DataHub-backed workflow agent/);
   assert.match(html, /Agents That Do Real Work/);
   assert.match(html, /Messy business requests/);

@@ -169,7 +169,7 @@ export default function Home() {
           </p>
           <div className="heroActions">
             <a className="button primary" href="#workflow">See the workflow</a>
-            <a className="button ghost" href="https://github.com/mytodd1-dotcom/cat-context-agent">Run the evidence</a>
+            <a className="button ghost" href="https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/submission-index.md">Judge start here</a>
           </div>
           <p className="micro">
             Submission foundation is live and reproducible. This page includes the concrete demo slice, proof commands, DataHub-style context, an approval queue, and receipt output.
