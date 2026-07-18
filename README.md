@@ -52,6 +52,14 @@ npm run datahub:bridge
 
 That command writes [`examples/cat-context-agent/generated-datahub-bridge-plan.json`](./examples/cat-context-agent/generated-datahub-bridge-plan.json), a dry-run list of DataHub metadata change proposals plus the agent context summary.
 
+To generate a judge-readable preview of the DataHub aspect payloads:
+
+```bash
+npm run datahub:payload
+```
+
+That command writes [`hackathon-assets/datahub-payload-preview.md`](./hackathon-assets/datahub-payload-preview.md) and [`hackathon-assets/datahub-payload-preview.json`](./hackathon-assets/datahub-payload-preview.json), showing the dry-run datasetProperties, schemaMetadata, ownership, and glossaryTerms payloads that the bridge would post after local DataHub is running.
+
 To preview the agent-side context read contract:
 
 ```bash
@@ -150,6 +158,7 @@ This repository contains the public submission foundation, Apache 2.0 license, l
 npm install
 npm run demo
 npm run datahub:bridge
+npm run datahub:payload
 npm run context:read
 npm run context:contracts
 npm run judge:pack

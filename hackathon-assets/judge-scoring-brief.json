@@ -10,7 +10,8 @@
       "evidence": "The demo produces datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects plus a dry-run DataHub bridge plan.",
       "files": [
         "examples/cat-context-agent/generated-datahub-metadata.json",
-        "examples/cat-context-agent/generated-datahub-bridge-plan.json"
+        "examples/cat-context-agent/generated-datahub-bridge-plan.json",
+        "hackathon-assets/datahub-payload-preview.md"
       ]
     },
     {

@@ -56,6 +56,7 @@ export async function runJudgeScoringBrief() {
         files: [
           "examples/cat-context-agent/generated-datahub-metadata.json",
           "examples/cat-context-agent/generated-datahub-bridge-plan.json",
+          "hackathon-assets/datahub-payload-preview.md",
         ],
       },
       {

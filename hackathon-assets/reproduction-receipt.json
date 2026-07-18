@@ -5,6 +5,10 @@
   "generated_at": "demo-static-run",
   "checks": [
     {
+      "name": "DataHub payload preview",
+      "detail": "4 dry-run aspect payloads prepared for local GMS posting."
+    },
+    {
       "name": "submission readiness",
       "detail": "6 readiness checks passed."
     },
@@ -41,6 +45,7 @@
   },
   "reports": [
     "hackathon-assets/judge-evidence-pack.md",
+    "hackathon-assets/datahub-payload-preview.md",
     "hackathon-assets/submission-readiness-report.md",
     "hackathon-assets/artifact-validation-report.md",
     "hackathon-assets/reproduction-receipt.md"
