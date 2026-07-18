@@ -31,6 +31,9 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\/?>/i);
   assert.match(html, /Context before action/);
   assert.match(html, /cat-context-agent\.flyguy\.chatgpt\.site/);
+  assert.match(html, /Watch demo/);
+  assert.match(html, /Open repo/);
+  assert.match(html, /Try live slice/);
   assert.match(html, /Judge start here/);
   assert.match(html, /JUDGE_START_HERE\.md/);
   assert.match(html, /open JUDGE_START_HERE\.md/);
@@ -100,6 +103,9 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /Agent Context Kit/);
   assert.match(page, /JUDGE_START_HERE\.md/);
   assert.match(page, /cat-context-agent\.flyguy\.chatgpt\.site/);
+  assert.match(page, /Watch demo/);
+  assert.match(page, /Open repo/);
+  assert.match(page, /Try live slice/);
   assert.match(page, /youtu\.be\/Gcbhl5_YlSM/);
   assert.match(page, /receipt-backed action plan/);
   assert.match(page, /judgePath/);
@@ -124,6 +130,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"decision:trace": "node scripts\/decision-trace\.mjs"/);
   assert.match(css, /@media \(max-width: 980px\)/);
   assert.match(css, /@media \(max-width: 620px\)/);
+  assert.match(css, /button\.dark/);
   assert.match(css, /artifactGrid/);
   assert.match(css, /scopeGrid/);
   assert.match(css, /judgePathGrid/);

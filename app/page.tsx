@@ -300,11 +300,12 @@ export default function Home() {
             CAT Context Agent is a DataHub-backed workflow agent that helps small teams turn scattered files into trusted next steps, missing-info questions, and traceable receipts.
           </p>
           <div className="heroActions">
-            <a className="button primary" href="#workflow">See the workflow</a>
-            <a className="button ghost" href="https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/JUDGE_START_HERE.md">Judge start here</a>
+            <a className="button primary" href="https://youtu.be/Gcbhl5_YlSM">Watch demo</a>
+            <a className="button dark" href="https://github.com/mytodd1-dotcom/cat-context-agent">Open repo</a>
+            <a className="button ghost" href="#demo">Try live slice</a>
           </div>
           <p className="micro">
-            Submission foundation is live and reproducible. This page includes the concrete demo slice, proof commands, DataHub-style context, an approval queue, and receipt output.
+            Submission foundation is live and reproducible. Start with the <a href="https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/JUDGE_START_HERE.md">judge guide</a>, then inspect the concrete demo slice, proof commands, DataHub-style context, approval queue, and receipt output.
           </p>
         </div>
 

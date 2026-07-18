@@ -95,8 +95,14 @@ h1 {
 }
 .button:hover { transform: translateY(-2px); box-shadow: 5px 5px 0 var(--ink); }
 .button.primary { background: var(--mint); }
+.button.dark { background: var(--ink); color: #fff; }
 .button.ghost { background: transparent; }
 .micro { max-width: 650px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.micro a {
+  color: var(--ink);
+  font-weight: 900;
+  border-bottom: 1px solid var(--ink);
+}
 
 .contextCard {
   background: var(--ink);
