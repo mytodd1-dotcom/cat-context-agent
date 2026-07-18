@@ -26,6 +26,7 @@ The repository now includes a first judge-readable demo slice in [`examples/cat-
 - a DataHub-style context map;
 - example agent receipts for approval-required, safe-to-queue, and blocked actions.
 - generated output from the local decision runner.
+- generated DataHub-ready metadata and agent context packets.
 
 The landing page renders the same slice as a visual workflow: messy CSV → DataHub context read → approval queue → receipt JSON.
 
@@ -35,7 +36,23 @@ Run it locally:
 npm run demo
 ```
 
-The command reads the sample CSV and context map, applies the current safety rules, and writes [`examples/cat-context-agent/generated-agent-output.json`](./examples/cat-context-agent/generated-agent-output.json).
+The command reads the sample CSV and context map, applies the current safety rules, and writes:
+
+- [`examples/cat-context-agent/generated-agent-output.json`](./examples/cat-context-agent/generated-agent-output.json)
+- [`examples/cat-context-agent/generated-datahub-metadata.json`](./examples/cat-context-agent/generated-datahub-metadata.json)
+- [`examples/cat-context-agent/generated-agent-context-packet.json`](./examples/cat-context-agent/generated-agent-context-packet.json)
+
+## DataHub integration path
+
+The current demo is intentionally runnable without Docker or credentials. It produces DataHub-ready metadata so judges can inspect the context layer before the full live integration is wired.
+
+Next live DataHub step:
+
+1. Start a local DataHub quickstart.
+2. Ingest or post the equivalent dataset aspects from `generated-datahub-metadata.json`.
+3. Let the agent read `generated-agent-context-packet.json` as the minimum context contract.
+4. Replace the static packet with DataHub MCP / Agent Context Kit reads.
+5. Write approval/blocked receipt outcomes back as metadata or workflow artifacts.
 
 ## Planned stack
 
@@ -49,7 +66,7 @@ The command reads the sample CSV and context map, applies the current safety rul
 
 ## Current status
 
-This repository contains the public submission foundation, Apache 2.0 license, landing page, static demo artifacts, and demo-preview video asset. The next milestone is replacing the static context map with a local DataHub quickstart run and MCP/Agent Context Kit reads.
+This repository contains the public submission foundation, Apache 2.0 license, landing page, local demo runner, DataHub-ready metadata artifacts, and demo-preview video asset. The next milestone is replacing the static context packet with a local DataHub quickstart run and MCP/Agent Context Kit reads.
 
 ## Local development
 

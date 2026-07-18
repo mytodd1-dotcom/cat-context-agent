@@ -56,6 +56,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /examples\/cat-context-agent/);
   assert.match(readme, /DataHub-style context map/);
+  assert.match(readme, /generated-datahub-metadata\.json/);
+  assert.match(readme, /DataHub MCP \/ Agent Context Kit reads/);
   assert.doesNotMatch(page + layout, /codex-preview|_sites-preview|SkeletonPreview/);
 });
 
@@ -84,14 +86,22 @@ test("runs the local CAT context demo and writes deterministic output", async ()
   assert.match(stdout, /"safe_to_queue": 1/);
   assert.match(stdout, /"needs_approval": 1/);
   assert.match(stdout, /"blocked": 1/);
+  assert.match(stdout, /generated-datahub-metadata\.json/);
+  assert.match(stdout, /generated-agent-context-packet\.json/);
 
-  const generated = JSON.parse(
-    await readFile(new URL("../examples/cat-context-agent/generated-agent-output.json", import.meta.url), "utf8"),
-  );
+  const [generated, datahubMetadata, agentContext] = await Promise.all([
+    readFile(new URL("../examples/cat-context-agent/generated-agent-output.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../examples/cat-context-agent/generated-datahub-metadata.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../examples/cat-context-agent/generated-agent-context-packet.json", import.meta.url), "utf8").then(JSON.parse),
+  ]);
 
   assert.equal(generated.summary.total_requests, 3);
   assert.equal(generated.summary.safe_to_queue, 1);
   assert.equal(generated.summary.needs_approval, 1);
   assert.equal(generated.summary.blocked, 1);
   assert.ok(generated.receipts.some((receipt) => receipt.receipt_id === "cat-demo-REQ-1042" && receipt.decision === "needs_approval"));
+  assert.equal(datahubMetadata.entityUrn, "urn:li:dataset:(cat,messy_business_requests,PROD)");
+  assert.equal(datahubMetadata.aspects.datasetProperties.customProperties.cat_decisions_blocked, "1");
+  assert.equal(agentContext.protocol, "cat-agent-context-v0");
+  assert.ok(agentContext.blocked_actions.includes("send_external_outreach_without_verified_contact"));
 });

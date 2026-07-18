@@ -1,0 +1,65 @@
+{
+  "protocol": "cat-agent-context-v0",
+  "purpose": "Context packet an agent should read before recommending workflow action.",
+  "datahub_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+  "lineage": [
+    "uploaded_csv",
+    "cat_context_mapper",
+    "agent_decision_loop",
+    "approval_queue"
+  ],
+  "governance": {
+    "owner_required_for_external_outreach": true,
+    "verified_contact_required_for_external_outreach": true,
+    "approval_required_when_confidence_below": 0.8,
+    "writeback_target": "approval_queue"
+  },
+  "schema_confidence": {
+    "request_id": 0.99,
+    "account": 0.95,
+    "request_type": 0.91,
+    "contact_email": 0.62,
+    "estimated_value": 0.83,
+    "priority": 0.88,
+    "owner": 0.57
+  },
+  "decision_summary": {
+    "total_requests": 3,
+    "safe_to_queue": 1,
+    "needs_approval": 1,
+    "blocked": 1
+  },
+  "allowed_actions": [
+    "create_internal_review_task",
+    "ask_missing_context_question",
+    "write_receipt"
+  ],
+  "blocked_actions": [
+    "send_external_outreach_without_verified_contact",
+    "invent_missing_owner",
+    "scrape_contact_details"
+  ],
+  "receipts": [
+    {
+      "receipt_id": "cat-demo-REQ-1042",
+      "request_id": "REQ-1042",
+      "decision": "needs_approval",
+      "safe_next_step": "Ask for missing customer contact owner before follow-up",
+      "blocked_action": "Do not send external follow-up"
+    },
+    {
+      "receipt_id": "cat-demo-REQ-1043",
+      "request_id": "REQ-1043",
+      "decision": "safe_to_queue_internal_task",
+      "safe_next_step": "Create finance review task for invoice mismatch",
+      "blocked_action": null
+    },
+    {
+      "receipt_id": "cat-demo-REQ-1044",
+      "request_id": "REQ-1044",
+      "decision": "blocked",
+      "safe_next_step": "Request a verified contact before customer action",
+      "blocked_action": "Do not guess, scrape, or invent contact details"
+    }
+  ]
+}

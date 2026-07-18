@@ -1,0 +1,91 @@
+{
+  "note": "DataHub-ready metadata payload for the hackathon demo. The next build step is posting equivalent aspects through DataHub ingestion/MCP.",
+  "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+  "aspects": {
+    "datasetProperties": {
+      "name": "messy_business_requests",
+      "description": "Messy business request data used by CAT Context Agent to demonstrate context-aware safety decisions.",
+      "customProperties": {
+        "cat_source_file": "examples/cat-context-agent/messy-business-requests.csv",
+        "cat_demo": "true",
+        "cat_decisions_total": "3",
+        "cat_decisions_blocked": "1",
+        "cat_decisions_needs_approval": "1"
+      }
+    },
+    "schemaMetadata": {
+      "platform": "cat",
+      "version": 0,
+      "hash": "cat-context-agent-demo",
+      "platformSchema": {
+        "schemaType": "CSV",
+        "rawSchema": "request_id: string\naccount: string\nrequest_type: string\ncontact_email: string\nestimated_value: string\npriority: string\nowner: string"
+      },
+      "fields": [
+        {
+          "fieldPath": "request_id",
+          "type": "string",
+          "nativeDataType": "string",
+          "description": "stable request identifier; confidence=0.99"
+        },
+        {
+          "fieldPath": "account",
+          "type": "string",
+          "nativeDataType": "string",
+          "description": "customer or account name; confidence=0.95"
+        },
+        {
+          "fieldPath": "request_type",
+          "type": "string",
+          "nativeDataType": "string",
+          "description": "business workflow category; confidence=0.91"
+        },
+        {
+          "fieldPath": "contact_email",
+          "type": "string",
+          "nativeDataType": "string",
+          "description": "verified contact address for outreach; confidence=0.62"
+        },
+        {
+          "fieldPath": "estimated_value",
+          "type": "string",
+          "nativeDataType": "string",
+          "description": "estimated commercial value in USD; confidence=0.83"
+        },
+        {
+          "fieldPath": "priority",
+          "type": "string",
+          "nativeDataType": "string",
+          "description": "urgency label from source system; confidence=0.88"
+        },
+        {
+          "fieldPath": "owner",
+          "type": "string",
+          "nativeDataType": "string",
+          "description": "internal accountable team or person; confidence=0.57"
+        }
+      ]
+    },
+    "ownership": {
+      "owners": [
+        {
+          "owner": "urn:li:corpuser:cat-context-agent",
+          "type": "DATAOWNER"
+        }
+      ]
+    },
+    "glossaryTerms": {
+      "terms": [
+        {
+          "term": "urn:li:glossaryTerm:ContextBeforeAction"
+        },
+        {
+          "term": "urn:li:glossaryTerm:HumanApprovalRequired"
+        },
+        {
+          "term": "urn:li:glossaryTerm:NoUnverifiedOutreach"
+        }
+      ]
+    }
+  }
+}

@@ -11,6 +11,8 @@ const inputPaths = {
 };
 
 const outputPath = resolve(exampleDir, "generated-agent-output.json");
+const datahubMetadataPath = resolve(exampleDir, "generated-datahub-metadata.json");
+const agentContextPath = resolve(exampleDir, "generated-agent-context-packet.json");
 
 function parseCsv(text) {
   const rows = [];
@@ -115,6 +117,88 @@ function evaluateRequest(row, context) {
   };
 }
 
+function buildDataHubMetadata(context, receipts) {
+  const fields = context.schema.map((field) => ({
+    fieldPath: field.field,
+    type: "string",
+    nativeDataType: "string",
+    description: `${field.meaning}; confidence=${field.confidence}`,
+  }));
+
+  return {
+    note: "DataHub-ready metadata payload for the hackathon demo. The next build step is posting equivalent aspects through DataHub ingestion/MCP.",
+    entityUrn: context.asset.urn,
+    aspects: {
+      datasetProperties: {
+        name: context.asset.name,
+        description:
+          "Messy business request data used by CAT Context Agent to demonstrate context-aware safety decisions.",
+        customProperties: {
+          cat_source_file: context.asset.source_file,
+          cat_demo: "true",
+          cat_decisions_total: String(receipts.length),
+          cat_decisions_blocked: String(receipts.filter((receipt) => receipt.decision === "blocked").length),
+          cat_decisions_needs_approval: String(receipts.filter((receipt) => receipt.decision === "needs_approval").length),
+        },
+      },
+      schemaMetadata: {
+        platform: context.asset.platform,
+        version: 0,
+        hash: "cat-context-agent-demo",
+        platformSchema: {
+          schemaType: "CSV",
+          rawSchema: context.schema.map((field) => `${field.field}: string`).join("\n"),
+        },
+        fields,
+      },
+      ownership: {
+        owners: [
+          {
+            owner: "urn:li:corpuser:cat-context-agent",
+            type: "DATAOWNER",
+          },
+        ],
+      },
+      glossaryTerms: {
+        terms: [
+          { term: "urn:li:glossaryTerm:ContextBeforeAction" },
+          { term: "urn:li:glossaryTerm:HumanApprovalRequired" },
+          { term: "urn:li:glossaryTerm:NoUnverifiedOutreach" },
+        ],
+      },
+    },
+  };
+}
+
+function buildAgentContextPacket(context, output) {
+  return {
+    protocol: "cat-agent-context-v0",
+    purpose: "Context packet an agent should read before recommending workflow action.",
+    datahub_asset: context.asset.urn,
+    lineage: context.lineage,
+    governance: context.governance,
+    schema_confidence: Object.fromEntries(context.schema.map((field) => [field.field, field.confidence])),
+    decision_summary: output.summary,
+    allowed_actions: [
+      "create_internal_review_task",
+      "ask_missing_context_question",
+      "write_receipt",
+    ],
+    blocked_actions: [
+      "send_external_outreach_without_verified_contact",
+      "invent_missing_owner",
+      "scrape_contact_details",
+    ],
+    receipts: output.receipts.map((receipt) => ({
+      receipt_id: receipt.receipt_id,
+      request_id: receipt.request_id,
+      decision: receipt.decision,
+      safe_next_step: receipt.safe_next_step,
+      blocked_action: receipt.blocked_action,
+    })),
+  };
+}
+
 export async function runDemo() {
   const [csv, contextRaw] = await Promise.all([
     readFile(inputPaths.csv, "utf8"),
@@ -139,7 +223,12 @@ export async function runDemo() {
     receipts,
   };
 
+  const datahubMetadata = buildDataHubMetadata(context, receipts);
+  const agentContextPacket = buildAgentContextPacket(context, output);
+
   await writeFile(outputPath, `${JSON.stringify(output, null, 2)}\n`);
+  await writeFile(datahubMetadataPath, `${JSON.stringify(datahubMetadata, null, 2)}\n`);
+  await writeFile(agentContextPath, `${JSON.stringify(agentContextPacket, null, 2)}\n`);
   return output;
 }
 
@@ -147,4 +236,6 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const output = await runDemo();
   console.log(JSON.stringify(output.summary, null, 2));
   console.log(`Wrote ${outputPath}`);
+  console.log(`Wrote ${datahubMetadataPath}`);
+  console.log(`Wrote ${agentContextPath}`);
 }
