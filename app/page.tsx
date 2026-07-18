@@ -475,6 +475,11 @@ export default function Home() {
           <span className="brandMark">CAT</span>
           <span>Context Agent</span>
         </a>
+        <div className="navLinks" aria-label="Judge shortcuts">
+          <a href="#judge">Fast path</a>
+          <a href="#proof">Proof</a>
+          <a href="#artifacts">Artifacts</a>
+        </div>
         <a className="navCta" href="#demo">Working demo slice</a>
       </nav>
 
@@ -526,7 +531,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="judgePath shell" aria-labelledby="judge-path-heading">
+      <section className="judgePath shell" id="judge" aria-labelledby="judge-path-heading">
         <div className="judgePathIntro">
           <p className="sectionTag">FAST JUDGE PATH</p>
           <h2 id="judge-path-heading">If you only have ten minutes, start here.</h2>
@@ -561,7 +566,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section shell datahubMap" aria-labelledby="datahub-map-heading">
+      <section className="section shell datahubMap" id="datahub" aria-labelledby="datahub-map-heading">
         <p className="sectionTag">DATAHUB → AGENT MAP</p>
         <div className="sectionIntro">
           <h2 id="datahub-map-heading">DataHub is the context layer, not a logo on the slide.</h2>
@@ -599,7 +604,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section shell verifySection" aria-labelledby="verify-heading">
+      <section className="section shell verifySection" id="proof" aria-labelledby="verify-heading">
         <p className="sectionTag">COPY/PASTE VERIFICATION</p>
         <div className="sectionIntro">
           <h2 id="verify-heading">Three commands prove the submission path.</h2>
