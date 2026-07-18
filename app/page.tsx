@@ -34,6 +34,29 @@ const buildTracks = [
   ["Demo slice", "messy CSV, context map, approval queue, receipt JSON"],
 ];
 
+const datahubUsage = [
+  {
+    aspect: "Dataset identity",
+    datahubInput: "urn:li:dataset:(cat,messy_business_requests,PROD)",
+    agentEffect: "Anchors every receipt to a named source asset instead of anonymous uploaded data.",
+  },
+  {
+    aspect: "Schema metadata",
+    datahubInput: "mapped fields, confidence, missing contact field",
+    agentEffect: "Separates safe internal queueing from rows that need a human question first.",
+  },
+  {
+    aspect: "Ownership",
+    datahubInput: "finance owner, success owner, unknown owner",
+    agentEffect: "Blocks or escalates external-facing work when accountable ownership is missing.",
+  },
+  {
+    aspect: "Glossary + policy",
+    datahubInput: "outreach guardrail, approval-required customer contact rule",
+    agentEffect: "Turns high-value work into approval tasks instead of unauthorized outreach.",
+  },
+];
+
 const judgePath = [
   {
     step: "1",
@@ -344,6 +367,25 @@ export default function Home() {
               <strong>{item.title}</strong>
               <p>{item.text}</p>
             </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="section shell datahubMap" aria-labelledby="datahub-map-heading">
+        <p className="sectionTag">DATAHUB → AGENT MAP</p>
+        <div className="sectionIntro">
+          <h2 id="datahub-map-heading">DataHub is the context layer, not a logo on the slide.</h2>
+          <p>
+            The agent reads catalog context before it decides. These are the exact kinds of DataHub signals the demo converts into safer actions and auditable receipts.
+          </p>
+        </div>
+        <div className="datahubMapGrid">
+          {datahubUsage.map((item) => (
+            <article className="datahubMapCard" key={item.aspect}>
+              <span>{item.aspect}</span>
+              <code>{item.datahubInput}</code>
+              <p>{item.agentEffect}</p>
+            </article>
           ))}
         </div>
       </section>

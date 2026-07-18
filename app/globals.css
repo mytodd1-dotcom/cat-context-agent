@@ -224,6 +224,49 @@ h1 {
 h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055em; margin-bottom: 0; }
 .sectionIntro p, .muted { color: var(--muted); line-height: 1.65; font-size: 17px; margin-bottom: 0; }
 
+.datahubMap { padding-block: 82px 72px; }
+.datahubMapGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.datahubMapCard {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22px;
+  background: #fffdf8;
+  border: 2px solid var(--ink);
+  padding: 24px;
+  box-shadow: 8px 8px 0 rgba(49, 92, 255, .18);
+}
+.datahubMapCard span {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.datahubMapCard code {
+  display: block;
+  min-height: 76px;
+  color: #dffcf0;
+  background: #0b1220;
+  border: 1px solid #243447;
+  padding: 14px;
+  font-family: var(--font-geist-mono), "SFMono-Regular", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.datahubMapCard p {
+  color: var(--muted);
+  line-height: 1.58;
+  margin: 0;
+}
+
 .stepGrid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); background: rgba(255,255,255,.3); }
 .stepCard { padding: 30px; min-height: 300px; border-right: 1px solid var(--line); position: relative; }
 .stepCard:last-child { border-right: 0; }
@@ -591,6 +634,7 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   .proofGrid, .stepGrid { grid-template-columns: repeat(2, 1fr); }
   .judgePathIntro { grid-template-columns: 1fr; gap: 10px; }
   .judgePathGrid { grid-template-columns: repeat(2, 1fr); }
+  .datahubMapGrid { grid-template-columns: repeat(2, 1fr); }
   .demoGrid, .queueGrid, .artifactGrid, .scopeGrid, .faqGrid { grid-template-columns: 1fr; }
   .deltaRow { grid-template-columns: 1fr; }
   .deltaRow > * { border-right: 0; border-bottom: 1px solid var(--line); }
@@ -613,6 +657,8 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   .judgePathGrid { grid-template-columns: 1fr; }
   .judgePathCard { min-height: auto; }
   .judgePathCard span { margin-bottom: 20px; }
+  .datahubMapGrid { grid-template-columns: 1fr; }
+  .datahubMapCard { min-height: auto; }
   .proofGrid, .stepGrid { grid-template-columns: 1fr; }
   .proofGrid div, .proofGrid div:first-child { border-left: 1px solid rgba(255,255,255,.24); }
   .stepCard, .stepCard:nth-child(2) { border-right: 0; border-bottom: 1px solid var(--line); min-height: 245px; }
