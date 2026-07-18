@@ -1,0 +1,137 @@
+{
+  "mode": "dry-run",
+  "datahub_gms_url": "http://localhost:8080",
+  "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+  "proposals": [
+    {
+      "entityType": "dataset",
+      "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+      "changeType": "UPSERT",
+      "aspectName": "datasetProperties",
+      "aspect": {
+        "name": "messy_business_requests",
+        "description": "Messy business request data used by CAT Context Agent to demonstrate context-aware safety decisions.",
+        "customProperties": {
+          "cat_source_file": "examples/cat-context-agent/messy-business-requests.csv",
+          "cat_demo": "true",
+          "cat_decisions_total": "3",
+          "cat_decisions_blocked": "1",
+          "cat_decisions_needs_approval": "1"
+        }
+      }
+    },
+    {
+      "entityType": "dataset",
+      "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+      "changeType": "UPSERT",
+      "aspectName": "schemaMetadata",
+      "aspect": {
+        "platform": "cat",
+        "version": 0,
+        "hash": "cat-context-agent-demo",
+        "platformSchema": {
+          "schemaType": "CSV",
+          "rawSchema": "request_id: string\naccount: string\nrequest_type: string\ncontact_email: string\nestimated_value: string\npriority: string\nowner: string"
+        },
+        "fields": [
+          {
+            "fieldPath": "request_id",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "stable request identifier; confidence=0.99"
+          },
+          {
+            "fieldPath": "account",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "customer or account name; confidence=0.95"
+          },
+          {
+            "fieldPath": "request_type",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "business workflow category; confidence=0.91"
+          },
+          {
+            "fieldPath": "contact_email",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "verified contact address for outreach; confidence=0.62"
+          },
+          {
+            "fieldPath": "estimated_value",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "estimated commercial value in USD; confidence=0.83"
+          },
+          {
+            "fieldPath": "priority",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "urgency label from source system; confidence=0.88"
+          },
+          {
+            "fieldPath": "owner",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "internal accountable team or person; confidence=0.57"
+          }
+        ]
+      }
+    },
+    {
+      "entityType": "dataset",
+      "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+      "changeType": "UPSERT",
+      "aspectName": "ownership",
+      "aspect": {
+        "owners": [
+          {
+            "owner": "urn:li:corpuser:cat-context-agent",
+            "type": "DATAOWNER"
+          }
+        ]
+      }
+    },
+    {
+      "entityType": "dataset",
+      "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+      "changeType": "UPSERT",
+      "aspectName": "glossaryTerms",
+      "aspect": {
+        "terms": [
+          {
+            "term": "urn:li:glossaryTerm:ContextBeforeAction"
+          },
+          {
+            "term": "urn:li:glossaryTerm:HumanApprovalRequired"
+          },
+          {
+            "term": "urn:li:glossaryTerm:NoUnverifiedOutreach"
+          }
+        ]
+      }
+    }
+  ],
+  "agent_context_summary": {
+    "protocol": "cat-agent-context-v0",
+    "allowed_actions": [
+      "create_internal_review_task",
+      "ask_missing_context_question",
+      "write_receipt"
+    ],
+    "blocked_actions": [
+      "send_external_outreach_without_verified_contact",
+      "invent_missing_owner",
+      "scrape_contact_details"
+    ],
+    "decision_summary": {
+      "total_requests": 3,
+      "safe_to_queue": 1,
+      "needs_approval": 1,
+      "blocked": 1
+    }
+  },
+  "next_endpoint": "http://localhost:8080/openapi/entities/v1/",
+  "note": "Dry-run by default. Run DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post after starting DataHub locally."
+}

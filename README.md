@@ -42,6 +42,14 @@ The command reads the sample CSV and context map, applies the current safety rul
 - [`examples/cat-context-agent/generated-datahub-metadata.json`](./examples/cat-context-agent/generated-datahub-metadata.json)
 - [`examples/cat-context-agent/generated-agent-context-packet.json`](./examples/cat-context-agent/generated-agent-context-packet.json)
 
+To preview the DataHub handoff without a running DataHub instance:
+
+```bash
+npm run datahub:bridge
+```
+
+That command writes [`examples/cat-context-agent/generated-datahub-bridge-plan.json`](./examples/cat-context-agent/generated-datahub-bridge-plan.json), a dry-run list of DataHub metadata change proposals plus the agent context summary.
+
 ## DataHub integration path
 
 The current demo is intentionally runnable without Docker or credentials. It produces DataHub-ready metadata so judges can inspect the context layer before the full live integration is wired.
@@ -49,7 +57,7 @@ The current demo is intentionally runnable without Docker or credentials. It pro
 Next live DataHub step:
 
 1. Start a local DataHub quickstart.
-2. Ingest or post the equivalent dataset aspects from `generated-datahub-metadata.json`.
+2. Run `DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post`.
 3. Let the agent read `generated-agent-context-packet.json` as the minimum context contract.
 4. Replace the static packet with DataHub MCP / Agent Context Kit reads.
 5. Write approval/blocked receipt outcomes back as metadata or workflow artifacts.
@@ -66,13 +74,14 @@ Next live DataHub step:
 
 ## Current status
 
-This repository contains the public submission foundation, Apache 2.0 license, landing page, local demo runner, DataHub-ready metadata artifacts, and demo-preview video asset. The next milestone is replacing the static context packet with a local DataHub quickstart run and MCP/Agent Context Kit reads.
+This repository contains the public submission foundation, Apache 2.0 license, landing page, local demo runner, DataHub-ready metadata artifacts, dry-run DataHub bridge plan, and demo-preview video asset. The next milestone is replacing the static context packet with a local DataHub quickstart run and MCP/Agent Context Kit reads.
 
 ## Local development
 
 ```bash
 npm install
 npm run demo
+npm run datahub:bridge
 npm run dev
 npm run build
 ```

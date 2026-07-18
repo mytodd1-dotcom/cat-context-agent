@@ -105,3 +105,39 @@ test("runs the local CAT context demo and writes deterministic output", async ()
   assert.equal(agentContext.protocol, "cat-agent-context-v0");
   assert.ok(agentContext.blocked_actions.includes("send_external_outreach_without_verified_contact"));
 });
+
+test("builds a dry-run DataHub bridge plan from generated context", async () => {
+  await execFileAsync("node", ["scripts/cat-context-demo.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  const { stdout } = await execFileAsync("node", ["scripts/datahub-local-bridge.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /"mode": "dry-run"/);
+  assert.match(stdout, /datasetProperties/);
+  assert.match(stdout, /schemaMetadata/);
+  assert.match(stdout, /ownership/);
+  assert.match(stdout, /glossaryTerms/);
+  assert.match(stdout, /generated-datahub-bridge-plan\.json/);
+
+  const bridgePlan = await readFile(
+    new URL("../examples/cat-context-agent/generated-datahub-bridge-plan.json", import.meta.url),
+    "utf8",
+  ).then(JSON.parse);
+
+  assert.equal(bridgePlan.mode, "dry-run");
+  assert.equal(bridgePlan.entityUrn, "urn:li:dataset:(cat,messy_business_requests,PROD)");
+  assert.deepEqual(
+    bridgePlan.proposals.map((proposal) => proposal.aspectName),
+    ["datasetProperties", "schemaMetadata", "ownership", "glossaryTerms"],
+  );
+  assert.match(bridgePlan.next_endpoint, /\/openapi\/entities\/v1\/$/);
+  assert.ok(bridgePlan.agent_context_summary.allowed_actions.includes("create_internal_review_task"));
+  assert.ok(
+    bridgePlan.agent_context_summary.blocked_actions.includes(
+      "send_external_outreach_without_verified_contact",
+    ),
+  );
+});
