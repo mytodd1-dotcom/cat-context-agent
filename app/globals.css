@@ -300,6 +300,57 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   margin: 0;
 }
 
+.artifactGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.artifactCard {
+  min-height: 310px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  background: #fffdf8;
+  border: 2px solid var(--ink);
+  padding: 24px;
+  box-shadow: 7px 7px 0 rgba(16, 24, 34, .1);
+}
+.artifactCard span {
+  display: block;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.artifactCard code {
+  display: block;
+  padding: 12px;
+  color: #dffcf0;
+  background: #0b1220;
+  border: 1px solid #243447;
+  font-family: var(--font-geist-mono), "SFMono-Regular", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+.artifactCard p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+.artifactCard a {
+  width: fit-content;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 7px;
+}
+
 .darkSection { background: var(--ink); color: #fff; }
 .receiptGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
 .receiptGrid h2 { margin-bottom: 25px; }
@@ -325,7 +376,7 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   .hero { gap: 45px; padding-top: 50px; }
   .sectionIntro, .receiptGrid { gap: 30px; }
   .proofGrid, .stepGrid { grid-template-columns: repeat(2, 1fr); }
-  .demoGrid, .queueGrid { grid-template-columns: 1fr; }
+  .demoGrid, .queueGrid, .artifactGrid { grid-template-columns: 1fr; }
   .stepCard:nth-child(2) { border-right: 0; }
   .stepCard:nth-child(1), .stepCard:nth-child(2) { border-bottom: 1px solid var(--line); }
 }

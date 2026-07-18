@@ -32,6 +32,9 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /APPROVAL QUEUE|approval queue/i);
   assert.match(html, /cat-demo-REQ-1042/);
   assert.match(html, /messy CSV, context map, approval queue, receipt JSON/);
+  assert.match(html, /RUNNABLE EVIDENCE/);
+  assert.match(html, /npm run datahub:bridge/);
+  assert.match(html, /judge-evidence-pack\.md/);
   assert.doesNotMatch(html, /Revenue Leak Audit|Get a 3-leak preview|Revenue Leak Scan/i);
 });
 
@@ -49,8 +52,12 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /receipt-backed action plan/);
   assert.match(page, /messyRows/);
   assert.match(page, /approvalQueue/);
+  assert.match(page, /runnableArtifacts/);
+  assert.match(page, /generated-mcp-context-read\.json/);
+  assert.match(page, /datahub\.get_entity/);
   assert.match(css, /@media \(max-width: 980px\)/);
   assert.match(css, /@media \(max-width: 620px\)/);
+  assert.match(css, /artifactGrid/);
   assert.match(layout, /CAT Context Agent \| DataHub Hackathon Draft/);
   assert.match(packageJson, /"name": "cat-context-agent"/);
   assert.match(readme, /Apache 2\.0/);

@@ -32,6 +32,33 @@ const buildTracks = [
   ["Demo slice", "messy CSV, context map, approval queue, receipt JSON"],
 ];
 
+const runnableArtifacts = [
+  {
+    label: "Local decision runner",
+    command: "npm run demo",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/examples/cat-context-agent/generated-agent-output.json",
+    text: "Turns messy CSV rows into safe-to-queue, approval-required, and blocked receipt outcomes.",
+  },
+  {
+    label: "DataHub bridge plan",
+    command: "npm run datahub:bridge",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/examples/cat-context-agent/generated-datahub-bridge-plan.json",
+    text: "Shows datasetProperties, schemaMetadata, ownership, and glossaryTerms ready for DataHub.",
+  },
+  {
+    label: "MCP-style context read",
+    command: "npm run context:read",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/examples/cat-context-agent/generated-mcp-context-read.json",
+    text: "Simulates datahub.get_entity, datahub.get_lineage, and CAT's agent context packet before action.",
+  },
+  {
+    label: "Judge evidence pack",
+    command: "npm run judge:pack",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/judge-evidence-pack.md",
+    text: "Summarizes commands, artifacts, DataHub aspects, safety claims, and decision receipts in one skim-ready file.",
+  },
+];
+
 const messyRows = [
   ["REQ-1042", "Acme HVAC", "renewal follow-up", "renewals@acme.example", "USD 8,400", "high", "owner unknown"],
   ["REQ-1043", "Northline Dental", "invoice mismatch", "ap@northline.example", "USD 1,280", "medium", "finance"],
@@ -111,7 +138,7 @@ export default function Home() {
           </p>
           <div className="heroActions">
             <a className="button primary" href="#workflow">See the workflow</a>
-            <a className="button ghost" href="#receipt">View the receipt model</a>
+            <a className="button ghost" href="#artifacts">Run the evidence</a>
           </div>
           <p className="micro">
             Submission foundation is live. This page now includes the first concrete demo slice: sample messy data, DataHub-style context, an approval queue, and receipt output.
@@ -205,6 +232,28 @@ export default function Home() {
           <div><strong>Human checkpoints</strong><span>Unsafe actions become questions</span></div>
           <div><strong>Receipts</strong><span>Recommendations cite their source context</span></div>
           <div><strong>Small-business demo</strong><span>Practical files, practical workflows</span></div>
+        </div>
+      </section>
+
+      <section className="section shell" id="artifacts">
+        <p className="sectionTag">RUNNABLE EVIDENCE</p>
+        <div className="sectionIntro">
+          <h2>Judges can verify the agent path from the repo.</h2>
+          <p>
+            The demo is intentionally reproducible without credentials: run the commands, inspect the generated artifacts, and see where DataHub context changes what the agent is allowed to do.
+          </p>
+        </div>
+        <div className="artifactGrid">
+          {runnableArtifacts.map((artifact) => (
+            <article className="artifactCard" key={artifact.label}>
+              <div>
+                <span>{artifact.label}</span>
+                <code>{artifact.command}</code>
+              </div>
+              <p>{artifact.text}</p>
+              <a href={artifact.href}>Inspect artifact →</a>
+            </article>
+          ))}
         </div>
       </section>
 
