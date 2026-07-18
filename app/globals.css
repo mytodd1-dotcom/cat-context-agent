@@ -142,6 +142,69 @@ h1 {
 .proofGrid strong { font-size: 17px; }
 .proofGrid span { font-size: 12px; margin-top: 4px; opacity: .82; }
 
+.judgePath {
+  padding: 34px;
+  margin-block: -38px 54px;
+  position: relative;
+  z-index: 2;
+  background: #fffdf8;
+  border: 2px solid var(--ink);
+  box-shadow: 12px 12px 0 var(--mint);
+}
+.judgePathIntro {
+  display: grid;
+  grid-template-columns: .72fr 1.28fr;
+  gap: 34px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+.judgePathIntro .sectionTag { margin: 0; }
+.judgePathIntro h2 {
+  font-size: clamp(28px, 3vw, 42px);
+  letter-spacing: -.05em;
+}
+.judgePathGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.judgePathCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 210px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  background: #f8fbff;
+  transition: .18s ease;
+}
+.judgePathCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--ink);
+  box-shadow: 5px 5px 0 rgba(49, 92, 255, .18);
+}
+.judgePathCard span {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 32px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+}
+.judgePathCard strong {
+  font-size: 18px;
+  letter-spacing: -.03em;
+  line-height: 1.18;
+}
+.judgePathCard p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 .section { padding-block: 110px; }
 .sectionTag { color: var(--blue); margin-bottom: 24px; }
 .sectionTag.lime { color: var(--mint); }
@@ -408,6 +471,8 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   .hero { gap: 45px; padding-top: 50px; }
   .sectionIntro, .receiptGrid { gap: 30px; }
   .proofGrid, .stepGrid { grid-template-columns: repeat(2, 1fr); }
+  .judgePathIntro { grid-template-columns: 1fr; gap: 10px; }
+  .judgePathGrid { grid-template-columns: repeat(2, 1fr); }
   .demoGrid, .queueGrid, .artifactGrid, .scopeGrid { grid-template-columns: 1fr; }
   .stepCard:nth-child(2) { border-right: 0; }
   .stepCard:nth-child(1), .stepCard:nth-child(2) { border-bottom: 1px solid var(--line); }
@@ -420,6 +485,10 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   .hero { padding-block: 42px 60px; }
   .heroLead { font-size: 18px; }
   .contextCard { padding: 18px; box-shadow: 8px 8px 0 var(--blue); }
+  .judgePath { padding: 24px; margin-block: -24px 36px; box-shadow: 8px 8px 0 var(--mint); }
+  .judgePathGrid { grid-template-columns: 1fr; }
+  .judgePathCard { min-height: auto; }
+  .judgePathCard span { margin-bottom: 20px; }
   .proofGrid, .stepGrid { grid-template-columns: 1fr; }
   .proofGrid div, .proofGrid div:first-child { border-left: 1px solid rgba(255,255,255,.24); }
   .stepCard, .stepCard:nth-child(2) { border-right: 0; border-bottom: 1px solid var(--line); min-height: 245px; }

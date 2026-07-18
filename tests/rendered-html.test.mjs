@@ -34,6 +34,10 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /Judge start here/);
   assert.match(html, /JUDGE_START_HERE\.md/);
   assert.match(html, /open JUDGE_START_HERE\.md/);
+  assert.match(html, /FAST JUDGE PATH/);
+  assert.match(html, /If you only have ten minutes, start here/);
+  assert.match(html, /Watch the two-minute video/);
+  assert.match(html, /Run one proof command/);
   assert.match(html, /youtu\.be\/Gcbhl5_YlSM/);
   assert.match(html, /watch the 2-minute walkthrough/);
   assert.match(html, /npm run demo:guide/);
@@ -84,6 +88,9 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(page, /youtu\.be\/Gcbhl5_YlSM/);
   assert.match(page, /receipt-backed action plan/);
+  assert.match(page, /judgePath/);
+  assert.match(page, /FAST JUDGE PATH/);
+  assert.match(page, /If you only have ten minutes, start here/);
   assert.match(page, /messyRows/);
   assert.match(page, /approvalQueue/);
   assert.match(page, /scopeCards/);
@@ -101,6 +108,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(css, /@media \(max-width: 620px\)/);
   assert.match(css, /artifactGrid/);
   assert.match(css, /scopeGrid/);
+  assert.match(css, /judgePathGrid/);
   assert.match(layout, /CAT Context Agent \| DataHub Hackathon Submission/);
   assert.match(layout, /metadataBase: siteUrl/);
   assert.match(layout, /openGraph/);

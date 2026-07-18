@@ -34,6 +34,33 @@ const buildTracks = [
   ["Demo slice", "messy CSV, context map, approval queue, receipt JSON"],
 ];
 
+const judgePath = [
+  {
+    step: "1",
+    title: "Watch the two-minute video",
+    href: "https://youtu.be/Gcbhl5_YlSM",
+    text: "See the full context-before-action loop without needing to run anything first.",
+  },
+  {
+    step: "2",
+    title: "Skim the live demo slice",
+    href: "#demo",
+    text: "Review the messy data, DataHub-style context read, approval queue, and receipt output.",
+  },
+  {
+    step: "3",
+    title: "Open the judge start guide",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/JUDGE_START_HERE.md",
+    text: "Follow the shortest repo path through claims, commands, artifacts, and scope transparency.",
+  },
+  {
+    step: "4",
+    title: "Run one proof command",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/reproduction-receipt.md",
+    text: "Use npm run evidence:reproduce or npm run ci:local to regenerate the receipt-backed evidence chain.",
+  },
+];
+
 const runnableArtifacts = [
   {
     label: "Judge start here",
@@ -238,6 +265,22 @@ export default function Home() {
             <small>BLOCKED ACTION</small>
             <strong>No automated outreach until approval and ownership are confirmed.</strong>
           </div>
+        </div>
+      </section>
+
+      <section className="judgePath shell" aria-labelledby="judge-path-heading">
+        <div className="judgePathIntro">
+          <p className="sectionTag">FAST JUDGE PATH</p>
+          <h2 id="judge-path-heading">If you only have ten minutes, start here.</h2>
+        </div>
+        <div className="judgePathGrid">
+          {judgePath.map((item) => (
+            <a className="judgePathCard" href={item.href} key={item.title}>
+              <span>{item.step}</span>
+              <strong>{item.title}</strong>
+              <p>{item.text}</p>
+            </a>
+          ))}
         </div>
       </section>
 
