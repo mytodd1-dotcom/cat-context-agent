@@ -92,6 +92,14 @@ npm run artifacts:validate
 
 That command checks the generated decisions, DataHub aspects, context-read tools, tool contracts, judge pack, and readiness report, then writes [`hackathon-assets/artifact-validation-report.md`](./hackathon-assets/artifact-validation-report.md) and [`hackathon-assets/artifact-validation-report.json`](./hackathon-assets/artifact-validation-report.json).
 
+For the shortest judge verification path:
+
+```bash
+npm run evidence:reproduce
+```
+
+That command reruns submission verification and artifact validation, then writes a one-command proof receipt at [`hackathon-assets/reproduction-receipt.md`](./hackathon-assets/reproduction-receipt.md) and [`hackathon-assets/reproduction-receipt.json`](./hackathon-assets/reproduction-receipt.json).
+
 A GitHub Actions template for the same checks is available at [`hackathon-assets/github-actions-ci-template.yml`](./hackathon-assets/github-actions-ci-template.yml). It is kept as a template because the current OAuth token cannot publish workflow files without GitHub's `workflow` scope.
 
 To run the local equivalent of that CI recipe:
@@ -139,6 +147,7 @@ npm run context:contracts
 npm run judge:pack
 npm run submission:verify
 npm run artifacts:validate
+npm run evidence:reproduce
 npm run ci:local
 npm run dev
 npm run build

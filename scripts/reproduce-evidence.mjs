@@ -1,0 +1,113 @@
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { runArtifactValidation } from "./validate-artifacts.mjs";
+import { runSubmissionVerify } from "./verify-submission.mjs";
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const assetDir = resolve(root, "hackathon-assets");
+const receiptJsonPath = resolve(assetDir, "reproduction-receipt.json");
+const receiptMarkdownPath = resolve(assetDir, "reproduction-receipt.md");
+
+function renderMarkdown(receipt) {
+  return `# CAT Context Agent — Reproduction Receipt
+
+Status: **${receipt.status}**  
+Generated: \`${receipt.generated_at}\`
+
+## One-command proof
+
+\`\`\`bash
+npm run evidence:reproduce
+\`\`\`
+
+## Checks reproduced
+
+${receipt.checks.map((check) => `- ✅ **${check.name}** — ${check.detail}`).join("\n")}
+
+## Summary
+
+- Requests evaluated: ${receipt.summary.total_requests}
+- Safe internal tasks: ${receipt.summary.safe_to_queue}
+- Approval-required tasks: ${receipt.summary.needs_approval}
+- Blocked tasks: ${receipt.summary.blocked}
+- DataHub aspects: ${receipt.summary.datahub_aspects.map((aspect) => `\`${aspect}\``).join(", ")}
+- MCP-style reads: ${receipt.summary.mcp_style_tool_reads.map((tool) => `\`${tool}\``).join(", ")}
+- Artifact validation checks: ${receipt.summary.artifact_validation_checks}
+
+## Reports regenerated
+
+${receipt.reports.map((report) => `- \`${report}\``).join("\n")}
+`;
+}
+
+export async function runEvidenceReproduction() {
+  const readiness = await runSubmissionVerify();
+  const artifactValidation = await runArtifactValidation();
+
+  const checks = [
+    {
+      name: "submission readiness",
+      detail: `${readiness.checks.length} readiness checks passed.`,
+    },
+    {
+      name: "artifact validation",
+      detail: `${artifactValidation.checks.length} generated-artifact checks passed.`,
+    },
+    {
+      name: "safety boundary",
+      detail: "Blocked action remains preserved for unverified external outreach.",
+    },
+    {
+      name: "judge evidence",
+      detail: "Judge notes, evidence pack, context contracts, readiness report, and validation report are regenerated.",
+    },
+  ];
+
+  const receipt = {
+    project: "CAT Context Agent",
+    challenge: "Build with DataHub: The Agent Hackathon",
+    status: readiness.status === "ready" && artifactValidation.status === "valid" ? "reproducible" : "failed",
+    generated_at: "demo-static-run",
+    checks,
+    summary: {
+      total_requests: readiness.summary.total_requests,
+      safe_to_queue: readiness.summary.safe_to_queue,
+      needs_approval: readiness.summary.needs_approval,
+      blocked: readiness.summary.blocked,
+      datahub_aspects: readiness.summary.datahub_aspects,
+      mcp_style_tool_reads: readiness.summary.mcp_style_tool_reads,
+      artifact_validation_checks: artifactValidation.checks.length,
+    },
+    reports: [
+      "hackathon-assets/judge-evidence-pack.md",
+      "hackathon-assets/submission-readiness-report.md",
+      "hackathon-assets/artifact-validation-report.md",
+      "hackathon-assets/reproduction-receipt.md",
+    ],
+  };
+
+  await mkdir(assetDir, { recursive: true });
+  await Promise.all([
+    writeFile(receiptJsonPath, `${JSON.stringify(receipt, null, 2)}\n`),
+    writeFile(receiptMarkdownPath, renderMarkdown(receipt)),
+  ]);
+
+  if (receipt.status !== "reproducible") {
+    throw new Error("Evidence reproduction failed.");
+  }
+
+  return receipt;
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const receipt = await runEvidenceReproduction();
+  console.log(JSON.stringify({
+    status: receipt.status,
+    checks: receipt.checks.length,
+    total_requests: receipt.summary.total_requests,
+    reports: receipt.reports,
+  }, null, 2));
+  console.log(`Wrote ${receiptJsonPath}`);
+  console.log(`Wrote ${receiptMarkdownPath}`);
+}

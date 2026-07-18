@@ -66,6 +66,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"name": "cat-context-agent"/);
   assert.match(packageJson, /"context:contracts": "node scripts\/context-tool-contracts\.mjs"/);
   assert.match(packageJson, /"artifacts:validate": "node scripts\/validate-artifacts\.mjs"/);
+  assert.match(packageJson, /"evidence:reproduce": "node scripts\/reproduce-evidence\.mjs"/);
   assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run submission:verify && npm run artifacts:validate && npm test"/);
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /examples\/cat-context-agent/);
@@ -76,6 +77,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /judge-evidence-pack\.md/);
   assert.match(readme, /submission-readiness-report\.md/);
   assert.match(readme, /artifact-validation-report\.md/);
+  assert.match(readme, /reproduction-receipt\.md/);
   assert.match(readme, /github-actions-ci-template\.yml/);
   assert.match(readme, /DEVPOST_JUDGE_NOTES\.md/);
   assert.match(readme, /DataHub MCP \/ Agent Context Kit reads/);
@@ -86,6 +88,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(judgeNotes, /generated-datahub-bridge-plan\.json/);
   assert.match(judgeNotes, /submission readiness report/);
   assert.match(judgeNotes, /artifact validation report/);
+  assert.match(judgeNotes, /reproduction receipt/);
   assert.match(judgeNotes, /local CI-equivalent command/);
   assert.match(judgeNotes, /What is simulated vs\. live/);
   assert.match(judgeNotes, /DATAHUB_GMS_URL=http:\/\/localhost:8080 npm run datahub:bridge -- --post/);
@@ -326,4 +329,26 @@ test("validates generated evidence artifacts", async () => {
   assert.ok(report.validated_files.includes("hackathon-assets/context-tool-contracts.json"));
   assert.match(markdown, /Artifact Validation Report/);
   assert.match(markdown, /✅ \*\*tool contract coverage\*\*/);
+});
+
+test("reproduces the judge evidence chain with one command", async () => {
+  const { stdout } = await execFileAsync("node", ["scripts/reproduce-evidence.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /"status": "reproducible"/);
+  assert.match(stdout, /reproduction-receipt\.md/);
+
+  const [receipt, markdown] = await Promise.all([
+    readFile(new URL("../hackathon-assets/reproduction-receipt.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../hackathon-assets/reproduction-receipt.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(receipt.status, "reproducible");
+  assert.equal(receipt.checks.length, 4);
+  assert.equal(receipt.summary.total_requests, 3);
+  assert.equal(receipt.summary.artifact_validation_checks, 7);
+  assert.ok(receipt.reports.includes("hackathon-assets/artifact-validation-report.md"));
+  assert.match(markdown, /One-command proof/);
+  assert.match(markdown, /npm run evidence:reproduce/);
 });

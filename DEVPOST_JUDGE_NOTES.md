@@ -31,6 +31,7 @@ npm run context:contracts
 npm run judge:pack
 npm run submission:verify
 npm run artifacts:validate
+npm run evidence:reproduce
 npm run ci:local
 npm test
 ```
@@ -45,6 +46,7 @@ Those commands produce:
 - a judge evidence pack with commands, claims, and outcomes.
 - a submission readiness report that validates the demo totals, DataHub aspects, MCP-style reads, blocked-action policy, and judge evidence pack.
 - an artifact validation report that checks generated decisions, DataHub aspects, context reads, tool contracts, judge pack, and readiness status.
+- a reproduction receipt that reruns the evidence chain and gives judges one file to inspect first.
 - a local CI-equivalent command that checks fresh-install readiness and the full build/test suite.
 
 ## Architecture
@@ -74,6 +76,7 @@ The important behavior is not just the transformation. The agent separates actio
 - [`hackathon-assets/judge-evidence-pack.md`](./hackathon-assets/judge-evidence-pack.md)
 - [`hackathon-assets/submission-readiness-report.md`](./hackathon-assets/submission-readiness-report.md)
 - [`hackathon-assets/artifact-validation-report.md`](./hackathon-assets/artifact-validation-report.md)
+- [`hackathon-assets/reproduction-receipt.md`](./hackathon-assets/reproduction-receipt.md)
 
 ## Safety boundary
 

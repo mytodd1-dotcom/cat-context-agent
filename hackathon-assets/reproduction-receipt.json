@@ -1,0 +1,48 @@
+{
+  "project": "CAT Context Agent",
+  "challenge": "Build with DataHub: The Agent Hackathon",
+  "status": "reproducible",
+  "generated_at": "demo-static-run",
+  "checks": [
+    {
+      "name": "submission readiness",
+      "detail": "6 readiness checks passed."
+    },
+    {
+      "name": "artifact validation",
+      "detail": "7 generated-artifact checks passed."
+    },
+    {
+      "name": "safety boundary",
+      "detail": "Blocked action remains preserved for unverified external outreach."
+    },
+    {
+      "name": "judge evidence",
+      "detail": "Judge notes, evidence pack, context contracts, readiness report, and validation report are regenerated."
+    }
+  ],
+  "summary": {
+    "total_requests": 3,
+    "safe_to_queue": 1,
+    "needs_approval": 1,
+    "blocked": 1,
+    "datahub_aspects": [
+      "datasetProperties",
+      "schemaMetadata",
+      "ownership",
+      "glossaryTerms"
+    ],
+    "mcp_style_tool_reads": [
+      "datahub.get_entity",
+      "datahub.get_lineage",
+      "cat.get_agent_context_packet"
+    ],
+    "artifact_validation_checks": 7
+  },
+  "reports": [
+    "hackathon-assets/judge-evidence-pack.md",
+    "hackathon-assets/submission-readiness-report.md",
+    "hackathon-assets/artifact-validation-report.md",
+    "hackathon-assets/reproduction-receipt.md"
+  ]
+}
