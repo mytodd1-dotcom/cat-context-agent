@@ -1,5 +1,7 @@
 # CAT Context Agent — Devpost Judge Notes
 
+[`hackathon-assets/github-actions-ci-template.yml`](./hackathon-assets/github-actions-ci-template.yml) contains a GitHub Actions recipe for verifying the submission evidence chain and test suite.
+
 ## 30-second version
 
 CAT Context Agent helps small businesses turn messy operational files into safe, traceable next steps. The core idea is context before action: the agent reads DataHub-style metadata, schema confidence, ownership, lineage, and governance rules before deciding whether to queue work, ask for approval, or block an unsafe action.

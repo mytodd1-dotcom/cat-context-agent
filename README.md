@@ -76,6 +76,8 @@ npm run submission:verify
 
 That command reruns the demo, DataHub bridge plan, MCP-style context read, and judge evidence pack, then writes [`hackathon-assets/submission-readiness-report.md`](./hackathon-assets/submission-readiness-report.md) and [`hackathon-assets/submission-readiness-report.json`](./hackathon-assets/submission-readiness-report.json).
 
+A GitHub Actions template for the same checks is available at [`hackathon-assets/github-actions-ci-template.yml`](./hackathon-assets/github-actions-ci-template.yml). It is kept as a template because the current OAuth token cannot publish workflow files without GitHub's `workflow` scope.
+
 ## DataHub integration path
 
 The current demo is intentionally runnable without Docker or credentials. It produces DataHub-ready metadata so judges can inspect the context layer before the full live integration is wired.
