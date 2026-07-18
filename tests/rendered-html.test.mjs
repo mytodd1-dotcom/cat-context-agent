@@ -56,6 +56,11 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /Meaningful DataHub use/);
   assert.match(html, /Safety and governance/);
   assert.match(html, /generated-datahub-bridge-plan\.json/);
+  assert.match(html, /COPY\/PASTE VERIFICATION/);
+  assert.match(html, /Three commands prove the submission path/);
+  assert.match(html, /npm run ci:local/);
+  assert.match(html, /npm run context:read/);
+  assert.match(html, /18 render\/evidence tests/);
   assert.match(html, /youtu\.be\/Gcbhl5_YlSM/);
   assert.match(html, /watch the 2-minute walkthrough/);
   assert.match(html, /npm run demo:guide/);
@@ -132,6 +137,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /datahubMap/);
   assert.match(page, /judgeScorecard/);
   assert.match(page, /scorecardSection/);
+  assert.match(page, /verificationCommands/);
+  assert.match(page, /verifySection/);
   assert.match(page, /messyRows/);
   assert.match(page, /approvalQueue/);
   assert.match(page, /decisionComparison/);
@@ -158,6 +165,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(css, /judgePathGrid/);
   assert.match(css, /datahubMapGrid/);
   assert.match(css, /scorecardList/);
+  assert.match(css, /verifyGrid/);
   assert.match(css, /faqGrid/);
   assert.match(css, /evidenceMatrix/);
   assert.match(css, /deltaMatrix/);

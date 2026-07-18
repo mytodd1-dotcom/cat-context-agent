@@ -92,6 +92,24 @@ const outcomeStats = [
   ["1", "approval + 1 block"],
 ];
 
+const verificationCommands = [
+  {
+    label: "Fast proof",
+    command: "npm run evidence:reproduce",
+    expected: "Regenerates the evidence chain and writes the reproduction receipt.",
+  },
+  {
+    label: "Full local check",
+    command: "npm run ci:local",
+    expected: "Runs the full artifact pipeline, build, and 18 render/evidence tests.",
+  },
+  {
+    label: "Context read",
+    command: "npm run context:read",
+    expected: "Writes the MCP-style DataHub context packet the agent reads before action.",
+  },
+];
+
 const judgePath = [
   {
     step: "1",
@@ -447,6 +465,25 @@ export default function Home() {
               <strong>{item.criterion}</strong>
               <p>{item.proof}</p>
               <code>{item.receipt}</code>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section shell verifySection" aria-labelledby="verify-heading">
+        <p className="sectionTag">COPY/PASTE VERIFICATION</p>
+        <div className="sectionIntro">
+          <h2 id="verify-heading">Three commands prove the submission path.</h2>
+          <p>
+            The repo is built so a judge can verify the context-before-action claim locally without accounts, credentials, or hidden services.
+          </p>
+        </div>
+        <div className="verifyGrid">
+          {verificationCommands.map((item) => (
+            <article className="verifyCard" key={item.label}>
+              <span>{item.label}</span>
+              <code>{item.command}</code>
+              <p>{item.expected}</p>
             </article>
           ))}
         </div>
