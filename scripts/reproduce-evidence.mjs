@@ -12,6 +12,7 @@ import { runLiveDataHubRunbook } from "./live-datahub-runbook.mjs";
 import { runMcpAdapterSmoke } from "./mcp-adapter-smoke.mjs";
 import { runSafetyPolicyMatrix } from "./safety-policy-matrix.mjs";
 import { runArtifactValidation } from "./validate-artifacts.mjs";
+import { runJudgeWalkthrough } from "./judge-walkthrough.mjs";
 import { runSubmissionVerify } from "./verify-submission.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -64,6 +65,7 @@ export async function runEvidenceReproduction() {
   const lineageMap = await runLineageDecisionMap();
   const policyMatrix = await runSafetyPolicyMatrix();
   const readiness = await runSubmissionVerify();
+  const walkthrough = await runJudgeWalkthrough({ readiness, datahubDoctor: readinessDoctor, mcpSmoke: mcpAdapterSmoke });
   const artifactValidation = await runArtifactValidation();
 
   const checks = [
@@ -112,6 +114,10 @@ export async function runEvidenceReproduction() {
       detail: `${readiness.checks.length} readiness checks passed.`,
     },
     {
+      name: "judge walkthrough",
+      detail: `${walkthrough.steps.length} judge walkthrough steps document the shortest terminal proof path.`,
+    },
+    {
       name: "artifact validation",
       detail: `${artifactValidation.checks.length} generated-artifact checks passed.`,
     },
@@ -154,6 +160,7 @@ export async function runEvidenceReproduction() {
       "hackathon-assets/lineage-decision-map.md",
       "hackathon-assets/safety-policy-matrix.md",
       "hackathon-assets/submission-readiness-report.md",
+      "hackathon-assets/judge-walkthrough.md",
       "hackathon-assets/artifact-validation-report.md",
       "hackathon-assets/reproduction-receipt.md",
     ],

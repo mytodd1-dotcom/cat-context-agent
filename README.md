@@ -170,6 +170,14 @@ npm run judge:pack
 
 That command writes [`hackathon-assets/judge-evidence-pack.md`](./hackathon-assets/judge-evidence-pack.md) and [`hackathon-assets/judge-evidence-pack.json`](./hackathon-assets/judge-evidence-pack.json), summarizing the reproducible commands, DataHub aspects, MCP-style context reads, safety claims, and decision receipts.
 
+To generate the five-minute judge walkthrough:
+
+```bash
+npm run judge:walkthrough
+```
+
+That command writes [`hackathon-assets/judge-walkthrough.md`](./hackathon-assets/judge-walkthrough.md) and [`hackathon-assets/judge-walkthrough.json`](./hackathon-assets/judge-walkthrough.json), showing the shortest terminal path, what each command proves, expected outputs, and the safety boundary.
+
 To regenerate and verify the full submission evidence chain:
 
 ```bash
@@ -234,7 +242,7 @@ To run the local equivalent of that CI recipe:
 npm run ci:local
 ```
 
-That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub readiness doctor, DataHub integration checklist, DataHub claim audit, DataHub MCP handoff, MCP adapter smoke test, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
+That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub readiness doctor, DataHub integration checklist, DataHub claim audit, DataHub MCP handoff, MCP adapter smoke test, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, regenerates the judge walkthrough, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
 
 ## DataHub integration path
 

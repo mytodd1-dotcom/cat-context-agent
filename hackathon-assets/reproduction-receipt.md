@@ -22,7 +22,8 @@ npm run evidence:reproduce
 - ✅ **safety policy matrix** — 6 rules and 3 request outcomes define allowed, approval-required, and blocked action boundaries.
 - ✅ **live DataHub runbook** — 5 operator commands document the opt-in local DataHub post and verification path.
 - ✅ **submission readiness** — 13 readiness checks passed.
-- ✅ **artifact validation** — 15 generated-artifact checks passed.
+- ✅ **judge walkthrough** — 5 judge walkthrough steps document the shortest terminal proof path.
+- ✅ **artifact validation** — 16 generated-artifact checks passed.
 - ✅ **safety boundary** — Blocked action remains preserved for unverified external outreach.
 - ✅ **judge evidence** — Judge notes, evidence pack, context contracts, readiness report, and validation report are regenerated.
 
@@ -35,7 +36,7 @@ npm run evidence:reproduce
 - DataHub aspects: `datasetProperties`, `schemaMetadata`, `ownership`, `glossaryTerms`
 - Live DataHub runbook commands: 5
 - MCP-style reads: `datahub.get_entity`, `datahub.get_lineage`, `cat.get_agent_context_packet`
-- Artifact validation checks: 15
+- Artifact validation checks: 16
 
 ## Reports regenerated
 
@@ -51,5 +52,6 @@ npm run evidence:reproduce
 - `hackathon-assets/lineage-decision-map.md`
 - `hackathon-assets/safety-policy-matrix.md`
 - `hackathon-assets/submission-readiness-report.md`
+- `hackathon-assets/judge-walkthrough.md`
 - `hackathon-assets/artifact-validation-report.md`
 - `hackathon-assets/reproduction-receipt.md`

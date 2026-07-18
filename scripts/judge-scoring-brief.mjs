@@ -113,6 +113,7 @@ export async function runJudgeScoringBrief() {
           "A one-command reproduction receipt reruns submission verification and artifact validation with all checks passing.",
         files: [
           "hackathon-assets/reproduction-receipt.md",
+          "hackathon-assets/judge-walkthrough.md",
           "hackathon-assets/submission-readiness-report.md",
           "hackathon-assets/artifact-validation-report.md",
         ],

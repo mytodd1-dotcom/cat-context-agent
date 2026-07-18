@@ -16,16 +16,17 @@ A judge-first index for verifying the DataHub Agent Hackathon submission without
 | 1. Watch the demo video | [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM) | Fastest visual pass through the CAT Context Agent story. |
 | 2. Open the live demo | [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site) | Shows the workflow, evidence cards, approval queue, and receipt pattern. |
 | 3. Read the judge scoring brief | `hackathon-assets/judge-scoring-brief.md` | Maps the main claims to concrete repo evidence. |
-| 4. Run the one-command proof | `hackathon-assets/reproduction-receipt.md`<br><code>npm run evidence:reproduce</code> | Regenerates the evidence chain and receipt from local source. |
-| 5. Inspect DataHub context artifacts | `examples/cat-context-agent/generated-datahub-bridge-plan.json` | Shows the datasetProperties, schemaMetadata, ownership, and glossaryTerms handoff. |
-| 6. Inspect the MCP-style read contract | `examples/cat-context-agent/generated-mcp-context-read.json` | Shows the agent reading entity, lineage, and CAT context before action. |
-| 7. Run the DataHub readiness doctor | `hackathon-assets/datahub-readiness-doctor.md`<br><code>npm run datahub:doctor</code> | Checks generated DataHub artifacts and optional local GMS reachability without posting metadata. |
-| 8. Inspect the DataHub integration checklist | `hackathon-assets/datahub-integration-checklist.md`<br><code>npm run datahub:checklist</code> | Shows what is judgeable now, what requires local DataHub, and what is intentionally out of scope. |
-| 9. Inspect the DataHub claim audit | `hackathon-assets/datahub-claim-audit.md`<br><code>npm run datahub:audit</code> | Gives a compact pass/fail audit of the submission's DataHub-specific claims. |
-| 10. Inspect the DataHub MCP handoff | `hackathon-assets/datahub-mcp-handoff.md`<br><code>npm run datahub:mcp</code> | Shows how DataHub reads, CAT policy context, and bounded receipt writes connect in the live path. |
-| 11. Run the MCP adapter smoke test | `hackathon-assets/mcp-adapter-smoke-report.md`<br><code>npm run mcp:smoke</code> | Proves the local adapter reads DataHub/CAT context before writing bounded receipts. |
-| 12. Inspect the lineage decision map | `hackathon-assets/lineage-decision-map.md`<br><code>npm run lineage:map</code> | Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph. |
-| 13. Inspect the safety policy matrix | `hackathon-assets/safety-policy-matrix.md`<br><code>npm run policy:matrix</code> | Shows which agent actions are allowed, approval-required, or blocked based on context quality. |
+| 4. Follow the terminal walkthrough | `hackathon-assets/judge-walkthrough.md`<br><code>npm run judge:walkthrough</code> | Shows the shortest command path, expected outputs, inspectable files, and safety boundary. |
+| 5. Run the one-command proof | `hackathon-assets/reproduction-receipt.md`<br><code>npm run evidence:reproduce</code> | Regenerates the evidence chain and receipt from local source. |
+| 6. Inspect DataHub context artifacts | `examples/cat-context-agent/generated-datahub-bridge-plan.json` | Shows the datasetProperties, schemaMetadata, ownership, and glossaryTerms handoff. |
+| 7. Inspect the MCP-style read contract | `examples/cat-context-agent/generated-mcp-context-read.json` | Shows the agent reading entity, lineage, and CAT context before action. |
+| 8. Run the DataHub readiness doctor | `hackathon-assets/datahub-readiness-doctor.md`<br><code>npm run datahub:doctor</code> | Checks generated DataHub artifacts and optional local GMS reachability without posting metadata. |
+| 9. Inspect the DataHub integration checklist | `hackathon-assets/datahub-integration-checklist.md`<br><code>npm run datahub:checklist</code> | Shows what is judgeable now, what requires local DataHub, and what is intentionally out of scope. |
+| 10. Inspect the DataHub claim audit | `hackathon-assets/datahub-claim-audit.md`<br><code>npm run datahub:audit</code> | Gives a compact pass/fail audit of the submission's DataHub-specific claims. |
+| 11. Inspect the DataHub MCP handoff | `hackathon-assets/datahub-mcp-handoff.md`<br><code>npm run datahub:mcp</code> | Shows how DataHub reads, CAT policy context, and bounded receipt writes connect in the live path. |
+| 12. Run the MCP adapter smoke test | `hackathon-assets/mcp-adapter-smoke-report.md`<br><code>npm run mcp:smoke</code> | Proves the local adapter reads DataHub/CAT context before writing bounded receipts. |
+| 13. Inspect the lineage decision map | `hackathon-assets/lineage-decision-map.md`<br><code>npm run lineage:map</code> | Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph. |
+| 14. Inspect the safety policy matrix | `hackathon-assets/safety-policy-matrix.md`<br><code>npm run policy:matrix</code> | Shows which agent actions are allowed, approval-required, or blocked based on context quality. |
 
 ## Proof commands
 
@@ -33,6 +34,7 @@ A judge-first index for verifying the DataHub Agent Hackathon submission without
 npm install
 npm run demo
 npm run submission:verify
+npm run judge:walkthrough
 npm run datahub:doctor
 npm run datahub:checklist
 npm run datahub:audit
@@ -78,6 +80,7 @@ npm run ci:local
 
 ### The submission is reproducible.
 
+- `hackathon-assets/judge-walkthrough.md`
 - `hackathon-assets/reproduction-receipt.md`
 - `hackathon-assets/submission-readiness-report.md`
 - `hackathon-assets/artifact-validation-report.md`

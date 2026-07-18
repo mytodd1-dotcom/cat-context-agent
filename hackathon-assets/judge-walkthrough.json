@@ -1,0 +1,77 @@
+{
+  "protocol": "cat-judge-walkthrough-v0",
+  "project": "CAT Context Agent",
+  "generated_at": "demo-static-run",
+  "status": "ready",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Open the judge start guide",
+      "command": "open JUDGE_START_HERE.md",
+      "proves": "The submission has a judge-first entry point with live demo, video, scoring brief, and local proof commands.",
+      "expected": "A compact start-here file that points to the live demo, GitHub repo, evidence pack, and DataHub artifacts.",
+      "inspect": [
+        "JUDGE_START_HERE.md",
+        "DEVPOST_JUDGE_NOTES.md"
+      ]
+    },
+    {
+      "step": 2,
+      "title": "Run the one-command proof",
+      "command": "npm run evidence:reproduce",
+      "proves": "The core evidence chain can be regenerated locally from source.",
+      "expected": "A reproducible receipt with generated DataHub, policy, validation, and safety reports.",
+      "inspect": [
+        "hackathon-assets/reproduction-receipt.md",
+        "hackathon-assets/artifact-validation-report.md"
+      ]
+    },
+    {
+      "step": 3,
+      "title": "Check DataHub readiness without posting",
+      "command": "npm run datahub:doctor",
+      "proves": "The optional local DataHub path is explicit, guarded, and not required for judging.",
+      "expected": "A readiness report that confirms dry-run artifacts are ready and no metadata is posted.",
+      "inspect": [
+        "hackathon-assets/datahub-readiness-doctor.md",
+        "hackathon-assets/live-datahub-runbook.md"
+      ]
+    },
+    {
+      "step": 4,
+      "title": "Smoke-test the MCP adapter boundary",
+      "command": "npm run mcp:smoke",
+      "proves": "The local adapter reads DataHub/CAT context before writing bounded receipts.",
+      "expected": "Three request flows, twelve tool calls, and no external side effects.",
+      "inspect": [
+        "hackathon-assets/mcp-adapter-smoke-report.md",
+        "hackathon-assets/datahub-mcp-handoff.md"
+      ]
+    },
+    {
+      "step": 5,
+      "title": "Run the full local CI equivalent",
+      "command": "npm run ci:local",
+      "proves": "A fresh-install check, all generators, build, and render/evidence tests pass together.",
+      "expected": "The build succeeds and the Node test suite reports all tests passing.",
+      "inspect": [
+        "package.json",
+        "hackathon-assets/github-actions-ci-template.yml"
+      ]
+    }
+  ],
+  "safety_summary": [
+    "No command in the five-minute path posts to DataHub, contacts customers, sends outreach, or requires secrets.",
+    "The optional live DataHub mutation remains isolated behind DATAHUB_GMS_URL plus --post.",
+    "The MCP smoke test writes only local receipts and records external_side_effects as none.",
+    "Missing owner/contact context still produces approval-required or blocked outcomes."
+  ],
+  "evidence_snapshot": {
+    "submission_readiness_checks": 13,
+    "datahub_doctor_status": "ready_without_live_datahub",
+    "local_datahub_required_for_judging": false,
+    "mcp_adapter_request_flows": 3,
+    "mcp_adapter_tool_calls": 12,
+    "external_side_effects": "none"
+  }
+}

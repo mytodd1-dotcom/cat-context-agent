@@ -101,7 +101,7 @@ const verificationCommands = [
   {
     label: "Full local check",
     command: "npm run ci:local",
-    expected: "Runs the full artifact pipeline, build, and 25 render/evidence tests.",
+    expected: "Runs the full artifact pipeline, build, and 26 render/evidence tests.",
   },
   {
     label: "Context read",
@@ -196,6 +196,12 @@ const runnableArtifacts = [
     command: "npm run judge:brief",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/judge-scoring-brief.md",
     text: "Maps each major claim to inspectable repo evidence: DataHub context, read-before-action, safety, and reproducibility.",
+  },
+  {
+    label: "Judge walkthrough",
+    command: "npm run judge:walkthrough",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/judge-walkthrough.md",
+    text: "A five-minute terminal path that names each command, expected output, inspectable files, and safety boundary.",
   },
   {
     label: "Devpost copy pack",

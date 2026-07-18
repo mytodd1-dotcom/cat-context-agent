@@ -76,6 +76,11 @@
       "name": "readiness report",
       "ok": true,
       "detail": "Readiness report should be ready, all checks passing, and include context tool contracts."
+    },
+    {
+      "name": "judge walkthrough",
+      "ok": true,
+      "detail": "Judge walkthrough should document the shortest proof path and preserve the no-external-side-effects boundary."
     }
   ],
   "validated_files": [
@@ -93,6 +98,7 @@
     "hackathon-assets/lineage-decision-map.json",
     "hackathon-assets/safety-policy-matrix.json",
     "hackathon-assets/judge-evidence-pack.json",
-    "hackathon-assets/submission-readiness-report.json"
+    "hackathon-assets/submission-readiness-report.json",
+    "hackathon-assets/judge-walkthrough.json"
   ]
 }

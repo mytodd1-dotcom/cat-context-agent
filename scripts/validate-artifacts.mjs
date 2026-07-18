@@ -30,6 +30,8 @@ const paths = {
   safetyPolicyMatrixMarkdown: resolve(assetDir, "safety-policy-matrix.md"),
   judgePack: resolve(assetDir, "judge-evidence-pack.json"),
   readiness: resolve(assetDir, "submission-readiness-report.json"),
+  judgeWalkthrough: resolve(assetDir, "judge-walkthrough.json"),
+  judgeWalkthroughMarkdown: resolve(assetDir, "judge-walkthrough.md"),
   judgePackMarkdown: resolve(assetDir, "judge-evidence-pack.md"),
   reportJson: resolve(assetDir, "artifact-validation-report.json"),
   reportMarkdown: resolve(assetDir, "artifact-validation-report.md"),
@@ -88,6 +90,8 @@ export async function runArtifactValidation() {
     safetyPolicyMatrixMarkdown,
     judgePack,
     readiness,
+    judgeWalkthrough,
+    judgeWalkthroughMarkdown,
     judgePackMarkdown,
   ] = await Promise.all([
     readJson(paths.agentOutput),
@@ -113,6 +117,8 @@ export async function runArtifactValidation() {
     readFile(paths.safetyPolicyMatrixMarkdown, "utf8"),
     readJson(paths.judgePack),
     readJson(paths.readiness),
+    readJson(paths.judgeWalkthrough),
+    readFile(paths.judgeWalkthroughMarkdown, "utf8"),
     readFile(paths.judgePackMarkdown, "utf8"),
   ]);
 
@@ -248,6 +254,15 @@ export async function runArtifactValidation() {
         readiness.checks.some((check) => check.name === "context tool contracts"),
       "Readiness report should be ready, all checks passing, and include context tool contracts.",
     ),
+    result(
+      "judge walkthrough",
+      judgeWalkthrough.protocol === "cat-judge-walkthrough-v0" &&
+        judgeWalkthrough.status === "ready" &&
+        judgeWalkthrough.steps.length === 5 &&
+        judgeWalkthrough.evidence_snapshot.external_side_effects === "none" &&
+        judgeWalkthroughMarkdown.includes("Five-minute path"),
+      "Judge walkthrough should document the shortest proof path and preserve the no-external-side-effects boundary.",
+    ),
   ];
 
   const report = {
@@ -270,6 +285,7 @@ export async function runArtifactValidation() {
       "hackathon-assets/safety-policy-matrix.json",
       "hackathon-assets/judge-evidence-pack.json",
       "hackathon-assets/submission-readiness-report.json",
+      "hackathon-assets/judge-walkthrough.json",
     ],
   };
 

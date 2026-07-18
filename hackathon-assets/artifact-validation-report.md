@@ -20,6 +20,7 @@ Generated: `demo-static-run`
 - ✅ **lineage decision map** — Lineage map should show the DataHub asset, context reads, decision loop, and all three decision branches.
 - ✅ **safety policy matrix** — Safety policy matrix should define allowed, approval-required, and blocked action boundaries for all three requests.
 - ✅ **readiness report** — Readiness report should be ready, all checks passing, and include context tool contracts.
+- ✅ **judge walkthrough** — Judge walkthrough should document the shortest proof path and preserve the no-external-side-effects boundary.
 
 ## Validated files
 
@@ -38,3 +39,4 @@ Generated: `demo-static-run`
 - `hackathon-assets/safety-policy-matrix.json`
 - `hackathon-assets/judge-evidence-pack.json`
 - `hackathon-assets/submission-readiness-report.json`
+- `hackathon-assets/judge-walkthrough.json`

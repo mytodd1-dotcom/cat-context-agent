@@ -7,7 +7,8 @@ This is the fastest path through the DataHub Agent Hackathon submission.
 1. Watch the demo video: [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)
 2. Try the live demo: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)
 3. Read the claim-to-evidence map: [`hackathon-assets/judge-scoring-brief.md`](./hackathon-assets/judge-scoring-brief.md)
-4. Inspect the full submission index: [`hackathon-assets/submission-index.md`](./hackathon-assets/submission-index.md)
+4. Follow the five-minute terminal walkthrough: [`hackathon-assets/judge-walkthrough.md`](./hackathon-assets/judge-walkthrough.md)
+5. Inspect the full submission index: [`hackathon-assets/submission-index.md`](./hackathon-assets/submission-index.md)
 
 ## What to look for
 
