@@ -61,13 +61,20 @@
     },
     {
       "step": 9,
+      "title": "Inspect the DataHub MCP handoff",
+      "artifact": "hackathon-assets/datahub-mcp-handoff.md",
+      "command": "npm run datahub:mcp",
+      "why": "Shows how DataHub reads, CAT policy context, and bounded receipt writes connect in the live path."
+    },
+    {
+      "step": 10,
       "title": "Inspect the lineage decision map",
       "artifact": "hackathon-assets/lineage-decision-map.md",
       "command": "npm run lineage:map",
       "why": "Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph."
     },
     {
-      "step": 10,
+      "step": 11,
       "title": "Inspect the safety policy matrix",
       "artifact": "hackathon-assets/safety-policy-matrix.md",
       "command": "npm run policy:matrix",
@@ -80,6 +87,7 @@
     "npm run submission:verify",
     "npm run datahub:checklist",
     "npm run datahub:audit",
+    "npm run datahub:mcp",
     "npm run lineage:map",
     "npm run policy:matrix",
     "npm run evidence:reproduce",
@@ -95,13 +103,15 @@
         "examples/cat-context-agent/generated-datahub-bridge-plan.json",
         "hackathon-assets/datahub-payload-preview.md",
         "hackathon-assets/datahub-integration-checklist.md",
-        "hackathon-assets/datahub-claim-audit.md"
+        "hackathon-assets/datahub-claim-audit.md",
+        "hackathon-assets/datahub-mcp-handoff.md"
       ]
     },
     {
       "claim": "The agent reads context before action.",
       "evidence": [
         "examples/cat-context-agent/generated-mcp-context-read.json",
+        "hackathon-assets/datahub-mcp-handoff.md",
         "hackathon-assets/context-tool-contracts.md",
         "hackathon-assets/lineage-decision-map.md",
         "hackathon-assets/safety-policy-matrix.md"

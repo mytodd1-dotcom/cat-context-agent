@@ -5,6 +5,7 @@ import { runContextProvider } from "./cat-context-provider.mjs";
 import { runContextToolContracts } from "./context-tool-contracts.mjs";
 import { runDataHubClaimAudit } from "./datahub-claim-audit.mjs";
 import { runDataHubIntegrationChecklist } from "./datahub-integration-checklist.mjs";
+import { runDataHubMcpHandoff } from "./datahub-mcp-handoff.mjs";
 import { runDemo } from "./cat-context-demo.mjs";
 import { runBridge } from "./datahub-local-bridge.mjs";
 import { runJudgeEvidencePack } from "./judge-evidence-pack.mjs";
@@ -64,6 +65,7 @@ export async function runSubmissionVerify() {
   const toolContracts = await runContextToolContracts();
   const datahubChecklist = await runDataHubIntegrationChecklist();
   const datahubClaimAudit = await runDataHubClaimAudit();
+  const datahubMcpHandoff = await runDataHubMcpHandoff();
   const lineageMap = await runLineageDecisionMap();
   const safetyPolicyMatrix = await runSafetyPolicyMatrix();
   const pack = await runJudgeEvidencePack();
@@ -119,6 +121,14 @@ export async function runSubmissionVerify() {
       "Expected all DataHub-specific claims to pass the generated audit.",
     ),
     check(
+      "DataHub MCP handoff",
+      datahubMcpHandoff.status === "ready_for_mcp_adapter" &&
+        datahubMcpHandoff.tool_calls.some((tool) => tool.name === "datahub.get_entity") &&
+        datahubMcpHandoff.tool_calls.some((tool) => tool.name === "cat.write_receipt") &&
+        datahubMcpHandoff.local_to_live_boundary.secrets_required_for_judging === false,
+      "Expected an MCP handoff artifact that connects DataHub reads, CAT policy, and bounded receipt writes.",
+    ),
+    check(
       "safety boundary",
       contextRead.context.blocked_actions.includes("send_external_outreach_without_verified_contact") &&
         contextRead.blocked.some((item) => item.request_id === "REQ-1044"),
@@ -171,6 +181,7 @@ export async function runSubmissionVerify() {
       "hackathon-assets/context-tool-contracts.md",
       "hackathon-assets/datahub-integration-checklist.md",
       "hackathon-assets/datahub-claim-audit.md",
+      "hackathon-assets/datahub-mcp-handoff.md",
       "hackathon-assets/lineage-decision-map.md",
       "hackathon-assets/safety-policy-matrix.md",
       "hackathon-assets/judge-evidence-pack.md",

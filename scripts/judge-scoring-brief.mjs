@@ -67,6 +67,7 @@ export async function runJudgeScoringBrief() {
           "hackathon-assets/live-datahub-runbook.md",
           "hackathon-assets/datahub-integration-checklist.md",
           "hackathon-assets/datahub-claim-audit.md",
+          "hackathon-assets/datahub-mcp-handoff.md",
         ],
       },
       {
@@ -75,6 +76,7 @@ export async function runJudgeScoringBrief() {
           "The MCP-style read plan includes datahub.get_entity, datahub.get_lineage, and cat.get_agent_context_packet before decisions are surfaced.",
         files: [
           "examples/cat-context-agent/generated-mcp-context-read.json",
+          "hackathon-assets/datahub-mcp-handoff.md",
           "hackathon-assets/context-tool-contracts.md",
           "hackathon-assets/lineage-decision-map.md",
           "hackathon-assets/safety-policy-matrix.md",

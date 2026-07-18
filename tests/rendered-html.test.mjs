@@ -66,7 +66,7 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /Three commands prove the submission path/);
   assert.match(html, /npm run ci:local/);
   assert.match(html, /npm run context:read/);
-  assert.match(html, /22 render\/evidence tests/);
+  assert.match(html, /23 render\/evidence tests/);
   assert.match(html, /youtu\.be\/Gcbhl5_YlSM/);
   assert.match(html, /watch the 2-minute walkthrough/);
   assert.match(html, /npm run demo:guide/);
@@ -99,6 +99,9 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /DataHub claim audit/);
   assert.match(html, /npm run datahub:audit/);
   assert.match(html, /datahub-claim-audit\.md/);
+  assert.match(html, /DataHub MCP handoff/);
+  assert.match(html, /npm run datahub:mcp/);
+  assert.match(html, /datahub-mcp-handoff\.md/);
   assert.match(html, /Lineage decision map/);
   assert.match(html, /npm run lineage:map/);
   assert.match(html, /lineage-decision-map\.md/);
@@ -175,12 +178,14 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /live-datahub-runbook\.md/);
   assert.match(page, /datahub-integration-checklist\.md/);
   assert.match(page, /datahub-claim-audit\.md/);
+  assert.match(page, /datahub-mcp-handoff\.md/);
   assert.match(page, /lineage-decision-map\.md/);
   assert.match(page, /safety-policy-matrix\.md/);
   assert.match(packageJson, /"datahub:payload": "node scripts\/datahub-payload-preview\.mjs"/);
   assert.match(packageJson, /"datahub:runbook": "node scripts\/live-datahub-runbook\.mjs"/);
   assert.match(packageJson, /"datahub:checklist": "node scripts\/datahub-integration-checklist\.mjs"/);
   assert.match(packageJson, /"datahub:audit": "node scripts\/datahub-claim-audit\.mjs"/);
+  assert.match(packageJson, /"datahub:mcp": "node scripts\/datahub-mcp-handoff\.mjs"/);
   assert.match(packageJson, /"decision:trace": "node scripts\/decision-trace\.mjs"/);
   assert.match(packageJson, /"lineage:map": "node scripts\/lineage-decision-map\.mjs"/);
   assert.match(packageJson, /"policy:matrix": "node scripts\/safety-policy-matrix\.mjs"/);
@@ -211,7 +216,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"devpost:copy": "node scripts\/devpost-submission-copy\.mjs"/);
   assert.match(packageJson, /"submission:index": "node scripts\/submission-index\.mjs"/);
   assert.match(packageJson, /"demo:guide": "node scripts\/demo-video-guide\.mjs"/);
-  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run datahub:checklist && npm run datahub:audit && npm run decision:trace && npm run lineage:map && npm run policy:matrix && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm run devpost:copy && npm run submission:index && npm run demo:guide && npm test"/);
+  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run datahub:checklist && npm run datahub:audit && npm run datahub:mcp && npm run decision:trace && npm run lineage:map && npm run policy:matrix && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm run devpost:copy && npm run submission:index && npm run demo:guide && npm test"/);
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /JUDGE_START_HERE\.md/);
   assert.match(readme, /cat-context-agent\.flyguy\.chatgpt\.site/);
@@ -223,6 +228,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /live-datahub-runbook\.md/);
   assert.match(readme, /datahub-integration-checklist\.md/);
   assert.match(readme, /datahub-claim-audit\.md/);
+  assert.match(readme, /datahub-mcp-handoff\.md/);
   assert.match(readme, /decision-trace\.md/);
   assert.match(readme, /lineage-decision-map\.md/);
   assert.match(readme, /safety-policy-matrix\.md/);
@@ -247,6 +253,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(judgeStart, /generated-mcp-context-read\.json/);
   assert.match(judgeStart, /datahub-integration-checklist\.md/);
   assert.match(judgeStart, /datahub-claim-audit\.md/);
+  assert.match(judgeStart, /datahub-mcp-handoff\.md/);
   assert.match(judgeStart, /lineage-decision-map\.md/);
   assert.match(judgeStart, /safety-policy-matrix\.md/);
   assert.match(judgeStart, /refuses to invent owners/);
@@ -261,6 +268,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(judgeNotes, /DataHub payload preview/);
   assert.match(judgeNotes, /live DataHub runbook/);
   assert.match(judgeNotes, /DataHub claim audit/);
+  assert.match(judgeNotes, /DataHub MCP handoff/);
   assert.match(judgeNotes, /decision trace/);
   assert.match(judgeNotes, /submission readiness report/);
   assert.match(judgeNotes, /artifact validation report/);
@@ -274,6 +282,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(ciWorkflow, /npm run datahub:runbook/);
   assert.match(ciWorkflow, /npm run datahub:checklist/);
   assert.match(ciWorkflow, /npm run datahub:audit/);
+  assert.match(ciWorkflow, /npm run datahub:mcp/);
   assert.match(ciWorkflow, /npm run artifacts:validate/);
   assert.match(ciWorkflow, /npm test/);
   assert.match(ciWorkflow, /npm run ci:local/);
@@ -437,11 +446,13 @@ test("builds a judge evidence pack from generated artifacts", async () => {
   assert.ok(pack.judge_commands.includes("npm run datahub:runbook"));
   assert.ok(pack.judge_commands.includes("npm run datahub:checklist"));
   assert.ok(pack.judge_commands.includes("npm run datahub:audit"));
+  assert.ok(pack.judge_commands.includes("npm run datahub:mcp"));
   assert.ok(pack.judge_commands.includes("npm run lineage:map"));
   assert.ok(pack.judge_commands.includes("npm run policy:matrix"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/live-datahub-runbook.md"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/datahub-integration-checklist.md"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/datahub-claim-audit.md"));
+  assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/datahub-mcp-handoff.md"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/lineage-decision-map.md"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/safety-policy-matrix.md"));
   assert.match(packMarkdown, /REQ-1042/);
@@ -449,6 +460,7 @@ test("builds a judge evidence pack from generated artifacts", async () => {
   assert.match(packMarkdown, /live-datahub-runbook\.md/);
   assert.match(packMarkdown, /datahub-integration-checklist\.md/);
   assert.match(packMarkdown, /datahub-claim-audit\.md/);
+  assert.match(packMarkdown, /datahub-mcp-handoff\.md/);
   assert.match(packMarkdown, /lineage-decision-map\.md/);
   assert.match(packMarkdown, /safety-policy-matrix\.md/);
   assert.match(packMarkdown, /Do not guess, scrape, or invent contact details/);
@@ -470,7 +482,7 @@ test("verifies the complete submission evidence chain", async () => {
   ]);
 
   assert.equal(report.status, "ready");
-  assert.equal(report.checks.length, 10);
+  assert.equal(report.checks.length, 11);
   assert.ok(report.checks.every((item) => item.ok));
   assert.equal(report.summary.total_requests, 3);
   assert.ok(report.summary.datahub_aspects.includes("glossaryTerms"));
@@ -479,6 +491,7 @@ test("verifies the complete submission evidence chain", async () => {
   assert.match(reportMarkdown, /✅ \*\*context tool contracts\*\*/);
   assert.match(reportMarkdown, /✅ \*\*DataHub integration checklist\*\*/);
   assert.match(reportMarkdown, /✅ \*\*DataHub claim audit\*\*/);
+  assert.match(reportMarkdown, /✅ \*\*DataHub MCP handoff\*\*/);
   assert.match(reportMarkdown, /✅ \*\*lineage decision map\*\*/);
   assert.match(reportMarkdown, /✅ \*\*safety policy matrix\*\*/);
   assert.match(reportMarkdown, /✅ \*\*safety boundary\*\*/);
@@ -529,18 +542,20 @@ test("validates generated evidence artifacts", async () => {
   ]);
 
   assert.equal(report.status, "valid");
-  assert.equal(report.checks.length, 12);
+  assert.equal(report.checks.length, 13);
   assert.ok(report.checks.every((check) => check.ok));
   assert.ok(report.validated_files.includes("hackathon-assets/context-tool-contracts.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/live-datahub-runbook.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/datahub-integration-checklist.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/datahub-claim-audit.json"));
+  assert.ok(report.validated_files.includes("hackathon-assets/datahub-mcp-handoff.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/lineage-decision-map.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/safety-policy-matrix.json"));
   assert.match(markdown, /Artifact Validation Report/);
   assert.match(markdown, /✅ \*\*tool contract coverage\*\*/);
   assert.match(markdown, /✅ \*\*DataHub integration checklist\*\*/);
   assert.match(markdown, /✅ \*\*DataHub claim audit\*\*/);
+  assert.match(markdown, /✅ \*\*DataHub MCP handoff\*\*/);
   assert.match(markdown, /✅ \*\*lineage decision map\*\*/);
   assert.match(markdown, /✅ \*\*safety policy matrix\*\*/);
   assert.match(markdown, /✅ \*\*live DataHub runbook\*\*/);
@@ -560,13 +575,14 @@ test("reproduces the judge evidence chain with one command", async () => {
   ]);
 
   assert.equal(receipt.status, "reproducible");
-  assert.equal(receipt.checks.length, 11);
+  assert.equal(receipt.checks.length, 12);
   assert.equal(receipt.summary.total_requests, 3);
-  assert.equal(receipt.summary.artifact_validation_checks, 12);
+  assert.equal(receipt.summary.artifact_validation_checks, 13);
   assert.equal(receipt.summary.live_datahub_commands, 5);
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-payload-preview.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-integration-checklist.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-claim-audit.md"));
+  assert.ok(receipt.reports.includes("hackathon-assets/datahub-mcp-handoff.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/live-datahub-runbook.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/decision-trace.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/lineage-decision-map.md"));
@@ -597,6 +613,7 @@ test("generates a judge scoring brief from reproduced evidence", async () => {
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/live-datahub-runbook.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/datahub-integration-checklist.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/datahub-claim-audit.md")));
+  assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/datahub-mcp-handoff.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/decision-trace.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/safety-policy-matrix.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/reproduction-receipt.md")));
@@ -646,17 +663,19 @@ test("generates a judge-first submission index", async () => {
   ]);
 
   assert.equal(index.project, "CAT Context Agent");
-  assert.equal(index.suggested_review_order.length, 10);
+  assert.equal(index.suggested_review_order.length, 11);
   assert.equal(index.canonical_links.live_demo, "https://cat-context-agent.flyguy.chatgpt.site");
   assert.ok(index.proof_commands.includes("npm run ci:local"));
   assert.ok(index.proof_commands.includes("npm run datahub:checklist"));
   assert.ok(index.proof_commands.includes("npm run datahub:audit"));
+  assert.ok(index.proof_commands.includes("npm run datahub:mcp"));
   assert.ok(index.proof_commands.includes("npm run lineage:map"));
   assert.ok(index.proof_commands.includes("npm run policy:matrix"));
   assert.ok(index.claim_shortlist.some((item) => item.claim === "DataHub is the context layer."));
   assert.match(markdown, /Suggested judge review order/);
   assert.match(markdown, /datahub-integration-checklist\.md/);
   assert.match(markdown, /datahub-claim-audit\.md/);
+  assert.match(markdown, /datahub-mcp-handoff\.md/);
   assert.match(markdown, /lineage-decision-map\.md/);
   assert.match(markdown, /safety-policy-matrix\.md/);
   assert.match(markdown, /npm run evidence:reproduce/);
@@ -756,6 +775,32 @@ test("generates a DataHub claim audit", async () => {
   assert.ok(audit.summary.datahub_aspects.includes("ownership"));
   assert.match(markdown, /DataHub Claim Audit/);
   assert.match(markdown, /Receipt write is bounded/);
+});
+
+test("generates a DataHub MCP handoff", async () => {
+  const { stdout } = await execFileAsync("node", ["scripts/datahub-mcp-handoff.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /cat-datahub-mcp-handoff-v0/);
+  assert.match(stdout, /ready_for_mcp_adapter/);
+  assert.match(stdout, /datahub-mcp-handoff\.md/);
+
+  const [handoff, markdown] = await Promise.all([
+    readFile(new URL("../hackathon-assets/datahub-mcp-handoff.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../hackathon-assets/datahub-mcp-handoff.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(handoff.protocol, "cat-datahub-mcp-handoff-v0");
+  assert.equal(handoff.status, "ready_for_mcp_adapter");
+  assert.equal(handoff.tool_calls.length, 4);
+  assert.ok(handoff.tool_calls.some((tool) => tool.name === "datahub.get_entity"));
+  assert.ok(handoff.tool_calls.some((tool) => tool.name === "cat.write_receipt"));
+  assert.equal(handoff.request_outcomes.length, 3);
+  assert.equal(handoff.local_to_live_boundary.secrets_required_for_judging, false);
+  assert.match(handoff.local_to_live_boundary.local_post_command, /DATAHUB_GMS_URL=http:\/\/localhost:8080/);
+  assert.match(markdown, /DataHub MCP Handoff/);
+  assert.match(markdown, /Receipt side effect/);
 });
 
 test("generates a dry-run DataHub payload preview", async () => {

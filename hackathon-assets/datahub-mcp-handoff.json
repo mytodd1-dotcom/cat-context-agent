@@ -1,0 +1,145 @@
+{
+  "protocol": "cat-datahub-mcp-handoff-v0",
+  "project": "CAT Context Agent",
+  "generated_at": "demo-static-run",
+  "status": "ready_for_mcp_adapter",
+  "datahub_entity": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+  "handoff_flow": [
+    {
+      "name": "CSV becomes a cataloged asset",
+      "detail": "The messy business request sample is anchored to a DataHub dataset URN."
+    },
+    {
+      "name": "MetadataChangeProposal payloads are prepared",
+      "detail": "datasetProperties, schemaMetadata, ownership, and glossaryTerms are generated in dry-run mode."
+    },
+    {
+      "name": "Local DataHub posting is opt-in",
+      "detail": "The same payloads can be posted only to a local GMS with the explicit --post command."
+    },
+    {
+      "name": "MCP-style context reads happen before action",
+      "detail": "The agent reads entity, lineage, and CAT context packet data before surfacing decisions."
+    },
+    {
+      "name": "Policy gates decide what is safe",
+      "detail": "Known owner/contact context permits internal queueing; missing contact context blocks external outreach."
+    },
+    {
+      "name": "Receipt write is bounded",
+      "detail": "CAT writes a receipt with no external side effects instead of performing outreach."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "datahub.get_entity",
+      "purpose": "Fetch the DataHub dataset identity and metadata aspects before the agent reasons about work.",
+      "sample_arguments": {
+        "urn": "urn:li:dataset:(cat,messy_business_requests,PROD)"
+      },
+      "expected_context": [
+        "datasetProperties",
+        "schemaMetadata",
+        "ownership",
+        "glossaryTerms"
+      ],
+      "safety_boundary": "read-only; no external side effects"
+    },
+    {
+      "name": "datahub.get_lineage",
+      "purpose": "Confirm the source-to-agent path so receipts cite the right upstream asset.",
+      "sample_arguments": {
+        "urn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+        "direction": "downstream"
+      },
+      "expected_context": [
+        "uploaded_csv",
+        "cat_context_mapper",
+        "agent_decision_loop",
+        "approval_queue"
+      ],
+      "safety_boundary": "read-only; no external side effects"
+    },
+    {
+      "name": "cat.get_agent_context_packet",
+      "purpose": "Transform DataHub-derived context into CAT's action-safety contract.",
+      "sample_arguments": {
+        "asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+        "request_id": "all"
+      },
+      "expected_context": [
+        "governance",
+        "schema_confidence",
+        "allowed_actions",
+        "blocked_actions",
+        "receipts"
+      ],
+      "safety_boundary": "read-only; no external side effects"
+    },
+    {
+      "name": "cat.write_receipt",
+      "purpose": "Persist the safe, approval-required, or blocked outcome after context has been read.",
+      "sample_arguments": {
+        "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+        "receipt_ids": [
+          "cat-demo-REQ-1042",
+          "cat-demo-REQ-1043",
+          "cat-demo-REQ-1044"
+        ]
+      },
+      "expected_context": [
+        "source_asset",
+        "context_checked",
+        "decision",
+        "safe_next_step",
+        "blocked_action"
+      ],
+      "safety_boundary": "none"
+    }
+  ],
+  "request_outcomes": [
+    {
+      "request_id": "REQ-1042",
+      "decision": "needs_approval",
+      "required_context": [
+        "schema",
+        "owner",
+        "contact",
+        "lineage",
+        "policy"
+      ],
+      "receipt_side_effect": "local receipt only; no external outreach or payment action"
+    },
+    {
+      "request_id": "REQ-1043",
+      "decision": "safe_to_queue_internal_task",
+      "required_context": [
+        "schema",
+        "owner",
+        "contact",
+        "lineage",
+        "policy"
+      ],
+      "receipt_side_effect": "local receipt only; no external outreach or payment action"
+    },
+    {
+      "request_id": "REQ-1044",
+      "decision": "blocked",
+      "required_context": [
+        "schema",
+        "owner",
+        "contact",
+        "lineage",
+        "policy"
+      ],
+      "receipt_side_effect": "local receipt only; no external outreach or payment action"
+    }
+  ],
+  "local_to_live_boundary": {
+    "current_mode": "local-dry-run",
+    "local_post_command": "DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post",
+    "remote_or_production_posting": "blocked unless the operator intentionally changes DATAHUB_GMS_URL",
+    "secrets_required_for_judging": false,
+    "external_side_effects": "none in dry-run evidence; optional local DataHub metadata write only"
+  }
+}

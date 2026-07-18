@@ -50,6 +50,11 @@
       "details": "Expected all DataHub-specific claims to pass the generated audit."
     },
     {
+      "name": "DataHub MCP handoff",
+      "ok": true,
+      "details": "Expected an MCP handoff artifact that connects DataHub reads, CAT policy, and bounded receipt writes."
+    },
+    {
       "name": "safety boundary",
       "ok": true,
       "details": "Expected unverified external outreach to remain blocked."
@@ -78,6 +83,7 @@
     "hackathon-assets/context-tool-contracts.md",
     "hackathon-assets/datahub-integration-checklist.md",
     "hackathon-assets/datahub-claim-audit.md",
+    "hackathon-assets/datahub-mcp-handoff.md",
     "hackathon-assets/lineage-decision-map.md",
     "hackathon-assets/safety-policy-matrix.md",
     "hackathon-assets/judge-evidence-pack.md",

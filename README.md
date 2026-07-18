@@ -98,6 +98,14 @@ npm run datahub:audit
 
 That command writes [`hackathon-assets/datahub-claim-audit.md`](./hackathon-assets/datahub-claim-audit.md) and [`hackathon-assets/datahub-claim-audit.json`](./hackathon-assets/datahub-claim-audit.json), giving judges a compact pass/fail audit of aspect coverage, context reads, local-only posting, safety gates, and bounded receipt writes.
 
+To generate the DataHub MCP handoff:
+
+```bash
+npm run datahub:mcp
+```
+
+That command writes [`hackathon-assets/datahub-mcp-handoff.md`](./hackathon-assets/datahub-mcp-handoff.md) and [`hackathon-assets/datahub-mcp-handoff.json`](./hackathon-assets/datahub-mcp-handoff.json), showing the exact DataHub/CAT tool calls, sample arguments, local-to-live boundary, policy decisions, and no-external-side-effect receipt write path.
+
 To generate the request-by-request decision trace:
 
 ```bash
@@ -210,7 +218,7 @@ To run the local equivalent of that CI recipe:
 npm run ci:local
 ```
 
-That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub integration checklist, DataHub claim audit, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
+That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub integration checklist, DataHub claim audit, DataHub MCP handoff, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
 
 ## DataHub integration path
 
@@ -250,6 +258,7 @@ npm run datahub:payload
 npm run datahub:runbook
 npm run datahub:checklist
 npm run datahub:audit
+npm run datahub:mcp
 npm run decision:trace
 npm run policy:matrix
 npm run context:read

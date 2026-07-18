@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { runDataHubPayloadPreview } from "./datahub-payload-preview.mjs";
 import { runDataHubClaimAudit } from "./datahub-claim-audit.mjs";
 import { runDataHubIntegrationChecklist } from "./datahub-integration-checklist.mjs";
+import { runDataHubMcpHandoff } from "./datahub-mcp-handoff.mjs";
 import { runDecisionTrace } from "./decision-trace.mjs";
 import { runLineageDecisionMap } from "./lineage-decision-map.mjs";
 import { runLiveDataHubRunbook } from "./live-datahub-runbook.mjs";
@@ -53,6 +54,7 @@ export async function runEvidenceReproduction() {
   const payloadPreview = await runDataHubPayloadPreview();
   const integrationChecklist = await runDataHubIntegrationChecklist();
   const claimAudit = await runDataHubClaimAudit();
+  const mcpHandoff = await runDataHubMcpHandoff();
   const liveRunbook = await runLiveDataHubRunbook();
   const decisionTrace = await runDecisionTrace();
   const lineageMap = await runLineageDecisionMap();
@@ -72,6 +74,10 @@ export async function runEvidenceReproduction() {
     {
       name: "DataHub claim audit",
       detail: `${claimAudit.claims.length} DataHub-specific claims passed aspect, context-read, local-posting, safety, and receipt checks.`,
+    },
+    {
+      name: "DataHub MCP handoff",
+      detail: `${mcpHandoff.tool_calls.length} tool calls connect DataHub reads, CAT policy context, and bounded receipt writes.`,
     },
     {
       name: "decision trace",
@@ -127,6 +133,7 @@ export async function runEvidenceReproduction() {
       "hackathon-assets/judge-evidence-pack.md",
       "hackathon-assets/datahub-integration-checklist.md",
       "hackathon-assets/datahub-claim-audit.md",
+      "hackathon-assets/datahub-mcp-handoff.md",
       "hackathon-assets/datahub-payload-preview.md",
       "hackathon-assets/live-datahub-runbook.md",
       "hackathon-assets/decision-trace.md",

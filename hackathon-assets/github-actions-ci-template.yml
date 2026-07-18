@@ -43,6 +43,9 @@ jobs:
       - name: Generate DataHub claim audit
         run: npm run datahub:audit
 
+      - name: Generate DataHub MCP handoff
+        run: npm run datahub:mcp
+
       - name: Validate generated artifacts
         run: npm run artifacts:validate
 

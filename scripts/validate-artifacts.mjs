@@ -18,6 +18,8 @@ const paths = {
   datahubChecklistMarkdown: resolve(assetDir, "datahub-integration-checklist.md"),
   datahubClaimAudit: resolve(assetDir, "datahub-claim-audit.json"),
   datahubClaimAuditMarkdown: resolve(assetDir, "datahub-claim-audit.md"),
+  datahubMcpHandoff: resolve(assetDir, "datahub-mcp-handoff.json"),
+  datahubMcpHandoffMarkdown: resolve(assetDir, "datahub-mcp-handoff.md"),
   lineageMap: resolve(assetDir, "lineage-decision-map.json"),
   lineageMapMarkdown: resolve(assetDir, "lineage-decision-map.md"),
   safetyPolicyMatrix: resolve(assetDir, "safety-policy-matrix.json"),
@@ -70,6 +72,8 @@ export async function runArtifactValidation() {
     datahubChecklistMarkdown,
     datahubClaimAudit,
     datahubClaimAuditMarkdown,
+    datahubMcpHandoff,
+    datahubMcpHandoffMarkdown,
     lineageMap,
     lineageMapMarkdown,
     safetyPolicyMatrix,
@@ -89,6 +93,8 @@ export async function runArtifactValidation() {
     readFile(paths.datahubChecklistMarkdown, "utf8"),
     readJson(paths.datahubClaimAudit),
     readFile(paths.datahubClaimAuditMarkdown, "utf8"),
+    readJson(paths.datahubMcpHandoff),
+    readFile(paths.datahubMcpHandoffMarkdown, "utf8"),
     readJson(paths.lineageMap),
     readFile(paths.lineageMapMarkdown, "utf8"),
     readJson(paths.safetyPolicyMatrix),
@@ -164,6 +170,20 @@ export async function runArtifactValidation() {
       "DataHub claim audit should pass every DataHub-specific claim check.",
     ),
     result(
+      "DataHub MCP handoff",
+      datahubMcpHandoff.protocol === "cat-datahub-mcp-handoff-v0" &&
+        datahubMcpHandoff.status === "ready_for_mcp_adapter" &&
+        hasAll(datahubMcpHandoff.tool_calls.map((tool) => tool.name), [
+          "datahub.get_entity",
+          "datahub.get_lineage",
+          "cat.get_agent_context_packet",
+          "cat.write_receipt",
+        ]) &&
+        datahubMcpHandoff.local_to_live_boundary.secrets_required_for_judging === false &&
+        datahubMcpHandoffMarkdown.includes("DataHub MCP Handoff"),
+      "DataHub MCP handoff should map read-before-action tools to bounded receipt writes.",
+    ),
+    result(
       "judge pack references generated evidence",
       judgePack.artifacts_to_inspect.includes("hackathon-assets/context-tool-contracts.md") &&
         judgePack.artifacts_to_inspect.includes("hackathon-assets/lineage-decision-map.md") &&
@@ -210,6 +230,7 @@ export async function runArtifactValidation() {
       "hackathon-assets/live-datahub-runbook.json",
       "hackathon-assets/datahub-integration-checklist.json",
       "hackathon-assets/datahub-claim-audit.json",
+      "hackathon-assets/datahub-mcp-handoff.json",
       "hackathon-assets/lineage-decision-map.json",
       "hackathon-assets/safety-policy-matrix.json",
       "hackathon-assets/judge-evidence-pack.json",
