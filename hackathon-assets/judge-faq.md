@@ -19,7 +19,7 @@ This is a direct objection-handler for judges: what is real now, what is optiona
 
 ### Is this connected to live DataHub right now?
 
-The submitted artifact is intentionally judgeable without live DataHub, Docker, or credentials. It generates DataHub-ready metadata, a dry-run bridge plan, a readiness doctor, and an explicit local-only post runbook for judges who want the live GMS path.
+The submitted artifact is intentionally judgeable without live DataHub, Docker, or credentials. It generates DataHub-ready metadata, exact Rest.li ingestProposal bodies, a readiness doctor, and an explicit local-only post runbook for judges who want the live GMS path.
 
 **Evidence:** `hackathon-assets/datahub-readiness-doctor.md`, `hackathon-assets/datahub-integration-checklist.md`, `hackathon-assets/live-datahub-runbook.md`
 

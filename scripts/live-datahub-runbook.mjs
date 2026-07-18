@@ -27,6 +27,14 @@ ${runbook.goal}
 
 ${runbook.prerequisites.map((item) => `- ${item}`).join("\n")}
 
+## Live ingest contract
+
+- Method: \`${runbook.live_ingest_contract.method}\`
+- Endpoint: \`${runbook.live_ingest_contract.endpoint}\`
+- Action: \`${runbook.live_ingest_contract.action}\`
+- Rest.li protocol: \`${runbook.live_ingest_contract.headers["X-RestLi-Protocol-Version"]}\`
+- Aspect encoding: ${runbook.live_ingest_contract.aspect_encoding}
+
 ## Commands
 
 ${runbook.commands.map((command) => `### ${command.name}
@@ -61,12 +69,14 @@ export async function runLiveDataHubRunbook() {
     generated_at: "demo-static-run",
     status: "ready_for_local_datahub",
     goal:
-      "Post CAT's generated datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects to a local DataHub GMS, then use the same context to justify safe, approval-gated, and blocked agent actions.",
+      "Post CAT's generated datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects to a local DataHub GMS through the Rest.li ingestProposal action, then use the same context to justify safe, approval-gated, and blocked agent actions.",
     entityUrn: preview.entityUrn,
+    live_ingest_contract: preview.live_ingest_contract,
     dry_run_payloads: preview.requests.map((request) => ({
       id: request.id,
       aspectName: request.aspectName,
       endpoint: request.endpoint,
+      restli_action: preview.live_ingest_contract.action,
       purpose: request.purpose,
     })),
     prerequisites: [
@@ -86,13 +96,13 @@ export async function runLiveDataHubRunbook() {
         name: "Preview the DataHub metadata payloads",
         command: "npm run datahub:payload",
         expected:
-          "hackathon-assets/datahub-payload-preview.md lists four DataHub aspects without contacting GMS.",
+          "hackathon-assets/datahub-payload-preview.md lists four DataHub Rest.li ingestProposal bodies without contacting GMS.",
       },
       {
         name: "Post to local DataHub only after GMS is running",
         command: "DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post",
         expected:
-          "The bridge posts four UPSERT proposals to /openapi/entities/v1/ and leaves generated-datahub-bridge-plan.json as a receipt.",
+          "The bridge posts four UPSERT MetadataChangeProposal bodies to /aspects?action=ingestProposal and leaves generated-datahub-bridge-plan.json as a receipt.",
       },
       {
         name: "Read context before agent action",
@@ -110,7 +120,7 @@ export async function runLiveDataHubRunbook() {
     acceptance_checks: [
       {
         name: "aspect coverage",
-        detail: `${preview.requests.length} DataHub aspect payloads are prepared: ${preview.aspect_names.join(", ")}.`,
+        detail: `${preview.requests.length} DataHub Rest.li ingestProposal payloads are prepared: ${preview.aspect_names.join(", ")}.`,
       },
       {
         name: "local-first verification",

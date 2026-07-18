@@ -58,7 +58,7 @@ export async function runJudgeFaq(inputs = {}) {
     {
       question: "Is this connected to live DataHub right now?",
       answer:
-        "The submitted artifact is intentionally judgeable without live DataHub, Docker, or credentials. It generates DataHub-ready metadata, a dry-run bridge plan, a readiness doctor, and an explicit local-only post runbook for judges who want the live GMS path.",
+        "The submitted artifact is intentionally judgeable without live DataHub, Docker, or credentials. It generates DataHub-ready metadata, exact Rest.li ingestProposal bodies, a readiness doctor, and an explicit local-only post runbook for judges who want the live GMS path.",
       evidence: [
         "hackathon-assets/datahub-readiness-doctor.md",
         "hackathon-assets/datahub-integration-checklist.md",

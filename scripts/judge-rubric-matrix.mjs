@@ -90,7 +90,7 @@ export async function runJudgeRubricMatrix(inputs = {}) {
       {
         criterion: "Use of DataHub",
         alignment:
-          "Strong for a reproducible prototype: DataHub-style dataset identity, schema metadata, ownership, glossary/policy context, lineage reads, MCP handoff, and optional local GMS write path are explicit.",
+          "Strong for a reproducible prototype: DataHub-style dataset identity, schema metadata, ownership, glossary/policy context, lineage reads, MCP handoff, and optional local Rest.li ingestProposal write path are explicit.",
         evidence: [
           "examples/cat-context-agent/generated-datahub-metadata.json",
           "examples/cat-context-agent/generated-datahub-bridge-plan.json",
@@ -179,7 +179,7 @@ export async function runJudgeRubricMatrix(inputs = {}) {
       datahub_claim_audit_status: datahubClaimAudit.status,
     },
     bottom_line:
-      "CAT is strongest on context-before-action, safety, reproducibility, and submission clarity. The only intentional limitation is that live DataHub posting remains opt-in/local instead of required for judging.",
+      "CAT is strongest on context-before-action, safety, reproducibility, and submission clarity. The only intentional limitation is that live DataHub posting remains opt-in/local instead of required for judging, but the repo now exposes the exact Rest.li ingestProposal bodies for that local verification path.",
     outputs: [
       "hackathon-assets/judge-rubric-matrix.json",
       "hackathon-assets/judge-rubric-matrix.md",

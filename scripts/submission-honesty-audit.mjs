@@ -154,8 +154,9 @@ export async function runSubmissionHonestyAudit() {
       "feedback and limitations are documented",
       devpostCopy.includes("Feedback for DataHub / organizers") &&
         judgeNotes.includes("What is simulated vs. live") &&
-        appPage.includes("not hidden inside the demo"),
-      "Organizer feedback, simulated-vs-live scope, and implementation limits are visible before judging.",
+        appPage.includes("explicit, opt-in") &&
+        appPage.includes("ingestProposal payloads"),
+      "Organizer feedback, simulated-vs-live scope, opt-in local posting, and implementation limits are visible before judging.",
       [
         "hackathon-assets/devpost-submission-copy.md",
         "DEVPOST_JUDGE_NOTES.md",
@@ -172,7 +173,7 @@ export async function runSubmissionHonestyAudit() {
     audits,
     explicit_boundaries: [
       "The demo is runnable without DataHub credentials or Docker.",
-      "The live DataHub post path is local-only and requires DATAHUB_GMS_URL plus --post.",
+      "The live DataHub post path is local-only, uses Rest.li ingestProposal bodies, and requires DATAHUB_GMS_URL plus --post.",
       "The agent blocks or approval-gates external outreach when contact or owner context is missing.",
       "Local smoke tests write receipts only and report external_side_effects as none.",
     ],

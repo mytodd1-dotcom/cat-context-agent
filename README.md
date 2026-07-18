@@ -64,7 +64,7 @@ To preview the DataHub handoff without a running DataHub instance:
 npm run datahub:bridge
 ```
 
-That command writes [`examples/cat-context-agent/generated-datahub-bridge-plan.json`](./examples/cat-context-agent/generated-datahub-bridge-plan.json), a dry-run list of DataHub metadata change proposals plus the agent context summary.
+That command writes [`examples/cat-context-agent/generated-datahub-bridge-plan.json`](./examples/cat-context-agent/generated-datahub-bridge-plan.json), a dry-run list of DataHub Metadata Change Proposal bodies plus the agent context summary. The optional live path posts those bodies to a local GMS Rest.li `ingestProposal` endpoint only when `--post` is supplied.
 
 To generate a judge-readable preview of the DataHub aspect payloads:
 
@@ -72,7 +72,7 @@ To generate a judge-readable preview of the DataHub aspect payloads:
 npm run datahub:payload
 ```
 
-That command writes [`hackathon-assets/datahub-payload-preview.md`](./hackathon-assets/datahub-payload-preview.md) and [`hackathon-assets/datahub-payload-preview.json`](./hackathon-assets/datahub-payload-preview.json), showing the dry-run datasetProperties, schemaMetadata, ownership, and glossaryTerms payloads that the bridge would post after local DataHub is running.
+That command writes [`hackathon-assets/datahub-payload-preview.md`](./hackathon-assets/datahub-payload-preview.md) and [`hackathon-assets/datahub-payload-preview.json`](./hackathon-assets/datahub-payload-preview.json), showing the dry-run `datasetProperties`, `schemaMetadata`, `ownership`, and `glossaryTerms` Rest.li `ingestProposal` bodies that the bridge would post after local DataHub is running.
 
 To generate the live DataHub verification runbook:
 
@@ -278,12 +278,12 @@ That command checks `npm ci --dry-run`, regenerates the context contracts, DataH
 
 ## DataHub integration path
 
-The current demo is intentionally runnable without Docker or credentials. It produces DataHub-ready metadata so judges can inspect the context layer before the full live integration is wired.
+The current demo is intentionally runnable without Docker or credentials. It produces DataHub-ready metadata plus the exact local Rest.li `ingestProposal` request bodies, so judges can inspect the context layer before optionally starting DataHub.
 
 Next live DataHub step:
 
 1. Start a local DataHub quickstart.
-2. Run `DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post`.
+2. Run `DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post` to post four Metadata Change Proposal bodies to `/aspects?action=ingestProposal`.
 3. Let the agent read `generated-mcp-context-read.json` as the MCP/DataHub-style context contract.
 4. Replace the static packet with DataHub MCP / Agent Context Kit reads.
 5. Write approval/blocked receipt outcomes back as metadata or workflow artifacts.
@@ -302,7 +302,7 @@ The repo also includes a generated live-run checklist at [`hackathon-assets/live
 
 ## Current status
 
-This repository contains the public submission foundation, Apache 2.0 license, landing page, local demo runner, DataHub-ready metadata artifacts, dry-run DataHub bridge plan, MCP-style context read artifact, and demo-preview video asset. The next milestone is replacing the static context packet with a local DataHub quickstart run and MCP/Agent Context Kit reads.
+This repository contains the public submission foundation, Apache 2.0 license, landing page, local demo runner, DataHub-ready metadata artifacts, Rest.li ingestProposal bridge plan, MCP-style context read artifact, and demo-preview video asset. The next milestone is replacing the static context packet with live DataHub MCP / Agent Context Kit reads after the local ingest path is exercised.
 
 ## Local development
 

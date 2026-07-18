@@ -48,7 +48,7 @@
     {
       "name": "feedback and limitations are documented",
       "ok": true,
-      "evidence": "Organizer feedback, simulated-vs-live scope, and implementation limits are visible before judging.",
+      "evidence": "Organizer feedback, simulated-vs-live scope, opt-in local posting, and implementation limits are visible before judging.",
       "files": [
         "hackathon-assets/devpost-submission-copy.md",
         "DEVPOST_JUDGE_NOTES.md",
@@ -58,7 +58,7 @@
   ],
   "explicit_boundaries": [
     "The demo is runnable without DataHub credentials or Docker.",
-    "The live DataHub post path is local-only and requires DATAHUB_GMS_URL plus --post.",
+    "The live DataHub post path is local-only, uses Rest.li ingestProposal bodies, and requires DATAHUB_GMS_URL plus --post.",
     "The agent blocks or approval-gates external outreach when contact or owner context is missing.",
     "Local smoke tests write receipts only and report external_side_effects as none."
   ],

@@ -168,8 +168,11 @@ export async function runArtifactValidation() {
     result(
       "bridge plan mirrors DataHub aspects",
       bridgePlan.mode === "dry-run" &&
-        hasAll(aspectNames, ["datasetProperties", "schemaMetadata", "ownership", "glossaryTerms"]),
-      "Bridge plan should remain dry-run and map all expected aspects.",
+        hasAll(aspectNames, ["datasetProperties", "schemaMetadata", "ownership", "glossaryTerms"]) &&
+        bridgePlan.live_ingest_contract?.action === "ingestProposal" &&
+        bridgePlan.next_endpoint.endsWith("/aspects?action=ingestProposal") &&
+        bridgePlan.proposals.every((proposal) => proposal.restli?.requestBody?.proposal?.aspect?.contentType === "application/json"),
+      "Bridge plan should remain dry-run, map all expected aspects, and expose DataHub Rest.li ingestProposal request bodies.",
     ),
     result(
       "context read tool path",
@@ -187,10 +190,12 @@ export async function runArtifactValidation() {
       "live DataHub runbook",
       liveRunbook.protocol === "cat-live-datahub-runbook-v0" &&
         liveRunbook.status === "ready_for_local_datahub" &&
+        liveRunbook.live_ingest_contract?.action === "ingestProposal" &&
         liveRunbook.dry_run_payloads.length === 4 &&
         liveRunbook.commands.some((command) => command.command.includes("--post")) &&
-        liveRunbookMarkdown.includes("DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post"),
-      "Live runbook should document the opt-in local DataHub post path and preserve the dry-run payload coverage.",
+        liveRunbookMarkdown.includes("DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post") &&
+        liveRunbookMarkdown.includes("ingestProposal"),
+      "Live runbook should document the opt-in local DataHub Rest.li ingestProposal path and preserve the dry-run payload coverage.",
     ),
     result(
       "DataHub readiness doctor",
@@ -209,8 +214,9 @@ export async function runArtifactValidation() {
         datahubChecklist.decision_gates.live_datahub_required_for_submission === false &&
         datahubChecklist.decision_gates.secrets_required === false &&
         datahubChecklist.phases.some((phase) => phase.command.includes("--post")) &&
+        datahubChecklist.boundaries.some((boundary) => boundary.includes("/aspects?action=ingestProposal")) &&
         datahubChecklistMarkdown.includes("Live DataHub required to judge current submission: **no**"),
-      "Integration checklist should separate no-credential judging from optional local DataHub posting.",
+      "Integration checklist should separate no-credential judging from optional local DataHub ingestProposal posting.",
     ),
     result(
       "DataHub claim audit",

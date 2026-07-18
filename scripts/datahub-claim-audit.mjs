@@ -65,11 +65,13 @@ export async function runDataHubClaimAudit() {
     claim(
       "DataHub aspect coverage",
       expectedAspects.every((aspect) => aspectNames.includes(aspect)) &&
-        bridge.plan.entityUrn === "urn:li:dataset:(cat,messy_business_requests,PROD)",
-      "Dataset identity plus datasetProperties, schemaMetadata, ownership, and glossaryTerms are generated for the CAT source asset.",
+        bridge.plan.entityUrn === "urn:li:dataset:(cat,messy_business_requests,PROD)" &&
+        bridge.plan.live_ingest_contract.endpoint.endsWith("/aspects?action=ingestProposal"),
+      "Dataset identity plus datasetProperties, schemaMetadata, ownership, and glossaryTerms are generated for the CAT source asset, and the live local bridge uses DataHub Rest.li ingestProposal request bodies.",
       [
         "examples/cat-context-agent/generated-datahub-metadata.json",
         "examples/cat-context-agent/generated-datahub-bridge-plan.json",
+        "hackathon-assets/datahub-payload-preview.json",
       ],
     ),
     claim(

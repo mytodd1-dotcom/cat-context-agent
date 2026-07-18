@@ -20,7 +20,7 @@
     {
       "name": "dry-run DataHub proposals ready",
       "ok": true,
-      "detail": "The bridge has four DataHub metadata proposals and did not post because --post was not supplied."
+      "detail": "The bridge has four DataHub Rest.li ingestProposal metadata bodies and did not post because --post was not supplied."
     },
     {
       "name": "payload preview matches bridge",
@@ -35,7 +35,7 @@
     {
       "name": "live mutation is guarded",
       "ok": true,
-      "detail": "The only metadata mutation path is the explicit DATAHUB_GMS_URL + --post command."
+      "detail": "The only metadata mutation path is the explicit DATAHUB_GMS_URL + --post command against local Rest.li ingestProposal."
     },
     {
       "name": "no secrets or remote GMS required",

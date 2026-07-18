@@ -70,7 +70,7 @@ const judgeScorecard = [
   },
   {
     criterion: "Context before action",
-    proof: "The agent simulates DataHub/MCP reads before recommending or blocking any next step.",
+    proof: "The agent reads the generated DataHub/MCP context contract before recommending or blocking any next step.",
     receipt: "generated-mcp-context-read.json",
   },
   {
@@ -128,8 +128,8 @@ const readinessChecks = [
   },
   {
     label: "Live integration",
-    status: "Documented next",
-    detail: "The opt-in runbook shows how to post the same DataHub aspects to a local GMS when judges want the live path.",
+    status: "Opt-in local ingest",
+    detail: "The runbook and payload preview show exact Rest.li ingestProposal bodies for posting the same DataHub aspects to local GMS.",
   },
 ];
 
@@ -249,7 +249,7 @@ const runnableArtifacts = [
     label: "DataHub bridge plan",
     command: "npm run datahub:bridge",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/examples/cat-context-agent/generated-datahub-bridge-plan.json",
-    text: "Shows datasetProperties, schemaMetadata, ownership, and glossaryTerms ready for DataHub.",
+    text: "Shows datasetProperties, schemaMetadata, ownership, and glossaryTerms as local DataHub Rest.li ingestProposal bodies.",
   },
   {
     label: "Live DataHub runbook",
@@ -405,7 +405,7 @@ const scopeCards = [
   {
     title: "Planned live integration",
     items: [
-      "post metadata change proposals to local DataHub GMS",
+      "post metadata change proposals to local DataHub GMS through Rest.li ingestProposal",
       "replace static context packet with DataHub MCP / Agent Context Kit reads",
       "write approval and blocked receipts back as auditable metadata",
       "wire safe internal decisions into a production workflow engine",
@@ -544,7 +544,7 @@ export default function Home() {
         <div className="sectionIntro">
           <h2 id="readiness-heading">Clear enough to judge without guessing.</h2>
           <p>
-            CAT separates what is working in the submitted artifact from the documented live DataHub integration path, so the evaluation does not depend on hidden services or hand-waving.
+            CAT separates what is working in the submitted artifact from the opt-in local DataHub ingest path, so the evaluation does not depend on hidden services or hand-waving.
           </p>
         </div>
         <div className="readinessGrid">
@@ -815,7 +815,7 @@ export default function Home() {
         <div className="sectionIntro">
           <h2>Clear about what is real now and what comes next.</h2>
           <p>
-            The current submission keeps the core agent-context contract runnable and inspectable. The live DataHub mutation path is documented as an opt-in next step, not hidden inside the demo.
+            The current submission keeps the core agent-context contract runnable and inspectable. The local DataHub mutation path is explicit, opt-in, and backed by inspectable ingestProposal payloads.
           </p>
         </div>
         <div className="scopeGrid">
@@ -871,7 +871,7 @@ export default function Home() {
           <p className="sectionTag lime">NEXT MILESTONE</p>
           <h2>Wire this demo slice to a live DataHub-backed run.</h2>
           <p>
-            Next up: replace the static context map with a local DataHub quickstart run, post metadata change proposals to DataHub GMS, and swap the generated context packet for live MCP / Agent Context Kit reads.
+            Next up: start local DataHub, run the opt-in ingestProposal bridge, then swap the generated context packet for live MCP / Agent Context Kit reads.
           </p>
         </div>
       </section>

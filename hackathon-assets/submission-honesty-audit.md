@@ -15,13 +15,13 @@ This audit checks that the public submission surfaces stay honest about what is 
   - Files: `hackathon-assets/datahub-integration-checklist.json`, `hackathon-assets/datahub-readiness-doctor.json`, `hackathon-assets/live-datahub-runbook.json`
 - ✅ **external side effects stay bounded** — The local adapter smoke test records no external side effects, and the policy matrix preserves blocked outreach and scraping actions.
   - Files: `hackathon-assets/mcp-adapter-smoke-report.json`, `hackathon-assets/safety-policy-matrix.json`
-- ✅ **feedback and limitations are documented** — Organizer feedback, simulated-vs-live scope, and implementation limits are visible before judging.
+- ✅ **feedback and limitations are documented** — Organizer feedback, simulated-vs-live scope, opt-in local posting, and implementation limits are visible before judging.
   - Files: `hackathon-assets/devpost-submission-copy.md`, `DEVPOST_JUDGE_NOTES.md`, `app/page.tsx`
 
 ## Explicit boundaries
 
 - The demo is runnable without DataHub credentials or Docker.
-- The live DataHub post path is local-only and requires DATAHUB_GMS_URL plus --post.
+- The live DataHub post path is local-only, uses Rest.li ingestProposal bodies, and requires DATAHUB_GMS_URL plus --post.
 - The agent blocks or approval-gates external outreach when contact or owner context is missing.
 - Local smoke tests write receipts only and report external_side_effects as none.
 

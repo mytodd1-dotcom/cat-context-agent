@@ -6,7 +6,7 @@ Generated: `demo-static-run`
 ## Checks
 
 - ✅ **demo decision totals** — Expected 3 requests: 1 safe internal task, 1 approval-required task, and 1 blocked task.
-- ✅ **DataHub metadata payload** — Expected dataset URN plus datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects.
+- ✅ **DataHub metadata payload** — Expected dataset URN plus datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects with opt-in Rest.li ingestProposal bodies.
 - ✅ **MCP-style context reads** — Expected the agent read path to include DataHub entity, DataHub lineage, and CAT context packet reads.
 - ✅ **context tool contracts** — Expected machine-readable contracts for the DataHub reads, CAT context packet read, and receipt write.
 - ✅ **DataHub integration checklist** — Expected local evidence to be judgeable without credentials while preserving the optional local GMS post path.

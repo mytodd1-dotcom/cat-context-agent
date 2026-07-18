@@ -28,7 +28,7 @@ The demo ingests messy business request data, maps it into DataHub-style metadat
 
 ## How we built it
 
-We built a runnable local evidence chain around one focused workflow. The repo includes a sample messy CSV, a DataHub-style context map, generated DataHub metadata aspects, a dry-run DataHub bridge plan, a DataHub readiness doctor, a DataHub integration checklist, a DataHub claim audit, a DataHub MCP handoff, an MCP adapter smoke report, an MCP-style context read artifact, a lineage-to-decision map, a safety policy matrix, a decision trace, a judge quick card, a judge rubric matrix, a judge evidence pack, and a public Next.js landing page. The key design choice was to make the context boundary inspectable instead of hiding it inside a black-box prompt.
+We built a runnable local evidence chain around one focused workflow. The repo includes a sample messy CSV, a DataHub-style context map, generated DataHub metadata aspects, an opt-in local DataHub Rest.li ingestProposal bridge plan, a DataHub readiness doctor, a DataHub integration checklist, a DataHub claim audit, a DataHub MCP handoff, an MCP adapter smoke report, an MCP-style context read artifact, a lineage-to-decision map, a safety policy matrix, a decision trace, a judge quick card, a judge rubric matrix, a judge evidence pack, and a public Next.js landing page. The key design choice was to make the context boundary inspectable instead of hiding it inside a black-box prompt.
 
 ## Challenges we ran into
 
@@ -44,7 +44,7 @@ The strongest agent pattern here is not more autonomy. It is better context, bet
 
 ## What's next
 
-Next we would run a local DataHub quickstart, post the generated metadata change proposals to DataHub GMS, replace the static context packet with live DataHub MCP / Agent Context Kit reads, and write workflow receipt outcomes back as metadata or auditable artifacts.
+Next we would run a local DataHub quickstart, post the generated Metadata Change Proposal bodies to DataHub GMS via Rest.li ingestProposal, replace the static context packet with live DataHub MCP / Agent Context Kit reads, and write workflow receipt outcomes back as metadata or auditable artifacts.
 
 ## Built with
 
@@ -58,4 +58,4 @@ Next we would run a local DataHub quickstart, post the generated metadata change
 
 ## Feedback for DataHub / organizers
 
-The hackathon theme is strong because it pushes builders toward context-aware agents instead of generic chatbots. The most helpful next addition would be a small reference example showing the preferred shape of a DataHub MCP / Agent Context Kit hackathon submission, including what judges consider a good boundary between dry-run metadata, live DataHub posting, and agent action.
+The hackathon theme is strong because it pushes builders toward context-aware agents instead of generic chatbots. The most helpful next addition would be a small reference example showing the preferred shape of a DataHub MCP / Agent Context Kit hackathon submission, including what judges consider a good boundary between dry-run metadata, opt-in Rest.li ingestProposal posting, and agent action.

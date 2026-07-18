@@ -16,10 +16,10 @@ This doctor checks whether the optional local DataHub path is ready without post
 ## Checks
 
 - ✅ **demo artifacts regenerated** — The local CAT decision runner still produces one safe, one approval-required, and one blocked outcome.
-- ✅ **dry-run DataHub proposals ready** — The bridge has four DataHub metadata proposals and did not post because --post was not supplied.
+- ✅ **dry-run DataHub proposals ready** — The bridge has four DataHub Rest.li ingestProposal metadata bodies and did not post because --post was not supplied.
 - ✅ **payload preview matches bridge** — The judge-readable payload preview matches the bridge proposal set.
 - ✅ **local DataHub remains optional** — No local GMS is reachable here, and the checklist correctly keeps live DataHub optional.
-- ✅ **live mutation is guarded** — The only metadata mutation path is the explicit DATAHUB_GMS_URL + --post command.
+- ✅ **live mutation is guarded** — The only metadata mutation path is the explicit DATAHUB_GMS_URL + --post command against local Rest.li ingestProposal.
 - ✅ **no secrets or remote GMS required** — The runnable judging path requires no secrets and keeps remote/production DataHub posting out of scope.
 
 ## Safe next command

@@ -12,20 +12,42 @@ const args = new Set(process.argv.slice(2));
 const shouldPost = args.has("--post");
 const gmsUrl = process.env.DATAHUB_GMS_URL ?? "http://localhost:8080";
 
+const restliProtocolVersion = "2.0.0";
+
 function toMetadataChangeProposal(entityUrn, aspectName, aspect) {
+  const proposal = {
+    entityType: "dataset",
+    entityUrn,
+    changeType: "UPSERT",
+    aspectName,
+    aspect: {
+      value: JSON.stringify(aspect),
+      contentType: "application/json",
+    },
+  };
+
   return {
+    id: `cat-datahub-ingest-${aspectName}`,
     entityType: "dataset",
     entityUrn,
     changeType: "UPSERT",
     aspectName,
     aspect,
+    restli: {
+      action: "ingestProposal",
+      protocolVersion: restliProtocolVersion,
+      requestBody: { proposal },
+    },
   };
 }
 
 async function postJson(url, body) {
   const response = await fetch(url, {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers: {
+      "content-type": "application/json",
+      "X-RestLi-Protocol-Version": restliProtocolVersion,
+    },
     body: JSON.stringify(body),
   });
 
@@ -49,20 +71,35 @@ export async function buildBridgePlan() {
     toMetadataChangeProposal(metadata.entityUrn, aspectName, aspect),
   );
 
+  const baseUrl = gmsUrl.replace(/\/$/, "");
+  const ingestEndpoint = `${baseUrl}/aspects?action=ingestProposal`;
+
   return {
     mode: shouldPost ? "post" : "dry-run",
     datahub_gms_url: gmsUrl,
     entityUrn: metadata.entityUrn,
     proposals,
+    live_ingest_contract: {
+      endpoint: ingestEndpoint,
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "X-RestLi-Protocol-Version": restliProtocolVersion,
+      },
+      action: "ingestProposal",
+      body_shape: "{ proposal: MetadataChangeProposal }",
+      aspect_encoding: "Each aspect is serialized as aspect.value JSON with contentType application/json.",
+      safe_default: "dry-run",
+    },
     agent_context_summary: {
       protocol: agentContext.protocol,
       allowed_actions: agentContext.allowed_actions,
       blocked_actions: agentContext.blocked_actions,
       decision_summary: agentContext.decision_summary,
     },
-    next_endpoint: `${gmsUrl.replace(/\/$/, "")}/openapi/entities/v1/`,
+    next_endpoint: ingestEndpoint,
     note:
-      "Dry-run by default. Run DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post after starting DataHub locally.",
+      "Dry-run by default. Run DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post after starting DataHub locally. The live post sends DataHub Metadata Change Proposal bodies to Rest.li ingestProposal.",
   };
 }
 
@@ -72,12 +109,13 @@ export async function runBridge() {
 
   if (!shouldPost) return { plan, posted: [] };
 
-  const endpoint = `${gmsUrl.replace(/\/$/, "")}/openapi/entities/v1/`;
+  const endpoint = plan.next_endpoint;
   const posted = [];
   for (const proposal of plan.proposals) {
     posted.push({
       aspectName: proposal.aspectName,
-      response: await postJson(endpoint, proposal),
+      endpoint,
+      response: await postJson(endpoint, proposal.restli.requestBody),
     });
   }
 

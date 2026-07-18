@@ -111,8 +111,10 @@ export async function runDataHubReadinessDoctor() {
     ),
     check(
       "dry-run DataHub proposals ready",
-      bridge.plan.mode === "dry-run" && expectedAspects.every((aspect) => proposalNames.includes(aspect)),
-      "The bridge has four DataHub metadata proposals and did not post because --post was not supplied.",
+      bridge.plan.mode === "dry-run" &&
+        expectedAspects.every((aspect) => proposalNames.includes(aspect)) &&
+        bridge.plan.live_ingest_contract.action === "ingestProposal",
+      "The bridge has four DataHub Rest.li ingestProposal metadata bodies and did not post because --post was not supplied.",
     ),
     check(
       "payload preview matches bridge",
@@ -133,7 +135,7 @@ export async function runDataHubReadinessDoctor() {
       "live mutation is guarded",
       runbook.commands.some((command) => command.command.includes("--post")) &&
         checklist.phases.some((phase) => phase.mode === "optional_local_datahub" && phase.command.includes("--post")),
-      "The only metadata mutation path is the explicit DATAHUB_GMS_URL + --post command.",
+      "The only metadata mutation path is the explicit DATAHUB_GMS_URL + --post command against local Rest.li ingestProposal.",
     ),
     check(
       "no secrets or remote GMS required",

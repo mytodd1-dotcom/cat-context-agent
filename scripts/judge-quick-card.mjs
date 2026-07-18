@@ -176,12 +176,12 @@ export async function runJudgeQuickCard(inputs = {}) {
     },
     what_is_real_now: [
       "Public live demo and public GitHub repository are available.",
-      "Local scripts generate DataHub-ready dry-run metadata and MCP-style context reads.",
+      "Local scripts generate DataHub-ready dry-run metadata, Rest.li ingestProposal bodies, and MCP-style context reads.",
       "The agent decision output, approval queue, safety policy matrix, and receipts are inspectable files.",
       "The evidence chain is runnable without DataHub credentials, Docker, customer data, or off-platform actions.",
     ],
     optional_next_steps: [
-      "Run the optional local DataHub GMS post path from the runbook when judges want live local metadata mutation.",
+      "Run the optional local DataHub GMS Rest.li ingestProposal path from the runbook when judges want live local metadata mutation.",
       "Replace the static context packet with live DataHub MCP / Agent Context Kit reads.",
       "Write approved workflow receipt outcomes back as DataHub-linked auditable metadata.",
     ],

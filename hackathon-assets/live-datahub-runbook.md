@@ -7,7 +7,7 @@ This runbook turns the dry-run CAT demo into a local DataHub verification path. 
 
 ## Goal
 
-Post CAT's generated datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects to a local DataHub GMS, then use the same context to justify safe, approval-gated, and blocked agent actions.
+Post CAT's generated datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects to a local DataHub GMS through the Rest.li ingestProposal action, then use the same context to justify safe, approval-gated, and blocked agent actions.
 
 ## Prerequisites
 
@@ -15,6 +15,14 @@ Post CAT's generated datasetProperties, schemaMetadata, ownership, and glossaryT
 - A local DataHub GMS instance reachable at DATAHUB_GMS_URL, usually http://localhost:8080.
 - No cloud credentials are required for the repo evidence path.
 - Live posting is intentionally blocked unless the operator passes --post.
+
+## Live ingest contract
+
+- Method: `POST`
+- Endpoint: `http://localhost:8080/aspects?action=ingestProposal`
+- Action: `ingestProposal`
+- Rest.li protocol: `2.0.0`
+- Aspect encoding: Each aspect is serialized as aspect.value JSON with contentType application/json.
 
 ## Commands
 
@@ -32,7 +40,7 @@ Expected: generated-agent-output.json, generated-datahub-metadata.json, and gene
 npm run datahub:payload
 ```
 
-Expected: hackathon-assets/datahub-payload-preview.md lists four DataHub aspects without contacting GMS.
+Expected: hackathon-assets/datahub-payload-preview.md lists four DataHub Rest.li ingestProposal bodies without contacting GMS.
 
 ### Post to local DataHub only after GMS is running
 
@@ -40,7 +48,7 @@ Expected: hackathon-assets/datahub-payload-preview.md lists four DataHub aspects
 DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post
 ```
 
-Expected: The bridge posts four UPSERT proposals to /openapi/entities/v1/ and leaves generated-datahub-bridge-plan.json as a receipt.
+Expected: The bridge posts four UPSERT MetadataChangeProposal bodies to /aspects?action=ingestProposal and leaves generated-datahub-bridge-plan.json as a receipt.
 
 ### Read context before agent action
 
@@ -60,7 +68,7 @@ Expected: The reproduction receipt confirms payload preview, live runbook, decis
 
 ## Acceptance checks
 
-- ✅ **aspect coverage** — 4 DataHub aspect payloads are prepared: datasetProperties, schemaMetadata, ownership, glossaryTerms.
+- ✅ **aspect coverage** — 4 DataHub Rest.li ingestProposal payloads are prepared: datasetProperties, schemaMetadata, ownership, glossaryTerms.
 - ✅ **local-first verification** — Judges can inspect every generated artifact without external credentials or a hosted service.
 - ✅ **live mutation is explicit** — Only the documented DATAHUB_GMS_URL + --post command mutates a local DataHub instance.
 - ✅ **agent safety remains preserved** — The blocked external outreach case remains blocked even after the DataHub post path is enabled.

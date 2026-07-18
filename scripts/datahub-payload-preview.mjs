@@ -21,6 +21,16 @@ Generated: \`${preview.generated_at}\`
 
 This is a dry-run preview of the metadata change proposal-style payloads CAT prepares for a local DataHub GMS run.
 
+The live command sends DataHub Rest.li \`ingestProposal\` action bodies. Dry-run mode writes the exact request shape without contacting GMS.
+
+## Live ingest contract
+
+- Method: \`${preview.live_ingest_contract.method}\`
+- Endpoint: \`${preview.live_ingest_contract.endpoint}\`
+- Rest.li protocol: \`${preview.live_ingest_contract.headers["X-RestLi-Protocol-Version"]}\`
+- Body shape: \`${preview.live_ingest_contract.body_shape}\`
+- Aspect encoding: ${preview.live_ingest_contract.aspect_encoding}
+
 ## Aspect upserts
 
 | Request | Aspect | Purpose |
@@ -61,15 +71,18 @@ export async function runDataHubPayloadPreview() {
     endpoint,
     method: "POST",
     content_type: "application/json",
+    live_ingest_contract: plan.live_ingest_contract,
     entityUrn: plan.entityUrn,
     aspect_names: plan.proposals.map((proposal) => proposal.aspectName),
     requests: plan.proposals.map((proposal) => ({
       id: requestId(proposal.aspectName),
       method: "POST",
       endpoint,
+      headers: plan.live_ingest_contract.headers,
       aspectName: proposal.aspectName,
       purpose: purposeFor(proposal.aspectName),
-      body: proposal,
+      body: proposal.restli.requestBody,
+      preview_aspect: proposal.aspect,
     })),
     local_post_command: "DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post",
     safety_note:

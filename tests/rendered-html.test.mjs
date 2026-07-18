@@ -51,7 +51,7 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /Live \+ local/);
   assert.match(html, /Context contract/);
   assert.match(html, /Guarded actions/);
-  assert.match(html, /Documented next/);
+  assert.match(html, /Opt-in local ingest/);
   assert.match(html, /DATAHUB → AGENT MAP/);
   assert.match(html, /DataHub is the context layer, not a logo on the slide/);
   assert.match(html, /Dataset identity/);
@@ -440,7 +440,21 @@ test("builds a dry-run DataHub bridge plan from generated context", async () => 
     bridgePlan.proposals.map((proposal) => proposal.aspectName),
     ["datasetProperties", "schemaMetadata", "ownership", "glossaryTerms"],
   );
-  assert.match(bridgePlan.next_endpoint, /\/openapi\/entities\/v1\/$/);
+  assert.match(bridgePlan.next_endpoint, /\/aspects\?action=ingestProposal$/);
+  assert.equal(bridgePlan.live_ingest_contract.action, "ingestProposal");
+  assert.equal(bridgePlan.live_ingest_contract.headers["X-RestLi-Protocol-Version"], "2.0.0");
+  assert.ok(
+    bridgePlan.proposals.every((proposal) => {
+      const body = proposal.restli.requestBody.proposal;
+      return (
+        body.entityUrn === bridgePlan.entityUrn &&
+        body.changeType === "UPSERT" &&
+        body.aspectName === proposal.aspectName &&
+        body.aspect.contentType === "application/json" &&
+        typeof body.aspect.value === "string"
+      );
+    }),
+  );
   assert.ok(bridgePlan.agent_context_summary.allowed_actions.includes("create_internal_review_task"));
   assert.ok(
     bridgePlan.agent_context_summary.blocked_actions.includes(
@@ -1020,9 +1034,12 @@ test("generates a live DataHub runbook for opt-in local posting", async () => {
   assert.equal(runbook.protocol, "cat-live-datahub-runbook-v0");
   assert.equal(runbook.status, "ready_for_local_datahub");
   assert.equal(runbook.dry_run_payloads.length, 4);
+  assert.equal(runbook.live_ingest_contract.action, "ingestProposal");
+  assert.match(runbook.live_ingest_contract.endpoint, /\/aspects\?action=ingestProposal$/);
   assert.ok(runbook.commands.some((command) => command.command.includes("--post")));
   assert.ok(runbook.safety_boundary.some((item) => item.includes("Do not post to a remote or production DataHub")));
   assert.match(markdown, /Live DataHub Runbook/);
+  assert.match(markdown, /ingestProposal/);
   assert.match(markdown, /DATAHUB_GMS_URL=http:\/\/localhost:8080 npm run datahub:bridge -- --post/);
   assert.match(markdown, /Fallback if DataHub is not running/);
 });
@@ -1072,8 +1089,11 @@ test("generates a DataHub integration checklist", async () => {
   assert.equal(checklist.decision_gates.live_datahub_required_for_submission, false);
   assert.equal(checklist.decision_gates.secrets_required, false);
   assert.ok(checklist.phases.some((phase) => phase.command.includes("DATAHUB_GMS_URL=http://localhost:8080")));
+  assert.ok(checklist.boundaries.some((boundary) => boundary.includes("/aspects?action=ingestProposal")));
   assert.ok(checklist.evidence_files.includes("hackathon-assets/safety-policy-matrix.md"));
+  assert.ok(checklist.evidence_files.includes("hackathon-assets/datahub-payload-preview.json"));
   assert.match(markdown, /DataHub Integration Checklist/);
+  assert.match(markdown, /ingestProposal/);
   assert.match(markdown, /Live DataHub required to judge current submission: \*\*no\*\*/);
 });
 
@@ -1099,6 +1119,7 @@ test("generates a DataHub claim audit", async () => {
   assert.ok(audit.claims.some((claim) => claim.name === "Local-only live posting boundary"));
   assert.ok(audit.summary.datahub_aspects.includes("ownership"));
   assert.match(markdown, /DataHub Claim Audit/);
+  assert.match(markdown, /ingestProposal/);
   assert.match(markdown, /Receipt write is bounded/);
 });
 
@@ -1178,9 +1199,14 @@ test("generates a dry-run DataHub payload preview", async () => {
   assert.equal(preview.protocol, "cat-datahub-payload-preview-v0");
   assert.equal(preview.mode, "dry-run");
   assert.equal(preview.requests.length, 4);
+  assert.equal(preview.live_ingest_contract.action, "ingestProposal");
+  assert.match(preview.endpoint, /\/aspects\?action=ingestProposal$/);
   assert.deepEqual(preview.aspect_names, ["datasetProperties", "schemaMetadata", "ownership", "glossaryTerms"]);
   assert.ok(preview.requests.every((request) => request.method === "POST"));
+  assert.ok(preview.requests.every((request) => request.body.proposal.aspect.contentType === "application/json"));
+  assert.ok(preview.requests.every((request) => typeof request.body.proposal.aspect.value === "string"));
   assert.match(markdown, /DataHub Payload Preview/);
+  assert.match(markdown, /ingestProposal/);
   assert.match(markdown, /DATAHUB_GMS_URL=http:\/\/localhost:8080 npm run datahub:bridge -- --post/);
 });
 

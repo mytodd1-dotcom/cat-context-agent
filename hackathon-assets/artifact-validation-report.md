@@ -7,12 +7,12 @@ Generated: `demo-static-run`
 
 - ✅ **decision summary** — Agent output should include 3 requests: 1 safe, 1 approval-required, 1 blocked.
 - ✅ **DataHub metadata shape** — Generated metadata should include the expected dataset URN and four DataHub aspects.
-- ✅ **bridge plan mirrors DataHub aspects** — Bridge plan should remain dry-run and map all expected aspects.
+- ✅ **bridge plan mirrors DataHub aspects** — Bridge plan should remain dry-run, map all expected aspects, and expose DataHub Rest.li ingestProposal request bodies.
 - ✅ **context read tool path** — Context read should include DataHub/CAT read tools and preserve the blocked customer action.
 - ✅ **tool contract coverage** — Tool contracts should cover DataHub reads, CAT context read, and guarded receipt write.
-- ✅ **live DataHub runbook** — Live runbook should document the opt-in local DataHub post path and preserve the dry-run payload coverage.
+- ✅ **live DataHub runbook** — Live runbook should document the opt-in local DataHub Rest.li ingestProposal path and preserve the dry-run payload coverage.
 - ✅ **DataHub readiness doctor** — Readiness doctor should prove dry-run DataHub artifacts are ready while live GMS remains optional.
-- ✅ **DataHub integration checklist** — Integration checklist should separate no-credential judging from optional local DataHub posting.
+- ✅ **DataHub integration checklist** — Integration checklist should separate no-credential judging from optional local DataHub ingestProposal posting.
 - ✅ **DataHub claim audit** — DataHub claim audit should pass every DataHub-specific claim check.
 - ✅ **DataHub MCP handoff** — DataHub MCP handoff should map read-before-action tools to bounded receipt writes.
 - ✅ **MCP adapter smoke test** — MCP adapter smoke test should prove read-before-write ordering and bounded local receipt writes.

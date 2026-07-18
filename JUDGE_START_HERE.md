@@ -75,4 +75,4 @@ The generated [`hackathon-assets/submission-honesty-audit.md`](./hackathon-asset
 
 Working now: local decision runner, DataHub-ready metadata, dry-run bridge plan, MCP-style read contract, approval queue, receipt artifacts, public demo, demo video, and reproducible tests.
 
-Planned next: replace the static context packet with live DataHub MCP / Agent Context Kit reads and write workflow receipts back as metadata or auditable artifacts.
+Planned next: run the opt-in local Rest.li `ingestProposal` bridge against a local DataHub quickstart, replace the static context packet with live DataHub MCP / Agent Context Kit reads, and write workflow receipts back as metadata or auditable artifacts.

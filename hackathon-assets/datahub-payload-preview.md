@@ -1,10 +1,20 @@
 # CAT Context Agent — DataHub Payload Preview
 
 Mode: **dry-run**  
-Endpoint: `http://localhost:8080/openapi/entities/v1/`  
+Endpoint: `http://localhost:8080/aspects?action=ingestProposal`  
 Generated: `demo-static-run`
 
 This is a dry-run preview of the metadata change proposal-style payloads CAT prepares for a local DataHub GMS run.
+
+The live command sends DataHub Rest.li `ingestProposal` action bodies. Dry-run mode writes the exact request shape without contacting GMS.
+
+## Live ingest contract
+
+- Method: `POST`
+- Endpoint: `http://localhost:8080/aspects?action=ingestProposal`
+- Rest.li protocol: `2.0.0`
+- Body shape: `{ proposal: MetadataChangeProposal }`
+- Aspect encoding: Each aspect is serialized as aspect.value JSON with contentType application/json.
 
 ## Aspect upserts
 

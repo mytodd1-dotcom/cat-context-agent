@@ -7,8 +7,8 @@ This audit gives judges a compact pass/fail view of the DataHub-specific claims 
 
 ## Claim checks
 
-- ✅ **DataHub aspect coverage** — Dataset identity plus datasetProperties, schemaMetadata, ownership, and glossaryTerms are generated for the CAT source asset.
-  - Files: `examples/cat-context-agent/generated-datahub-metadata.json`, `examples/cat-context-agent/generated-datahub-bridge-plan.json`
+- ✅ **DataHub aspect coverage** — Dataset identity plus datasetProperties, schemaMetadata, ownership, and glossaryTerms are generated for the CAT source asset, and the live local bridge uses DataHub Rest.li ingestProposal request bodies.
+  - Files: `examples/cat-context-agent/generated-datahub-metadata.json`, `examples/cat-context-agent/generated-datahub-bridge-plan.json`, `hackathon-assets/datahub-payload-preview.json`
 - ✅ **DataHub context read path** — The agent reads entity, lineage, and CAT context packet data before surfacing decisions.
   - Files: `examples/cat-context-agent/generated-mcp-context-read.json`, `hackathon-assets/context-tool-contracts.md`
 - ✅ **Local-only live posting boundary** — The current submission is judgeable without credentials, and the only live mutation command targets a local GMS explicitly.

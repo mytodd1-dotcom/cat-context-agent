@@ -27,7 +27,7 @@
     {
       "name": "DataHub metadata payload",
       "ok": true,
-      "details": "Expected dataset URN plus datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects."
+      "details": "Expected dataset URN plus datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects with opt-in Rest.li ingestProposal bodies."
     },
     {
       "name": "MCP-style context reads",

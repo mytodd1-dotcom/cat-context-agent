@@ -59,7 +59,7 @@ export async function runJudgeScoringBrief() {
       {
         claim: "DataHub is the context layer, not a logo pasted onto the demo.",
         evidence:
-          "The demo produces datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects plus a dry-run DataHub bridge plan and an opt-in live DataHub runbook.",
+          "The demo produces datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects plus a dry-run DataHub bridge plan with Rest.li ingestProposal bodies and an opt-in live DataHub runbook.",
         files: [
           "examples/cat-context-agent/generated-datahub-metadata.json",
           "examples/cat-context-agent/generated-datahub-bridge-plan.json",

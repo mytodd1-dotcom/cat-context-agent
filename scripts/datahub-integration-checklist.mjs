@@ -100,6 +100,7 @@ export async function runDataHubIntegrationChecklist() {
     ],
     boundaries: [
       "Do not require judges to run Docker or provide credentials to validate the core submission.",
+      `When judges do run local DataHub, use the Rest.li ingestProposal endpoint: ${runbook.live_ingest_contract.endpoint}.`,
       "Do not post to a remote or production DataHub instance from the demo.",
       "Do not include customer secrets, access tokens, or real contact data in generated artifacts.",
       "Do not replace approval gates with external outreach automation when owner or contact context is missing.",
@@ -109,6 +110,7 @@ export async function runDataHubIntegrationChecklist() {
       "hackathon-assets/reproduction-receipt.md",
       "hackathon-assets/datahub-payload-preview.md",
       "hackathon-assets/live-datahub-runbook.md",
+      "hackathon-assets/datahub-payload-preview.json",
       "hackathon-assets/context-tool-contracts.md",
       "hackathon-assets/safety-policy-matrix.md",
       "examples/cat-context-agent/generated-datahub-bridge-plan.json",

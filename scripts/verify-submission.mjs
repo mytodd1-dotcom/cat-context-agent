@@ -95,10 +95,12 @@ export async function runSubmissionVerify() {
     check(
       "DataHub metadata payload",
       datahubMetadata.entityUrn === "urn:li:dataset:(cat,messy_business_requests,PROD)" &&
+        bridge.plan.live_ingest_contract?.action === "ingestProposal" &&
+        bridge.plan.next_endpoint.endsWith("/aspects?action=ingestProposal") &&
         ["datasetProperties", "schemaMetadata", "ownership", "glossaryTerms"].every((aspect) =>
           datahubAspects.includes(aspect),
         ),
-      "Expected dataset URN plus datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects.",
+      "Expected dataset URN plus datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects with opt-in Rest.li ingestProposal bodies.",
     ),
     check(
       "MCP-style context reads",

@@ -2,9 +2,21 @@
   "protocol": "cat-datahub-payload-preview-v0",
   "mode": "dry-run",
   "generated_at": "demo-static-run",
-  "endpoint": "http://localhost:8080/openapi/entities/v1/",
+  "endpoint": "http://localhost:8080/aspects?action=ingestProposal",
   "method": "POST",
   "content_type": "application/json",
+  "live_ingest_contract": {
+    "endpoint": "http://localhost:8080/aspects?action=ingestProposal",
+    "method": "POST",
+    "headers": {
+      "content-type": "application/json",
+      "X-RestLi-Protocol-Version": "2.0.0"
+    },
+    "action": "ingestProposal",
+    "body_shape": "{ proposal: MetadataChangeProposal }",
+    "aspect_encoding": "Each aspect is serialized as aspect.value JSON with contentType application/json.",
+    "safe_default": "dry-run"
+  },
   "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
   "aspect_names": [
     "datasetProperties",
@@ -16,138 +28,178 @@
     {
       "id": "cat-datahub-upsert-datasetProperties",
       "method": "POST",
-      "endpoint": "http://localhost:8080/openapi/entities/v1/",
+      "endpoint": "http://localhost:8080/aspects?action=ingestProposal",
+      "headers": {
+        "content-type": "application/json",
+        "X-RestLi-Protocol-Version": "2.0.0"
+      },
       "aspectName": "datasetProperties",
       "purpose": "Identify the messy business request dataset and expose CAT decision totals as metadata.",
       "body": {
-        "entityType": "dataset",
-        "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
-        "changeType": "UPSERT",
-        "aspectName": "datasetProperties",
-        "aspect": {
-          "name": "messy_business_requests",
-          "description": "Messy business request data used by CAT Context Agent to demonstrate context-aware safety decisions.",
-          "customProperties": {
-            "cat_source_file": "examples/cat-context-agent/messy-business-requests.csv",
-            "cat_demo": "true",
-            "cat_decisions_total": "3",
-            "cat_decisions_blocked": "1",
-            "cat_decisions_needs_approval": "1"
+        "proposal": {
+          "entityType": "dataset",
+          "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+          "changeType": "UPSERT",
+          "aspectName": "datasetProperties",
+          "aspect": {
+            "value": "{\"name\":\"messy_business_requests\",\"description\":\"Messy business request data used by CAT Context Agent to demonstrate context-aware safety decisions.\",\"customProperties\":{\"cat_source_file\":\"examples/cat-context-agent/messy-business-requests.csv\",\"cat_demo\":\"true\",\"cat_decisions_total\":\"3\",\"cat_decisions_blocked\":\"1\",\"cat_decisions_needs_approval\":\"1\"}}",
+            "contentType": "application/json"
           }
+        }
+      },
+      "preview_aspect": {
+        "name": "messy_business_requests",
+        "description": "Messy business request data used by CAT Context Agent to demonstrate context-aware safety decisions.",
+        "customProperties": {
+          "cat_source_file": "examples/cat-context-agent/messy-business-requests.csv",
+          "cat_demo": "true",
+          "cat_decisions_total": "3",
+          "cat_decisions_blocked": "1",
+          "cat_decisions_needs_approval": "1"
         }
       }
     },
     {
       "id": "cat-datahub-upsert-schemaMetadata",
       "method": "POST",
-      "endpoint": "http://localhost:8080/openapi/entities/v1/",
+      "endpoint": "http://localhost:8080/aspects?action=ingestProposal",
+      "headers": {
+        "content-type": "application/json",
+        "X-RestLi-Protocol-Version": "2.0.0"
+      },
       "aspectName": "schemaMetadata",
       "purpose": "Describe the CSV schema and field confidence before the agent acts.",
       "body": {
-        "entityType": "dataset",
-        "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
-        "changeType": "UPSERT",
-        "aspectName": "schemaMetadata",
-        "aspect": {
-          "platform": "cat",
-          "version": 0,
-          "hash": "cat-context-agent-demo",
-          "platformSchema": {
-            "schemaType": "CSV",
-            "rawSchema": "request_id: string\naccount: string\nrequest_type: string\ncontact_email: string\nestimated_value: string\npriority: string\nowner: string"
-          },
-          "fields": [
-            {
-              "fieldPath": "request_id",
-              "type": "string",
-              "nativeDataType": "string",
-              "description": "stable request identifier; confidence=0.99"
-            },
-            {
-              "fieldPath": "account",
-              "type": "string",
-              "nativeDataType": "string",
-              "description": "customer or account name; confidence=0.95"
-            },
-            {
-              "fieldPath": "request_type",
-              "type": "string",
-              "nativeDataType": "string",
-              "description": "business workflow category; confidence=0.91"
-            },
-            {
-              "fieldPath": "contact_email",
-              "type": "string",
-              "nativeDataType": "string",
-              "description": "verified contact address for outreach; confidence=0.62"
-            },
-            {
-              "fieldPath": "estimated_value",
-              "type": "string",
-              "nativeDataType": "string",
-              "description": "estimated commercial value in USD; confidence=0.83"
-            },
-            {
-              "fieldPath": "priority",
-              "type": "string",
-              "nativeDataType": "string",
-              "description": "urgency label from source system; confidence=0.88"
-            },
-            {
-              "fieldPath": "owner",
-              "type": "string",
-              "nativeDataType": "string",
-              "description": "internal accountable team or person; confidence=0.57"
-            }
-          ]
+        "proposal": {
+          "entityType": "dataset",
+          "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+          "changeType": "UPSERT",
+          "aspectName": "schemaMetadata",
+          "aspect": {
+            "value": "{\"platform\":\"cat\",\"version\":0,\"hash\":\"cat-context-agent-demo\",\"platformSchema\":{\"schemaType\":\"CSV\",\"rawSchema\":\"request_id: string\\naccount: string\\nrequest_type: string\\ncontact_email: string\\nestimated_value: string\\npriority: string\\nowner: string\"},\"fields\":[{\"fieldPath\":\"request_id\",\"type\":\"string\",\"nativeDataType\":\"string\",\"description\":\"stable request identifier; confidence=0.99\"},{\"fieldPath\":\"account\",\"type\":\"string\",\"nativeDataType\":\"string\",\"description\":\"customer or account name; confidence=0.95\"},{\"fieldPath\":\"request_type\",\"type\":\"string\",\"nativeDataType\":\"string\",\"description\":\"business workflow category; confidence=0.91\"},{\"fieldPath\":\"contact_email\",\"type\":\"string\",\"nativeDataType\":\"string\",\"description\":\"verified contact address for outreach; confidence=0.62\"},{\"fieldPath\":\"estimated_value\",\"type\":\"string\",\"nativeDataType\":\"string\",\"description\":\"estimated commercial value in USD; confidence=0.83\"},{\"fieldPath\":\"priority\",\"type\":\"string\",\"nativeDataType\":\"string\",\"description\":\"urgency label from source system; confidence=0.88\"},{\"fieldPath\":\"owner\",\"type\":\"string\",\"nativeDataType\":\"string\",\"description\":\"internal accountable team or person; confidence=0.57\"}]}",
+            "contentType": "application/json"
+          }
         }
+      },
+      "preview_aspect": {
+        "platform": "cat",
+        "version": 0,
+        "hash": "cat-context-agent-demo",
+        "platformSchema": {
+          "schemaType": "CSV",
+          "rawSchema": "request_id: string\naccount: string\nrequest_type: string\ncontact_email: string\nestimated_value: string\npriority: string\nowner: string"
+        },
+        "fields": [
+          {
+            "fieldPath": "request_id",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "stable request identifier; confidence=0.99"
+          },
+          {
+            "fieldPath": "account",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "customer or account name; confidence=0.95"
+          },
+          {
+            "fieldPath": "request_type",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "business workflow category; confidence=0.91"
+          },
+          {
+            "fieldPath": "contact_email",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "verified contact address for outreach; confidence=0.62"
+          },
+          {
+            "fieldPath": "estimated_value",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "estimated commercial value in USD; confidence=0.83"
+          },
+          {
+            "fieldPath": "priority",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "urgency label from source system; confidence=0.88"
+          },
+          {
+            "fieldPath": "owner",
+            "type": "string",
+            "nativeDataType": "string",
+            "description": "internal accountable team or person; confidence=0.57"
+          }
+        ]
       }
     },
     {
       "id": "cat-datahub-upsert-ownership",
       "method": "POST",
-      "endpoint": "http://localhost:8080/openapi/entities/v1/",
+      "endpoint": "http://localhost:8080/aspects?action=ingestProposal",
+      "headers": {
+        "content-type": "application/json",
+        "X-RestLi-Protocol-Version": "2.0.0"
+      },
       "aspectName": "ownership",
       "purpose": "Attach a known CAT demo data owner so missing ownership can be detected instead of invented.",
       "body": {
-        "entityType": "dataset",
-        "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
-        "changeType": "UPSERT",
-        "aspectName": "ownership",
-        "aspect": {
-          "owners": [
-            {
-              "owner": "urn:li:corpuser:cat-context-agent",
-              "type": "DATAOWNER"
-            }
-          ]
+        "proposal": {
+          "entityType": "dataset",
+          "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+          "changeType": "UPSERT",
+          "aspectName": "ownership",
+          "aspect": {
+            "value": "{\"owners\":[{\"owner\":\"urn:li:corpuser:cat-context-agent\",\"type\":\"DATAOWNER\"}]}",
+            "contentType": "application/json"
+          }
         }
+      },
+      "preview_aspect": {
+        "owners": [
+          {
+            "owner": "urn:li:corpuser:cat-context-agent",
+            "type": "DATAOWNER"
+          }
+        ]
       }
     },
     {
       "id": "cat-datahub-upsert-glossaryTerms",
       "method": "POST",
-      "endpoint": "http://localhost:8080/openapi/entities/v1/",
+      "endpoint": "http://localhost:8080/aspects?action=ingestProposal",
+      "headers": {
+        "content-type": "application/json",
+        "X-RestLi-Protocol-Version": "2.0.0"
+      },
       "aspectName": "glossaryTerms",
       "purpose": "Mark policy terms such as context-before-action and no unverified outreach.",
       "body": {
-        "entityType": "dataset",
-        "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
-        "changeType": "UPSERT",
-        "aspectName": "glossaryTerms",
-        "aspect": {
-          "terms": [
-            {
-              "term": "urn:li:glossaryTerm:ContextBeforeAction"
-            },
-            {
-              "term": "urn:li:glossaryTerm:HumanApprovalRequired"
-            },
-            {
-              "term": "urn:li:glossaryTerm:NoUnverifiedOutreach"
-            }
-          ]
+        "proposal": {
+          "entityType": "dataset",
+          "entityUrn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+          "changeType": "UPSERT",
+          "aspectName": "glossaryTerms",
+          "aspect": {
+            "value": "{\"terms\":[{\"term\":\"urn:li:glossaryTerm:ContextBeforeAction\"},{\"term\":\"urn:li:glossaryTerm:HumanApprovalRequired\"},{\"term\":\"urn:li:glossaryTerm:NoUnverifiedOutreach\"}]}",
+            "contentType": "application/json"
+          }
         }
+      },
+      "preview_aspect": {
+        "terms": [
+          {
+            "term": "urn:li:glossaryTerm:ContextBeforeAction"
+          },
+          {
+            "term": "urn:li:glossaryTerm:HumanApprovalRequired"
+          },
+          {
+            "term": "urn:li:glossaryTerm:NoUnverifiedOutreach"
+          }
+        ]
       }
     }
   ],

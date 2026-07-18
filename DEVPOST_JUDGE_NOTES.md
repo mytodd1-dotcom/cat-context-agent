@@ -63,7 +63,7 @@ Those commands produce:
 - DataHub-ready dataset properties, schema metadata, ownership, and glossary terms;
 - a dry-run DataHub bridge plan;
 - a DataHub payload preview that shows the aspect bodies prepared for local GMS posting;
-- a live DataHub runbook with prerequisites, exact opt-in post command, acceptance checks, fallback path, and safety boundary;
+- a live DataHub runbook with prerequisites, exact opt-in Rest.li `ingestProposal` post command, acceptance checks, fallback path, and safety boundary;
 - a DataHub readiness doctor that checks the optional local GMS path without posting anything;
 - a DataHub integration checklist that separates no-credential judging from optional local posting;
 - a DataHub claim audit that gives a pass/fail view of aspect coverage, context reads, local-only posting, safety gates, and bounded receipt writes;
@@ -151,14 +151,14 @@ Working and committed:
 - local decision runner;
 - generated DataHub-ready metadata;
 - dry-run DataHub bridge plan;
-- opt-in live DataHub runbook;
+- opt-in live DataHub Rest.li `ingestProposal` runbook;
 - MCP-style read contract;
 - landing page and evidence pack;
 - test coverage.
 
 Simulated by design for the current submission:
 
-- live DataHub GMS posting;
+- live DataHub GMS posting through Rest.li `ingestProposal`;
 - live DataHub MCP reads;
 - production workflow writeback.
 
