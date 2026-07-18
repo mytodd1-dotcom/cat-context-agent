@@ -1,0 +1,88 @@
+{
+  "project": "CAT Context Agent",
+  "challenge": "Build with DataHub: The Agent Hackathon",
+  "category": "Agents That Do Real Work",
+  "repo_url": "https://github.com/mytodd1-dotcom/cat-context-agent",
+  "demo_video": "https://youtu.be/Gcbhl5_YlSM",
+  "evidence_generated_at": "demo-static-run",
+  "summary": {
+    "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+    "total_requests": 3,
+    "decisions": {
+      "needs_approval": 1,
+      "safe_to_queue_internal_task": 1,
+      "blocked": 1
+    },
+    "datahub_entity": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+    "datahub_aspects": [
+      "datasetProperties",
+      "schemaMetadata",
+      "ownership",
+      "glossaryTerms"
+    ],
+    "mcp_style_tool_reads": [
+      "datahub.get_entity",
+      "datahub.get_lineage",
+      "cat.get_agent_context_packet"
+    ],
+    "low_confidence_fields": [
+      "contact_email",
+      "owner"
+    ]
+  },
+  "safety_claims": [
+    "The agent reads schema, ownership, lineage, and policy context before recommending action.",
+    "Internal tasks can be queued when owner/contact context is sufficient.",
+    "External outreach is approval-gated or blocked when owner/contact context is missing.",
+    "Every recommendation emits a receipt with source asset, checked context, confidence, and blocked action."
+  ],
+  "judge_commands": [
+    "npm install",
+    "npm run demo",
+    "npm run datahub:bridge",
+    "npm run context:read",
+    "npm run judge:pack",
+    "npm test"
+  ],
+  "artifacts_to_inspect": [
+    "examples/cat-context-agent/messy-business-requests.csv",
+    "examples/cat-context-agent/generated-agent-output.json",
+    "examples/cat-context-agent/generated-datahub-metadata.json",
+    "examples/cat-context-agent/generated-datahub-bridge-plan.json",
+    "examples/cat-context-agent/generated-mcp-context-read.json",
+    "hackathon-assets/cat-context-agent-demo-preview.mp4"
+  ],
+  "decisions": [
+    {
+      "request_id": "REQ-1042",
+      "account": "Acme HVAC",
+      "decision": "needs_approval",
+      "missing_context": [
+        "owner"
+      ],
+      "safe_next_step": "Ask for missing customer contact owner before follow-up",
+      "blocked_action": "Do not send external follow-up",
+      "confidence": 0.78
+    },
+    {
+      "request_id": "REQ-1043",
+      "account": "Northline Dental",
+      "decision": "safe_to_queue_internal_task",
+      "missing_context": [],
+      "safe_next_step": "Create finance review task for invoice mismatch",
+      "blocked_action": null,
+      "confidence": 0.91
+    },
+    {
+      "request_id": "REQ-1044",
+      "account": "Cedar Auto",
+      "decision": "blocked",
+      "missing_context": [
+        "verified_contact"
+      ],
+      "safe_next_step": "Request a verified contact before customer action",
+      "blocked_action": "Do not guess, scrape, or invent contact details",
+      "confidence": 0.69
+    }
+  ]
+}

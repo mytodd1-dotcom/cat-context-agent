@@ -88,6 +88,7 @@ Generate it after running the demo and bridge:
 npm run demo
 npm run datahub:bridge
 npm run context:read
+npm run judge:pack
 ```
 
 You can also inspect one request:

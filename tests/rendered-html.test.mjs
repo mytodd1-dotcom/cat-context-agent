@@ -58,6 +58,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /DataHub-style context map/);
   assert.match(readme, /generated-datahub-metadata\.json/);
   assert.match(readme, /generated-mcp-context-read\.json/);
+  assert.match(readme, /judge-evidence-pack\.md/);
   assert.match(readme, /DataHub MCP \/ Agent Context Kit reads/);
   assert.doesNotMatch(page + layout, /codex-preview|_sites-preview|SkeletonPreview/);
 });
@@ -177,4 +178,39 @@ test("builds an MCP-style context read plan before agent action", async () => {
   );
   assert.ok(contextRead.context.low_confidence_fields.some((field) => field.field === "owner"));
   assert.ok(contextRead.context.blocked_actions.includes("send_external_outreach_without_verified_contact"));
+});
+
+test("builds a judge evidence pack from generated artifacts", async () => {
+  await execFileAsync("node", ["scripts/cat-context-demo.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+  await execFileAsync("node", ["scripts/datahub-local-bridge.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+  await execFileAsync("node", ["scripts/cat-context-provider.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  const { stdout } = await execFileAsync("node", ["scripts/judge-evidence-pack.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /CAT Context Agent/);
+  assert.match(stdout, /datasetProperties/);
+  assert.match(stdout, /datahub\.get_entity/);
+  assert.match(stdout, /judge-evidence-pack\.md/);
+
+  const [pack, packMarkdown] = await Promise.all([
+    readFile(new URL("../hackathon-assets/judge-evidence-pack.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../hackathon-assets/judge-evidence-pack.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(pack.summary.total_requests, 3);
+  assert.equal(pack.summary.decisions.needs_approval, 1);
+  assert.equal(pack.summary.decisions.blocked, 1);
+  assert.ok(pack.summary.datahub_aspects.includes("ownership"));
+  assert.ok(pack.summary.mcp_style_tool_reads.includes("cat.get_agent_context_packet"));
+  assert.ok(pack.safety_claims.some((claim) => /External outreach/.test(claim)));
+  assert.match(packMarkdown, /REQ-1042/);
+  assert.match(packMarkdown, /Do not guess, scrape, or invent contact details/);
 });

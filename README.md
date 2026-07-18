@@ -58,6 +58,14 @@ npm run context:read
 
 That command writes [`examples/cat-context-agent/generated-mcp-context-read.json`](./examples/cat-context-agent/generated-mcp-context-read.json), a local MCP/DataHub-style read plan showing which context the agent checks before queueing, approval-gating, or blocking work.
 
+To generate the judge evidence pack:
+
+```bash
+npm run judge:pack
+```
+
+That command writes [`hackathon-assets/judge-evidence-pack.md`](./hackathon-assets/judge-evidence-pack.md) and [`hackathon-assets/judge-evidence-pack.json`](./hackathon-assets/judge-evidence-pack.json), summarizing the reproducible commands, DataHub aspects, MCP-style context reads, safety claims, and decision receipts.
+
 ## DataHub integration path
 
 The current demo is intentionally runnable without Docker or credentials. It produces DataHub-ready metadata so judges can inspect the context layer before the full live integration is wired.
@@ -91,6 +99,7 @@ npm install
 npm run demo
 npm run datahub:bridge
 npm run context:read
+npm run judge:pack
 npm run dev
 npm run build
 ```

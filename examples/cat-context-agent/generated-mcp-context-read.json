@@ -2,7 +2,7 @@
   "protocol": "cat-mcp-context-read-v0",
   "generated_at": "demo-static-run",
   "mode": "local-dry-run",
-  "request_filter": "REQ-1042",
+  "request_filter": "all",
   "provider_boundary": "This artifact simulates the MCP/DataHub read contract while keeping the hackathon demo runnable without Docker, credentials, or external network access.",
   "tool_read_plan": [
     {
@@ -37,7 +37,7 @@
       "purpose": "Read CAT's minimum action-safety contract derived from DataHub context.",
       "arguments": {
         "asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
-        "request_id": "REQ-1042"
+        "request_id": "all"
       },
       "expected_reads": [
         "governance",
@@ -95,6 +95,42 @@
         "context:policy",
         "policy:cat-agent-context-v0"
       ]
+    },
+    {
+      "request_id": "REQ-1043",
+      "decision": "safe_to_queue_internal_task",
+      "missing_context": [],
+      "safe_next_step": "Create finance review task for invoice mismatch",
+      "blocked_action": null,
+      "confidence": 0.91,
+      "context_sources": [
+        "urn:li:dataset:(cat,messy_business_requests,PROD)",
+        "context:schema",
+        "context:owner",
+        "context:contact",
+        "context:lineage",
+        "context:policy",
+        "policy:cat-agent-context-v0"
+      ]
+    },
+    {
+      "request_id": "REQ-1044",
+      "decision": "blocked",
+      "missing_context": [
+        "verified_contact"
+      ],
+      "safe_next_step": "Request a verified contact before customer action",
+      "blocked_action": "Do not guess, scrape, or invent contact details",
+      "confidence": 0.69,
+      "context_sources": [
+        "urn:li:dataset:(cat,messy_business_requests,PROD)",
+        "context:schema",
+        "context:owner",
+        "context:contact",
+        "context:lineage",
+        "context:policy",
+        "policy:cat-agent-context-v0"
+      ]
     }
   ],
   "approval_queue": [
@@ -104,5 +140,11 @@
       "reason": "Ask for missing customer contact owner before follow-up"
     }
   ],
-  "blocked": []
+  "blocked": [
+    {
+      "request_id": "REQ-1044",
+      "blocked_action": "Do not guess, scrape, or invent contact details",
+      "reason": "Verified contact context is missing, so the agent must not infer or scrape it."
+    }
+  ]
 }
