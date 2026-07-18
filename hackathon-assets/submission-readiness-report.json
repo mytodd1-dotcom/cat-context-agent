@@ -48,6 +48,11 @@
       "name": "judge pack",
       "ok": true,
       "details": "Expected judge evidence pack to summarize commands, safety claims, and inspectable artifacts."
+    },
+    {
+      "name": "lineage decision map",
+      "ok": true,
+      "details": "Expected source, DataHub context reads, decision branches, and receipt routing to be mapped."
     }
   ],
   "artifacts": [
@@ -56,6 +61,7 @@
     "examples/cat-context-agent/generated-datahub-bridge-plan.json",
     "examples/cat-context-agent/generated-mcp-context-read.json",
     "hackathon-assets/context-tool-contracts.md",
+    "hackathon-assets/lineage-decision-map.md",
     "hackathon-assets/judge-evidence-pack.md",
     "hackathon-assets/submission-readiness-report.md"
   ]

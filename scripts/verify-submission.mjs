@@ -6,6 +6,7 @@ import { runContextToolContracts } from "./context-tool-contracts.mjs";
 import { runDemo } from "./cat-context-demo.mjs";
 import { runBridge } from "./datahub-local-bridge.mjs";
 import { runJudgeEvidencePack } from "./judge-evidence-pack.mjs";
+import { runLineageDecisionMap } from "./lineage-decision-map.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const assetDir = resolve(root, "hackathon-assets");
@@ -58,6 +59,7 @@ export async function runSubmissionVerify() {
   const bridge = await runBridge();
   const contextRead = await runContextProvider();
   const toolContracts = await runContextToolContracts();
+  const lineageMap = await runLineageDecisionMap();
   const pack = await runJudgeEvidencePack();
 
   const datahubMetadata = await readJson(resolve(root, "examples/cat-context-agent/generated-datahub-metadata.json"));
@@ -109,6 +111,13 @@ export async function runSubmissionVerify() {
         pack.artifacts_to_inspect.includes("examples/cat-context-agent/generated-mcp-context-read.json"),
       "Expected judge evidence pack to summarize commands, safety claims, and inspectable artifacts.",
     ),
+    check(
+      "lineage decision map",
+      lineageMap.nodes.some((node) => node.id === "datahub_asset") &&
+        lineageMap.edges.some((edge) => edge.from === "context_reads" && edge.to.startsWith("decision_")) &&
+        lineageMap.decisions.length === 3,
+      "Expected source, DataHub context reads, decision branches, and receipt routing to be mapped.",
+    ),
   ];
 
   for (const item of checks) {
@@ -133,6 +142,7 @@ export async function runSubmissionVerify() {
       "examples/cat-context-agent/generated-datahub-bridge-plan.json",
       "examples/cat-context-agent/generated-mcp-context-read.json",
       "hackathon-assets/context-tool-contracts.md",
+      "hackathon-assets/lineage-decision-map.md",
       "hackathon-assets/judge-evidence-pack.md",
       "hackathon-assets/submission-readiness-report.md",
     ],

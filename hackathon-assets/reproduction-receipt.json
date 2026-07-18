@@ -13,16 +13,20 @@
       "detail": "3 request-level traces connect source rows, context reads, decisions, and receipts."
     },
     {
+      "name": "lineage decision map",
+      "detail": "9 nodes and 11 edges show source → DataHub context → decisions → receipts."
+    },
+    {
       "name": "live DataHub runbook",
       "detail": "5 operator commands document the opt-in local DataHub post and verification path."
     },
     {
       "name": "submission readiness",
-      "detail": "6 readiness checks passed."
+      "detail": "7 readiness checks passed."
     },
     {
       "name": "artifact validation",
-      "detail": "8 generated-artifact checks passed."
+      "detail": "9 generated-artifact checks passed."
     },
     {
       "name": "safety boundary",
@@ -50,13 +54,14 @@
       "datahub.get_lineage",
       "cat.get_agent_context_packet"
     ],
-    "artifact_validation_checks": 8
+    "artifact_validation_checks": 9
   },
   "reports": [
     "hackathon-assets/judge-evidence-pack.md",
     "hackathon-assets/datahub-payload-preview.md",
     "hackathon-assets/live-datahub-runbook.md",
     "hackathon-assets/decision-trace.md",
+    "hackathon-assets/lineage-decision-map.md",
     "hackathon-assets/submission-readiness-report.md",
     "hackathon-assets/artifact-validation-report.md",
     "hackathon-assets/reproduction-receipt.md"

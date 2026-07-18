@@ -38,6 +38,11 @@
       "detail": "Judge pack should point to context contracts and include the blocked-action receipt."
     },
     {
+      "name": "lineage decision map",
+      "ok": true,
+      "detail": "Lineage map should show the DataHub asset, context reads, decision loop, and all three decision branches."
+    },
+    {
       "name": "readiness report",
       "ok": true,
       "detail": "Readiness report should be ready, all checks passing, and include context tool contracts."
@@ -50,6 +55,7 @@
     "examples/cat-context-agent/generated-mcp-context-read.json",
     "hackathon-assets/context-tool-contracts.json",
     "hackathon-assets/live-datahub-runbook.json",
+    "hackathon-assets/lineage-decision-map.json",
     "hackathon-assets/judge-evidence-pack.json",
     "hackathon-assets/submission-readiness-report.json"
   ]

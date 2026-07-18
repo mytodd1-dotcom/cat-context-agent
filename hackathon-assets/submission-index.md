@@ -19,6 +19,7 @@ A judge-first index for verifying the DataHub Agent Hackathon submission without
 | 4. Run the one-command proof | `hackathon-assets/reproduction-receipt.md`<br><code>npm run evidence:reproduce</code> | Regenerates the evidence chain and receipt from local source. |
 | 5. Inspect DataHub context artifacts | `examples/cat-context-agent/generated-datahub-bridge-plan.json` | Shows the datasetProperties, schemaMetadata, ownership, and glossaryTerms handoff. |
 | 6. Inspect the MCP-style read contract | `examples/cat-context-agent/generated-mcp-context-read.json` | Shows the agent reading entity, lineage, and CAT context before action. |
+| 7. Inspect the lineage decision map | `hackathon-assets/lineage-decision-map.md`<br><code>npm run lineage:map</code> | Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph. |
 
 ## Proof commands
 
@@ -26,6 +27,7 @@ A judge-first index for verifying the DataHub Agent Hackathon submission without
 npm install
 npm run demo
 npm run submission:verify
+npm run lineage:map
 npm run evidence:reproduce
 npm run judge:brief
 npm run devpost:copy
@@ -44,11 +46,13 @@ npm run ci:local
 
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/context-tool-contracts.md`
+- `hackathon-assets/lineage-decision-map.md`
 
 ### Unsafe work is approval-gated or blocked.
 
 - `examples/cat-context-agent/generated-agent-output.json`
 - `hackathon-assets/decision-trace.md`
+- `hackathon-assets/lineage-decision-map.md`
 - `hackathon-assets/judge-evidence-pack.md`
 
 ### The submission is reproducible.

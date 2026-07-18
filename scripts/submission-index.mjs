@@ -55,11 +55,19 @@ const submissionIndex = {
       artifact: "examples/cat-context-agent/generated-mcp-context-read.json",
       why: "Shows the agent reading entity, lineage, and CAT context before action.",
     },
+    {
+      step: 7,
+      title: "Inspect the lineage decision map",
+      artifact: "hackathon-assets/lineage-decision-map.md",
+      command: "npm run lineage:map",
+      why: "Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph.",
+    },
   ],
   proof_commands: [
     "npm install",
     "npm run demo",
     "npm run submission:verify",
+    "npm run lineage:map",
     "npm run evidence:reproduce",
     "npm run judge:brief",
     "npm run devpost:copy",
@@ -79,6 +87,7 @@ const submissionIndex = {
       evidence: [
         "examples/cat-context-agent/generated-mcp-context-read.json",
         "hackathon-assets/context-tool-contracts.md",
+        "hackathon-assets/lineage-decision-map.md",
       ],
     },
     {
@@ -86,6 +95,7 @@ const submissionIndex = {
       evidence: [
         "examples/cat-context-agent/generated-agent-output.json",
         "hackathon-assets/decision-trace.md",
+        "hackathon-assets/lineage-decision-map.md",
         "hackathon-assets/judge-evidence-pack.md",
       ],
     },

@@ -1,0 +1,165 @@
+{
+  "protocol": "cat-lineage-decision-map-v0",
+  "generated_at": "demo-static-run",
+  "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+  "context_tools": [
+    "datahub.get_entity",
+    "datahub.get_lineage",
+    "cat.get_agent_context_packet"
+  ],
+  "nodes": [
+    {
+      "id": "uploaded_csv",
+      "label": "Uploaded messy CSV",
+      "type": "source",
+      "evidence": "examples/cat-context-agent/messy-business-requests.csv"
+    },
+    {
+      "id": "datahub_asset",
+      "label": "DataHub dataset asset",
+      "type": "catalog",
+      "evidence": "examples/cat-context-agent/generated-datahub-metadata.json"
+    },
+    {
+      "id": "context_reads",
+      "label": "MCP/DataHub context reads",
+      "type": "context",
+      "evidence": "examples/cat-context-agent/generated-mcp-context-read.json"
+    },
+    {
+      "id": "cat_decision_loop",
+      "label": "CAT agent decision loop",
+      "type": "agent",
+      "evidence": "hackathon-assets/decision-trace.md"
+    },
+    {
+      "id": "approval_queue",
+      "label": "Approval queue",
+      "type": "workflow",
+      "evidence": "examples/cat-context-agent/generated-agent-output.json"
+    },
+    {
+      "id": "receipt_store",
+      "label": "Receipt artifacts",
+      "type": "receipt",
+      "evidence": "examples/cat-context-agent/agent-receipts.json"
+    },
+    {
+      "id": "decision_REQ-1042",
+      "label": "REQ-1042: needs_approval",
+      "type": "decision",
+      "evidence": "cat-demo-REQ-1042",
+      "request_id": "REQ-1042",
+      "account": "Acme HVAC",
+      "safe_next_step": "Ask for missing customer contact owner before follow-up",
+      "blocked_action": "Do not send external follow-up",
+      "confidence": 0.78
+    },
+    {
+      "id": "decision_REQ-1043",
+      "label": "REQ-1043: safe_to_queue_internal_task",
+      "type": "decision",
+      "evidence": "cat-demo-REQ-1043",
+      "request_id": "REQ-1043",
+      "account": "Northline Dental",
+      "safe_next_step": "Create finance review task for invoice mismatch",
+      "blocked_action": null,
+      "confidence": 0.91
+    },
+    {
+      "id": "decision_REQ-1044",
+      "label": "REQ-1044: blocked",
+      "type": "decision",
+      "evidence": "cat-demo-REQ-1044",
+      "request_id": "REQ-1044",
+      "account": "Cedar Auto",
+      "safe_next_step": "Request a verified contact before customer action",
+      "blocked_action": "Do not guess, scrape, or invent contact details",
+      "confidence": 0.69
+    }
+  ],
+  "edges": [
+    {
+      "from": "uploaded_csv",
+      "to": "datahub_asset",
+      "label": "catalogs as"
+    },
+    {
+      "from": "datahub_asset",
+      "to": "context_reads",
+      "label": "read before action"
+    },
+    {
+      "from": "context_reads",
+      "to": "cat_decision_loop",
+      "label": "grounds"
+    },
+    {
+      "from": "cat_decision_loop",
+      "to": "approval_queue",
+      "label": "routes uncertain work"
+    },
+    {
+      "from": "cat_decision_loop",
+      "to": "receipt_store",
+      "label": "writes evidence"
+    },
+    {
+      "from": "context_reads",
+      "to": "decision_REQ-1042",
+      "label": "context applied"
+    },
+    {
+      "from": "decision_REQ-1042",
+      "to": "receipt_store",
+      "label": "needs_approval"
+    },
+    {
+      "from": "context_reads",
+      "to": "decision_REQ-1043",
+      "label": "context applied"
+    },
+    {
+      "from": "decision_REQ-1043",
+      "to": "approval_queue",
+      "label": "safe_to_queue_internal_task"
+    },
+    {
+      "from": "context_reads",
+      "to": "decision_REQ-1044",
+      "label": "context applied"
+    },
+    {
+      "from": "decision_REQ-1044",
+      "to": "receipt_store",
+      "label": "blocked"
+    }
+  ],
+  "decisions": [
+    {
+      "request_id": "REQ-1042",
+      "account": "Acme HVAC",
+      "decision": "needs_approval",
+      "safe_next_step": "Ask for missing customer contact owner before follow-up",
+      "blocked_action": "Do not send external follow-up",
+      "receipt_id": "cat-demo-REQ-1042"
+    },
+    {
+      "request_id": "REQ-1043",
+      "account": "Northline Dental",
+      "decision": "safe_to_queue_internal_task",
+      "safe_next_step": "Create finance review task for invoice mismatch",
+      "blocked_action": null,
+      "receipt_id": "cat-demo-REQ-1043"
+    },
+    {
+      "request_id": "REQ-1044",
+      "account": "Cedar Auto",
+      "decision": "blocked",
+      "safe_next_step": "Request a verified contact before customer action",
+      "blocked_action": "Do not guess, scrape, or invent contact details",
+      "receipt_id": "cat-demo-REQ-1044"
+    }
+  ],
+  "mermaid": "flowchart LR\n  uploaded_csv[\"Uploaded messy CSV\"]\n  datahub_asset[\"DataHub dataset asset\"]\n  context_reads[\"MCP/DataHub context reads\"]\n  cat_decision_loop[\"CAT agent decision loop\"]\n  approval_queue[\"Approval queue\"]\n  receipt_store[\"Receipt artifacts\"]\n  decision_REQ_1042{{\"REQ-1042: needs_approval\"}}\n  decision_REQ_1043{{\"REQ-1043: safe_to_queue_internal_task\"}}\n  decision_REQ_1044{{\"REQ-1044: blocked\"}}\n  uploaded_csv -->|\"catalogs as\"| datahub_asset\n  datahub_asset -->|\"read before action\"| context_reads\n  context_reads -->|\"grounds\"| cat_decision_loop\n  cat_decision_loop -->|\"routes uncertain work\"| approval_queue\n  cat_decision_loop -->|\"writes evidence\"| receipt_store\n  context_reads -->|\"context applied\"| decision_REQ_1042\n  decision_REQ_1042 -->|\"needs_approval\"| receipt_store\n  context_reads -->|\"context applied\"| decision_REQ_1043\n  decision_REQ_1043 -->|\"safe_to_queue_internal_task\"| approval_queue\n  context_reads -->|\"context applied\"| decision_REQ_1044\n  decision_REQ_1044 -->|\"blocked\"| receipt_store"
+}

@@ -41,6 +41,7 @@ npm run datahub:bridge
 npm run datahub:payload
 npm run datahub:runbook
 npm run context:read
+npm run lineage:map
 npm run judge:pack
 npm test
 ```
@@ -55,6 +56,7 @@ npm test
 - `hackathon-assets/live-datahub-runbook.md`
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/decision-trace.md`
+- `hackathon-assets/lineage-decision-map.md`
 - `hackathon-assets/context-tool-contracts.md`
 - `hackathon-assets/artifact-validation-report.md`
 - `hackathon-assets/reproduction-receipt.md`

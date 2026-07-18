@@ -101,7 +101,7 @@ const verificationCommands = [
   {
     label: "Full local check",
     command: "npm run ci:local",
-    expected: "Runs the full artifact pipeline, build, and 18 render/evidence tests.",
+    expected: "Runs the full artifact pipeline, build, and 19 render/evidence tests.",
   },
   {
     label: "Context read",
@@ -226,6 +226,12 @@ const runnableArtifacts = [
     command: "npm run context:read",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/examples/cat-context-agent/generated-mcp-context-read.json",
     text: "Simulates datahub.get_entity, datahub.get_lineage, and CAT's agent context packet before action.",
+  },
+  {
+    label: "Lineage decision map",
+    command: "npm run lineage:map",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/lineage-decision-map.md",
+    text: "Shows the source → DataHub context → agent decision → approval queue → receipt chain as a Mermaid map.",
   },
   {
     label: "Judge evidence pack",

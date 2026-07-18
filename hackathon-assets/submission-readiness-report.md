@@ -11,6 +11,7 @@ Generated: `demo-static-run`
 - ✅ **context tool contracts** — Expected machine-readable contracts for the DataHub reads, CAT context packet read, and receipt write.
 - ✅ **safety boundary** — Expected unverified external outreach to remain blocked.
 - ✅ **judge pack** — Expected judge evidence pack to summarize commands, safety claims, and inspectable artifacts.
+- ✅ **lineage decision map** — Expected source, DataHub context reads, decision branches, and receipt routing to be mapped.
 
 ## Summary
 
@@ -28,5 +29,6 @@ Generated: `demo-static-run`
 - `examples/cat-context-agent/generated-datahub-bridge-plan.json`
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/context-tool-contracts.md`
+- `hackathon-assets/lineage-decision-map.md`
 - `hackathon-assets/judge-evidence-pack.md`
 - `hackathon-assets/submission-readiness-report.md`

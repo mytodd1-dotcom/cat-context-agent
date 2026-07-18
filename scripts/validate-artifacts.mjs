@@ -14,6 +14,8 @@ const paths = {
   contracts: resolve(assetDir, "context-tool-contracts.json"),
   liveRunbook: resolve(assetDir, "live-datahub-runbook.json"),
   liveRunbookMarkdown: resolve(assetDir, "live-datahub-runbook.md"),
+  lineageMap: resolve(assetDir, "lineage-decision-map.json"),
+  lineageMapMarkdown: resolve(assetDir, "lineage-decision-map.md"),
   judgePack: resolve(assetDir, "judge-evidence-pack.json"),
   readiness: resolve(assetDir, "submission-readiness-report.json"),
   judgePackMarkdown: resolve(assetDir, "judge-evidence-pack.md"),
@@ -58,6 +60,8 @@ export async function runArtifactValidation() {
     contracts,
     liveRunbook,
     liveRunbookMarkdown,
+    lineageMap,
+    lineageMapMarkdown,
     judgePack,
     readiness,
     judgePackMarkdown,
@@ -69,6 +73,8 @@ export async function runArtifactValidation() {
     readJson(paths.contracts),
     readJson(paths.liveRunbook),
     readFile(paths.liveRunbookMarkdown, "utf8"),
+    readJson(paths.lineageMap),
+    readFile(paths.lineageMapMarkdown, "utf8"),
     readJson(paths.judgePack),
     readJson(paths.readiness),
     readFile(paths.judgePackMarkdown, "utf8"),
@@ -123,8 +129,18 @@ export async function runArtifactValidation() {
     result(
       "judge pack references generated evidence",
       judgePack.artifacts_to_inspect.includes("hackathon-assets/context-tool-contracts.md") &&
+        judgePack.artifacts_to_inspect.includes("hackathon-assets/lineage-decision-map.md") &&
         judgePackMarkdown.includes("Do not guess, scrape, or invent contact details"),
       "Judge pack should point to context contracts and include the blocked-action receipt.",
+    ),
+    result(
+      "lineage decision map",
+      lineageMap.protocol === "cat-lineage-decision-map-v0" &&
+        lineageMap.nodes.some((node) => node.id === "datahub_asset") &&
+        lineageMap.edges.some((edge) => edge.from === "context_reads" && edge.to === "cat_decision_loop") &&
+        lineageMap.decisions.length === 3 &&
+        lineageMapMarkdown.includes("flowchart LR"),
+      "Lineage map should show the DataHub asset, context reads, decision loop, and all three decision branches.",
     ),
     result(
       "readiness report",
@@ -146,6 +162,7 @@ export async function runArtifactValidation() {
       "examples/cat-context-agent/generated-mcp-context-read.json",
       "hackathon-assets/context-tool-contracts.json",
       "hackathon-assets/live-datahub-runbook.json",
+      "hackathon-assets/lineage-decision-map.json",
       "hackathon-assets/judge-evidence-pack.json",
       "hackathon-assets/submission-readiness-report.json",
     ],
