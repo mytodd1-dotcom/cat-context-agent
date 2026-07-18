@@ -100,6 +100,14 @@ npm run evidence:reproduce
 
 That command reruns submission verification and artifact validation, then writes a one-command proof receipt at [`hackathon-assets/reproduction-receipt.md`](./hackathon-assets/reproduction-receipt.md) and [`hackathon-assets/reproduction-receipt.json`](./hackathon-assets/reproduction-receipt.json).
 
+To generate the compact judge scoring brief:
+
+```bash
+npm run judge:brief
+```
+
+That command reruns the one-command proof path and writes a claim-to-evidence map at [`hackathon-assets/judge-scoring-brief.md`](./hackathon-assets/judge-scoring-brief.md) and [`hackathon-assets/judge-scoring-brief.json`](./hackathon-assets/judge-scoring-brief.json).
+
 A GitHub Actions template for the same checks is available at [`hackathon-assets/github-actions-ci-template.yml`](./hackathon-assets/github-actions-ci-template.yml). It is kept as a template because the current OAuth token cannot publish workflow files without GitHub's `workflow` scope.
 
 To run the local equivalent of that CI recipe:
@@ -108,7 +116,7 @@ To run the local equivalent of that CI recipe:
 npm run ci:local
 ```
 
-That command checks `npm ci --dry-run`, regenerates the context contracts and submission readiness report, validates artifacts, and runs the full build/test suite.
+That command checks `npm ci --dry-run`, regenerates the context contracts, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, and runs the full build/test suite.
 
 ## DataHub integration path
 
@@ -148,6 +156,7 @@ npm run judge:pack
 npm run submission:verify
 npm run artifacts:validate
 npm run evidence:reproduce
+npm run judge:brief
 npm run ci:local
 npm run dev
 npm run build

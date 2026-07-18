@@ -52,4 +52,5 @@ npm test
 - `hackathon-assets/context-tool-contracts.md`
 - `hackathon-assets/artifact-validation-report.md`
 - `hackathon-assets/reproduction-receipt.md`
+- `hackathon-assets/judge-scoring-brief.md`
 - `hackathon-assets/cat-context-agent-demo-preview.mp4`

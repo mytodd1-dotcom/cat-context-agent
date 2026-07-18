@@ -17,7 +17,8 @@
     "submission:verify": "node scripts/verify-submission.mjs",
     "artifacts:validate": "node scripts/validate-artifacts.mjs",
     "evidence:reproduce": "node scripts/reproduce-evidence.mjs",
-    "ci:local": "npm ci --dry-run && npm run context:contracts && npm run submission:verify && npm run artifacts:validate && npm test",
+    "judge:brief": "node scripts/judge-scoring-brief.mjs",
+    "ci:local": "npm ci --dry-run && npm run context:contracts && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm test",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"
