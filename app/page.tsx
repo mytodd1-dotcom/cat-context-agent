@@ -27,6 +27,7 @@ const demoArtifacts = [
 
 const buildTracks = [
   ["Live demo", "cat-context-agent.flyguy.chatgpt.site"],
+  ["Demo video", "youtu.be/Gcbhl5_YlSM"],
   ["Challenge", "Agents That Do Real Work"],
   ["Core platform", "DataHub OSS + MCP Server"],
   ["Agent context", "Agent Context Kit + DataHub Skills"],
@@ -34,6 +35,12 @@ const buildTracks = [
 ];
 
 const runnableArtifacts = [
+  {
+    label: "Demo video",
+    command: "watch the 2-minute walkthrough",
+    href: "https://youtu.be/Gcbhl5_YlSM",
+    text: "A quick judge-facing walkthrough of the context-before-action workflow and evidence chain.",
+  },
   {
     label: "One-command proof",
     command: "npm run evidence:reproduce",
