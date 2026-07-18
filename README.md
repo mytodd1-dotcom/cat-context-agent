@@ -68,6 +68,14 @@ npm run judge:pack
 
 That command writes [`hackathon-assets/judge-evidence-pack.md`](./hackathon-assets/judge-evidence-pack.md) and [`hackathon-assets/judge-evidence-pack.json`](./hackathon-assets/judge-evidence-pack.json), summarizing the reproducible commands, DataHub aspects, MCP-style context reads, safety claims, and decision receipts.
 
+To regenerate and verify the full submission evidence chain:
+
+```bash
+npm run submission:verify
+```
+
+That command reruns the demo, DataHub bridge plan, MCP-style context read, and judge evidence pack, then writes [`hackathon-assets/submission-readiness-report.md`](./hackathon-assets/submission-readiness-report.md) and [`hackathon-assets/submission-readiness-report.json`](./hackathon-assets/submission-readiness-report.json).
+
 ## DataHub integration path
 
 The current demo is intentionally runnable without Docker or credentials. It produces DataHub-ready metadata so judges can inspect the context layer before the full live integration is wired.
@@ -102,6 +110,7 @@ npm run demo
 npm run datahub:bridge
 npm run context:read
 npm run judge:pack
+npm run submission:verify
 npm run dev
 npm run build
 ```

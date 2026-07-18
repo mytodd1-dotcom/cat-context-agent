@@ -1,0 +1,56 @@
+{
+  "status": "ready",
+  "generated_at": "demo-static-run",
+  "summary": {
+    "total_requests": 3,
+    "safe_to_queue": 1,
+    "needs_approval": 1,
+    "blocked": 1,
+    "datahub_aspects": [
+      "datasetProperties",
+      "schemaMetadata",
+      "ownership",
+      "glossaryTerms"
+    ],
+    "mcp_style_tool_reads": [
+      "datahub.get_entity",
+      "datahub.get_lineage",
+      "cat.get_agent_context_packet"
+    ]
+  },
+  "checks": [
+    {
+      "name": "demo decision totals",
+      "ok": true,
+      "details": "Expected 3 requests: 1 safe internal task, 1 approval-required task, and 1 blocked task."
+    },
+    {
+      "name": "DataHub metadata payload",
+      "ok": true,
+      "details": "Expected dataset URN plus datasetProperties, schemaMetadata, ownership, and glossaryTerms aspects."
+    },
+    {
+      "name": "MCP-style context reads",
+      "ok": true,
+      "details": "Expected the agent read path to include DataHub entity, DataHub lineage, and CAT context packet reads."
+    },
+    {
+      "name": "safety boundary",
+      "ok": true,
+      "details": "Expected unverified external outreach to remain blocked."
+    },
+    {
+      "name": "judge pack",
+      "ok": true,
+      "details": "Expected judge evidence pack to summarize commands, safety claims, and inspectable artifacts."
+    }
+  ],
+  "artifacts": [
+    "examples/cat-context-agent/generated-agent-output.json",
+    "examples/cat-context-agent/generated-datahub-metadata.json",
+    "examples/cat-context-agent/generated-datahub-bridge-plan.json",
+    "examples/cat-context-agent/generated-mcp-context-read.json",
+    "hackathon-assets/judge-evidence-pack.md",
+    "hackathon-assets/submission-readiness-report.md"
+  ]
+}

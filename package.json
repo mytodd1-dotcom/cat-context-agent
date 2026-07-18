@@ -13,6 +13,7 @@
     "datahub:bridge": "node scripts/datahub-local-bridge.mjs",
     "context:read": "node scripts/cat-context-provider.mjs",
     "judge:pack": "node scripts/judge-evidence-pack.mjs",
+    "submission:verify": "node scripts/verify-submission.mjs",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"

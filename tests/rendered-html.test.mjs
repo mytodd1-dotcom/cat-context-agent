@@ -34,6 +34,7 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /messy CSV, context map, approval queue, receipt JSON/);
   assert.match(html, /RUNNABLE EVIDENCE/);
   assert.match(html, /npm run datahub:bridge/);
+  assert.match(html, /npm run judge:pack/);
   assert.match(html, /judge-evidence-pack\.md/);
   assert.doesNotMatch(html, /Revenue Leak Audit|Get a 3-leak preview|Revenue Leak Scan/i);
 });
@@ -67,11 +68,13 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /generated-datahub-metadata\.json/);
   assert.match(readme, /generated-mcp-context-read\.json/);
   assert.match(readme, /judge-evidence-pack\.md/);
+  assert.match(readme, /submission-readiness-report\.md/);
   assert.match(readme, /DEVPOST_JUDGE_NOTES\.md/);
   assert.match(readme, /DataHub MCP \/ Agent Context Kit reads/);
   assert.match(judgeNotes, /30-second version/);
   assert.match(judgeNotes, /context before action/);
   assert.match(judgeNotes, /generated-datahub-bridge-plan\.json/);
+  assert.match(judgeNotes, /submission readiness report/);
   assert.match(judgeNotes, /What is simulated vs\. live/);
   assert.match(judgeNotes, /DATAHUB_GMS_URL=http:\/\/localhost:8080 npm run datahub:bridge -- --post/);
   assert.doesNotMatch(page + layout, /codex-preview|_sites-preview|SkeletonPreview/);
@@ -227,4 +230,29 @@ test("builds a judge evidence pack from generated artifacts", async () => {
   assert.ok(pack.safety_claims.some((claim) => /External outreach/.test(claim)));
   assert.match(packMarkdown, /REQ-1042/);
   assert.match(packMarkdown, /Do not guess, scrape, or invent contact details/);
+});
+
+test("verifies the complete submission evidence chain", async () => {
+  const { stdout } = await execFileAsync("node", ["scripts/verify-submission.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /"status": "ready"/);
+  assert.match(stdout, /datasetProperties/);
+  assert.match(stdout, /datahub\.get_entity/);
+  assert.match(stdout, /submission-readiness-report\.md/);
+
+  const [report, reportMarkdown] = await Promise.all([
+    readFile(new URL("../hackathon-assets/submission-readiness-report.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../hackathon-assets/submission-readiness-report.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(report.status, "ready");
+  assert.equal(report.checks.length, 5);
+  assert.ok(report.checks.every((item) => item.ok));
+  assert.equal(report.summary.total_requests, 3);
+  assert.ok(report.summary.datahub_aspects.includes("glossaryTerms"));
+  assert.ok(report.summary.mcp_style_tool_reads.includes("cat.get_agent_context_packet"));
+  assert.match(reportMarkdown, /Submission Readiness Report/);
+  assert.match(reportMarkdown, /✅ \*\*safety boundary\*\*/);
 });

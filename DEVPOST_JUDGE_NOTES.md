@@ -26,6 +26,7 @@ npm run demo
 npm run datahub:bridge
 npm run context:read
 npm run judge:pack
+npm run submission:verify
 npm test
 ```
 
@@ -36,6 +37,7 @@ Those commands produce:
 - a dry-run DataHub bridge plan;
 - an MCP-style context read showing the agent’s pre-action context checks;
 - a judge evidence pack with commands, claims, and outcomes.
+- a submission readiness report that validates the demo totals, DataHub aspects, MCP-style reads, blocked-action policy, and judge evidence pack.
 
 ## Architecture
 
@@ -61,6 +63,7 @@ The important behavior is not just the transformation. The agent separates actio
 - [`examples/cat-context-agent/generated-datahub-bridge-plan.json`](./examples/cat-context-agent/generated-datahub-bridge-plan.json)
 - [`examples/cat-context-agent/generated-mcp-context-read.json`](./examples/cat-context-agent/generated-mcp-context-read.json)
 - [`hackathon-assets/judge-evidence-pack.md`](./hackathon-assets/judge-evidence-pack.md)
+- [`hackathon-assets/submission-readiness-report.md`](./hackathon-assets/submission-readiness-report.md)
 
 ## Safety boundary
 
