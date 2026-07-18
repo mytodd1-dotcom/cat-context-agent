@@ -28,7 +28,7 @@ The demo ingests messy business request data, maps it into DataHub-style metadat
 
 ## How we built it
 
-We built a runnable local evidence chain around one focused workflow. The repo includes a sample messy CSV, a DataHub-style context map, generated DataHub metadata aspects, a dry-run DataHub bridge plan, a DataHub readiness doctor, a DataHub integration checklist, a DataHub claim audit, a DataHub MCP handoff, an MCP adapter smoke report, an MCP-style context read artifact, a lineage-to-decision map, a safety policy matrix, a decision trace, a judge quick card, a judge evidence pack, and a public Next.js landing page. The key design choice was to make the context boundary inspectable instead of hiding it inside a black-box prompt.
+We built a runnable local evidence chain around one focused workflow. The repo includes a sample messy CSV, a DataHub-style context map, generated DataHub metadata aspects, a dry-run DataHub bridge plan, a DataHub readiness doctor, a DataHub integration checklist, a DataHub claim audit, a DataHub MCP handoff, an MCP adapter smoke report, an MCP-style context read artifact, a lineage-to-decision map, a safety policy matrix, a decision trace, a judge quick card, a judge rubric matrix, a judge evidence pack, and a public Next.js landing page. The key design choice was to make the context boundary inspectable instead of hiding it inside a black-box prompt.
 
 ## Challenges we ran into
 
@@ -36,7 +36,7 @@ The hardest part was keeping the scope honest. A full live DataHub deployment, M
 
 ## Accomplishments
 
-The project now has a public demo, a public GitHub repo, Apache 2.0 licensing, reproducible local commands, generated judge artifacts, a 2-minute judge card, a one-command evidence reproduction path, and tests that verify the submission shell and evidence chain.
+The project now has a public demo, a public GitHub repo, Apache 2.0 licensing, reproducible local commands, generated judge artifacts, a 2-minute judge card, a public-rubric alignment matrix, a one-command evidence reproduction path, and tests that verify the submission shell and evidence chain.
 
 ## What we learned
 

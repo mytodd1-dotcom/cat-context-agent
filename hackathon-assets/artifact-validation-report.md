@@ -24,6 +24,7 @@ Generated: `demo-static-run`
 - ✅ **judge walkthrough** — Judge walkthrough should document the shortest proof path and preserve the no-external-side-effects boundary.
 - ✅ **judge FAQ** — Judge FAQ should answer the hard reviewer questions with evidence files and verification commands.
 - ✅ **judge quick card** — Judge quick card should give reviewers the fastest links, proof command, claim map, and safety boundary.
+- ✅ **judge rubric matrix** — Judge rubric matrix should map the official criteria to concrete CAT evidence and limitations.
 
 ## Validated files
 
@@ -46,3 +47,4 @@ Generated: `demo-static-run`
 - `hackathon-assets/judge-walkthrough.json`
 - `hackathon-assets/judge-faq.json`
 - `hackathon-assets/judge-quick-card.json`
+- `hackathon-assets/judge-rubric-matrix.json`

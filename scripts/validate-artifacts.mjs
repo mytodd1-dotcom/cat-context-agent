@@ -38,6 +38,8 @@ const paths = {
   judgeFaqMarkdown: resolve(assetDir, "judge-faq.md"),
   judgeQuickCard: resolve(assetDir, "judge-quick-card.json"),
   judgeQuickCardMarkdown: resolve(assetDir, "judge-quick-card.md"),
+  judgeRubricMatrix: resolve(assetDir, "judge-rubric-matrix.json"),
+  judgeRubricMatrixMarkdown: resolve(assetDir, "judge-rubric-matrix.md"),
   judgePackMarkdown: resolve(assetDir, "judge-evidence-pack.md"),
   reportJson: resolve(assetDir, "artifact-validation-report.json"),
   reportMarkdown: resolve(assetDir, "artifact-validation-report.md"),
@@ -104,6 +106,8 @@ export async function runArtifactValidation() {
     judgeFaqMarkdown,
     judgeQuickCard,
     judgeQuickCardMarkdown,
+    judgeRubricMatrix,
+    judgeRubricMatrixMarkdown,
     judgePackMarkdown,
   ] = await Promise.all([
     readJson(paths.agentOutput),
@@ -137,6 +141,8 @@ export async function runArtifactValidation() {
     readFile(paths.judgeFaqMarkdown, "utf8"),
     readJson(paths.judgeQuickCard),
     readFile(paths.judgeQuickCardMarkdown, "utf8"),
+    readJson(paths.judgeRubricMatrix),
+    readFile(paths.judgeRubricMatrixMarkdown, "utf8"),
     readFile(paths.judgePackMarkdown, "utf8"),
   ]);
 
@@ -310,6 +316,17 @@ export async function runArtifactValidation() {
         judgeQuickCardMarkdown.includes("2-Minute Judge Card"),
       "Judge quick card should give reviewers the fastest links, proof command, claim map, and safety boundary.",
     ),
+    result(
+      "judge rubric matrix",
+      judgeRubricMatrix.protocol === "cat-judge-rubric-matrix-v0" &&
+        judgeRubricMatrix.status === "ready" &&
+        judgeRubricMatrix.criteria.length === 6 &&
+        judgeRubricMatrix.criteria.some((item) => item.criterion === "Use of DataHub") &&
+        judgeRubricMatrix.criteria.some((item) => item.criterion === "Technical Execution") &&
+        judgeRubricMatrix.signals.external_side_effects === "none" &&
+        judgeRubricMatrixMarkdown.includes("Judge Rubric Matrix"),
+      "Judge rubric matrix should map the official criteria to concrete CAT evidence and limitations.",
+    ),
   ];
 
   const report = {
@@ -336,6 +353,7 @@ export async function runArtifactValidation() {
       "hackathon-assets/judge-walkthrough.json",
       "hackathon-assets/judge-faq.json",
       "hackathon-assets/judge-quick-card.json",
+      "hackathon-assets/judge-rubric-matrix.json",
     ],
   };
 

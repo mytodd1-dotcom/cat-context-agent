@@ -96,6 +96,11 @@
       "name": "judge quick card",
       "ok": true,
       "detail": "Judge quick card should give reviewers the fastest links, proof command, claim map, and safety boundary."
+    },
+    {
+      "name": "judge rubric matrix",
+      "ok": true,
+      "detail": "Judge rubric matrix should map the official criteria to concrete CAT evidence and limitations."
     }
   ],
   "validated_files": [
@@ -117,6 +122,7 @@
     "hackathon-assets/submission-readiness-report.json",
     "hackathon-assets/judge-walkthrough.json",
     "hackathon-assets/judge-faq.json",
-    "hackathon-assets/judge-quick-card.json"
+    "hackathon-assets/judge-quick-card.json",
+    "hackathon-assets/judge-rubric-matrix.json"
   ]
 }

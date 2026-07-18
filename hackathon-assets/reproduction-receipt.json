@@ -65,8 +65,12 @@
       "detail": "2-minute scoring card links the live demo, video, one-command proof, DataHub evidence, and safety boundary."
     },
     {
+      "name": "judge rubric matrix",
+      "detail": "6 official judging criteria are mapped to CAT evidence, limitations, and next steps."
+    },
+    {
       "name": "artifact validation",
-      "detail": "19 generated-artifact checks passed."
+      "detail": "20 generated-artifact checks passed."
     },
     {
       "name": "safety boundary",
@@ -94,7 +98,7 @@
       "datahub.get_lineage",
       "cat.get_agent_context_packet"
     ],
-    "artifact_validation_checks": 19
+    "artifact_validation_checks": 20
   },
   "reports": [
     "hackathon-assets/judge-evidence-pack.md",
@@ -113,6 +117,7 @@
     "hackathon-assets/judge-walkthrough.md",
     "hackathon-assets/judge-faq.md",
     "hackathon-assets/judge-quick-card.md",
+    "hackathon-assets/judge-rubric-matrix.md",
     "hackathon-assets/artifact-validation-report.md",
     "hackathon-assets/reproduction-receipt.md"
   ]

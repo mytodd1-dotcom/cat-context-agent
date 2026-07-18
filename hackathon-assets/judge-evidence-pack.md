@@ -50,6 +50,7 @@ npm run context:read
 npm run judge:walkthrough
 npm run judge:faq
 npm run judge:quick
+npm run judge:rubric
 npm run lineage:map
 npm run policy:matrix
 npm run judge:pack
@@ -74,6 +75,7 @@ npm test
 - `hackathon-assets/judge-walkthrough.md`
 - `hackathon-assets/judge-faq.md`
 - `hackathon-assets/judge-quick-card.md`
+- `hackathon-assets/judge-rubric-matrix.md`
 - `hackathon-assets/decision-trace.md`
 - `hackathon-assets/lineage-decision-map.md`
 - `hackathon-assets/safety-policy-matrix.md`

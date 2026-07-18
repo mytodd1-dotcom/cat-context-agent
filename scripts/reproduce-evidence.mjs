@@ -10,6 +10,7 @@ import { runDecisionTrace } from "./decision-trace.mjs";
 import { runDevpostSubmissionCopy } from "./devpost-submission-copy.mjs";
 import { runJudgeFaq } from "./judge-faq.mjs";
 import { runJudgeQuickCard } from "./judge-quick-card.mjs";
+import { runJudgeRubricMatrix } from "./judge-rubric-matrix.mjs";
 import { runLineageDecisionMap } from "./lineage-decision-map.mjs";
 import { runLiveDataHubRunbook } from "./live-datahub-runbook.mjs";
 import { runMcpAdapterSmoke } from "./mcp-adapter-smoke.mjs";
@@ -87,6 +88,13 @@ export async function runEvidenceReproduction() {
     honestyAudit: submissionHonestyAudit,
     policyMatrix,
   });
+  const judgeRubricMatrix = await runJudgeRubricMatrix({
+    readiness,
+    datahubClaimAudit: claimAudit,
+    mcpSmoke: mcpAdapterSmoke,
+    honestyAudit: submissionHonestyAudit,
+    quickCard: judgeQuickCard,
+  });
   const artifactValidation = await runArtifactValidation();
 
   const checks = [
@@ -151,6 +159,10 @@ export async function runEvidenceReproduction() {
       detail: `${judgeQuickCard.time_budget_minutes}-minute scoring card links the live demo, video, one-command proof, DataHub evidence, and safety boundary.`,
     },
     {
+      name: "judge rubric matrix",
+      detail: `${judgeRubricMatrix.criteria.length} official judging criteria are mapped to CAT evidence, limitations, and next steps.`,
+    },
+    {
       name: "artifact validation",
       detail: `${artifactValidation.checks.length} generated-artifact checks passed.`,
     },
@@ -197,6 +209,7 @@ export async function runEvidenceReproduction() {
       "hackathon-assets/judge-walkthrough.md",
       "hackathon-assets/judge-faq.md",
       "hackathon-assets/judge-quick-card.md",
+      "hackathon-assets/judge-rubric-matrix.md",
       "hackathon-assets/artifact-validation-report.md",
       "hackathon-assets/reproduction-receipt.md",
     ],

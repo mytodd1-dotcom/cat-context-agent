@@ -101,7 +101,7 @@ const verificationCommands = [
   {
     label: "Full local check",
     command: "npm run ci:local",
-    expected: "Runs the full artifact pipeline, build, and 29 render/evidence tests.",
+    expected: "Runs the full artifact pipeline, build, and 30 render/evidence tests.",
   },
   {
     label: "Context read",
@@ -154,12 +154,18 @@ const judgePath = [
   },
   {
     step: "4",
+    title: "Check the rubric matrix",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/judge-rubric-matrix.md",
+    text: "See how the public judging criteria map to CAT evidence, limitations, and next steps.",
+  },
+  {
+    step: "5",
     title: "Open the judge start guide",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/JUDGE_START_HERE.md",
     text: "Follow the shortest repo path through claims, commands, artifacts, and scope transparency.",
   },
   {
-    step: "5",
+    step: "6",
     title: "Run one proof command",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/reproduction-receipt.md",
     text: "Use npm run evidence:reproduce or npm run ci:local to regenerate the receipt-backed evidence chain.",
@@ -208,6 +214,12 @@ const runnableArtifacts = [
     command: "npm run judge:quick",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/judge-quick-card.md",
     text: "Compresses the live demo, video, one-command proof, claim map, DataHub evidence, and safety boundary into one scoring card.",
+  },
+  {
+    label: "Judge rubric matrix",
+    command: "npm run judge:rubric",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/judge-rubric-matrix.md",
+    text: "Maps the public DataHub judging criteria to CAT evidence, current limitations, and practical next steps.",
   },
   {
     label: "Judge walkthrough",

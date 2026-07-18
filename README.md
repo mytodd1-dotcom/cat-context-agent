@@ -186,6 +186,14 @@ npm run judge:quick
 
 That command writes [`hackathon-assets/judge-quick-card.md`](./hackathon-assets/judge-quick-card.md) and [`hackathon-assets/judge-quick-card.json`](./hackathon-assets/judge-quick-card.json), giving judges the fastest links, one proof command, claim snapshot, DataHub evidence, and safety boundary.
 
+To generate the judge rubric matrix:
+
+```bash
+npm run judge:rubric
+```
+
+That command writes [`hackathon-assets/judge-rubric-matrix.md`](./hackathon-assets/judge-rubric-matrix.md) and [`hackathon-assets/judge-rubric-matrix.json`](./hackathon-assets/judge-rubric-matrix.json), mapping the public DataHub judging criteria to concrete CAT evidence, limitations, and next steps.
+
 To generate the judge FAQ / objection handler:
 
 ```bash
@@ -266,7 +274,7 @@ To run the local equivalent of that CI recipe:
 npm run ci:local
 ```
 
-That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub readiness doctor, DataHub integration checklist, DataHub claim audit, DataHub MCP handoff, MCP adapter smoke test, Devpost copy pack, submission honesty audit, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, regenerates the judge walkthrough, regenerates the judge FAQ, validates artifacts, regenerates the judge scoring brief, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
+That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub readiness doctor, DataHub integration checklist, DataHub claim audit, DataHub MCP handoff, MCP adapter smoke test, Devpost copy pack, submission honesty audit, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, regenerates the judge walkthrough, judge FAQ, judge quick card, judge rubric matrix, validates artifacts, regenerates the judge scoring brief, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
 
 ## DataHub integration path
 
@@ -315,6 +323,7 @@ npm run context:contracts
 npm run judge:pack
 npm run judge:faq
 npm run judge:quick
+npm run judge:rubric
 npm run submission:verify
 npm run artifacts:validate
 npm run evidence:reproduce

@@ -64,6 +64,9 @@ jobs:
       - name: Generate judge quick card
         run: npm run judge:quick
 
+      - name: Generate judge rubric matrix
+        run: npm run judge:rubric
+
       - name: Validate generated artifacts
         run: npm run artifacts:validate
 
