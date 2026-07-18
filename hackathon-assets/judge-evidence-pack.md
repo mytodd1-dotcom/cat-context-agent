@@ -42,6 +42,7 @@ npm run datahub:payload
 npm run datahub:runbook
 npm run context:read
 npm run lineage:map
+npm run policy:matrix
 npm run judge:pack
 npm test
 ```
@@ -57,6 +58,7 @@ npm test
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/decision-trace.md`
 - `hackathon-assets/lineage-decision-map.md`
+- `hackathon-assets/safety-policy-matrix.md`
 - `hackathon-assets/context-tool-contracts.md`
 - `hackathon-assets/artifact-validation-report.md`
 - `hackathon-assets/reproduction-receipt.md`

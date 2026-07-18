@@ -12,6 +12,7 @@ Generated: `demo-static-run`
 - ✅ **safety boundary** — Expected unverified external outreach to remain blocked.
 - ✅ **judge pack** — Expected judge evidence pack to summarize commands, safety claims, and inspectable artifacts.
 - ✅ **lineage decision map** — Expected source, DataHub context reads, decision branches, and receipt routing to be mapped.
+- ✅ **safety policy matrix** — Expected explicit allowed, approval-required, and blocked action policies tied to the request outcomes.
 
 ## Summary
 
@@ -30,5 +31,6 @@ Generated: `demo-static-run`
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/context-tool-contracts.md`
 - `hackathon-assets/lineage-decision-map.md`
+- `hackathon-assets/safety-policy-matrix.md`
 - `hackathon-assets/judge-evidence-pack.md`
 - `hackathon-assets/submission-readiness-report.md`

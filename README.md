@@ -98,6 +98,14 @@ npm run lineage:map
 
 That command writes [`hackathon-assets/lineage-decision-map.md`](./hackathon-assets/lineage-decision-map.md) and [`hackathon-assets/lineage-decision-map.json`](./hackathon-assets/lineage-decision-map.json), showing the source → DataHub context → agent decision → approval queue → receipt chain as a Mermaid graph plus machine-readable nodes and edges.
 
+To generate the safety policy matrix:
+
+```bash
+npm run policy:matrix
+```
+
+That command writes [`hackathon-assets/safety-policy-matrix.md`](./hackathon-assets/safety-policy-matrix.md) and [`hackathon-assets/safety-policy-matrix.json`](./hackathon-assets/safety-policy-matrix.json), showing which actions are allowed, approval-required, or blocked based on context quality.
+
 To preview the agent-side context read contract:
 
 ```bash
@@ -186,7 +194,7 @@ To run the local equivalent of that CI recipe:
 npm run ci:local
 ```
 
-That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, decision trace, lineage decision map, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
+That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
 
 ## DataHub integration path
 
@@ -225,6 +233,7 @@ npm run datahub:bridge
 npm run datahub:payload
 npm run datahub:runbook
 npm run decision:trace
+npm run policy:matrix
 npm run context:read
 npm run context:contracts
 npm run judge:pack

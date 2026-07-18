@@ -20,6 +20,7 @@ A judge-first index for verifying the DataHub Agent Hackathon submission without
 | 5. Inspect DataHub context artifacts | `examples/cat-context-agent/generated-datahub-bridge-plan.json` | Shows the datasetProperties, schemaMetadata, ownership, and glossaryTerms handoff. |
 | 6. Inspect the MCP-style read contract | `examples/cat-context-agent/generated-mcp-context-read.json` | Shows the agent reading entity, lineage, and CAT context before action. |
 | 7. Inspect the lineage decision map | `hackathon-assets/lineage-decision-map.md`<br><code>npm run lineage:map</code> | Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph. |
+| 8. Inspect the safety policy matrix | `hackathon-assets/safety-policy-matrix.md`<br><code>npm run policy:matrix</code> | Shows which agent actions are allowed, approval-required, or blocked based on context quality. |
 
 ## Proof commands
 
@@ -28,6 +29,7 @@ npm install
 npm run demo
 npm run submission:verify
 npm run lineage:map
+npm run policy:matrix
 npm run evidence:reproduce
 npm run judge:brief
 npm run devpost:copy
@@ -47,12 +49,14 @@ npm run ci:local
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/context-tool-contracts.md`
 - `hackathon-assets/lineage-decision-map.md`
+- `hackathon-assets/safety-policy-matrix.md`
 
 ### Unsafe work is approval-gated or blocked.
 
 - `examples/cat-context-agent/generated-agent-output.json`
 - `hackathon-assets/decision-trace.md`
 - `hackathon-assets/lineage-decision-map.md`
+- `hackathon-assets/safety-policy-matrix.md`
 - `hackathon-assets/judge-evidence-pack.md`
 
 ### The submission is reproducible.

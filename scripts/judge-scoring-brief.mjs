@@ -75,6 +75,7 @@ export async function runJudgeScoringBrief() {
           "examples/cat-context-agent/generated-mcp-context-read.json",
           "hackathon-assets/context-tool-contracts.md",
           "hackathon-assets/lineage-decision-map.md",
+          "hackathon-assets/safety-policy-matrix.md",
         ],
       },
       {
@@ -96,6 +97,7 @@ export async function runJudgeScoringBrief() {
         files: [
           "examples/cat-context-agent/generated-mcp-context-read.json",
           "hackathon-assets/artifact-validation-report.md",
+          "hackathon-assets/safety-policy-matrix.md",
         ],
       },
       {

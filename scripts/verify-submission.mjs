@@ -7,6 +7,7 @@ import { runDemo } from "./cat-context-demo.mjs";
 import { runBridge } from "./datahub-local-bridge.mjs";
 import { runJudgeEvidencePack } from "./judge-evidence-pack.mjs";
 import { runLineageDecisionMap } from "./lineage-decision-map.mjs";
+import { runSafetyPolicyMatrix } from "./safety-policy-matrix.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const assetDir = resolve(root, "hackathon-assets");
@@ -60,6 +61,7 @@ export async function runSubmissionVerify() {
   const contextRead = await runContextProvider();
   const toolContracts = await runContextToolContracts();
   const lineageMap = await runLineageDecisionMap();
+  const safetyPolicyMatrix = await runSafetyPolicyMatrix();
   const pack = await runJudgeEvidencePack();
 
   const datahubMetadata = await readJson(resolve(root, "examples/cat-context-agent/generated-datahub-metadata.json"));
@@ -118,6 +120,13 @@ export async function runSubmissionVerify() {
         lineageMap.decisions.length === 3,
       "Expected source, DataHub context reads, decision branches, and receipt routing to be mapped.",
     ),
+    check(
+      "safety policy matrix",
+      safetyPolicyMatrix.rules.length === 6 &&
+        safetyPolicyMatrix.blocked_actions.includes("scrape_contact_details") &&
+        safetyPolicyMatrix.request_outcomes.some((item) => item.request_id === "REQ-1044" && item.policy_outcome === "blocked"),
+      "Expected explicit allowed, approval-required, and blocked action policies tied to the request outcomes.",
+    ),
   ];
 
   for (const item of checks) {
@@ -143,6 +152,7 @@ export async function runSubmissionVerify() {
       "examples/cat-context-agent/generated-mcp-context-read.json",
       "hackathon-assets/context-tool-contracts.md",
       "hackathon-assets/lineage-decision-map.md",
+      "hackathon-assets/safety-policy-matrix.md",
       "hackathon-assets/judge-evidence-pack.md",
       "hackathon-assets/submission-readiness-report.md",
     ],

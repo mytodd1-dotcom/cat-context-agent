@@ -32,7 +32,7 @@ const submissionCopy = {
   what_it_does:
     "The demo ingests messy business request data, maps it into DataHub-style metadata, reads schema/ownership/lineage/policy context, and separates requests into safe internal tasks, approval-required work, and blocked outreach. Every recommendation produces a receipt that shows the source asset, context checked, missing information, confidence, safe next step, and blocked action.",
   how_we_built_it:
-    "We built a runnable local evidence chain around one focused workflow. The repo includes a sample messy CSV, a DataHub-style context map, generated DataHub metadata aspects, a dry-run DataHub bridge plan, an MCP-style context read artifact, a lineage-to-decision map, a decision trace, a judge evidence pack, and a public Next.js landing page. The key design choice was to make the context boundary inspectable instead of hiding it inside a black-box prompt.",
+    "We built a runnable local evidence chain around one focused workflow. The repo includes a sample messy CSV, a DataHub-style context map, generated DataHub metadata aspects, a dry-run DataHub bridge plan, an MCP-style context read artifact, a lineage-to-decision map, a safety policy matrix, a decision trace, a judge evidence pack, and a public Next.js landing page. The key design choice was to make the context boundary inspectable instead of hiding it inside a black-box prompt.",
   challenges:
     "The hardest part was keeping the scope honest. A full live DataHub deployment, MCP server, and workflow engine could grow quickly, so the current submission isolates the agent-context contract and makes every simulated boundary explicit. That keeps the prototype reproducible while showing the intended DataHub integration path.",
   accomplishments:

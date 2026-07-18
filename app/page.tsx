@@ -101,7 +101,7 @@ const verificationCommands = [
   {
     label: "Full local check",
     command: "npm run ci:local",
-    expected: "Runs the full artifact pipeline, build, and 19 render/evidence tests.",
+    expected: "Runs the full artifact pipeline, build, and 20 render/evidence tests.",
   },
   {
     label: "Context read",
@@ -232,6 +232,12 @@ const runnableArtifacts = [
     command: "npm run lineage:map",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/lineage-decision-map.md",
     text: "Shows the source → DataHub context → agent decision → approval queue → receipt chain as a Mermaid map.",
+  },
+  {
+    label: "Safety policy matrix",
+    command: "npm run policy:matrix",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/safety-policy-matrix.md",
+    text: "Shows which agent actions are allowed, approval-required, or blocked from the available DataHub-style context.",
   },
   {
     label: "Judge evidence pack",

@@ -16,6 +16,8 @@ const paths = {
   liveRunbookMarkdown: resolve(assetDir, "live-datahub-runbook.md"),
   lineageMap: resolve(assetDir, "lineage-decision-map.json"),
   lineageMapMarkdown: resolve(assetDir, "lineage-decision-map.md"),
+  safetyPolicyMatrix: resolve(assetDir, "safety-policy-matrix.json"),
+  safetyPolicyMatrixMarkdown: resolve(assetDir, "safety-policy-matrix.md"),
   judgePack: resolve(assetDir, "judge-evidence-pack.json"),
   readiness: resolve(assetDir, "submission-readiness-report.json"),
   judgePackMarkdown: resolve(assetDir, "judge-evidence-pack.md"),
@@ -62,6 +64,8 @@ export async function runArtifactValidation() {
     liveRunbookMarkdown,
     lineageMap,
     lineageMapMarkdown,
+    safetyPolicyMatrix,
+    safetyPolicyMatrixMarkdown,
     judgePack,
     readiness,
     judgePackMarkdown,
@@ -75,6 +79,8 @@ export async function runArtifactValidation() {
     readFile(paths.liveRunbookMarkdown, "utf8"),
     readJson(paths.lineageMap),
     readFile(paths.lineageMapMarkdown, "utf8"),
+    readJson(paths.safetyPolicyMatrix),
+    readFile(paths.safetyPolicyMatrixMarkdown, "utf8"),
     readJson(paths.judgePack),
     readJson(paths.readiness),
     readFile(paths.judgePackMarkdown, "utf8"),
@@ -143,6 +149,15 @@ export async function runArtifactValidation() {
       "Lineage map should show the DataHub asset, context reads, decision loop, and all three decision branches.",
     ),
     result(
+      "safety policy matrix",
+      safetyPolicyMatrix.protocol === "cat-safety-policy-matrix-v0" &&
+        safetyPolicyMatrix.rules.some((rule) => rule.action === "send_external_outreach" && rule.class === "approval_required") &&
+        safetyPolicyMatrix.blocked_actions.includes("scrape_contact_details") &&
+        safetyPolicyMatrix.request_outcomes.length === 3 &&
+        safetyPolicyMatrixMarkdown.includes("Safety Policy Matrix"),
+      "Safety policy matrix should define allowed, approval-required, and blocked action boundaries for all three requests.",
+    ),
+    result(
       "readiness report",
       readiness.status === "ready" &&
         readiness.checks.every((check) => check.ok) &&
@@ -163,6 +178,7 @@ export async function runArtifactValidation() {
       "hackathon-assets/context-tool-contracts.json",
       "hackathon-assets/live-datahub-runbook.json",
       "hackathon-assets/lineage-decision-map.json",
+      "hackathon-assets/safety-policy-matrix.json",
       "hackathon-assets/judge-evidence-pack.json",
       "hackathon-assets/submission-readiness-report.json",
     ],

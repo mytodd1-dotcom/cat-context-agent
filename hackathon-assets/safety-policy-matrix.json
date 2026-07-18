@@ -1,0 +1,127 @@
+{
+  "protocol": "cat-safety-policy-matrix-v0",
+  "generated_at": "demo-static-run",
+  "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+  "default_mode": "read_before_action",
+  "approval_required_when_confidence_below": 0.8,
+  "allowed_actions": [
+    "create_internal_review_task",
+    "ask_missing_context_question",
+    "write_receipt"
+  ],
+  "blocked_actions": [
+    "send_external_outreach_without_verified_contact",
+    "invent_missing_owner",
+    "scrape_contact_details"
+  ],
+  "rules": [
+    {
+      "action": "create_internal_review_task",
+      "class": "allowed",
+      "required_context": [
+        "schema",
+        "owner",
+        "lineage",
+        "policy"
+      ],
+      "reason": "Internal work can be queued when source, owner, and policy context are known.",
+      "allowed_when": "Owner is known and the action stays inside the business workflow.",
+      "fallback": "Ask for missing context or write an approval receipt."
+    },
+    {
+      "action": "ask_missing_context_question",
+      "class": "allowed",
+      "required_context": [
+        "schema",
+        "missing_context",
+        "policy"
+      ],
+      "reason": "Asking a human is safe when the agent lacks ownership, contact, or confidence context.",
+      "allowed_when": "Any required context is missing or below the approval threshold.",
+      "fallback": "Block external work until the answer is supplied."
+    },
+    {
+      "action": "write_receipt",
+      "class": "allowed",
+      "required_context": [
+        "source_asset",
+        "context_checked",
+        "decision"
+      ],
+      "reason": "Receipts are the audit trail for every recommendation, approval gate, or block.",
+      "allowed_when": "The agent has read context and selected a decision status.",
+      "fallback": "Do not claim a recommendation without a receipt."
+    },
+    {
+      "action": "send_external_outreach",
+      "class": "approval_required",
+      "required_context": [
+        "verified_contact",
+        "owner",
+        "policy_approval"
+      ],
+      "reason": "External-facing work can affect customers and must not be triggered from low-trust context.",
+      "allowed_when": "Verified contact, accountable owner, and explicit outreach approval are present.",
+      "fallback": "Create an approval task or block if contact is missing."
+    },
+    {
+      "action": "invent_missing_owner",
+      "class": "blocked",
+      "required_context": [
+        "owner"
+      ],
+      "reason": "The agent must not hallucinate accountability when ownership is missing.",
+      "allowed_when": "Never.",
+      "fallback": "Ask who owns the request."
+    },
+    {
+      "action": "scrape_contact_details",
+      "class": "blocked",
+      "required_context": [
+        "verified_contact"
+      ],
+      "reason": "The agent must not go outside the trusted context boundary to fill missing customer data.",
+      "allowed_when": "Never.",
+      "fallback": "Request a verified contact from the human owner."
+    }
+  ],
+  "request_outcomes": [
+    {
+      "request_id": "REQ-1042",
+      "account": "Acme HVAC",
+      "decision": "needs_approval",
+      "policy_outcome": "approval_required",
+      "missing_context": [
+        "owner"
+      ],
+      "confidence": 0.78,
+      "safe_next_step": "Ask for missing customer contact owner before follow-up",
+      "blocked_action": "Do not send external follow-up",
+      "receipt_id": "cat-demo-REQ-1042"
+    },
+    {
+      "request_id": "REQ-1043",
+      "account": "Northline Dental",
+      "decision": "safe_to_queue_internal_task",
+      "policy_outcome": "allowed",
+      "missing_context": [],
+      "confidence": 0.91,
+      "safe_next_step": "Create finance review task for invoice mismatch",
+      "blocked_action": null,
+      "receipt_id": "cat-demo-REQ-1043"
+    },
+    {
+      "request_id": "REQ-1044",
+      "account": "Cedar Auto",
+      "decision": "blocked",
+      "policy_outcome": "blocked",
+      "missing_context": [
+        "verified_contact"
+      ],
+      "confidence": 0.69,
+      "safe_next_step": "Request a verified contact before customer action",
+      "blocked_action": "Do not guess, scrape, or invent contact details",
+      "receipt_id": "cat-demo-REQ-1044"
+    }
+  ]
+}

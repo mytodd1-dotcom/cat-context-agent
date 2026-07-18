@@ -13,6 +13,7 @@ Generated: `demo-static-run`
 - ✅ **live DataHub runbook** — Live runbook should document the opt-in local DataHub post path and preserve the dry-run payload coverage.
 - ✅ **judge pack references generated evidence** — Judge pack should point to context contracts and include the blocked-action receipt.
 - ✅ **lineage decision map** — Lineage map should show the DataHub asset, context reads, decision loop, and all three decision branches.
+- ✅ **safety policy matrix** — Safety policy matrix should define allowed, approval-required, and blocked action boundaries for all three requests.
 - ✅ **readiness report** — Readiness report should be ready, all checks passing, and include context tool contracts.
 
 ## Validated files
@@ -24,5 +25,6 @@ Generated: `demo-static-run`
 - `hackathon-assets/context-tool-contracts.json`
 - `hackathon-assets/live-datahub-runbook.json`
 - `hackathon-assets/lineage-decision-map.json`
+- `hackathon-assets/safety-policy-matrix.json`
 - `hackathon-assets/judge-evidence-pack.json`
 - `hackathon-assets/submission-readiness-report.json`

@@ -35,6 +35,7 @@ npm run datahub:bridge
 npm run datahub:payload
 npm run datahub:runbook
 npm run decision:trace
+npm run policy:matrix
 npm run context:read
 npm run context:contracts
 npm run judge:pack
@@ -54,6 +55,7 @@ Those commands produce:
 - a DataHub payload preview that shows the aspect bodies prepared for local GMS posting;
 - a live DataHub runbook with prerequisites, exact opt-in post command, acceptance checks, fallback path, and safety boundary;
 - a request-level decision trace that joins messy rows to context reads, decisions, safe next steps, blocked actions, and receipts;
+- a safety policy matrix that defines allowed, approval-required, and blocked action classes;
 - an MCP-style context read showing the agent’s pre-action context checks;
 - a machine-readable tool contract for DataHub reads, CAT context reads, and guarded receipt writes;
 - a judge evidence pack with commands, claims, and outcomes.
@@ -72,6 +74,7 @@ messy-business-requests.csv
   → generated-datahub-metadata.json
   → generated-datahub-bridge-plan.json
   → generated-mcp-context-read.json
+  → safety-policy-matrix.md
   → judge-evidence-pack.md
 ```
 
@@ -89,6 +92,7 @@ The important behavior is not just the transformation. The agent separates actio
 - [`hackathon-assets/live-datahub-runbook.md`](./hackathon-assets/live-datahub-runbook.md)
 - [`examples/cat-context-agent/generated-mcp-context-read.json`](./examples/cat-context-agent/generated-mcp-context-read.json)
 - [`hackathon-assets/decision-trace.md`](./hackathon-assets/decision-trace.md)
+- [`hackathon-assets/safety-policy-matrix.md`](./hackathon-assets/safety-policy-matrix.md)
 - [`hackathon-assets/context-tool-contracts.md`](./hackathon-assets/context-tool-contracts.md)
 - [`hackathon-assets/judge-evidence-pack.md`](./hackathon-assets/judge-evidence-pack.md)
 - [`hackathon-assets/submission-readiness-report.md`](./hackathon-assets/submission-readiness-report.md)

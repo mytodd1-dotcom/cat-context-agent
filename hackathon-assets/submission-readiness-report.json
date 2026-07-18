@@ -53,6 +53,11 @@
       "name": "lineage decision map",
       "ok": true,
       "details": "Expected source, DataHub context reads, decision branches, and receipt routing to be mapped."
+    },
+    {
+      "name": "safety policy matrix",
+      "ok": true,
+      "details": "Expected explicit allowed, approval-required, and blocked action policies tied to the request outcomes."
     }
   ],
   "artifacts": [
@@ -62,6 +67,7 @@
     "examples/cat-context-agent/generated-mcp-context-read.json",
     "hackathon-assets/context-tool-contracts.md",
     "hackathon-assets/lineage-decision-map.md",
+    "hackathon-assets/safety-policy-matrix.md",
     "hackathon-assets/judge-evidence-pack.md",
     "hackathon-assets/submission-readiness-report.md"
   ]

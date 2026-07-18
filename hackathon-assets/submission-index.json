@@ -51,6 +51,13 @@
       "artifact": "hackathon-assets/lineage-decision-map.md",
       "command": "npm run lineage:map",
       "why": "Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph."
+    },
+    {
+      "step": 8,
+      "title": "Inspect the safety policy matrix",
+      "artifact": "hackathon-assets/safety-policy-matrix.md",
+      "command": "npm run policy:matrix",
+      "why": "Shows which agent actions are allowed, approval-required, or blocked based on context quality."
     }
   ],
   "proof_commands": [
@@ -58,6 +65,7 @@
     "npm run demo",
     "npm run submission:verify",
     "npm run lineage:map",
+    "npm run policy:matrix",
     "npm run evidence:reproduce",
     "npm run judge:brief",
     "npm run devpost:copy",
@@ -77,7 +85,8 @@
       "evidence": [
         "examples/cat-context-agent/generated-mcp-context-read.json",
         "hackathon-assets/context-tool-contracts.md",
-        "hackathon-assets/lineage-decision-map.md"
+        "hackathon-assets/lineage-decision-map.md",
+        "hackathon-assets/safety-policy-matrix.md"
       ]
     },
     {
@@ -86,6 +95,7 @@
         "examples/cat-context-agent/generated-agent-output.json",
         "hackathon-assets/decision-trace.md",
         "hackathon-assets/lineage-decision-map.md",
+        "hackathon-assets/safety-policy-matrix.md",
         "hackathon-assets/judge-evidence-pack.md"
       ]
     },

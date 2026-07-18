@@ -5,6 +5,7 @@ import { runDataHubPayloadPreview } from "./datahub-payload-preview.mjs";
 import { runDecisionTrace } from "./decision-trace.mjs";
 import { runLineageDecisionMap } from "./lineage-decision-map.mjs";
 import { runLiveDataHubRunbook } from "./live-datahub-runbook.mjs";
+import { runSafetyPolicyMatrix } from "./safety-policy-matrix.mjs";
 import { runArtifactValidation } from "./validate-artifacts.mjs";
 import { runSubmissionVerify } from "./verify-submission.mjs";
 
@@ -51,6 +52,7 @@ export async function runEvidenceReproduction() {
   const liveRunbook = await runLiveDataHubRunbook();
   const decisionTrace = await runDecisionTrace();
   const lineageMap = await runLineageDecisionMap();
+  const policyMatrix = await runSafetyPolicyMatrix();
   const readiness = await runSubmissionVerify();
   const artifactValidation = await runArtifactValidation();
 
@@ -66,6 +68,10 @@ export async function runEvidenceReproduction() {
     {
       name: "lineage decision map",
       detail: `${lineageMap.nodes.length} nodes and ${lineageMap.edges.length} edges show source → DataHub context → decisions → receipts.`,
+    },
+    {
+      name: "safety policy matrix",
+      detail: `${policyMatrix.rules.length} rules and ${policyMatrix.request_outcomes.length} request outcomes define allowed, approval-required, and blocked action boundaries.`,
     },
     {
       name: "live DataHub runbook",
@@ -111,6 +117,7 @@ export async function runEvidenceReproduction() {
       "hackathon-assets/live-datahub-runbook.md",
       "hackathon-assets/decision-trace.md",
       "hackathon-assets/lineage-decision-map.md",
+      "hackathon-assets/safety-policy-matrix.md",
       "hackathon-assets/submission-readiness-report.md",
       "hackathon-assets/artifact-validation-report.md",
       "hackathon-assets/reproduction-receipt.md",
