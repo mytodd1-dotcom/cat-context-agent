@@ -32,6 +32,8 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /Context before action/);
   assert.match(html, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(html, /Judge start here/);
+  assert.match(html, /JUDGE_START_HERE\.md/);
+  assert.match(html, /open JUDGE_START_HERE\.md/);
   assert.match(html, /youtu\.be\/Gcbhl5_YlSM/);
   assert.match(html, /watch the 2-minute walkthrough/);
   assert.match(html, /npm run demo:guide/);
@@ -73,6 +75,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
 
   assert.match(page, /MCP Server/);
   assert.match(page, /Agent Context Kit/);
+  assert.match(page, /JUDGE_START_HERE\.md/);
   assert.match(page, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(page, /youtu\.be\/Gcbhl5_YlSM/);
   assert.match(page, /receipt-backed action plan/);

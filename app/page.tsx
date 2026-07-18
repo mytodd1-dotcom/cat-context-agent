@@ -36,6 +36,12 @@ const buildTracks = [
 
 const runnableArtifacts = [
   {
+    label: "Judge start here",
+    command: "open JUDGE_START_HERE.md",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/JUDGE_START_HERE.md",
+    text: "The shortest review path through the video, live demo, scoring brief, one-command proof, and DataHub evidence.",
+  },
+  {
     label: "Demo video",
     command: "watch the 2-minute walkthrough",
     href: "https://youtu.be/Gcbhl5_YlSM",
@@ -182,7 +188,7 @@ export default function Home() {
           </p>
           <div className="heroActions">
             <a className="button primary" href="#workflow">See the workflow</a>
-            <a className="button ghost" href="https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/submission-index.md">Judge start here</a>
+            <a className="button ghost" href="https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/JUDGE_START_HERE.md">Judge start here</a>
           </div>
           <p className="micro">
             Submission foundation is live and reproducible. This page includes the concrete demo slice, proof commands, DataHub-style context, an approval queue, and receipt output.
