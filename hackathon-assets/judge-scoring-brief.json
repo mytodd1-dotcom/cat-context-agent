@@ -18,7 +18,8 @@
         "hackathon-assets/live-datahub-runbook.md",
         "hackathon-assets/datahub-integration-checklist.md",
         "hackathon-assets/datahub-claim-audit.md",
-        "hackathon-assets/datahub-mcp-handoff.md"
+        "hackathon-assets/datahub-mcp-handoff.md",
+        "hackathon-assets/mcp-adapter-smoke-report.md"
       ]
     },
     {
@@ -27,6 +28,7 @@
       "files": [
         "examples/cat-context-agent/generated-mcp-context-read.json",
         "hackathon-assets/datahub-mcp-handoff.md",
+        "hackathon-assets/mcp-adapter-smoke-report.md",
         "hackathon-assets/context-tool-contracts.md",
         "hackathon-assets/lineage-decision-map.md",
         "hackathon-assets/safety-policy-matrix.md"
@@ -67,6 +69,6 @@
     "It treats missing ownership and missing verified contact as workflow state, not as prompts to hallucinate.",
     "It emits receipts and regenerated reports, so the judge can audit both the recommendation and the context used to make it.",
     "It documents the local DataHub post command separately from the dry-run evidence, so mutation is explicit instead of hidden inside tests.",
-    "The current evidence chain is reproducible with 3 requests and 13 artifact validation checks."
+    "The current evidence chain is reproducible with 3 requests and 14 artifact validation checks."
   ]
 }

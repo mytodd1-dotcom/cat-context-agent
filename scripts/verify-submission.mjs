@@ -10,6 +10,7 @@ import { runDemo } from "./cat-context-demo.mjs";
 import { runBridge } from "./datahub-local-bridge.mjs";
 import { runJudgeEvidencePack } from "./judge-evidence-pack.mjs";
 import { runLineageDecisionMap } from "./lineage-decision-map.mjs";
+import { runMcpAdapterSmoke } from "./mcp-adapter-smoke.mjs";
 import { runSafetyPolicyMatrix } from "./safety-policy-matrix.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -66,6 +67,7 @@ export async function runSubmissionVerify() {
   const datahubChecklist = await runDataHubIntegrationChecklist();
   const datahubClaimAudit = await runDataHubClaimAudit();
   const datahubMcpHandoff = await runDataHubMcpHandoff();
+  const mcpAdapterSmoke = await runMcpAdapterSmoke();
   const lineageMap = await runLineageDecisionMap();
   const safetyPolicyMatrix = await runSafetyPolicyMatrix();
   const pack = await runJudgeEvidencePack();
@@ -129,6 +131,14 @@ export async function runSubmissionVerify() {
       "Expected an MCP handoff artifact that connects DataHub reads, CAT policy, and bounded receipt writes.",
     ),
     check(
+      "MCP adapter smoke test",
+      mcpAdapterSmoke.status === "passed" &&
+        mcpAdapterSmoke.request_flows.length === 3 &&
+        mcpAdapterSmoke.tool_sequence.length === 12 &&
+        mcpAdapterSmoke.external_side_effects === "none",
+      "Expected the local adapter smoke test to prove read-before-write ordering and bounded receipt writes.",
+    ),
+    check(
       "safety boundary",
       contextRead.context.blocked_actions.includes("send_external_outreach_without_verified_contact") &&
         contextRead.blocked.some((item) => item.request_id === "REQ-1044"),
@@ -182,6 +192,7 @@ export async function runSubmissionVerify() {
       "hackathon-assets/datahub-integration-checklist.md",
       "hackathon-assets/datahub-claim-audit.md",
       "hackathon-assets/datahub-mcp-handoff.md",
+      "hackathon-assets/mcp-adapter-smoke-report.md",
       "hackathon-assets/lineage-decision-map.md",
       "hackathon-assets/safety-policy-matrix.md",
       "hackathon-assets/judge-evidence-pack.md",

@@ -101,7 +101,7 @@ const verificationCommands = [
   {
     label: "Full local check",
     command: "npm run ci:local",
-    expected: "Runs the full artifact pipeline, build, and 23 render/evidence tests.",
+    expected: "Runs the full artifact pipeline, build, and 24 render/evidence tests.",
   },
   {
     label: "Context read",
@@ -238,6 +238,12 @@ const runnableArtifacts = [
     command: "npm run datahub:mcp",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/datahub-mcp-handoff.md",
     text: "Maps DataHub reads, CAT policy context, sample tool calls, request outcomes, and bounded receipt writes.",
+  },
+  {
+    label: "MCP adapter smoke test",
+    command: "npm run mcp:smoke",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/mcp-adapter-smoke-report.md",
+    text: "Runs the local read-before-write adapter sequence for DataHub reads, CAT context, and bounded receipt writes.",
   },
   {
     label: "MCP-style context read",

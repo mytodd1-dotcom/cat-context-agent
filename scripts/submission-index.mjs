@@ -78,13 +78,20 @@ const submissionIndex = {
     },
     {
       step: 10,
+      title: "Run the MCP adapter smoke test",
+      artifact: "hackathon-assets/mcp-adapter-smoke-report.md",
+      command: "npm run mcp:smoke",
+      why: "Proves the local adapter reads DataHub/CAT context before writing bounded receipts.",
+    },
+    {
+      step: 11,
       title: "Inspect the lineage decision map",
       artifact: "hackathon-assets/lineage-decision-map.md",
       command: "npm run lineage:map",
       why: "Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph.",
     },
     {
-      step: 11,
+      step: 12,
       title: "Inspect the safety policy matrix",
       artifact: "hackathon-assets/safety-policy-matrix.md",
       command: "npm run policy:matrix",
@@ -98,6 +105,7 @@ const submissionIndex = {
     "npm run datahub:checklist",
     "npm run datahub:audit",
     "npm run datahub:mcp",
+    "npm run mcp:smoke",
     "npm run lineage:map",
     "npm run policy:matrix",
     "npm run evidence:reproduce",
@@ -115,6 +123,7 @@ const submissionIndex = {
         "hackathon-assets/datahub-integration-checklist.md",
         "hackathon-assets/datahub-claim-audit.md",
         "hackathon-assets/datahub-mcp-handoff.md",
+        "hackathon-assets/mcp-adapter-smoke-report.md",
       ],
     },
     {
@@ -122,6 +131,7 @@ const submissionIndex = {
       evidence: [
         "examples/cat-context-agent/generated-mcp-context-read.json",
         "hackathon-assets/datahub-mcp-handoff.md",
+        "hackathon-assets/mcp-adapter-smoke-report.md",
         "hackathon-assets/context-tool-contracts.md",
         "hackathon-assets/lineage-decision-map.md",
         "hackathon-assets/safety-policy-matrix.md",

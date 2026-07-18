@@ -46,6 +46,9 @@ jobs:
       - name: Generate DataHub MCP handoff
         run: npm run datahub:mcp
 
+      - name: Run MCP adapter smoke test
+        run: npm run mcp:smoke
+
       - name: Validate generated artifacts
         run: npm run artifacts:validate
 

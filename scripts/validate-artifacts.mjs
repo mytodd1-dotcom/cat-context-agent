@@ -20,6 +20,8 @@ const paths = {
   datahubClaimAuditMarkdown: resolve(assetDir, "datahub-claim-audit.md"),
   datahubMcpHandoff: resolve(assetDir, "datahub-mcp-handoff.json"),
   datahubMcpHandoffMarkdown: resolve(assetDir, "datahub-mcp-handoff.md"),
+  mcpAdapterSmoke: resolve(assetDir, "mcp-adapter-smoke-report.json"),
+  mcpAdapterSmokeMarkdown: resolve(assetDir, "mcp-adapter-smoke-report.md"),
   lineageMap: resolve(assetDir, "lineage-decision-map.json"),
   lineageMapMarkdown: resolve(assetDir, "lineage-decision-map.md"),
   safetyPolicyMatrix: resolve(assetDir, "safety-policy-matrix.json"),
@@ -74,6 +76,8 @@ export async function runArtifactValidation() {
     datahubClaimAuditMarkdown,
     datahubMcpHandoff,
     datahubMcpHandoffMarkdown,
+    mcpAdapterSmoke,
+    mcpAdapterSmokeMarkdown,
     lineageMap,
     lineageMapMarkdown,
     safetyPolicyMatrix,
@@ -95,6 +99,8 @@ export async function runArtifactValidation() {
     readFile(paths.datahubClaimAuditMarkdown, "utf8"),
     readJson(paths.datahubMcpHandoff),
     readFile(paths.datahubMcpHandoffMarkdown, "utf8"),
+    readJson(paths.mcpAdapterSmoke),
+    readFile(paths.mcpAdapterSmokeMarkdown, "utf8"),
     readJson(paths.lineageMap),
     readFile(paths.lineageMapMarkdown, "utf8"),
     readJson(paths.safetyPolicyMatrix),
@@ -184,6 +190,17 @@ export async function runArtifactValidation() {
       "DataHub MCP handoff should map read-before-action tools to bounded receipt writes.",
     ),
     result(
+      "MCP adapter smoke test",
+      mcpAdapterSmoke.protocol === "cat-mcp-adapter-smoke-v0" &&
+        mcpAdapterSmoke.status === "passed" &&
+        mcpAdapterSmoke.request_flows.length === 3 &&
+        mcpAdapterSmoke.tool_sequence.length === 12 &&
+        mcpAdapterSmoke.external_side_effects === "none" &&
+        mcpAdapterSmoke.contract_checks.every((check) => check.ok) &&
+        mcpAdapterSmokeMarkdown.includes("MCP Adapter Smoke Report"),
+      "MCP adapter smoke test should prove read-before-write ordering and bounded local receipt writes.",
+    ),
+    result(
       "judge pack references generated evidence",
       judgePack.artifacts_to_inspect.includes("hackathon-assets/context-tool-contracts.md") &&
         judgePack.artifacts_to_inspect.includes("hackathon-assets/lineage-decision-map.md") &&
@@ -231,6 +248,7 @@ export async function runArtifactValidation() {
       "hackathon-assets/datahub-integration-checklist.json",
       "hackathon-assets/datahub-claim-audit.json",
       "hackathon-assets/datahub-mcp-handoff.json",
+      "hackathon-assets/mcp-adapter-smoke-report.json",
       "hackathon-assets/lineage-decision-map.json",
       "hackathon-assets/safety-policy-matrix.json",
       "hackathon-assets/judge-evidence-pack.json",

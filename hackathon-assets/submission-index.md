@@ -22,8 +22,9 @@ A judge-first index for verifying the DataHub Agent Hackathon submission without
 | 7. Inspect the DataHub integration checklist | `hackathon-assets/datahub-integration-checklist.md`<br><code>npm run datahub:checklist</code> | Shows what is judgeable now, what requires local DataHub, and what is intentionally out of scope. |
 | 8. Inspect the DataHub claim audit | `hackathon-assets/datahub-claim-audit.md`<br><code>npm run datahub:audit</code> | Gives a compact pass/fail audit of the submission's DataHub-specific claims. |
 | 9. Inspect the DataHub MCP handoff | `hackathon-assets/datahub-mcp-handoff.md`<br><code>npm run datahub:mcp</code> | Shows how DataHub reads, CAT policy context, and bounded receipt writes connect in the live path. |
-| 10. Inspect the lineage decision map | `hackathon-assets/lineage-decision-map.md`<br><code>npm run lineage:map</code> | Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph. |
-| 11. Inspect the safety policy matrix | `hackathon-assets/safety-policy-matrix.md`<br><code>npm run policy:matrix</code> | Shows which agent actions are allowed, approval-required, or blocked based on context quality. |
+| 10. Run the MCP adapter smoke test | `hackathon-assets/mcp-adapter-smoke-report.md`<br><code>npm run mcp:smoke</code> | Proves the local adapter reads DataHub/CAT context before writing bounded receipts. |
+| 11. Inspect the lineage decision map | `hackathon-assets/lineage-decision-map.md`<br><code>npm run lineage:map</code> | Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph. |
+| 12. Inspect the safety policy matrix | `hackathon-assets/safety-policy-matrix.md`<br><code>npm run policy:matrix</code> | Shows which agent actions are allowed, approval-required, or blocked based on context quality. |
 
 ## Proof commands
 
@@ -34,6 +35,7 @@ npm run submission:verify
 npm run datahub:checklist
 npm run datahub:audit
 npm run datahub:mcp
+npm run mcp:smoke
 npm run lineage:map
 npm run policy:matrix
 npm run evidence:reproduce
@@ -52,11 +54,13 @@ npm run ci:local
 - `hackathon-assets/datahub-integration-checklist.md`
 - `hackathon-assets/datahub-claim-audit.md`
 - `hackathon-assets/datahub-mcp-handoff.md`
+- `hackathon-assets/mcp-adapter-smoke-report.md`
 
 ### The agent reads context before action.
 
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/datahub-mcp-handoff.md`
+- `hackathon-assets/mcp-adapter-smoke-report.md`
 - `hackathon-assets/context-tool-contracts.md`
 - `hackathon-assets/lineage-decision-map.md`
 - `hackathon-assets/safety-policy-matrix.md`

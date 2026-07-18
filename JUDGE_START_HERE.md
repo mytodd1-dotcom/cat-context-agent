@@ -51,6 +51,7 @@ The current submission is runnable without Docker or credentials, but it makes t
 - DataHub integration checklist: [`hackathon-assets/datahub-integration-checklist.md`](./hackathon-assets/datahub-integration-checklist.md)
 - DataHub claim audit: [`hackathon-assets/datahub-claim-audit.md`](./hackathon-assets/datahub-claim-audit.md)
 - DataHub MCP handoff: [`hackathon-assets/datahub-mcp-handoff.md`](./hackathon-assets/datahub-mcp-handoff.md)
+- MCP adapter smoke report: [`hackathon-assets/mcp-adapter-smoke-report.md`](./hackathon-assets/mcp-adapter-smoke-report.md)
 - MCP-style context read: [`examples/cat-context-agent/generated-mcp-context-read.json`](./examples/cat-context-agent/generated-mcp-context-read.json)
 - lineage decision map: [`hackathon-assets/lineage-decision-map.md`](./hackathon-assets/lineage-decision-map.md)
 - safety policy matrix: [`hackathon-assets/safety-policy-matrix.md`](./hackathon-assets/safety-policy-matrix.md)

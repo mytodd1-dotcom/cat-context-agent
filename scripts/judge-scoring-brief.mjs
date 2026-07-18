@@ -68,6 +68,7 @@ export async function runJudgeScoringBrief() {
           "hackathon-assets/datahub-integration-checklist.md",
           "hackathon-assets/datahub-claim-audit.md",
           "hackathon-assets/datahub-mcp-handoff.md",
+          "hackathon-assets/mcp-adapter-smoke-report.md",
         ],
       },
       {
@@ -77,6 +78,7 @@ export async function runJudgeScoringBrief() {
         files: [
           "examples/cat-context-agent/generated-mcp-context-read.json",
           "hackathon-assets/datahub-mcp-handoff.md",
+          "hackathon-assets/mcp-adapter-smoke-report.md",
           "hackathon-assets/context-tool-contracts.md",
           "hackathon-assets/lineage-decision-map.md",
           "hackathon-assets/safety-policy-matrix.md",

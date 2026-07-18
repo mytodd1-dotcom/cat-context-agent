@@ -1,0 +1,170 @@
+{
+  "protocol": "cat-mcp-adapter-smoke-v0",
+  "project": "CAT Context Agent",
+  "generated_at": "demo-static-run",
+  "status": "passed",
+  "datahub_entity": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+  "required_read_tools": [
+    "datahub.get_entity",
+    "datahub.get_lineage",
+    "cat.get_agent_context_packet"
+  ],
+  "request_flows": [
+    {
+      "request_id": "REQ-1042",
+      "decision": "needs_approval",
+      "read_tools_before_write": [
+        "datahub.get_entity",
+        "datahub.get_lineage",
+        "cat.get_agent_context_packet"
+      ],
+      "context_matched_decision": true,
+      "aspect_count": 4,
+      "lineage_steps": [
+        "uploaded_csv",
+        "cat_context_mapper",
+        "agent_decision_loop",
+        "approval_queue"
+      ],
+      "receipt_write": {
+        "tool": "cat.write_receipt",
+        "receipt_id": "cat-mcp-smoke-REQ-1042",
+        "external_side_effects": "none"
+      }
+    },
+    {
+      "request_id": "REQ-1043",
+      "decision": "safe_to_queue_internal_task",
+      "read_tools_before_write": [
+        "datahub.get_entity",
+        "datahub.get_lineage",
+        "cat.get_agent_context_packet"
+      ],
+      "context_matched_decision": true,
+      "aspect_count": 4,
+      "lineage_steps": [
+        "uploaded_csv",
+        "cat_context_mapper",
+        "agent_decision_loop",
+        "approval_queue"
+      ],
+      "receipt_write": {
+        "tool": "cat.write_receipt",
+        "receipt_id": "cat-mcp-smoke-REQ-1043",
+        "external_side_effects": "none"
+      }
+    },
+    {
+      "request_id": "REQ-1044",
+      "decision": "blocked",
+      "read_tools_before_write": [
+        "datahub.get_entity",
+        "datahub.get_lineage",
+        "cat.get_agent_context_packet"
+      ],
+      "context_matched_decision": true,
+      "aspect_count": 4,
+      "lineage_steps": [
+        "uploaded_csv",
+        "cat_context_mapper",
+        "agent_decision_loop",
+        "approval_queue"
+      ],
+      "receipt_write": {
+        "tool": "cat.write_receipt",
+        "receipt_id": "cat-mcp-smoke-REQ-1044",
+        "external_side_effects": "none"
+      }
+    }
+  ],
+  "tool_sequence": [
+    {
+      "request_id": "REQ-1042",
+      "tool": "datahub.get_entity",
+      "phase": "read"
+    },
+    {
+      "request_id": "REQ-1042",
+      "tool": "datahub.get_lineage",
+      "phase": "read"
+    },
+    {
+      "request_id": "REQ-1042",
+      "tool": "cat.get_agent_context_packet",
+      "phase": "read"
+    },
+    {
+      "request_id": "REQ-1042",
+      "tool": "cat.write_receipt",
+      "phase": "write"
+    },
+    {
+      "request_id": "REQ-1043",
+      "tool": "datahub.get_entity",
+      "phase": "read"
+    },
+    {
+      "request_id": "REQ-1043",
+      "tool": "datahub.get_lineage",
+      "phase": "read"
+    },
+    {
+      "request_id": "REQ-1043",
+      "tool": "cat.get_agent_context_packet",
+      "phase": "read"
+    },
+    {
+      "request_id": "REQ-1043",
+      "tool": "cat.write_receipt",
+      "phase": "write"
+    },
+    {
+      "request_id": "REQ-1044",
+      "tool": "datahub.get_entity",
+      "phase": "read"
+    },
+    {
+      "request_id": "REQ-1044",
+      "tool": "datahub.get_lineage",
+      "phase": "read"
+    },
+    {
+      "request_id": "REQ-1044",
+      "tool": "cat.get_agent_context_packet",
+      "phase": "read"
+    },
+    {
+      "request_id": "REQ-1044",
+      "tool": "cat.write_receipt",
+      "phase": "write"
+    }
+  ],
+  "contract_checks": [
+    {
+      "name": "required MCP tools are contracted",
+      "ok": true,
+      "detail": "Tool contracts include DataHub entity reads, lineage reads, CAT context reads, and guarded receipt writes."
+    },
+    {
+      "name": "handoff and adapter agree on tools",
+      "ok": true,
+      "detail": "The DataHub MCP handoff and smoke adapter share the same tool boundary."
+    },
+    {
+      "name": "read-before-write ordering",
+      "ok": true,
+      "detail": "Every request reads DataHub/CAT context before the receipt write."
+    },
+    {
+      "name": "decision parity",
+      "ok": true,
+      "detail": "Context packet decisions match the generated agent receipts."
+    },
+    {
+      "name": "bounded writes",
+      "ok": true,
+      "detail": "The smoke adapter writes only local receipts and performs no outreach, payment, or remote posting."
+    }
+  ],
+  "external_side_effects": "none"
+}

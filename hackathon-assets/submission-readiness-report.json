@@ -55,6 +55,11 @@
       "details": "Expected an MCP handoff artifact that connects DataHub reads, CAT policy, and bounded receipt writes."
     },
     {
+      "name": "MCP adapter smoke test",
+      "ok": true,
+      "details": "Expected the local adapter smoke test to prove read-before-write ordering and bounded receipt writes."
+    },
+    {
       "name": "safety boundary",
       "ok": true,
       "details": "Expected unverified external outreach to remain blocked."
@@ -84,6 +89,7 @@
     "hackathon-assets/datahub-integration-checklist.md",
     "hackathon-assets/datahub-claim-audit.md",
     "hackathon-assets/datahub-mcp-handoff.md",
+    "hackathon-assets/mcp-adapter-smoke-report.md",
     "hackathon-assets/lineage-decision-map.md",
     "hackathon-assets/safety-policy-matrix.md",
     "hackathon-assets/judge-evidence-pack.md",

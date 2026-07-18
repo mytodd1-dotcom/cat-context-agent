@@ -12,6 +12,7 @@ Generated: `demo-static-run`
 - ✅ **DataHub integration checklist** — Expected local evidence to be judgeable without credentials while preserving the optional local GMS post path.
 - ✅ **DataHub claim audit** — Expected all DataHub-specific claims to pass the generated audit.
 - ✅ **DataHub MCP handoff** — Expected an MCP handoff artifact that connects DataHub reads, CAT policy, and bounded receipt writes.
+- ✅ **MCP adapter smoke test** — Expected the local adapter smoke test to prove read-before-write ordering and bounded receipt writes.
 - ✅ **safety boundary** — Expected unverified external outreach to remain blocked.
 - ✅ **judge pack** — Expected judge evidence pack to summarize commands, safety claims, and inspectable artifacts.
 - ✅ **lineage decision map** — Expected source, DataHub context reads, decision branches, and receipt routing to be mapped.
@@ -36,6 +37,7 @@ Generated: `demo-static-run`
 - `hackathon-assets/datahub-integration-checklist.md`
 - `hackathon-assets/datahub-claim-audit.md`
 - `hackathon-assets/datahub-mcp-handoff.md`
+- `hackathon-assets/mcp-adapter-smoke-report.md`
 - `hackathon-assets/lineage-decision-map.md`
 - `hackathon-assets/safety-policy-matrix.md`
 - `hackathon-assets/judge-evidence-pack.md`
