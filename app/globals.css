@@ -476,6 +476,52 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   line-height: 1.65;
 }
 
+.evidenceMatrix {
+  border: 2px solid var(--ink);
+  background: #fffdf8;
+  box-shadow: 10px 10px 0 rgba(49, 92, 255, .22);
+}
+.evidenceRow {
+  display: grid;
+  grid-template-columns: 1.05fr 1.55fr 170px;
+  border-bottom: 1px solid var(--line);
+}
+.evidenceRow:last-child { border-bottom: 0; }
+.evidenceRow > * {
+  padding: 22px 24px;
+  border-right: 1px solid var(--line);
+}
+.evidenceRow > *:last-child { border-right: 0; }
+.evidenceHeader {
+  background: #edf5ff;
+}
+.evidenceHeader b {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.evidenceRow strong {
+  font-size: 18px;
+  letter-spacing: -.03em;
+  line-height: 1.35;
+}
+.evidenceRow span {
+  color: var(--muted);
+  line-height: 1.55;
+}
+.evidenceRow a {
+  align-self: center;
+  width: fit-content;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 7px;
+}
+
 .trackTable { border: 2px solid var(--ink); background: var(--card); box-shadow: 10px 10px 0 var(--mint); }
 .trackRow { display: grid; grid-template-columns: 260px 1fr; border-bottom: 1px solid var(--line); }
 .trackRow:last-child { border-bottom: 0; }
@@ -497,6 +543,9 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   .judgePathIntro { grid-template-columns: 1fr; gap: 10px; }
   .judgePathGrid { grid-template-columns: repeat(2, 1fr); }
   .demoGrid, .queueGrid, .artifactGrid, .scopeGrid, .faqGrid { grid-template-columns: 1fr; }
+  .evidenceRow { grid-template-columns: 1fr; }
+  .evidenceRow > * { border-right: 0; border-bottom: 1px solid var(--line); }
+  .evidenceRow > *:last-child { border-bottom: 0; }
   .stepCard:nth-child(2) { border-right: 0; }
   .stepCard:nth-child(1), .stepCard:nth-child(2) { border-bottom: 1px solid var(--line); }
 }

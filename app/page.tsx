@@ -228,6 +228,29 @@ const judgeFaq = [
   },
 ];
 
+const evidenceMatrix = [
+  {
+    claim: "The agent reads context before action.",
+    evidence: "MCP-style context read + generated agent context packet",
+    link: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/examples/cat-context-agent/generated-mcp-context-read.json",
+  },
+  {
+    claim: "DataHub metadata shapes the decision boundary.",
+    evidence: "DataHub bridge plan with datasetProperties, schemaMetadata, ownership, and glossaryTerms",
+    link: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/examples/cat-context-agent/generated-datahub-bridge-plan.json",
+  },
+  {
+    claim: "Unsafe or underspecified work is blocked.",
+    evidence: "Generated agent output and receipt JSON showing safe, approval-required, and blocked outcomes",
+    link: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/examples/cat-context-agent/generated-agent-output.json",
+  },
+  {
+    claim: "The submission is reproducible.",
+    evidence: "One-command reproduction receipt and local CI-equivalent validation",
+    link: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/reproduction-receipt.md",
+  },
+];
+
 const receiptJson = `{
   "receipt_id": "cat-demo-REQ-1042",
   "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
@@ -367,6 +390,30 @@ export default function Home() {
           <div><strong>Human checkpoints</strong><span>Unsafe actions become questions</span></div>
           <div><strong>Receipts</strong><span>Recommendations cite their source context</span></div>
           <div><strong>Small-business demo</strong><span>Practical files, practical workflows</span></div>
+        </div>
+      </section>
+
+      <section className="section shell" id="evidence">
+        <p className="sectionTag">CLAIM TO EVIDENCE</p>
+        <div className="sectionIntro">
+          <h2>Every major claim has a thing judges can open.</h2>
+          <p>
+            The submission avoids hand-wavy agent claims. Each promise points to a generated artifact or proof command in the repo.
+          </p>
+        </div>
+        <div className="evidenceMatrix" role="table" aria-label="Claim to evidence matrix">
+          <div className="evidenceRow evidenceHeader" role="row">
+            <b role="columnheader">Claim</b>
+            <b role="columnheader">Evidence to inspect</b>
+            <b role="columnheader">Artifact</b>
+          </div>
+          {evidenceMatrix.map((item) => (
+            <div className="evidenceRow" role="row" key={item.claim}>
+              <strong role="cell">{item.claim}</strong>
+              <span role="cell">{item.evidence}</span>
+              <a role="cell" href={item.link}>Open proof →</a>
+            </div>
+          ))}
         </div>
       </section>
 

@@ -70,6 +70,11 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /Is this connected to a live DataHub instance/);
   assert.match(html, /What does the agent actually decide/);
   assert.match(html, /How can judges reproduce the claim/);
+  assert.match(html, /CLAIM TO EVIDENCE/);
+  assert.match(html, /Every major claim has a thing judges can open/);
+  assert.match(html, /The agent reads context before action/);
+  assert.match(html, /DataHub metadata shapes the decision boundary/);
+  assert.match(html, /Open proof/);
   assert.doesNotMatch(html, /Revenue Leak Audit|Get a 3-leak preview|Revenue Leak Scan/i);
 });
 
@@ -99,6 +104,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /approvalQueue/);
   assert.match(page, /scopeCards/);
   assert.match(page, /judgeFaq/);
+  assert.match(page, /evidenceMatrix/);
   assert.match(page, /runnableArtifacts/);
   assert.match(page, /generated-mcp-context-read\.json/);
   assert.match(page, /datahub\.get_entity/);
@@ -115,6 +121,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(css, /scopeGrid/);
   assert.match(css, /judgePathGrid/);
   assert.match(css, /faqGrid/);
+  assert.match(css, /evidenceMatrix/);
   assert.match(layout, /CAT Context Agent \| DataHub Hackathon Submission/);
   assert.match(layout, /metadataBase: siteUrl/);
   assert.match(layout, /openGraph/);
