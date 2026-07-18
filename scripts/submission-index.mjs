@@ -1,0 +1,155 @@
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const assetDir = resolve(root, "hackathon-assets");
+const indexJsonPath = resolve(assetDir, "submission-index.json");
+const indexMarkdownPath = resolve(assetDir, "submission-index.md");
+
+const submissionIndex = {
+  project: "CAT Context Agent",
+  purpose:
+    "A judge-first index for verifying the DataHub Agent Hackathon submission without guessing where to start.",
+  canonical_links: {
+    live_demo: "https://cat-context-agent.flyguy.chatgpt.site",
+    repository: "https://github.com/mytodd1-dotcom/cat-context-agent",
+    demo_video: "https://youtu.be/Gcbhl5_YlSM",
+    devpost_copy: "hackathon-assets/devpost-submission-copy.md",
+  },
+  suggested_review_order: [
+    {
+      step: 1,
+      title: "Watch the demo video",
+      artifact: "https://youtu.be/Gcbhl5_YlSM",
+      why: "Fastest visual pass through the CAT Context Agent story.",
+    },
+    {
+      step: 2,
+      title: "Open the live demo",
+      artifact: "https://cat-context-agent.flyguy.chatgpt.site",
+      why: "Shows the workflow, evidence cards, approval queue, and receipt pattern.",
+    },
+    {
+      step: 3,
+      title: "Read the judge scoring brief",
+      artifact: "hackathon-assets/judge-scoring-brief.md",
+      why: "Maps the main claims to concrete repo evidence.",
+    },
+    {
+      step: 4,
+      title: "Run the one-command proof",
+      artifact: "hackathon-assets/reproduction-receipt.md",
+      command: "npm run evidence:reproduce",
+      why: "Regenerates the evidence chain and receipt from local source.",
+    },
+    {
+      step: 5,
+      title: "Inspect DataHub context artifacts",
+      artifact: "examples/cat-context-agent/generated-datahub-bridge-plan.json",
+      why: "Shows the datasetProperties, schemaMetadata, ownership, and glossaryTerms handoff.",
+    },
+    {
+      step: 6,
+      title: "Inspect the MCP-style read contract",
+      artifact: "examples/cat-context-agent/generated-mcp-context-read.json",
+      why: "Shows the agent reading entity, lineage, and CAT context before action.",
+    },
+  ],
+  proof_commands: [
+    "npm install",
+    "npm run demo",
+    "npm run submission:verify",
+    "npm run evidence:reproduce",
+    "npm run judge:brief",
+    "npm run devpost:copy",
+    "npm run ci:local",
+  ],
+  claim_shortlist: [
+    {
+      claim: "DataHub is the context layer.",
+      evidence: [
+        "examples/cat-context-agent/generated-datahub-metadata.json",
+        "examples/cat-context-agent/generated-datahub-bridge-plan.json",
+        "hackathon-assets/datahub-payload-preview.md",
+      ],
+    },
+    {
+      claim: "The agent reads context before action.",
+      evidence: [
+        "examples/cat-context-agent/generated-mcp-context-read.json",
+        "hackathon-assets/context-tool-contracts.md",
+      ],
+    },
+    {
+      claim: "Unsafe work is approval-gated or blocked.",
+      evidence: [
+        "examples/cat-context-agent/generated-agent-output.json",
+        "hackathon-assets/decision-trace.md",
+        "hackathon-assets/judge-evidence-pack.md",
+      ],
+    },
+    {
+      claim: "The submission is reproducible.",
+      evidence: [
+        "hackathon-assets/reproduction-receipt.md",
+        "hackathon-assets/submission-readiness-report.md",
+        "hackathon-assets/artifact-validation-report.md",
+      ],
+    },
+  ],
+};
+
+function renderMarkdown(index) {
+  return `# CAT Context Agent — Submission Index
+
+${index.purpose}
+
+## Canonical links
+
+- Live demo: [${index.canonical_links.live_demo}](${index.canonical_links.live_demo})
+- Repository: [${index.canonical_links.repository}](${index.canonical_links.repository})
+- Demo video: [${index.canonical_links.demo_video}](${index.canonical_links.demo_video})
+- Devpost copy pack: \`${index.canonical_links.devpost_copy}\`
+
+## Suggested judge review order
+
+| Step | Open this | Why it matters |
+| --- | --- | --- |
+${index.suggested_review_order.map((item) => `| ${item.step}. ${item.title} | ${item.artifact.startsWith("http") ? `[${item.artifact}](${item.artifact})` : `\`${item.artifact}\``}${item.command ? `<br><code>${item.command}</code>` : ""} | ${item.why} |`).join("\n")}
+
+## Proof commands
+
+\`\`\`bash
+${index.proof_commands.join("\n")}
+\`\`\`
+
+## Claim shortlist
+
+${index.claim_shortlist.map((item) => `### ${item.claim}\n\n${item.evidence.map((artifact) => `- \`${artifact}\``).join("\n")}`).join("\n\n")}
+`;
+}
+
+export async function runSubmissionIndex() {
+  await mkdir(assetDir, { recursive: true });
+  await Promise.all([
+    writeFile(indexJsonPath, `${JSON.stringify(submissionIndex, null, 2)}\n`),
+    writeFile(indexMarkdownPath, renderMarkdown(submissionIndex)),
+  ]);
+  return submissionIndex;
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const index = await runSubmissionIndex();
+  console.log(JSON.stringify({
+    project: index.project,
+    review_steps: index.suggested_review_order.length,
+    proof_commands: index.proof_commands.length,
+    output: [
+      "hackathon-assets/submission-index.json",
+      "hackathon-assets/submission-index.md",
+    ],
+  }, null, 2));
+  console.log(`Wrote ${indexJsonPath}`);
+  console.log(`Wrote ${indexMarkdownPath}`);
+}

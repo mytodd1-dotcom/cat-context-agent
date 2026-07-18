@@ -143,6 +143,14 @@ npm run devpost:copy
 
 That command writes [`hackathon-assets/devpost-submission-copy.md`](./hackathon-assets/devpost-submission-copy.md) and [`hackathon-assets/devpost-submission-copy.json`](./hackathon-assets/devpost-submission-copy.json), including the final links, project story, built-with list, next steps, and organizer feedback text.
 
+To generate the judge-first submission index:
+
+```bash
+npm run submission:index
+```
+
+That command writes [`hackathon-assets/submission-index.md`](./hackathon-assets/submission-index.md) and [`hackathon-assets/submission-index.json`](./hackathon-assets/submission-index.json), with the recommended review order, proof commands, canonical links, and claim shortlist.
+
 A GitHub Actions template for the same checks is available at [`hackathon-assets/github-actions-ci-template.yml`](./hackathon-assets/github-actions-ci-template.yml). It is kept as a template because the current OAuth token cannot publish workflow files without GitHub's `workflow` scope.
 
 To run the local equivalent of that CI recipe:
@@ -151,7 +159,7 @@ To run the local equivalent of that CI recipe:
 npm run ci:local
 ```
 
-That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, and runs the full build/test suite.
+That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, verifies the submission chain, validates artifacts, regenerates the judge scoring brief, regenerates the Devpost copy pack, regenerates the submission index, and runs the full build/test suite.
 
 ## DataHub integration path
 
@@ -198,6 +206,7 @@ npm run artifacts:validate
 npm run evidence:reproduce
 npm run judge:brief
 npm run devpost:copy
+npm run submission:index
 npm run ci:local
 npm run dev
 npm run build

@@ -35,6 +35,8 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /messy CSV, context map, approval queue, receipt JSON/);
   assert.match(html, /RUNNABLE EVIDENCE/);
   assert.match(html, /npm run evidence:reproduce/);
+  assert.match(html, /npm run submission:index/);
+  assert.match(html, /submission-index\.md/);
   assert.match(html, /npm run judge:brief/);
   assert.match(html, /judge-scoring-brief\.md/);
   assert.match(html, /npm run devpost:copy/);
@@ -85,7 +87,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"evidence:reproduce": "node scripts\/reproduce-evidence\.mjs"/);
   assert.match(packageJson, /"judge:brief": "node scripts\/judge-scoring-brief\.mjs"/);
   assert.match(packageJson, /"devpost:copy": "node scripts\/devpost-submission-copy\.mjs"/);
-  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm run devpost:copy && npm test"/);
+  assert.match(packageJson, /"submission:index": "node scripts\/submission-index\.mjs"/);
+  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm run devpost:copy && npm run submission:index && npm test"/);
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(readme, /youtu\.be\/Gcbhl5_YlSM/);
@@ -103,6 +106,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /reproduction-receipt\.md/);
   assert.match(readme, /judge-scoring-brief\.md/);
   assert.match(readme, /devpost-submission-copy\.md/);
+  assert.match(readme, /submission-index\.md/);
   assert.match(readme, /github-actions-ci-template\.yml/);
   assert.match(readme, /DEVPOST_JUDGE_NOTES\.md/);
   assert.match(readme, /DataHub MCP \/ Agent Context Kit reads/);
@@ -451,6 +455,29 @@ test("generates canonical Devpost submission copy", async () => {
   assert.match(markdown, /Feedback for DataHub \/ organizers/);
   assert.match(markdown, /DataHub MCP \/ Agent Context Kit/);
   assert.match(markdown, /https:\/\/youtu\.be\/Gcbhl5_YlSM/);
+});
+
+test("generates a judge-first submission index", async () => {
+  const { stdout } = await execFileAsync("node", ["scripts/submission-index.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /CAT Context Agent/);
+  assert.match(stdout, /submission-index\.md/);
+
+  const [index, markdown] = await Promise.all([
+    readFile(new URL("../hackathon-assets/submission-index.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../hackathon-assets/submission-index.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(index.project, "CAT Context Agent");
+  assert.equal(index.suggested_review_order.length, 6);
+  assert.equal(index.canonical_links.live_demo, "https://cat-context-agent.flyguy.chatgpt.site");
+  assert.ok(index.proof_commands.includes("npm run ci:local"));
+  assert.ok(index.claim_shortlist.some((item) => item.claim === "DataHub is the context layer."));
+  assert.match(markdown, /Suggested judge review order/);
+  assert.match(markdown, /npm run evidence:reproduce/);
+  assert.match(markdown, /hackathon-assets\/judge-scoring-brief\.md/);
 });
 
 test("generates a live DataHub runbook for opt-in local posting", async () => {

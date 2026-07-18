@@ -41,6 +41,12 @@ const runnableArtifacts = [
     text: "Reruns submission verification and artifact validation, then writes a reproduction receipt for judges.",
   },
   {
+    label: "Submission index",
+    command: "npm run submission:index",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/submission-index.md",
+    text: "A judge-first start-here map with the exact review order, proof commands, canonical links, and claim shortlist.",
+  },
+  {
     label: "Judge scoring brief",
     command: "npm run judge:brief",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/judge-scoring-brief.md",
