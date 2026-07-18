@@ -22,6 +22,7 @@ Generated: `demo-static-run`
 - ✅ **safety policy matrix** — Safety policy matrix should define allowed, approval-required, and blocked action boundaries for all three requests.
 - ✅ **readiness report** — Readiness report should be ready, all checks passing, and include context tool contracts.
 - ✅ **judge walkthrough** — Judge walkthrough should document the shortest proof path and preserve the no-external-side-effects boundary.
+- ✅ **judge FAQ** — Judge FAQ should answer the hard reviewer questions with evidence files and verification commands.
 
 ## Validated files
 
@@ -42,3 +43,4 @@ Generated: `demo-static-run`
 - `hackathon-assets/judge-evidence-pack.json`
 - `hackathon-assets/submission-readiness-report.json`
 - `hackathon-assets/judge-walkthrough.json`
+- `hackathon-assets/judge-faq.json`

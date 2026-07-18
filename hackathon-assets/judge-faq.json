@@ -1,0 +1,71 @@
+{
+  "protocol": "cat-judge-faq-v0",
+  "project": "CAT Context Agent",
+  "generated_at": "demo-static-run",
+  "status": "ready",
+  "quick_facts": {
+    "submission_readiness_checks": 14,
+    "honesty_audits": 5,
+    "datahub_doctor_status": "ready_without_live_datahub",
+    "local_datahub_required_for_judging": false,
+    "mcp_smoke_request_flows": 3,
+    "external_side_effects": "none",
+    "blocked_actions": [
+      "send_external_outreach_without_verified_contact",
+      "invent_missing_owner",
+      "scrape_contact_details"
+    ]
+  },
+  "questions": [
+    {
+      "question": "Is this connected to live DataHub right now?",
+      "answer": "The submitted artifact is intentionally judgeable without live DataHub, Docker, or credentials. It generates DataHub-ready metadata, a dry-run bridge plan, a readiness doctor, and an explicit local-only post runbook for judges who want the live GMS path.",
+      "evidence": [
+        "hackathon-assets/datahub-readiness-doctor.md",
+        "hackathon-assets/datahub-integration-checklist.md",
+        "hackathon-assets/live-datahub-runbook.md"
+      ],
+      "command": "npm run datahub:doctor"
+    },
+    {
+      "question": "What does DataHub actually contribute?",
+      "answer": "DataHub is modeled as the context layer: dataset identity, schema metadata, ownership, glossary/policy signals, and lineage become the evidence the agent reads before it chooses safe-to-queue, approval-required, or blocked outcomes.",
+      "evidence": [
+        "examples/cat-context-agent/generated-datahub-metadata.json",
+        "examples/cat-context-agent/generated-datahub-bridge-plan.json",
+        "examples/cat-context-agent/generated-mcp-context-read.json"
+      ],
+      "command": "npm run datahub:bridge"
+    },
+    {
+      "question": "Is this more than a chatbot wrapper?",
+      "answer": "Yes. The demo has a deterministic workflow boundary: three messy business requests produce one safe internal task, one approval-required action, and one blocked outreach action, with receipts tied back to source context.",
+      "evidence": [
+        "examples/cat-context-agent/generated-agent-output.json",
+        "hackathon-assets/decision-trace.md",
+        "hackathon-assets/lineage-decision-map.md"
+      ],
+      "command": "npm run evidence:reproduce"
+    },
+    {
+      "question": "What prevents unsafe automation?",
+      "answer": "The policy matrix and MCP smoke test preserve the refusal boundary. Missing verified contact or ownership blocks external outreach, and the local adapter records external_side_effects as none.",
+      "evidence": [
+        "hackathon-assets/safety-policy-matrix.md",
+        "hackathon-assets/mcp-adapter-smoke-report.md",
+        "hackathon-assets/submission-honesty-audit.md"
+      ],
+      "command": "npm run submission:honesty"
+    },
+    {
+      "question": "How can I verify the whole submission quickly?",
+      "answer": "Use the five-minute walkthrough for the shortest path, or run the full local CI command. The proof chain regenerates judge artifacts and checks the build/test suite together.",
+      "evidence": [
+        "hackathon-assets/judge-walkthrough.md",
+        "hackathon-assets/reproduction-receipt.md",
+        "hackathon-assets/artifact-validation-report.md"
+      ],
+      "command": "npm run judge:walkthrough"
+    }
+  ]
+}

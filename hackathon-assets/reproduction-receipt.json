@@ -57,8 +57,12 @@
       "detail": "5 judge walkthrough steps document the shortest terminal proof path."
     },
     {
+      "name": "judge FAQ",
+      "detail": "5 hard judge questions answered with evidence files and verification commands."
+    },
+    {
       "name": "artifact validation",
-      "detail": "17 generated-artifact checks passed."
+      "detail": "18 generated-artifact checks passed."
     },
     {
       "name": "safety boundary",
@@ -86,7 +90,7 @@
       "datahub.get_lineage",
       "cat.get_agent_context_packet"
     ],
-    "artifact_validation_checks": 17
+    "artifact_validation_checks": 18
   },
   "reports": [
     "hackathon-assets/judge-evidence-pack.md",
@@ -103,6 +107,7 @@
     "hackathon-assets/safety-policy-matrix.md",
     "hackathon-assets/submission-readiness-report.md",
     "hackathon-assets/judge-walkthrough.md",
+    "hackathon-assets/judge-faq.md",
     "hackathon-assets/artifact-validation-report.md",
     "hackathon-assets/reproduction-receipt.md"
   ]

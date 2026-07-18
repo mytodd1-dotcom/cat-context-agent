@@ -8,6 +8,7 @@ import { runDataHubMcpHandoff } from "./datahub-mcp-handoff.mjs";
 import { runDataHubReadinessDoctor } from "./datahub-readiness-doctor.mjs";
 import { runDecisionTrace } from "./decision-trace.mjs";
 import { runDevpostSubmissionCopy } from "./devpost-submission-copy.mjs";
+import { runJudgeFaq } from "./judge-faq.mjs";
 import { runLineageDecisionMap } from "./lineage-decision-map.mjs";
 import { runLiveDataHubRunbook } from "./live-datahub-runbook.mjs";
 import { runMcpAdapterSmoke } from "./mcp-adapter-smoke.mjs";
@@ -70,6 +71,14 @@ export async function runEvidenceReproduction() {
   const policyMatrix = await runSafetyPolicyMatrix();
   const readiness = await runSubmissionVerify();
   const walkthrough = await runJudgeWalkthrough({ readiness, datahubDoctor: readinessDoctor, mcpSmoke: mcpAdapterSmoke });
+  const judgeFaq = await runJudgeFaq({
+    readiness,
+    datahubDoctor: readinessDoctor,
+    mcpSmoke: mcpAdapterSmoke,
+    honestyAudit: submissionHonestyAudit,
+    policyMatrix,
+    walkthrough,
+  });
   const artifactValidation = await runArtifactValidation();
 
   const checks = [
@@ -126,6 +135,10 @@ export async function runEvidenceReproduction() {
       detail: `${walkthrough.steps.length} judge walkthrough steps document the shortest terminal proof path.`,
     },
     {
+      name: "judge FAQ",
+      detail: `${judgeFaq.questions.length} hard judge questions answered with evidence files and verification commands.`,
+    },
+    {
       name: "artifact validation",
       detail: `${artifactValidation.checks.length} generated-artifact checks passed.`,
     },
@@ -170,6 +183,7 @@ export async function runEvidenceReproduction() {
       "hackathon-assets/safety-policy-matrix.md",
       "hackathon-assets/submission-readiness-report.md",
       "hackathon-assets/judge-walkthrough.md",
+      "hackathon-assets/judge-faq.md",
       "hackathon-assets/artifact-validation-report.md",
       "hackathon-assets/reproduction-receipt.md",
     ],

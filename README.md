@@ -178,6 +178,14 @@ npm run judge:walkthrough
 
 That command writes [`hackathon-assets/judge-walkthrough.md`](./hackathon-assets/judge-walkthrough.md) and [`hackathon-assets/judge-walkthrough.json`](./hackathon-assets/judge-walkthrough.json), showing the shortest terminal path, what each command proves, expected outputs, and the safety boundary.
 
+To generate the judge FAQ / objection handler:
+
+```bash
+npm run judge:faq
+```
+
+That command writes [`hackathon-assets/judge-faq.md`](./hackathon-assets/judge-faq.md) and [`hackathon-assets/judge-faq.json`](./hackathon-assets/judge-faq.json), answering the hard reviewer questions about live DataHub, simulation boundaries, workflow value, safety, and fast verification.
+
 To generate the submission honesty audit:
 
 ```bash
@@ -250,7 +258,7 @@ To run the local equivalent of that CI recipe:
 npm run ci:local
 ```
 
-That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub readiness doctor, DataHub integration checklist, DataHub claim audit, DataHub MCP handoff, MCP adapter smoke test, Devpost copy pack, submission honesty audit, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, regenerates the judge walkthrough, validates artifacts, regenerates the judge scoring brief, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
+That command checks `npm ci --dry-run`, regenerates the context contracts, DataHub payload preview, live DataHub runbook, DataHub readiness doctor, DataHub integration checklist, DataHub claim audit, DataHub MCP handoff, MCP adapter smoke test, Devpost copy pack, submission honesty audit, decision trace, lineage decision map, safety policy matrix, verifies the submission chain, regenerates the judge walkthrough, regenerates the judge FAQ, validates artifacts, regenerates the judge scoring brief, regenerates the submission index, regenerates the video guide, and runs the full build/test suite.
 
 ## DataHub integration path
 
@@ -297,6 +305,7 @@ npm run policy:matrix
 npm run context:read
 npm run context:contracts
 npm run judge:pack
+npm run judge:faq
 npm run submission:verify
 npm run artifacts:validate
 npm run evidence:reproduce

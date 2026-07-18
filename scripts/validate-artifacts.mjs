@@ -34,6 +34,8 @@ const paths = {
   readiness: resolve(assetDir, "submission-readiness-report.json"),
   judgeWalkthrough: resolve(assetDir, "judge-walkthrough.json"),
   judgeWalkthroughMarkdown: resolve(assetDir, "judge-walkthrough.md"),
+  judgeFaq: resolve(assetDir, "judge-faq.json"),
+  judgeFaqMarkdown: resolve(assetDir, "judge-faq.md"),
   judgePackMarkdown: resolve(assetDir, "judge-evidence-pack.md"),
   reportJson: resolve(assetDir, "artifact-validation-report.json"),
   reportMarkdown: resolve(assetDir, "artifact-validation-report.md"),
@@ -96,6 +98,8 @@ export async function runArtifactValidation() {
     readiness,
     judgeWalkthrough,
     judgeWalkthroughMarkdown,
+    judgeFaq,
+    judgeFaqMarkdown,
     judgePackMarkdown,
   ] = await Promise.all([
     readJson(paths.agentOutput),
@@ -125,6 +129,8 @@ export async function runArtifactValidation() {
     readJson(paths.readiness),
     readJson(paths.judgeWalkthrough),
     readFile(paths.judgeWalkthroughMarkdown, "utf8"),
+    readJson(paths.judgeFaq),
+    readFile(paths.judgeFaqMarkdown, "utf8"),
     readFile(paths.judgePackMarkdown, "utf8"),
   ]);
 
@@ -278,6 +284,15 @@ export async function runArtifactValidation() {
         judgeWalkthroughMarkdown.includes("Five-minute path"),
       "Judge walkthrough should document the shortest proof path and preserve the no-external-side-effects boundary.",
     ),
+    result(
+      "judge FAQ",
+      judgeFaq.protocol === "cat-judge-faq-v0" &&
+        judgeFaq.status === "ready" &&
+        judgeFaq.questions.length === 5 &&
+        judgeFaq.quick_facts.external_side_effects === "none" &&
+        judgeFaqMarkdown.includes("Judge FAQ"),
+      "Judge FAQ should answer the hard reviewer questions with evidence files and verification commands.",
+    ),
   ];
 
   const report = {
@@ -302,6 +317,7 @@ export async function runArtifactValidation() {
       "hackathon-assets/judge-evidence-pack.json",
       "hackathon-assets/submission-readiness-report.json",
       "hackathon-assets/judge-walkthrough.json",
+      "hackathon-assets/judge-faq.json",
     ],
   };
 

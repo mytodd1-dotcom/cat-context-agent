@@ -19,7 +19,7 @@ CAT Context Agent demonstrates context before action: the agent reads DataHub-st
 | The agent reads context before it acts. | The MCP-style read plan includes datahub.get_entity, datahub.get_lineage, and cat.get_agent_context_packet before decisions are surfaced. | `examples/cat-context-agent/generated-mcp-context-read.json`<br>`hackathon-assets/datahub-mcp-handoff.md`<br>`hackathon-assets/mcp-adapter-smoke-report.md`<br>`hackathon-assets/context-tool-contracts.md`<br>`hackathon-assets/lineage-decision-map.md`<br>`hackathon-assets/safety-policy-matrix.md` |
 | The demo shows real workflow behavior. | Three messy business requests are separated into safe internal task, approval-required, and blocked external outreach outcomes. | `examples/cat-context-agent/messy-business-requests.csv`<br>`examples/cat-context-agent/generated-agent-output.json`<br>`hackathon-assets/decision-trace.md`<br>`hackathon-assets/lineage-decision-map.md`<br>`hackathon-assets/judge-evidence-pack.md` |
 | The safety boundary is explicit and inspectable. | The repo preserves blocked actions for unverified outreach and refuses to invent owners, scrape contacts, or act without verified context. | `examples/cat-context-agent/generated-mcp-context-read.json`<br>`hackathon-assets/artifact-validation-report.md`<br>`hackathon-assets/safety-policy-matrix.md`<br>`hackathon-assets/submission-honesty-audit.md` |
-| The submission is reproducible. | A one-command reproduction receipt reruns submission verification and artifact validation with all checks passing. | `hackathon-assets/reproduction-receipt.md`<br>`hackathon-assets/judge-walkthrough.md`<br>`hackathon-assets/submission-readiness-report.md`<br>`hackathon-assets/artifact-validation-report.md`<br>`hackathon-assets/submission-honesty-audit.md` |
+| The submission is reproducible. | A one-command reproduction receipt reruns submission verification and artifact validation with all checks passing. | `hackathon-assets/reproduction-receipt.md`<br>`hackathon-assets/judge-walkthrough.md`<br>`hackathon-assets/judge-faq.md`<br>`hackathon-assets/submission-readiness-report.md`<br>`hackathon-assets/artifact-validation-report.md`<br>`hackathon-assets/submission-honesty-audit.md` |
 
 ## Why this is more than a toy demo
 
@@ -27,7 +27,7 @@ CAT Context Agent demonstrates context before action: the agent reads DataHub-st
 - It treats missing ownership and missing verified contact as workflow state, not as prompts to hallucinate.
 - It emits receipts and regenerated reports, so the judge can audit both the recommendation and the context used to make it.
 - It documents the local DataHub post command separately from the dry-run evidence, so mutation is explicit instead of hidden inside tests.
-- The current evidence chain is reproducible with 3 requests and 17 artifact validation checks.
+- The current evidence chain is reproducible with 3 requests and 18 artifact validation checks.
 
 ## Judge command path
 

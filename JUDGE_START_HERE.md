@@ -8,7 +8,8 @@ This is the fastest path through the DataHub Agent Hackathon submission.
 2. Try the live demo: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)
 3. Read the claim-to-evidence map: [`hackathon-assets/judge-scoring-brief.md`](./hackathon-assets/judge-scoring-brief.md)
 4. Follow the five-minute terminal walkthrough: [`hackathon-assets/judge-walkthrough.md`](./hackathon-assets/judge-walkthrough.md)
-5. Inspect the full submission index: [`hackathon-assets/submission-index.md`](./hackathon-assets/submission-index.md)
+5. Read the hard-question FAQ: [`hackathon-assets/judge-faq.md`](./hackathon-assets/judge-faq.md)
+6. Inspect the full submission index: [`hackathon-assets/submission-index.md`](./hackathon-assets/submission-index.md)
 
 ## What to look for
 
@@ -58,6 +59,7 @@ The current submission is runnable without Docker or credentials, but it makes t
 - MCP-style context read: [`examples/cat-context-agent/generated-mcp-context-read.json`](./examples/cat-context-agent/generated-mcp-context-read.json)
 - lineage decision map: [`hackathon-assets/lineage-decision-map.md`](./hackathon-assets/lineage-decision-map.md)
 - safety policy matrix: [`hackathon-assets/safety-policy-matrix.md`](./hackathon-assets/safety-policy-matrix.md)
+- judge FAQ: [`hackathon-assets/judge-faq.md`](./hackathon-assets/judge-faq.md)
 
 ## Safety claim
 

@@ -45,6 +45,7 @@ npm run policy:matrix
 npm run context:read
 npm run context:contracts
 npm run judge:walkthrough
+npm run judge:faq
 npm run judge:pack
 npm run submission:verify
 npm run artifacts:validate
@@ -72,6 +73,7 @@ Those commands produce:
 - an MCP-style context read showing the agent’s pre-action context checks;
 - a machine-readable tool contract for DataHub reads, CAT context reads, and guarded receipt writes;
 - a five-minute judge walkthrough that explains the shortest terminal proof path and expected outputs;
+- a judge FAQ that answers likely reviewer objections with evidence files and commands;
 - a judge evidence pack with commands, claims, and outcomes.
 - a submission readiness report that validates the demo totals, DataHub aspects, MCP-style reads, blocked-action policy, and judge evidence pack.
 - an artifact validation report that checks generated decisions, DataHub aspects, context reads, tool contracts, judge pack, and readiness status.
@@ -96,6 +98,7 @@ messy-business-requests.csv
   → generated-mcp-context-read.json
   → safety-policy-matrix.md
   → judge-walkthrough.md
+  → judge-faq.md
   → judge-evidence-pack.md
 ```
 
@@ -122,6 +125,7 @@ The important behavior is not just the transformation. The agent separates actio
 - [`hackathon-assets/safety-policy-matrix.md`](./hackathon-assets/safety-policy-matrix.md)
 - [`hackathon-assets/context-tool-contracts.md`](./hackathon-assets/context-tool-contracts.md)
 - [`hackathon-assets/judge-walkthrough.md`](./hackathon-assets/judge-walkthrough.md)
+- [`hackathon-assets/judge-faq.md`](./hackathon-assets/judge-faq.md)
 - [`hackathon-assets/judge-evidence-pack.md`](./hackathon-assets/judge-evidence-pack.md)
 - [`hackathon-assets/submission-readiness-report.md`](./hackathon-assets/submission-readiness-report.md)
 - [`hackathon-assets/artifact-validation-report.md`](./hackathon-assets/artifact-validation-report.md)

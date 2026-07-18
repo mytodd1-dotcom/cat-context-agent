@@ -58,6 +58,9 @@ jobs:
       - name: Generate judge walkthrough
         run: npm run judge:walkthrough
 
+      - name: Generate judge FAQ
+        run: npm run judge:faq
+
       - name: Validate generated artifacts
         run: npm run artifacts:validate
 

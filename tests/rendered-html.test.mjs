@@ -66,7 +66,7 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /Three commands prove the submission path/);
   assert.match(html, /npm run ci:local/);
   assert.match(html, /npm run context:read/);
-  assert.match(html, /27 render\/evidence tests/);
+  assert.match(html, /28 render\/evidence tests/);
   assert.match(html, /youtu\.be\/Gcbhl5_YlSM/);
   assert.match(html, /watch the 2-minute walkthrough/);
   assert.match(html, /npm run demo:guide/);
@@ -91,6 +91,9 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /Judge walkthrough/);
   assert.match(html, /npm run judge:walkthrough/);
   assert.match(html, /judge-walkthrough\.md/);
+  assert.match(html, /Judge FAQ/);
+  assert.match(html, /npm run judge:faq/);
+  assert.match(html, /judge-faq\.md/);
   assert.match(html, /npm run devpost:copy/);
   assert.match(html, /devpost-submission-copy\.md/);
   assert.match(html, /npm run datahub:bridge/);
@@ -187,6 +190,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /reproduction-receipt\.md/);
   assert.match(page, /judge-scoring-brief\.md/);
   assert.match(page, /judge-walkthrough\.md/);
+  assert.match(page, /judge-faq\.md/);
   assert.match(page, /devpost-submission-copy\.md/);
   assert.match(page, /live-datahub-runbook\.md/);
   assert.match(page, /datahub-readiness-doctor\.md/);
@@ -230,13 +234,14 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"name": "cat-context-agent"/);
   assert.match(packageJson, /"context:contracts": "node scripts\/context-tool-contracts\.mjs"/);
   assert.match(packageJson, /"judge:walkthrough": "node scripts\/judge-walkthrough\.mjs"/);
+  assert.match(packageJson, /"judge:faq": "node scripts\/judge-faq\.mjs"/);
   assert.match(packageJson, /"artifacts:validate": "node scripts\/validate-artifacts\.mjs"/);
   assert.match(packageJson, /"evidence:reproduce": "node scripts\/reproduce-evidence\.mjs"/);
   assert.match(packageJson, /"judge:brief": "node scripts\/judge-scoring-brief\.mjs"/);
   assert.match(packageJson, /"devpost:copy": "node scripts\/devpost-submission-copy\.mjs"/);
   assert.match(packageJson, /"submission:index": "node scripts\/submission-index\.mjs"/);
   assert.match(packageJson, /"demo:guide": "node scripts\/demo-video-guide\.mjs"/);
-  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run datahub:doctor && npm run datahub:checklist && npm run datahub:audit && npm run datahub:mcp && npm run mcp:smoke && npm run devpost:copy && npm run submission:honesty && npm run decision:trace && npm run lineage:map && npm run policy:matrix && npm run submission:verify && npm run judge:walkthrough && npm run artifacts:validate && npm run judge:brief && npm run submission:index && npm run demo:guide && npm test"/);
+  assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run datahub:doctor && npm run datahub:checklist && npm run datahub:audit && npm run datahub:mcp && npm run mcp:smoke && npm run devpost:copy && npm run submission:honesty && npm run decision:trace && npm run lineage:map && npm run policy:matrix && npm run submission:verify && npm run judge:walkthrough && npm run judge:faq && npm run artifacts:validate && npm run judge:brief && npm run submission:index && npm run demo:guide && npm test"/);
   assert.match(readme, /Apache 2\.0/);
   assert.match(readme, /JUDGE_START_HERE\.md/);
   assert.match(readme, /cat-context-agent\.flyguy\.chatgpt\.site/);
@@ -263,6 +268,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /judge-evidence-pack\.md/);
   assert.match(readme, /judge-walkthrough\.md/);
   assert.match(readme, /npm run judge:walkthrough/);
+  assert.match(readme, /judge-faq\.md/);
+  assert.match(readme, /npm run judge:faq/);
   assert.match(readme, /submission-readiness-report\.md/);
   assert.match(readme, /artifact-validation-report\.md/);
   assert.match(readme, /reproduction-receipt\.md/);
@@ -277,6 +284,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(judgeStart, /https:\/\/youtu\.be\/Gcbhl5_YlSM/);
   assert.match(judgeStart, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(judgeStart, /judge-walkthrough\.md/);
+  assert.match(judgeStart, /judge-faq\.md/);
   assert.match(judgeStart, /npm run ci:local/);
   assert.match(judgeStart, /DataHub metadata preview/);
   assert.match(judgeStart, /generated-mcp-context-read\.json/);
@@ -298,6 +306,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(judgeNotes, /machine-readable tool contract/);
   assert.match(judgeNotes, /five-minute judge walkthrough/);
   assert.match(judgeNotes, /npm run judge:walkthrough/);
+  assert.match(judgeNotes, /judge FAQ/);
+  assert.match(judgeNotes, /npm run judge:faq/);
   assert.match(judgeNotes, /generated-datahub-bridge-plan\.json/);
   assert.match(judgeNotes, /DataHub payload preview/);
   assert.match(judgeNotes, /live DataHub runbook/);
@@ -327,6 +337,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(ciWorkflow, /npm run mcp:smoke/);
   assert.match(ciWorkflow, /npm run submission:honesty/);
   assert.match(ciWorkflow, /npm run judge:walkthrough/);
+  assert.match(ciWorkflow, /npm run judge:faq/);
   assert.match(ciWorkflow, /npm run artifacts:validate/);
   assert.match(ciWorkflow, /npm test/);
   assert.match(ciWorkflow, /npm run ci:local/);
@@ -494,6 +505,7 @@ test("builds a judge evidence pack from generated artifacts", async () => {
   assert.ok(pack.judge_commands.includes("npm run datahub:mcp"));
   assert.ok(pack.judge_commands.includes("npm run mcp:smoke"));
   assert.ok(pack.judge_commands.includes("npm run judge:walkthrough"));
+  assert.ok(pack.judge_commands.includes("npm run judge:faq"));
   assert.ok(pack.judge_commands.includes("npm run lineage:map"));
   assert.ok(pack.judge_commands.includes("npm run policy:matrix"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/live-datahub-runbook.md"));
@@ -503,6 +515,7 @@ test("builds a judge evidence pack from generated artifacts", async () => {
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/datahub-mcp-handoff.md"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/mcp-adapter-smoke-report.md"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/judge-walkthrough.md"));
+  assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/judge-faq.md"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/lineage-decision-map.md"));
   assert.ok(pack.artifacts_to_inspect.includes("hackathon-assets/safety-policy-matrix.md"));
   assert.match(packMarkdown, /REQ-1042/);
@@ -514,6 +527,7 @@ test("builds a judge evidence pack from generated artifacts", async () => {
   assert.match(packMarkdown, /datahub-mcp-handoff\.md/);
   assert.match(packMarkdown, /mcp-adapter-smoke-report\.md/);
   assert.match(packMarkdown, /judge-walkthrough\.md/);
+  assert.match(packMarkdown, /judge-faq\.md/);
   assert.match(packMarkdown, /lineage-decision-map\.md/);
   assert.match(packMarkdown, /safety-policy-matrix\.md/);
   assert.match(packMarkdown, /Do not guess, scrape, or invent contact details/);
@@ -587,6 +601,9 @@ test("validates generated evidence artifacts", async () => {
   await execFileAsync("node", ["scripts/judge-walkthrough.mjs"], {
     cwd: new URL("..", import.meta.url),
   });
+  await execFileAsync("node", ["scripts/judge-faq.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
   await execFileAsync("node", ["scripts/submission-honesty-audit.mjs"], {
     cwd: new URL("..", import.meta.url),
   });
@@ -604,7 +621,7 @@ test("validates generated evidence artifacts", async () => {
   ]);
 
   assert.equal(report.status, "valid");
-  assert.equal(report.checks.length, 17);
+  assert.equal(report.checks.length, 18);
   assert.ok(report.checks.every((check) => check.ok));
   assert.ok(report.validated_files.includes("hackathon-assets/context-tool-contracts.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/live-datahub-runbook.json"));
@@ -617,6 +634,7 @@ test("validates generated evidence artifacts", async () => {
   assert.ok(report.validated_files.includes("hackathon-assets/lineage-decision-map.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/safety-policy-matrix.json"));
   assert.ok(report.validated_files.includes("hackathon-assets/judge-walkthrough.json"));
+  assert.ok(report.validated_files.includes("hackathon-assets/judge-faq.json"));
   assert.match(markdown, /Artifact Validation Report/);
   assert.match(markdown, /✅ \*\*tool contract coverage\*\*/);
   assert.match(markdown, /✅ \*\*DataHub readiness doctor\*\*/);
@@ -629,6 +647,7 @@ test("validates generated evidence artifacts", async () => {
   assert.match(markdown, /✅ \*\*safety policy matrix\*\*/);
   assert.match(markdown, /✅ \*\*live DataHub runbook\*\*/);
   assert.match(markdown, /✅ \*\*judge walkthrough\*\*/);
+  assert.match(markdown, /✅ \*\*judge FAQ\*\*/);
 });
 
 test("reproduces the judge evidence chain with one command", async () => {
@@ -645,9 +664,9 @@ test("reproduces the judge evidence chain with one command", async () => {
   ]);
 
   assert.equal(receipt.status, "reproducible");
-  assert.equal(receipt.checks.length, 16);
+  assert.equal(receipt.checks.length, 17);
   assert.equal(receipt.summary.total_requests, 3);
-  assert.equal(receipt.summary.artifact_validation_checks, 17);
+  assert.equal(receipt.summary.artifact_validation_checks, 18);
   assert.equal(receipt.summary.live_datahub_commands, 5);
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-payload-preview.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/datahub-readiness-doctor.md"));
@@ -661,6 +680,7 @@ test("reproduces the judge evidence chain with one command", async () => {
   assert.ok(receipt.reports.includes("hackathon-assets/lineage-decision-map.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/safety-policy-matrix.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/judge-walkthrough.md"));
+  assert.ok(receipt.reports.includes("hackathon-assets/judge-faq.md"));
   assert.ok(receipt.reports.includes("hackathon-assets/artifact-validation-report.md"));
   assert.match(markdown, /One-command proof/);
   assert.match(markdown, /npm run evidence:reproduce/);
@@ -689,6 +709,34 @@ test("generates a five-minute judge walkthrough", async () => {
   assert.ok(walkthrough.steps.some((step) => step.command === "npm run mcp:smoke"));
   assert.match(markdown, /Five-minute path/);
   assert.match(markdown, /No command in the five-minute path posts to DataHub/);
+});
+
+test("generates a hard-question judge FAQ", async () => {
+  const { stdout } = await execFileAsync("node", ["scripts/judge-faq.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  assert.match(stdout, /cat-judge-faq-v0/);
+  assert.match(stdout, /"status": "ready"/);
+  assert.match(stdout, /judge-faq\.md/);
+
+  const [faq, markdown] = await Promise.all([
+    readFile(new URL("../hackathon-assets/judge-faq.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../hackathon-assets/judge-faq.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(faq.protocol, "cat-judge-faq-v0");
+  assert.equal(faq.status, "ready");
+  assert.equal(faq.questions.length, 5);
+  assert.equal(faq.quick_facts.external_side_effects, "none");
+  assert.equal(faq.quick_facts.local_datahub_required_for_judging, false);
+  assert.ok(faq.quick_facts.blocked_actions.includes("scrape_contact_details"));
+  assert.ok(faq.questions.some((item) => item.question.includes("live DataHub")));
+  assert.ok(faq.questions.some((item) => item.command === "npm run submission:honesty"));
+  assert.match(markdown, /Judge FAQ/);
+  assert.match(markdown, /Questions judges may ask/);
+  assert.match(markdown, /Is this connected to live DataHub right now/);
+  assert.match(markdown, /What prevents unsafe automation/);
 });
 
 test("generates a submission honesty audit", async () => {
@@ -747,6 +795,7 @@ test("generates a judge scoring brief from reproduced evidence", async () => {
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/decision-trace.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/safety-policy-matrix.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/judge-walkthrough.md")));
+  assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/judge-faq.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/submission-honesty-audit.md")));
   assert.ok(brief.claims.some((claim) => claim.files.includes("hackathon-assets/reproduction-receipt.md")));
   assert.match(markdown, /Claim-to-evidence map/);
@@ -795,10 +844,11 @@ test("generates a judge-first submission index", async () => {
   ]);
 
   assert.equal(index.project, "CAT Context Agent");
-  assert.equal(index.suggested_review_order.length, 15);
+  assert.equal(index.suggested_review_order.length, 16);
   assert.equal(index.canonical_links.live_demo, "https://cat-context-agent.flyguy.chatgpt.site");
   assert.ok(index.proof_commands.includes("npm run ci:local"));
   assert.ok(index.proof_commands.includes("npm run judge:walkthrough"));
+  assert.ok(index.proof_commands.includes("npm run judge:faq"));
   assert.ok(index.proof_commands.includes("npm run datahub:doctor"));
   assert.ok(index.proof_commands.includes("npm run datahub:checklist"));
   assert.ok(index.proof_commands.includes("npm run datahub:audit"));
@@ -810,6 +860,7 @@ test("generates a judge-first submission index", async () => {
   assert.ok(index.claim_shortlist.some((item) => item.claim === "DataHub is the context layer."));
   assert.match(markdown, /Suggested judge review order/);
   assert.match(markdown, /judge-walkthrough\.md/);
+  assert.match(markdown, /judge-faq\.md/);
   assert.match(markdown, /datahub-readiness-doctor\.md/);
   assert.match(markdown, /datahub-integration-checklist\.md/);
   assert.match(markdown, /datahub-claim-audit\.md/);
