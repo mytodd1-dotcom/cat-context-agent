@@ -1,0 +1,4 @@
+request_id,account,request_type,contact_email,estimated_value,priority,owner,notes
+REQ-1042,Acme HVAC,renewal follow-up,renewals@acme.example,8400,high,owner unknown,"Renewal window closes soon; prior internal owner left company"
+REQ-1043,Northline Dental,invoice mismatch,ap@northline.example,1280,medium,finance,"Invoice total does not match approved service record"
+REQ-1044,Cedar Auto,churn risk,,3100,high,success,"Recent negative support note; no verified contact in source row"

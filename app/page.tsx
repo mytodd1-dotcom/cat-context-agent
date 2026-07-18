@@ -29,8 +29,67 @@ const buildTracks = [
   ["Challenge", "Agents That Do Real Work"],
   ["Core platform", "DataHub OSS + MCP Server"],
   ["Agent context", "Agent Context Kit + DataHub Skills"],
-  ["Submission goal", "public repo, runnable demo, under-3-minute video"],
+  ["Demo slice", "messy CSV, context map, approval queue, receipt JSON"],
 ];
+
+const messyRows = [
+  ["REQ-1042", "Acme HVAC", "renewal follow-up", "renewals@acme.example", "USD 8,400", "high", "owner unknown"],
+  ["REQ-1043", "Northline Dental", "invoice mismatch", "ap@northline.example", "USD 1,280", "medium", "finance"],
+  ["REQ-1044", "Cedar Auto", "churn risk", "", "USD 3,100", "high", "success"],
+];
+
+const contextSignals = [
+  {
+    label: "DataHub asset",
+    value: "urn:li:dataset:(cat,messy_business_requests,PROD)",
+    state: "cataloged",
+  },
+  {
+    label: "Schema confidence",
+    value: "6/7 fields mapped",
+    state: "warning",
+  },
+  {
+    label: "Owner context",
+    value: "2 owner gaps found",
+    state: "blocked",
+  },
+  {
+    label: "Policy",
+    value: "outreach requires contact owner + approval",
+    state: "guardrail",
+  },
+];
+
+const approvalQueue = [
+  {
+    item: "REQ-1042 · Acme HVAC",
+    decision: "Ask for contact owner before follow-up",
+    why: "High priority, but contact owner is missing and the action could trigger client outreach.",
+    status: "Needs human approval",
+  },
+  {
+    item: "REQ-1043 · Northline Dental",
+    decision: "Create finance review task",
+    why: "Contact and owner are known; invoice mismatch can be routed internally without external messaging.",
+    status: "Safe to queue",
+  },
+  {
+    item: "REQ-1044 · Cedar Auto",
+    decision: "Block automated outreach",
+    why: "Churn risk is high, but customer email is blank; the agent must not guess or scrape contacts.",
+    status: "Blocked",
+  },
+];
+
+const receiptJson = `{
+  "receipt_id": "cat-demo-REQ-1042",
+  "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+  "context_checked": ["schema", "owner", "lineage", "policy"],
+  "safe_next_step": "Ask for missing customer contact owner",
+  "blocked_action": "Do not send external follow-up",
+  "confidence": 0.78
+}`;
 
 export default function Home() {
   return (
@@ -40,7 +99,7 @@ export default function Home() {
           <span className="brandMark">CAT</span>
           <span>Context Agent</span>
         </a>
-        <a className="navCta" href="#build">Hackathon build</a>
+        <a className="navCta" href="#demo">Working demo slice</a>
       </nav>
 
       <section className="hero shell" id="top">
@@ -55,7 +114,7 @@ export default function Home() {
             <a className="button ghost" href="#receipt">View the receipt model</a>
           </div>
           <p className="micro">
-            This is an early submission shell for Build with DataHub: The Agent Hackathon. Repo, demo, screenshots, and video will be attached as the prototype is built.
+            Submission foundation is live. This page now includes the first concrete demo slice: sample messy data, DataHub-style context, an approval queue, and receipt output.
           </p>
         </div>
 
@@ -79,6 +138,64 @@ export default function Home() {
             <small>BLOCKED ACTION</small>
             <strong>No automated outreach until approval and ownership are confirmed.</strong>
           </div>
+        </div>
+      </section>
+
+      <section className="section shell demoSection" id="demo">
+        <p className="sectionTag">DEMO SLICE</p>
+        <div className="sectionIntro">
+          <h2>One messy workflow, made safe enough to judge.</h2>
+          <p>
+            The current prototype models the agent decision loop the full build will wire to DataHub: identify the dataset, read available context, detect missing fields, then choose between safe queueing and human approval.
+          </p>
+        </div>
+
+        <div className="demoGrid">
+          <article className="demoPanel wide">
+            <div className="panelHead">
+              <span>01</span>
+              <h3>Messy business requests</h3>
+            </div>
+            <div className="miniTable" role="table" aria-label="Messy business request sample">
+              <div className="miniRow miniHeader" role="row">
+                {["id", "account", "request", "contact", "value", "priority", "owner"].map((heading) => (
+                  <b role="columnheader" key={heading}>{heading}</b>
+                ))}
+              </div>
+              {messyRows.map((row) => (
+                <div className="miniRow" role="row" key={row[0]}>
+                  {row.map((cell, index) => (
+                    <span className={cell === "missing" || cell === "" || cell === "owner unknown" ? "cellWarn" : ""} role="cell" key={`${row[0]}-${index}`}>
+                      {cell || "blank"}
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </article>
+
+          <article className="demoPanel">
+            <div className="panelHead">
+              <span>02</span>
+              <h3>DataHub context read</h3>
+            </div>
+            <div className="signalStack">
+              {contextSignals.map((signal) => (
+                <div className={`signal ${signal.state}`} key={signal.label}>
+                  <small>{signal.label}</small>
+                  <strong>{signal.value}</strong>
+                </div>
+              ))}
+            </div>
+          </article>
+
+          <article className="demoPanel">
+            <div className="panelHead">
+              <span>03</span>
+              <h3>Receipt JSON</h3>
+            </div>
+            <pre className="receiptCode">{receiptJson}</pre>
+          </article>
         </div>
       </section>
 
@@ -110,11 +227,33 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section shell">
+        <p className="sectionTag">APPROVAL QUEUE</p>
+        <div className="sectionIntro">
+          <h2>CAT separates safe internal work from risky action.</h2>
+          <p>
+            This is the “Agents That Do Real Work” part: the agent does not merely summarize data. It decides which next step is allowed, which needs approval, and which must be blocked.
+          </p>
+        </div>
+        <div className="queueGrid">
+          {approvalQueue.map((task) => (
+            <article className="queueCard" key={task.item}>
+              <div className="queueTop">
+                <span>{task.status}</span>
+                <b>{task.item}</b>
+              </div>
+              <h3>{task.decision}</h3>
+              <p>{task.why}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="section darkSection" id="receipt">
         <div className="shell receiptGrid">
           <div>
             <p className="sectionTag lime">WHAT THE DEMO WILL PROVE</p>
-            <h2>An agent should explain why it is safe to act.</h2>
+            <h2>An agent should explain why it is safe to act — or refuse.</h2>
             <p className="muted">
               The prototype will generate an action plan only after it reads the available DataHub context. If the context is missing, the agent produces a question or an approval task instead.
             </p>
@@ -146,9 +285,9 @@ export default function Home() {
       <section className="ctaSection">
         <div className="shell ctaInner">
           <p className="sectionTag lime">NEXT MILESTONE</p>
-          <h2>Build the smallest credible receipt-backed workflow.</h2>
+          <h2>Wire this demo slice to a live DataHub-backed run.</h2>
           <p>
-            Next up: create the public GitHub repo, add the Apache 2.0 license, wire sample data into the prototype, and replace this draft page with a working demo.
+            Next up: replace the static context map with a local DataHub quickstart run, add generated example artifacts, and record the final under-3-minute walkthrough.
           </p>
         </div>
       </section>

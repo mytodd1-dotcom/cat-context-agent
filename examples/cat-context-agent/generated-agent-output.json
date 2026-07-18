@@ -1,0 +1,78 @@
+{
+  "generated_at": "demo-static-run",
+  "demo": "CAT Context Agent local proof",
+  "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+  "source_file": "examples/cat-context-agent/messy-business-requests.csv",
+  "summary": {
+    "total_requests": 3,
+    "safe_to_queue": 1,
+    "needs_approval": 1,
+    "blocked": 1
+  },
+  "receipts": [
+    {
+      "receipt_id": "cat-demo-REQ-1042",
+      "request_id": "REQ-1042",
+      "account": "Acme HVAC",
+      "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+      "context_checked": [
+        "schema",
+        "owner",
+        "contact",
+        "lineage",
+        "policy"
+      ],
+      "missing_context": [
+        "owner"
+      ],
+      "decision": "needs_approval",
+      "status": "Needs human approval",
+      "safe_next_step": "Ask for missing customer contact owner before follow-up",
+      "blocked_action": "Do not send external follow-up",
+      "confidence": 0.78,
+      "reason": "The request may be valuable, but owner context is unknown."
+    },
+    {
+      "receipt_id": "cat-demo-REQ-1043",
+      "request_id": "REQ-1043",
+      "account": "Northline Dental",
+      "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+      "context_checked": [
+        "schema",
+        "owner",
+        "contact",
+        "lineage",
+        "policy"
+      ],
+      "missing_context": [],
+      "decision": "safe_to_queue_internal_task",
+      "status": "Safe to queue",
+      "safe_next_step": "Create finance review task for invoice mismatch",
+      "blocked_action": null,
+      "confidence": 0.91,
+      "reason": "Action stays inside the business and required owner/contact context is present."
+    },
+    {
+      "receipt_id": "cat-demo-REQ-1044",
+      "request_id": "REQ-1044",
+      "account": "Cedar Auto",
+      "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+      "context_checked": [
+        "schema",
+        "owner",
+        "contact",
+        "lineage",
+        "policy"
+      ],
+      "missing_context": [
+        "verified_contact"
+      ],
+      "decision": "blocked",
+      "status": "Blocked",
+      "safe_next_step": "Request a verified contact before customer action",
+      "blocked_action": "Do not guess, scrape, or invent contact details",
+      "confidence": 0.69,
+      "reason": "External outreach is unsafe because verified contact data is blank or missing."
+    }
+  ]
+}

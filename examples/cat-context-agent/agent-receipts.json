@@ -1,0 +1,35 @@
+[
+  {
+    "receipt_id": "cat-demo-REQ-1042",
+    "request_id": "REQ-1042",
+    "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+    "context_checked": ["schema", "owner", "lineage", "policy"],
+    "decision": "needs_approval",
+    "safe_next_step": "Ask for missing customer contact owner before follow-up",
+    "blocked_action": "Do not send external follow-up",
+    "confidence": 0.78,
+    "reason": "High value and high priority, but owner context is unknown."
+  },
+  {
+    "receipt_id": "cat-demo-REQ-1043",
+    "request_id": "REQ-1043",
+    "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+    "context_checked": ["schema", "owner", "policy"],
+    "decision": "safe_to_queue_internal_task",
+    "safe_next_step": "Create finance review task for invoice mismatch",
+    "blocked_action": null,
+    "confidence": 0.91,
+    "reason": "Contact and internal owner are known; action stays inside the business."
+  },
+  {
+    "receipt_id": "cat-demo-REQ-1044",
+    "request_id": "REQ-1044",
+    "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+    "context_checked": ["schema", "contact", "owner", "policy"],
+    "decision": "blocked",
+    "safe_next_step": "Request a verified contact before customer action",
+    "blocked_action": "Do not guess or scrape contact details",
+    "confidence": 0.69,
+    "reason": "Priority is high, but verified contact is blank."
+  }
+]

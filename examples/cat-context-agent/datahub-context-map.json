@@ -1,0 +1,30 @@
+{
+  "asset": {
+    "urn": "urn:li:dataset:(cat,messy_business_requests,PROD)",
+    "name": "messy_business_requests",
+    "platform": "cat",
+    "environment": "PROD",
+    "source_file": "examples/cat-context-agent/messy-business-requests.csv"
+  },
+  "schema": [
+    { "field": "request_id", "meaning": "stable request identifier", "confidence": 0.99 },
+    { "field": "account", "meaning": "customer or account name", "confidence": 0.95 },
+    { "field": "request_type", "meaning": "business workflow category", "confidence": 0.91 },
+    { "field": "contact_email", "meaning": "verified contact address for outreach", "confidence": 0.62 },
+    { "field": "estimated_value", "meaning": "estimated commercial value in USD", "confidence": 0.83 },
+    { "field": "priority", "meaning": "urgency label from source system", "confidence": 0.88 },
+    { "field": "owner", "meaning": "internal accountable team or person", "confidence": 0.57 }
+  ],
+  "governance": {
+    "owner_required_for_external_outreach": true,
+    "verified_contact_required_for_external_outreach": true,
+    "approval_required_when_confidence_below": 0.8,
+    "writeback_target": "approval_queue"
+  },
+  "lineage": [
+    "uploaded_csv",
+    "cat_context_mapper",
+    "agent_decision_loop",
+    "approval_queue"
+  ]
+}
