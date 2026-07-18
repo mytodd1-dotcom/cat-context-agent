@@ -59,12 +59,13 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
 });
 
 test("keeps the project shell responsive and repo-ready", async () => {
-  const [page, css, layout, packageJson, readme, judgeNotes, ciWorkflow, toolContracts] = await Promise.all([
+  const [page, css, layout, packageJson, readme, judgeStart, judgeNotes, ciWorkflow, toolContracts] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     readFile(new URL("../README.md", import.meta.url), "utf8"),
+    readFile(new URL("../JUDGE_START_HERE.md", import.meta.url), "utf8"),
     readFile(new URL("../DEVPOST_JUDGE_NOTES.md", import.meta.url), "utf8"),
     readFile(new URL("../hackathon-assets/github-actions-ci-template.yml", import.meta.url), "utf8"),
     readFile(new URL("../hackathon-assets/context-tool-contracts.md", import.meta.url), "utf8"),
@@ -105,6 +106,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(packageJson, /"demo:guide": "node scripts\/demo-video-guide\.mjs"/);
   assert.match(packageJson, /"ci:local": "npm ci --dry-run && npm run context:contracts && npm run datahub:payload && npm run datahub:runbook && npm run decision:trace && npm run submission:verify && npm run artifacts:validate && npm run judge:brief && npm run devpost:copy && npm run submission:index && npm run demo:guide && npm test"/);
   assert.match(readme, /Apache 2\.0/);
+  assert.match(readme, /JUDGE_START_HERE\.md/);
   assert.match(readme, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(readme, /youtu\.be\/Gcbhl5_YlSM/);
   assert.match(readme, /examples\/cat-context-agent/);
@@ -126,6 +128,14 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /github-actions-ci-template\.yml/);
   assert.match(readme, /DEVPOST_JUDGE_NOTES\.md/);
   assert.match(readme, /DataHub MCP \/ Agent Context Kit reads/);
+  assert.match(judgeStart, /Judge Start Here/);
+  assert.match(judgeStart, /https:\/\/youtu\.be\/Gcbhl5_YlSM/);
+  assert.match(judgeStart, /cat-context-agent\.flyguy\.chatgpt\.site/);
+  assert.match(judgeStart, /npm run ci:local/);
+  assert.match(judgeStart, /DataHub metadata preview/);
+  assert.match(judgeStart, /generated-mcp-context-read\.json/);
+  assert.match(judgeStart, /refuses to invent owners/);
+  assert.match(judgeNotes, /JUDGE_START_HERE\.md/);
   assert.match(judgeNotes, /github-actions-ci-template\.yml/);
   assert.match(judgeNotes, /cat-context-agent\.flyguy\.chatgpt\.site/);
   assert.match(judgeNotes, /github\.com\/mytodd1-dotcom\/cat-context-agent/);

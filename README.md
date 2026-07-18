@@ -4,6 +4,17 @@ CAT Context Agent is a DataHub Agent Hackathon project for a context-aware workf
 
 The goal is simple: messy business data should become safe, traceable next actions only after an agent understands the data context. DataHub is the planned context layer for schemas, ownership, lineage, and metadata receipts.
 
+## Judge start here
+
+For the fastest review path, open [`JUDGE_START_HERE.md`](./JUDGE_START_HERE.md).
+
+Short version:
+
+- Watch the demo video: [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)
+- Open the live demo: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)
+- Read the scoring brief: [`hackathon-assets/judge-scoring-brief.md`](./hackathon-assets/judge-scoring-brief.md)
+- Run the local proof: `npm run ci:local`
+
 ## Hackathon target
 
 - Event: Build with DataHub: The Agent Hackathon

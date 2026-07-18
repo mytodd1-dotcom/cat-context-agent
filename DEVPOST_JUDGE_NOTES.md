@@ -1,5 +1,7 @@
 # CAT Context Agent — Devpost Judge Notes
 
+Start with [`JUDGE_START_HERE.md`](./JUDGE_START_HERE.md) for the shortest review path through the video, live demo, scoring brief, and local proof command.
+
 [`hackathon-assets/github-actions-ci-template.yml`](./hackathon-assets/github-actions-ci-template.yml) contains a GitHub Actions recipe for verifying the submission evidence chain and test suite.
 
 - Live demo / test URL: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)
