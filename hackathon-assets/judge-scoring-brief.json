@@ -15,7 +15,8 @@
         "examples/cat-context-agent/generated-datahub-metadata.json",
         "examples/cat-context-agent/generated-datahub-bridge-plan.json",
         "hackathon-assets/datahub-payload-preview.md",
-        "hackathon-assets/live-datahub-runbook.md"
+        "hackathon-assets/live-datahub-runbook.md",
+        "hackathon-assets/datahub-integration-checklist.md"
       ]
     },
     {
@@ -63,6 +64,6 @@
     "It treats missing ownership and missing verified contact as workflow state, not as prompts to hallucinate.",
     "It emits receipts and regenerated reports, so the judge can audit both the recommendation and the context used to make it.",
     "It documents the local DataHub post command separately from the dry-run evidence, so mutation is explicit instead of hidden inside tests.",
-    "The current evidence chain is reproducible with 3 requests and 10 artifact validation checks."
+    "The current evidence chain is reproducible with 3 requests and 11 artifact validation checks."
   ]
 }

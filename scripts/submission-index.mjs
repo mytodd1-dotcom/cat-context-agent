@@ -57,13 +57,20 @@ const submissionIndex = {
     },
     {
       step: 7,
+      title: "Inspect the DataHub integration checklist",
+      artifact: "hackathon-assets/datahub-integration-checklist.md",
+      command: "npm run datahub:checklist",
+      why: "Shows what is judgeable now, what requires local DataHub, and what is intentionally out of scope.",
+    },
+    {
+      step: 8,
       title: "Inspect the lineage decision map",
       artifact: "hackathon-assets/lineage-decision-map.md",
       command: "npm run lineage:map",
       why: "Shows the source, DataHub context reads, decision branches, approval queue, and receipt path in one graph.",
     },
     {
-      step: 8,
+      step: 9,
       title: "Inspect the safety policy matrix",
       artifact: "hackathon-assets/safety-policy-matrix.md",
       command: "npm run policy:matrix",
@@ -74,6 +81,7 @@ const submissionIndex = {
     "npm install",
     "npm run demo",
     "npm run submission:verify",
+    "npm run datahub:checklist",
     "npm run lineage:map",
     "npm run policy:matrix",
     "npm run evidence:reproduce",
@@ -88,6 +96,7 @@ const submissionIndex = {
         "examples/cat-context-agent/generated-datahub-metadata.json",
         "examples/cat-context-agent/generated-datahub-bridge-plan.json",
         "hackathon-assets/datahub-payload-preview.md",
+        "hackathon-assets/datahub-integration-checklist.md",
       ],
     },
     {

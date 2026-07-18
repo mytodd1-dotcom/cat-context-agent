@@ -34,6 +34,7 @@ npm run demo
 npm run datahub:bridge
 npm run datahub:payload
 npm run datahub:runbook
+npm run datahub:checklist
 npm run decision:trace
 npm run policy:matrix
 npm run context:read
@@ -54,6 +55,7 @@ Those commands produce:
 - a dry-run DataHub bridge plan;
 - a DataHub payload preview that shows the aspect bodies prepared for local GMS posting;
 - a live DataHub runbook with prerequisites, exact opt-in post command, acceptance checks, fallback path, and safety boundary;
+- a DataHub integration checklist that separates no-credential judging from optional local posting;
 - a request-level decision trace that joins messy rows to context reads, decisions, safe next steps, blocked actions, and receipts;
 - a safety policy matrix that defines allowed, approval-required, and blocked action classes;
 - an MCP-style context read showing the agent’s pre-action context checks;
@@ -73,6 +75,7 @@ messy-business-requests.csv
   → generated-agent-output.json
   → generated-datahub-metadata.json
   → generated-datahub-bridge-plan.json
+  → datahub-integration-checklist.md
   → generated-mcp-context-read.json
   → safety-policy-matrix.md
   → judge-evidence-pack.md
@@ -90,6 +93,7 @@ The important behavior is not just the transformation. The agent separates actio
 - [`examples/cat-context-agent/generated-datahub-bridge-plan.json`](./examples/cat-context-agent/generated-datahub-bridge-plan.json)
 - [`hackathon-assets/datahub-payload-preview.md`](./hackathon-assets/datahub-payload-preview.md)
 - [`hackathon-assets/live-datahub-runbook.md`](./hackathon-assets/live-datahub-runbook.md)
+- [`hackathon-assets/datahub-integration-checklist.md`](./hackathon-assets/datahub-integration-checklist.md)
 - [`examples/cat-context-agent/generated-mcp-context-read.json`](./examples/cat-context-agent/generated-mcp-context-read.json)
 - [`hackathon-assets/decision-trace.md`](./hackathon-assets/decision-trace.md)
 - [`hackathon-assets/safety-policy-matrix.md`](./hackathon-assets/safety-policy-matrix.md)

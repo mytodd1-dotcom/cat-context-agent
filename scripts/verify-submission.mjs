@@ -3,6 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { runContextProvider } from "./cat-context-provider.mjs";
 import { runContextToolContracts } from "./context-tool-contracts.mjs";
+import { runDataHubIntegrationChecklist } from "./datahub-integration-checklist.mjs";
 import { runDemo } from "./cat-context-demo.mjs";
 import { runBridge } from "./datahub-local-bridge.mjs";
 import { runJudgeEvidencePack } from "./judge-evidence-pack.mjs";
@@ -60,6 +61,7 @@ export async function runSubmissionVerify() {
   const bridge = await runBridge();
   const contextRead = await runContextProvider();
   const toolContracts = await runContextToolContracts();
+  const datahubChecklist = await runDataHubIntegrationChecklist();
   const lineageMap = await runLineageDecisionMap();
   const safetyPolicyMatrix = await runSafetyPolicyMatrix();
   const pack = await runJudgeEvidencePack();
@@ -99,6 +101,13 @@ export async function runSubmissionVerify() {
         (tool) => toolContracts.tools.some((contract) => contract.name === tool),
       ),
       "Expected machine-readable contracts for the DataHub reads, CAT context packet read, and receipt write.",
+    ),
+    check(
+      "DataHub integration checklist",
+      datahubChecklist.decision_gates.can_submit_now === true &&
+        datahubChecklist.decision_gates.live_datahub_required_for_submission === false &&
+        datahubChecklist.phases.some((phase) => phase.mode === "optional_local_datahub"),
+      "Expected local evidence to be judgeable without credentials while preserving the optional local GMS post path.",
     ),
     check(
       "safety boundary",
@@ -151,6 +160,7 @@ export async function runSubmissionVerify() {
       "examples/cat-context-agent/generated-datahub-bridge-plan.json",
       "examples/cat-context-agent/generated-mcp-context-read.json",
       "hackathon-assets/context-tool-contracts.md",
+      "hackathon-assets/datahub-integration-checklist.md",
       "hackathon-assets/lineage-decision-map.md",
       "hackathon-assets/safety-policy-matrix.md",
       "hackathon-assets/judge-evidence-pack.md",

@@ -14,6 +14,8 @@ const paths = {
   contracts: resolve(assetDir, "context-tool-contracts.json"),
   liveRunbook: resolve(assetDir, "live-datahub-runbook.json"),
   liveRunbookMarkdown: resolve(assetDir, "live-datahub-runbook.md"),
+  datahubChecklist: resolve(assetDir, "datahub-integration-checklist.json"),
+  datahubChecklistMarkdown: resolve(assetDir, "datahub-integration-checklist.md"),
   lineageMap: resolve(assetDir, "lineage-decision-map.json"),
   lineageMapMarkdown: resolve(assetDir, "lineage-decision-map.md"),
   safetyPolicyMatrix: resolve(assetDir, "safety-policy-matrix.json"),
@@ -62,6 +64,8 @@ export async function runArtifactValidation() {
     contracts,
     liveRunbook,
     liveRunbookMarkdown,
+    datahubChecklist,
+    datahubChecklistMarkdown,
     lineageMap,
     lineageMapMarkdown,
     safetyPolicyMatrix,
@@ -77,6 +81,8 @@ export async function runArtifactValidation() {
     readJson(paths.contracts),
     readJson(paths.liveRunbook),
     readFile(paths.liveRunbookMarkdown, "utf8"),
+    readJson(paths.datahubChecklist),
+    readFile(paths.datahubChecklistMarkdown, "utf8"),
     readJson(paths.lineageMap),
     readFile(paths.lineageMapMarkdown, "utf8"),
     readJson(paths.safetyPolicyMatrix),
@@ -133,6 +139,16 @@ export async function runArtifactValidation() {
       "Live runbook should document the opt-in local DataHub post path and preserve the dry-run payload coverage.",
     ),
     result(
+      "DataHub integration checklist",
+      datahubChecklist.protocol === "cat-datahub-integration-checklist-v0" &&
+        datahubChecklist.decision_gates.can_submit_now === true &&
+        datahubChecklist.decision_gates.live_datahub_required_for_submission === false &&
+        datahubChecklist.decision_gates.secrets_required === false &&
+        datahubChecklist.phases.some((phase) => phase.command.includes("--post")) &&
+        datahubChecklistMarkdown.includes("Live DataHub required to judge current submission: **no**"),
+      "Integration checklist should separate no-credential judging from optional local DataHub posting.",
+    ),
+    result(
       "judge pack references generated evidence",
       judgePack.artifacts_to_inspect.includes("hackathon-assets/context-tool-contracts.md") &&
         judgePack.artifacts_to_inspect.includes("hackathon-assets/lineage-decision-map.md") &&
@@ -177,6 +193,7 @@ export async function runArtifactValidation() {
       "examples/cat-context-agent/generated-mcp-context-read.json",
       "hackathon-assets/context-tool-contracts.json",
       "hackathon-assets/live-datahub-runbook.json",
+      "hackathon-assets/datahub-integration-checklist.json",
       "hackathon-assets/lineage-decision-map.json",
       "hackathon-assets/safety-policy-matrix.json",
       "hackathon-assets/judge-evidence-pack.json",

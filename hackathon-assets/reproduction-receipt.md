@@ -12,12 +12,13 @@ npm run evidence:reproduce
 ## Checks reproduced
 
 - ✅ **DataHub payload preview** — 4 dry-run aspect payloads prepared for local GMS posting.
+- ✅ **DataHub integration checklist** — 5 verification phases separate runnable evidence from optional local DataHub posting.
 - ✅ **decision trace** — 3 request-level traces connect source rows, context reads, decisions, and receipts.
 - ✅ **lineage decision map** — 9 nodes and 11 edges show source → DataHub context → decisions → receipts.
 - ✅ **safety policy matrix** — 6 rules and 3 request outcomes define allowed, approval-required, and blocked action boundaries.
 - ✅ **live DataHub runbook** — 5 operator commands document the opt-in local DataHub post and verification path.
-- ✅ **submission readiness** — 8 readiness checks passed.
-- ✅ **artifact validation** — 10 generated-artifact checks passed.
+- ✅ **submission readiness** — 9 readiness checks passed.
+- ✅ **artifact validation** — 11 generated-artifact checks passed.
 - ✅ **safety boundary** — Blocked action remains preserved for unverified external outreach.
 - ✅ **judge evidence** — Judge notes, evidence pack, context contracts, readiness report, and validation report are regenerated.
 
@@ -30,11 +31,12 @@ npm run evidence:reproduce
 - DataHub aspects: `datasetProperties`, `schemaMetadata`, `ownership`, `glossaryTerms`
 - Live DataHub runbook commands: 5
 - MCP-style reads: `datahub.get_entity`, `datahub.get_lineage`, `cat.get_agent_context_packet`
-- Artifact validation checks: 10
+- Artifact validation checks: 11
 
 ## Reports regenerated
 
 - `hackathon-assets/judge-evidence-pack.md`
+- `hackathon-assets/datahub-integration-checklist.md`
 - `hackathon-assets/datahub-payload-preview.md`
 - `hackathon-assets/live-datahub-runbook.md`
 - `hackathon-assets/decision-trace.md`

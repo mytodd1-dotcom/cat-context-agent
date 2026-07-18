@@ -37,6 +37,9 @@ jobs:
       - name: Generate live DataHub runbook
         run: npm run datahub:runbook
 
+      - name: Generate DataHub integration checklist
+        run: npm run datahub:checklist
+
       - name: Validate generated artifacts
         run: npm run artifacts:validate
 

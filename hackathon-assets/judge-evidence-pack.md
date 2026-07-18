@@ -40,6 +40,7 @@ npm run demo
 npm run datahub:bridge
 npm run datahub:payload
 npm run datahub:runbook
+npm run datahub:checklist
 npm run context:read
 npm run lineage:map
 npm run policy:matrix
@@ -55,6 +56,7 @@ npm test
 - `examples/cat-context-agent/generated-datahub-bridge-plan.json`
 - `hackathon-assets/datahub-payload-preview.md`
 - `hackathon-assets/live-datahub-runbook.md`
+- `hackathon-assets/datahub-integration-checklist.md`
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/decision-trace.md`
 - `hackathon-assets/lineage-decision-map.md`

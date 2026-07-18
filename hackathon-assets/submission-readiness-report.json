@@ -40,6 +40,11 @@
       "details": "Expected machine-readable contracts for the DataHub reads, CAT context packet read, and receipt write."
     },
     {
+      "name": "DataHub integration checklist",
+      "ok": true,
+      "details": "Expected local evidence to be judgeable without credentials while preserving the optional local GMS post path."
+    },
+    {
       "name": "safety boundary",
       "ok": true,
       "details": "Expected unverified external outreach to remain blocked."
@@ -66,6 +71,7 @@
     "examples/cat-context-agent/generated-datahub-bridge-plan.json",
     "examples/cat-context-agent/generated-mcp-context-read.json",
     "hackathon-assets/context-tool-contracts.md",
+    "hackathon-assets/datahub-integration-checklist.md",
     "hackathon-assets/lineage-decision-map.md",
     "hackathon-assets/safety-policy-matrix.md",
     "hackathon-assets/judge-evidence-pack.md",

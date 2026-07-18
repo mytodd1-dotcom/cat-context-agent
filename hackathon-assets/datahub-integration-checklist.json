@@ -1,0 +1,60 @@
+{
+  "protocol": "cat-datahub-integration-checklist-v0",
+  "project": "CAT Context Agent",
+  "generated_at": "demo-static-run",
+  "decision_gates": {
+    "can_submit_now": true,
+    "live_datahub_required_for_submission": false,
+    "secrets_required": false,
+    "do_not_use_remote_gms": true
+  },
+  "summary": "The current submission is judgeable from local generated evidence. A local DataHub GMS can optionally receive the same generated aspects, but production/remote posting and customer-data writeback are intentionally out of scope.",
+  "phases": [
+    {
+      "name": "Reproduce the no-credential proof",
+      "mode": "runnable_now",
+      "command": "npm run evidence:reproduce",
+      "acceptance": "Reproduction receipt is marked reproducible and includes generated DataHub, policy, and validation artifacts."
+    },
+    {
+      "name": "Inspect the DataHub aspect payloads",
+      "mode": "runnable_now",
+      "command": "npm run datahub:payload",
+      "acceptance": "4 dry-run aspect payloads are produced without contacting GMS."
+    },
+    {
+      "name": "Confirm context tool boundaries",
+      "mode": "runnable_now",
+      "command": "npm run context:contracts",
+      "acceptance": "4 read/write contracts document the DataHub reads and guarded CAT receipt write."
+    },
+    {
+      "name": "Confirm safe action policy",
+      "mode": "runnable_now",
+      "command": "npm run policy:matrix",
+      "acceptance": "6 policy rules preserve allowed, approval-required, and blocked action classes."
+    },
+    {
+      "name": "Post to local DataHub GMS",
+      "mode": "optional_local_datahub",
+      "command": "DATAHUB_GMS_URL=http://localhost:8080 npm run datahub:bridge -- --post",
+      "acceptance": "Only a local GMS receives the four UPSERT proposals; dry-run evidence remains the fallback if GMS is unavailable."
+    }
+  ],
+  "boundaries": [
+    "Do not require judges to run Docker or provide credentials to validate the core submission.",
+    "Do not post to a remote or production DataHub instance from the demo.",
+    "Do not include customer secrets, access tokens, or real contact data in generated artifacts.",
+    "Do not replace approval gates with external outreach automation when owner or contact context is missing.",
+    "Treat DataHub posting as verification of context artifacts, not as permission for unsafe workflow writes."
+  ],
+  "evidence_files": [
+    "hackathon-assets/reproduction-receipt.md",
+    "hackathon-assets/datahub-payload-preview.md",
+    "hackathon-assets/live-datahub-runbook.md",
+    "hackathon-assets/context-tool-contracts.md",
+    "hackathon-assets/safety-policy-matrix.md",
+    "examples/cat-context-agent/generated-datahub-bridge-plan.json",
+    "examples/cat-context-agent/generated-mcp-context-read.json"
+  ]
+}
