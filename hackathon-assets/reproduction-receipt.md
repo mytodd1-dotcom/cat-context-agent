@@ -25,7 +25,8 @@ npm run evidence:reproduce
 - ✅ **submission readiness** — 14 readiness checks passed.
 - ✅ **judge walkthrough** — 5 judge walkthrough steps document the shortest terminal proof path.
 - ✅ **judge FAQ** — 5 hard judge questions answered with evidence files and verification commands.
-- ✅ **artifact validation** — 18 generated-artifact checks passed.
+- ✅ **judge quick card** — 2-minute scoring card links the live demo, video, one-command proof, DataHub evidence, and safety boundary.
+- ✅ **artifact validation** — 19 generated-artifact checks passed.
 - ✅ **safety boundary** — Blocked action remains preserved for unverified external outreach.
 - ✅ **judge evidence** — Judge notes, evidence pack, context contracts, readiness report, and validation report are regenerated.
 
@@ -38,7 +39,7 @@ npm run evidence:reproduce
 - DataHub aspects: `datasetProperties`, `schemaMetadata`, `ownership`, `glossaryTerms`
 - Live DataHub runbook commands: 5
 - MCP-style reads: `datahub.get_entity`, `datahub.get_lineage`, `cat.get_agent_context_packet`
-- Artifact validation checks: 18
+- Artifact validation checks: 19
 
 ## Reports regenerated
 
@@ -57,5 +58,6 @@ npm run evidence:reproduce
 - `hackathon-assets/submission-readiness-report.md`
 - `hackathon-assets/judge-walkthrough.md`
 - `hackathon-assets/judge-faq.md`
+- `hackathon-assets/judge-quick-card.md`
 - `hackathon-assets/artifact-validation-report.md`
 - `hackathon-assets/reproduction-receipt.md`

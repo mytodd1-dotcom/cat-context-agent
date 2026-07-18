@@ -49,6 +49,7 @@ npm run submission:honesty
 npm run context:read
 npm run judge:walkthrough
 npm run judge:faq
+npm run judge:quick
 npm run lineage:map
 npm run policy:matrix
 npm run judge:pack
@@ -72,6 +73,7 @@ npm test
 - `examples/cat-context-agent/generated-mcp-context-read.json`
 - `hackathon-assets/judge-walkthrough.md`
 - `hackathon-assets/judge-faq.md`
+- `hackathon-assets/judge-quick-card.md`
 - `hackathon-assets/decision-trace.md`
 - `hackathon-assets/lineage-decision-map.md`
 - `hackathon-assets/safety-policy-matrix.md`

@@ -116,6 +116,7 @@ export async function runJudgeScoringBrief() {
           "hackathon-assets/reproduction-receipt.md",
           "hackathon-assets/judge-walkthrough.md",
           "hackathon-assets/judge-faq.md",
+          "hackathon-assets/judge-quick-card.md",
           "hackathon-assets/submission-readiness-report.md",
           "hackathon-assets/artifact-validation-report.md",
           "hackathon-assets/submission-honesty-audit.md",

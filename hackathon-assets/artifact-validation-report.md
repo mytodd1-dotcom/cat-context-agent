@@ -23,6 +23,7 @@ Generated: `demo-static-run`
 - ✅ **readiness report** — Readiness report should be ready, all checks passing, and include context tool contracts.
 - ✅ **judge walkthrough** — Judge walkthrough should document the shortest proof path and preserve the no-external-side-effects boundary.
 - ✅ **judge FAQ** — Judge FAQ should answer the hard reviewer questions with evidence files and verification commands.
+- ✅ **judge quick card** — Judge quick card should give reviewers the fastest links, proof command, claim map, and safety boundary.
 
 ## Validated files
 
@@ -44,3 +45,4 @@ Generated: `demo-static-run`
 - `hackathon-assets/submission-readiness-report.json`
 - `hackathon-assets/judge-walkthrough.json`
 - `hackathon-assets/judge-faq.json`
+- `hackathon-assets/judge-quick-card.json`

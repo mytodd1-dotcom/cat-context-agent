@@ -91,6 +91,11 @@
       "name": "judge FAQ",
       "ok": true,
       "detail": "Judge FAQ should answer the hard reviewer questions with evidence files and verification commands."
+    },
+    {
+      "name": "judge quick card",
+      "ok": true,
+      "detail": "Judge quick card should give reviewers the fastest links, proof command, claim map, and safety boundary."
     }
   ],
   "validated_files": [
@@ -111,6 +116,7 @@
     "hackathon-assets/judge-evidence-pack.json",
     "hackathon-assets/submission-readiness-report.json",
     "hackathon-assets/judge-walkthrough.json",
-    "hackathon-assets/judge-faq.json"
+    "hackathon-assets/judge-faq.json",
+    "hackathon-assets/judge-quick-card.json"
   ]
 }

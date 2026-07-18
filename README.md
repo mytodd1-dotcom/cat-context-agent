@@ -178,6 +178,14 @@ npm run judge:walkthrough
 
 That command writes [`hackathon-assets/judge-walkthrough.md`](./hackathon-assets/judge-walkthrough.md) and [`hackathon-assets/judge-walkthrough.json`](./hackathon-assets/judge-walkthrough.json), showing the shortest terminal path, what each command proves, expected outputs, and the safety boundary.
 
+To generate the 2-minute judge card:
+
+```bash
+npm run judge:quick
+```
+
+That command writes [`hackathon-assets/judge-quick-card.md`](./hackathon-assets/judge-quick-card.md) and [`hackathon-assets/judge-quick-card.json`](./hackathon-assets/judge-quick-card.json), giving judges the fastest links, one proof command, claim snapshot, DataHub evidence, and safety boundary.
+
 To generate the judge FAQ / objection handler:
 
 ```bash
@@ -306,6 +314,7 @@ npm run context:read
 npm run context:contracts
 npm run judge:pack
 npm run judge:faq
+npm run judge:quick
 npm run submission:verify
 npm run artifacts:validate
 npm run evidence:reproduce

@@ -36,6 +36,8 @@ const paths = {
   judgeWalkthroughMarkdown: resolve(assetDir, "judge-walkthrough.md"),
   judgeFaq: resolve(assetDir, "judge-faq.json"),
   judgeFaqMarkdown: resolve(assetDir, "judge-faq.md"),
+  judgeQuickCard: resolve(assetDir, "judge-quick-card.json"),
+  judgeQuickCardMarkdown: resolve(assetDir, "judge-quick-card.md"),
   judgePackMarkdown: resolve(assetDir, "judge-evidence-pack.md"),
   reportJson: resolve(assetDir, "artifact-validation-report.json"),
   reportMarkdown: resolve(assetDir, "artifact-validation-report.md"),
@@ -100,6 +102,8 @@ export async function runArtifactValidation() {
     judgeWalkthroughMarkdown,
     judgeFaq,
     judgeFaqMarkdown,
+    judgeQuickCard,
+    judgeQuickCardMarkdown,
     judgePackMarkdown,
   ] = await Promise.all([
     readJson(paths.agentOutput),
@@ -131,6 +135,8 @@ export async function runArtifactValidation() {
     readFile(paths.judgeWalkthroughMarkdown, "utf8"),
     readJson(paths.judgeFaq),
     readFile(paths.judgeFaqMarkdown, "utf8"),
+    readJson(paths.judgeQuickCard),
+    readFile(paths.judgeQuickCardMarkdown, "utf8"),
     readFile(paths.judgePackMarkdown, "utf8"),
   ]);
 
@@ -293,6 +299,17 @@ export async function runArtifactValidation() {
         judgeFaqMarkdown.includes("Judge FAQ"),
       "Judge FAQ should answer the hard reviewer questions with evidence files and verification commands.",
     ),
+    result(
+      "judge quick card",
+      judgeQuickCard.protocol === "cat-judge-quick-card-v0" &&
+        judgeQuickCard.status === "ready" &&
+        judgeQuickCard.time_budget_minutes === 2 &&
+        judgeQuickCard.fastest_local_command === "npm run evidence:reproduce" &&
+        judgeQuickCard.datahub_evidence.local_datahub_required_for_judging === false &&
+        judgeQuickCard.safety_boundary.external_side_effects === "none" &&
+        judgeQuickCardMarkdown.includes("2-Minute Judge Card"),
+      "Judge quick card should give reviewers the fastest links, proof command, claim map, and safety boundary.",
+    ),
   ];
 
   const report = {
@@ -318,6 +335,7 @@ export async function runArtifactValidation() {
       "hackathon-assets/submission-readiness-report.json",
       "hackathon-assets/judge-walkthrough.json",
       "hackathon-assets/judge-faq.json",
+      "hackathon-assets/judge-quick-card.json",
     ],
   };
 

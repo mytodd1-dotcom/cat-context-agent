@@ -1,0 +1,119 @@
+{
+  "protocol": "cat-judge-quick-card-v0",
+  "project": "CAT Context Agent",
+  "challenge": "Build with DataHub: The Agent Hackathon",
+  "generated_at": "demo-static-run",
+  "status": "ready",
+  "time_budget_minutes": 2,
+  "canonical_links": {
+    "live_demo": "https://cat-context-agent.flyguy.chatgpt.site",
+    "repository": "https://github.com/mytodd1-dotcom/cat-context-agent",
+    "demo_video": "https://youtu.be/Gcbhl5_YlSM"
+  },
+  "open_first": [
+    {
+      "step": 1,
+      "label": "Live demo",
+      "url": "https://cat-context-agent.flyguy.chatgpt.site",
+      "why": "Fastest visual scan of the messy data, context read, approval queue, and receipt-backed action plan."
+    },
+    {
+      "step": 2,
+      "label": "Demo video",
+      "url": "https://youtu.be/Gcbhl5_YlSM",
+      "why": "Two-minute narrated walkthrough of the context-before-action loop."
+    },
+    {
+      "step": 3,
+      "label": "Scoring brief",
+      "url": "hackathon-assets/judge-scoring-brief.md",
+      "why": "Maps each major judging claim to concrete files."
+    },
+    {
+      "step": 4,
+      "label": "One-command reproduction receipt",
+      "url": "hackathon-assets/reproduction-receipt.md",
+      "why": "Shows the generated proof chain and the command that regenerates it."
+    }
+  ],
+  "fastest_local_command": "npm run evidence:reproduce",
+  "full_validation_command": "npm run ci:local",
+  "claim_snapshot": [
+    {
+      "claim": "DataHub is the context layer.",
+      "proof": "The demo prepares dataset identity, schema, ownership, glossary, and lineage context before agent decisions.",
+      "files": [
+        "examples/cat-context-agent/generated-datahub-metadata.json",
+        "hackathon-assets/datahub-payload-preview.md",
+        "hackathon-assets/datahub-mcp-handoff.md"
+      ]
+    },
+    {
+      "claim": "The agent does real workflow work.",
+      "proof": "Three messy requests become one safe internal task, one approval-required task, and one blocked external outreach attempt.",
+      "files": [
+        "examples/cat-context-agent/generated-agent-output.json",
+        "hackathon-assets/decision-trace.md",
+        "hackathon-assets/lineage-decision-map.md"
+      ]
+    },
+    {
+      "claim": "Unsafe automation is constrained.",
+      "proof": "Missing owners, unclear contacts, and external outreach are approval-gated or blocked before action.",
+      "files": [
+        "hackathon-assets/safety-policy-matrix.md",
+        "hackathon-assets/submission-honesty-audit.md",
+        "hackathon-assets/judge-faq.md"
+      ]
+    },
+    {
+      "claim": "The submission is reproducible.",
+      "proof": "The local proof chain regenerates artifacts, validates them, and builds/tests the page.",
+      "files": [
+        "hackathon-assets/reproduction-receipt.md",
+        "hackathon-assets/artifact-validation-report.md",
+        "hackathon-assets/judge-walkthrough.md"
+      ]
+    }
+  ],
+  "datahub_evidence": {
+    "aspects": [
+      "datasetProperties",
+      "schemaMetadata",
+      "ownership",
+      "glossaryTerms"
+    ],
+    "mcp_style_reads": [
+      "datahub.get_entity",
+      "datahub.get_lineage",
+      "cat.get_agent_context_packet"
+    ],
+    "local_datahub_required_for_judging": false,
+    "datahub_doctor_status": "ready_without_live_datahub"
+  },
+  "safety_boundary": {
+    "external_side_effects": "none",
+    "blocked_actions": [
+      "send_external_outreach_without_verified_contact",
+      "invent_missing_owner",
+      "scrape_contact_details"
+    ],
+    "secrets_required": false,
+    "honesty_status": "passed"
+  },
+  "what_is_real_now": [
+    "Public live demo and public GitHub repository are available.",
+    "Local scripts generate DataHub-ready dry-run metadata and MCP-style context reads.",
+    "The agent decision output, approval queue, safety policy matrix, and receipts are inspectable files.",
+    "The evidence chain is runnable without DataHub credentials, Docker, customer data, or off-platform actions."
+  ],
+  "optional_next_steps": [
+    "Run the optional local DataHub GMS post path from the runbook when judges want live local metadata mutation.",
+    "Replace the static context packet with live DataHub MCP / Agent Context Kit reads.",
+    "Write approved workflow receipt outcomes back as DataHub-linked auditable metadata."
+  ],
+  "outputs": [
+    "hackathon-assets/judge-quick-card.json",
+    "hackathon-assets/judge-quick-card.md"
+  ]
+}

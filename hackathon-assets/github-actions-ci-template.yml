@@ -61,6 +61,9 @@ jobs:
       - name: Generate judge FAQ
         run: npm run judge:faq
 
+      - name: Generate judge quick card
+        run: npm run judge:quick
+
       - name: Validate generated artifacts
         run: npm run artifacts:validate
 

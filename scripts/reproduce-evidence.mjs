@@ -9,6 +9,7 @@ import { runDataHubReadinessDoctor } from "./datahub-readiness-doctor.mjs";
 import { runDecisionTrace } from "./decision-trace.mjs";
 import { runDevpostSubmissionCopy } from "./devpost-submission-copy.mjs";
 import { runJudgeFaq } from "./judge-faq.mjs";
+import { runJudgeQuickCard } from "./judge-quick-card.mjs";
 import { runLineageDecisionMap } from "./lineage-decision-map.mjs";
 import { runLiveDataHubRunbook } from "./live-datahub-runbook.mjs";
 import { runMcpAdapterSmoke } from "./mcp-adapter-smoke.mjs";
@@ -79,6 +80,13 @@ export async function runEvidenceReproduction() {
     policyMatrix,
     walkthrough,
   });
+  const judgeQuickCard = await runJudgeQuickCard({
+    readiness,
+    datahubDoctor: readinessDoctor,
+    mcpSmoke: mcpAdapterSmoke,
+    honestyAudit: submissionHonestyAudit,
+    policyMatrix,
+  });
   const artifactValidation = await runArtifactValidation();
 
   const checks = [
@@ -139,6 +147,10 @@ export async function runEvidenceReproduction() {
       detail: `${judgeFaq.questions.length} hard judge questions answered with evidence files and verification commands.`,
     },
     {
+      name: "judge quick card",
+      detail: `${judgeQuickCard.time_budget_minutes}-minute scoring card links the live demo, video, one-command proof, DataHub evidence, and safety boundary.`,
+    },
+    {
       name: "artifact validation",
       detail: `${artifactValidation.checks.length} generated-artifact checks passed.`,
     },
@@ -184,6 +196,7 @@ export async function runEvidenceReproduction() {
       "hackathon-assets/submission-readiness-report.md",
       "hackathon-assets/judge-walkthrough.md",
       "hackathon-assets/judge-faq.md",
+      "hackathon-assets/judge-quick-card.md",
       "hackathon-assets/artifact-validation-report.md",
       "hackathon-assets/reproduction-receipt.md",
     ],

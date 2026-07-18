@@ -101,7 +101,7 @@ const verificationCommands = [
   {
     label: "Full local check",
     command: "npm run ci:local",
-    expected: "Runs the full artifact pipeline, build, and 28 render/evidence tests.",
+    expected: "Runs the full artifact pipeline, build, and 29 render/evidence tests.",
   },
   {
     label: "Context read",
@@ -148,12 +148,18 @@ const judgePath = [
   },
   {
     step: "3",
+    title: "Open the 2-minute judge card",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/judge-quick-card.md",
+    text: "Get the live links, fastest proof command, claim map, DataHub evidence, and safety boundary in one compact card.",
+  },
+  {
+    step: "4",
     title: "Open the judge start guide",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/JUDGE_START_HERE.md",
     text: "Follow the shortest repo path through claims, commands, artifacts, and scope transparency.",
   },
   {
-    step: "4",
+    step: "5",
     title: "Run one proof command",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/reproduction-receipt.md",
     text: "Use npm run evidence:reproduce or npm run ci:local to regenerate the receipt-backed evidence chain.",
@@ -196,6 +202,12 @@ const runnableArtifacts = [
     command: "npm run judge:brief",
     href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/judge-scoring-brief.md",
     text: "Maps each major claim to inspectable repo evidence: DataHub context, read-before-action, safety, and reproducibility.",
+  },
+  {
+    label: "2-minute judge card",
+    command: "npm run judge:quick",
+    href: "https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/hackathon-assets/judge-quick-card.md",
+    text: "Compresses the live demo, video, one-command proof, claim map, DataHub evidence, and safety boundary into one scoring card.",
   },
   {
     label: "Judge walkthrough",
