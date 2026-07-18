@@ -39,12 +39,13 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
 });
 
 test("keeps the project shell responsive and repo-ready", async () => {
-  const [page, css, layout, packageJson, readme] = await Promise.all([
+  const [page, css, layout, packageJson, readme, judgeNotes] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     readFile(new URL("../README.md", import.meta.url), "utf8"),
+    readFile(new URL("../DEVPOST_JUDGE_NOTES.md", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /MCP Server/);
@@ -66,7 +67,13 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(readme, /generated-datahub-metadata\.json/);
   assert.match(readme, /generated-mcp-context-read\.json/);
   assert.match(readme, /judge-evidence-pack\.md/);
+  assert.match(readme, /DEVPOST_JUDGE_NOTES\.md/);
   assert.match(readme, /DataHub MCP \/ Agent Context Kit reads/);
+  assert.match(judgeNotes, /30-second version/);
+  assert.match(judgeNotes, /context before action/);
+  assert.match(judgeNotes, /generated-datahub-bridge-plan\.json/);
+  assert.match(judgeNotes, /What is simulated vs\. live/);
+  assert.match(judgeNotes, /DATAHUB_GMS_URL=http:\/\/localhost:8080 npm run datahub:bridge -- --post/);
   assert.doesNotMatch(page + layout, /codex-preview|_sites-preview|SkeletonPreview/);
 });
 

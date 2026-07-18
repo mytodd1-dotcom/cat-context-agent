@@ -30,6 +30,8 @@ The repository now includes a first judge-readable demo slice in [`examples/cat-
 
 The landing page renders the same slice as a visual workflow: messy CSV → DataHub context read → approval queue → receipt JSON.
 
+For the fastest judge-oriented overview, see [`DEVPOST_JUDGE_NOTES.md`](./DEVPOST_JUDGE_NOTES.md).
+
 Run it locally:
 
 ```bash
