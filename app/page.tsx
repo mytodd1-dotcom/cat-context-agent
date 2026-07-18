@@ -29,7 +29,8 @@ const demoArtifacts = [
 
 const buildTracks = [
   ["Live demo", "cat-context-agent.flyguy.chatgpt.site"],
-  ["Demo video", "youtu.be/Gcbhl5_YlSM"],
+  ["Demo video", "youtu.be/_4qvnsGBbtA"],
+  ["Submission", "Devpost submitted · public video live"],
   ["Challenge", "Agents That Do Real Work"],
   ["Core platform", "DataHub OSS + MCP Server"],
   ["Agent context", "Agent Context Kit + DataHub Skills"],
@@ -139,7 +140,7 @@ const judgePath = [
   {
     step: "1",
     title: "Watch the two-minute video",
-    href: "https://youtu.be/Gcbhl5_YlSM",
+    href: "https://youtu.be/_4qvnsGBbtA",
     text: "See the full context-before-action loop without needing to run anything first.",
   },
   {
@@ -184,7 +185,7 @@ const runnableArtifacts = [
   {
     label: "Demo video",
     command: "watch the 2-minute walkthrough",
-    href: "https://youtu.be/Gcbhl5_YlSM",
+    href: "https://youtu.be/_4qvnsGBbtA",
     text: "A quick judge-facing walkthrough of the context-before-action workflow and evidence chain.",
   },
   {
@@ -479,13 +480,13 @@ export default function Home() {
 
       <section className="hero shell" id="top">
         <div className="heroCopy">
-          <p className="eyebrow"><span /> DataHub Agent Hackathon submission</p>
-          <h1>Context before action for messy business data.</h1>
+          <p className="eyebrow"><span /> Submitted · public demo live · DataHub Agent Hackathon</p>
+          <h1>Context before action. Receipts before trust.</h1>
           <p className="heroLead">
-            CAT Context Agent is a DataHub-backed workflow agent that helps small teams turn scattered files into trusted next steps, missing-info questions, and traceable receipts.
+            CAT Context Agent turns messy business requests into safe queues, approval gates, and blocked-action receipts by making the agent read DataHub-style schema, ownership, lineage, glossary, and policy context before it acts.
           </p>
           <div className="heroActions">
-            <a className="button primary" href="https://youtu.be/Gcbhl5_YlSM">Watch demo</a>
+            <a className="button primary" href="https://youtu.be/_4qvnsGBbtA">Watch public demo</a>
             <a className="button dark" href="https://github.com/mytodd1-dotcom/cat-context-agent">Open repo</a>
             <a className="button ghost" href="#demo">Try live slice</a>
           </div>
@@ -498,7 +499,7 @@ export default function Home() {
             ))}
           </div>
           <p className="micro">
-            Submission foundation is live and reproducible. Start with the <a href="https://github.com/mytodd1-dotcom/cat-context-agent/blob/main/JUDGE_START_HERE.md">judge guide</a>, then inspect the concrete demo slice, proof commands, DataHub-style context, approval queue, and receipt output.
+            Fast judge path: watch the public video, scan the live slice, then run one proof command. The submission is explicit about what is live now, what is simulated locally, and where DataHub becomes the agent’s context boundary.
           </p>
         </div>
 

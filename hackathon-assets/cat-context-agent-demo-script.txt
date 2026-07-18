@@ -1,0 +1,32 @@
+Most agent demos skip the dangerous middle step.
+They jump from messy business data straight to action.
+
+CAT Context Agent is built around a different rule:
+context before action.
+
+This is the live hackathon demo for Build with DataHub.
+The input is intentionally ordinary: small-business requests with missing owners,
+unclear contact fields, stale context, and different levels of risk.
+
+CAT treats DataHub as the agent's context layer.
+Before recommending work, it checks the source, schema, ownership, lineage, glossary
+terms, and policy boundaries.
+
+Then it separates the work into three lanes.
+One request is safe to queue as an internal task.
+One needs approval because renewal outreach has missing owner context.
+One is blocked because outreach would require missing or unverified context.
+
+The point is not just automation.
+The point is accountable automation.
+
+Every decision leaves a receipt:
+what data was read, what was missing, what action was allowed, and what action was refused.
+
+The repo includes the runnable proof path, generated DataHub-style metadata,
+MCP-style read contracts, a live roundtrip harness, and judge-ready evidence.
+
+CAT is a small prototype, but the pattern is the product:
+business data becomes trusted context;
+trusted context gates safe agent action;
+and every action leaves a receipt.

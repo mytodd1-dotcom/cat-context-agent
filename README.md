@@ -1,8 +1,10 @@
 # CAT Context Agent
 
-CAT Context Agent is a DataHub Agent Hackathon project for a context-aware workflow agent.
+CAT Context Agent is a submitted DataHub Agent Hackathon project for a context-aware workflow agent.
 
-The goal is simple: messy business data should become safe, traceable next actions only after an agent understands the data context. DataHub is the planned context layer for schemas, ownership, lineage, and metadata receipts.
+The goal is simple: messy business data should become safe, traceable next actions only after an agent understands the data context. CAT uses DataHub-style schemas, ownership, lineage, glossary, and policy signals as the context boundary before any agent action.
+
+**Submission status:** Devpost submitted, public demo site live, public YouTube demo live, and local evidence commands included.
 
 ## Judge start here
 
@@ -10,17 +12,24 @@ For the fastest review path, open [`JUDGE_START_HERE.md`](./JUDGE_START_HERE.md)
 
 Short version:
 
-- Watch the demo video: [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)
+- Watch the demo video: [https://youtu.be/_4qvnsGBbtA](https://youtu.be/_4qvnsGBbtA)
 - Open the live demo: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)
 - Read the scoring brief: [`hackathon-assets/judge-scoring-brief.md`](./hackathon-assets/judge-scoring-brief.md)
 - Run the local proof: `npm run ci:local`
+
+What judges should notice first:
+
+- CAT does real workflow triage: safe internal queue, approval-required work, and blocked outreach.
+- DataHub context changes the decision, not just the UI copy.
+- Every recommendation leaves a receipt with source, context checked, confidence, safe next step, and blocked action.
+- Live DataHub posting is intentionally opt-in/local; the submitted artifact stays reproducible without hidden credentials.
 
 ## Hackathon target
 
 - Event: Build with DataHub: The Agent Hackathon
 - Challenge category: Agents That Do Real Work
 - Live demo / test URL: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)
-- Demo video: [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)
+- Demo video: [https://youtu.be/_4qvnsGBbtA](https://youtu.be/_4qvnsGBbtA)
 - Repository: [https://github.com/mytodd1-dotcom/cat-context-agent](https://github.com/mytodd1-dotcom/cat-context-agent)
 - Submission concept: small-business messy data → DataHub context → agent reasoning → approval queue → receipt-backed action plan
 

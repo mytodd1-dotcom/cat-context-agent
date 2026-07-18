@@ -2,7 +2,7 @@
 
 Repo: [https://github.com/mytodd1-dotcom/cat-context-agent](https://github.com/mytodd1-dotcom/cat-context-agent)  
 Live demo / test URL: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)  
-Demo video: [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)  
+Demo video: [https://youtu.be/_4qvnsGBbtA](https://youtu.be/_4qvnsGBbtA)  
 Challenge: Build with DataHub: The Agent Hackathon / Agents That Do Real Work
 
 ## What this proves

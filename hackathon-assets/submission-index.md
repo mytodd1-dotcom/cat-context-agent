@@ -6,14 +6,14 @@ A judge-first index for verifying the DataHub Agent Hackathon submission without
 
 - Live demo: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)
 - Repository: [https://github.com/mytodd1-dotcom/cat-context-agent](https://github.com/mytodd1-dotcom/cat-context-agent)
-- Demo video: [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)
+- Demo video: [https://youtu.be/_4qvnsGBbtA](https://youtu.be/_4qvnsGBbtA)
 - Devpost copy pack: `hackathon-assets/devpost-submission-copy.md`
 
 ## Suggested judge review order
 
 | Step | Open this | Why it matters |
 | --- | --- | --- |
-| 1. Watch the demo video | [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM) | Fastest visual pass through the CAT Context Agent story. |
+| 1. Watch the demo video | [https://youtu.be/_4qvnsGBbtA](https://youtu.be/_4qvnsGBbtA) | Fastest visual pass through the CAT Context Agent story. |
 | 2. Open the live demo | [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site) | Shows the workflow, evidence cards, approval queue, and receipt pattern. |
 | 3. Read the 2-minute judge card | `hackathon-assets/judge-quick-card.md`<br><code>npm run judge:quick</code> | Gives the fastest links, one proof command, claim map, DataHub evidence, and safety boundary. |
 | 4. Read the rubric matrix | `hackathon-assets/judge-rubric-matrix.md`<br><code>npm run judge:rubric</code> | Maps the public judging criteria to CAT evidence, limitations, and next steps. |

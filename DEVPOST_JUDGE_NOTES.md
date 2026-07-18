@@ -5,7 +5,7 @@ Start with [`JUDGE_START_HERE.md`](./JUDGE_START_HERE.md) for the shortest revie
 [`hackathon-assets/github-actions-ci-template.yml`](./hackathon-assets/github-actions-ci-template.yml) contains a GitHub Actions recipe for verifying the submission evidence chain and test suite.
 
 - Live demo / test URL: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)
-- Demo video: [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)
+- Demo video: [https://youtu.be/_4qvnsGBbtA](https://youtu.be/_4qvnsGBbtA)
 - Repository: [https://github.com/mytodd1-dotcom/cat-context-agent](https://github.com/mytodd1-dotcom/cat-context-agent)
 
 ## 30-second version

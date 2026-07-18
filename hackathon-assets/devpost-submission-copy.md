@@ -6,7 +6,7 @@ Use this as the canonical copy pack if the Devpost draft needs edits.
 
 - Live demo / test URL: [https://cat-context-agent.flyguy.chatgpt.site](https://cat-context-agent.flyguy.chatgpt.site)
 - Repository: [https://github.com/mytodd1-dotcom/cat-context-agent](https://github.com/mytodd1-dotcom/cat-context-agent)
-- Demo video: [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)
+- Demo video: [https://youtu.be/_4qvnsGBbtA](https://youtu.be/_4qvnsGBbtA)
 - Event: Build with DataHub: The Agent Hackathon
 - Category: Agents That Do Real Work
 

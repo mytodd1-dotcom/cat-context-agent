@@ -2,7 +2,7 @@
 
 Accessibility and judge companion for the demo video, so the project can be reviewed quickly even without audio.
 
-Video: [https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)
+Video: [https://youtu.be/_4qvnsGBbtA](https://youtu.be/_4qvnsGBbtA)
 
 ## Timestamp guide
 

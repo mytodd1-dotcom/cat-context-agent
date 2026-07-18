@@ -16,7 +16,7 @@ Why: Fastest visual scan of the messy data, context read, approval queue, and re
 
 ### 2. Demo video
 
-[https://youtu.be/Gcbhl5_YlSM](https://youtu.be/Gcbhl5_YlSM)
+[https://youtu.be/_4qvnsGBbtA](https://youtu.be/_4qvnsGBbtA)
 
 Why: Two-minute narrated walkthrough of the context-before-action loop.
 

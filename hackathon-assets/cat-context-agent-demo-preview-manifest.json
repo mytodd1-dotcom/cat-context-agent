@@ -1,0 +1,15 @@
+{
+  "output": "/Users/flyguy/Documents/Codex/2026-07-12/t/hackathon-assets/cat-context-agent-demo-preview.mp4",
+  "resolution": "1920x1080",
+  "fps": 24,
+  "duration_seconds": 98,
+  "has_narration": true,
+  "source_captures": [
+    "01-hero.png",
+    "02-demo-safe.png",
+    "03-demo-approval.png",
+    "04-demo-blocked.png",
+    "05-evidence.png"
+  ],
+  "narration_script": "/Users/flyguy/Documents/Codex/2026-07-12/t/hackathon-assets/cat-context-agent-demo-script.txt"
+}

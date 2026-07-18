@@ -1,0 +1,96 @@
+1
+00:00:00,050 --> 00:00:03,412
+Most agent demos skip the dangerous middle step.
+
+2
+00:00:03,412 --> 00:00:06,587
+They jump from messy business data straight to action.
+
+3
+00:00:06,587 --> 00:00:10,400
+CAT Context Agent is built around a different rule:
+
+4
+00:00:10,400 --> 00:00:12,125
+context before action.
+
+5
+00:00:12,125 --> 00:00:15,387
+This is the live hackathon demo for Build with DataHub.
+
+6
+00:00:15,387 --> 00:00:20,887
+The input is intentionally ordinary: small-business requests with missing owners,
+
+7
+00:00:20,887 --> 00:00:25,837
+unclear contact fields, stale context, and different levels of risk.
+
+8
+00:00:25,837 --> 00:00:29,525
+CAT treats DataHub as the agent's context layer.
+
+9
+00:00:29,525 --> 00:00:35,687
+Before recommending work, it checks the source, schema, ownership, lineage, glossary
+
+10
+00:00:35,687 --> 00:00:37,862
+terms, and policy boundaries.
+
+11
+00:00:37,862 --> 00:00:40,912
+Then it separates the work into three lanes.
+
+12
+00:00:40,912 --> 00:00:44,612
+One request is safe to queue as an internal task.
+
+13
+00:00:44,612 --> 00:00:49,062
+One needs approval because renewal outreach has missing owner context.
+
+14
+00:00:49,062 --> 00:00:54,175
+One is blocked because outreach would require missing or unverified context.
+
+15
+00:00:54,175 --> 00:00:56,387
+The point is not just automation.
+
+16
+00:00:56,387 --> 00:00:58,687
+The point is accountable automation.
+
+17
+00:00:58,687 --> 00:01:01,075
+Every decision leaves a receipt:
+
+18
+00:01:01,075 --> 00:01:06,812
+what data was read, what was missing, what action was allowed, and what action was refused.
+
+19
+00:01:06,812 --> 00:01:12,325
+The repo includes the runnable proof path, generated DataHub-style metadata,
+
+20
+00:01:12,325 --> 00:01:17,887
+MCP-style read contracts, a live roundtrip harness, and judge-ready evidence.
+
+21
+00:01:17,887 --> 00:01:21,662
+CAT is a small prototype, but the pattern is the product:
+
+22
+00:01:21,662 --> 00:01:24,387
+business data becomes trusted context;
+
+23
+00:01:24,387 --> 00:01:27,787
+trusted context gates safe agent action;
+
+24
+00:01:27,787 --> 00:01:29,850
+and every action leaves a receipt.
+

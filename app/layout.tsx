@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 const siteUrl = new URL("https://cat-context-agent.flyguy.chatgpt.site");
 const title = "CAT Context Agent | DataHub Hackathon Submission";
 const description =
-  "CAT Context Agent turns messy business data into trusted, traceable workflows by reading DataHub-style context before taking action.";
+  "A submitted DataHub Agent Hackathon project that turns messy business requests into safe queues, approval gates, and receipt-backed decisions.";
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
