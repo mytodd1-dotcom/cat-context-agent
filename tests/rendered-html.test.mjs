@@ -45,6 +45,11 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /DataHub-backed workflow agent/);
   assert.match(html, /Agents That Do Real Work/);
   assert.match(html, /Messy business requests/);
+  assert.match(html, /CONTEXT CHANGES THE DECISION/);
+  assert.match(html, /Same messy row, safer outcome/);
+  assert.match(html, /Without trusted context/);
+  assert.match(html, /With DataHub context/);
+  assert.match(html, /owner metadata \+ outreach policy/);
   assert.match(html, /APPROVAL QUEUE|approval queue/i);
   assert.match(html, /cat-demo-REQ-1042/);
   assert.match(html, /messy CSV, context map, approval queue, receipt JSON/);
@@ -102,6 +107,8 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /If you only have ten minutes, start here/);
   assert.match(page, /messyRows/);
   assert.match(page, /approvalQueue/);
+  assert.match(page, /decisionComparison/);
+  assert.match(page, /contextDelta/);
   assert.match(page, /scopeCards/);
   assert.match(page, /judgeFaq/);
   assert.match(page, /evidenceMatrix/);
@@ -122,6 +129,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(css, /judgePathGrid/);
   assert.match(css, /faqGrid/);
   assert.match(css, /evidenceMatrix/);
+  assert.match(css, /deltaMatrix/);
   assert.match(layout, /CAT Context Agent \| DataHub Hackathon Submission/);
   assert.match(layout, /metadataBase: siteUrl/);
   assert.match(layout, /openGraph/);

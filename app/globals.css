@@ -320,6 +320,49 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   border: 1px solid #243447;
   padding: 18px;
 }
+.contextDelta { padding-top: 36px; }
+.deltaMatrix {
+  border: 2px solid var(--ink);
+  background: #fffdf8;
+  box-shadow: 10px 10px 0 rgba(186, 255, 122, .55);
+}
+.deltaRow {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr 1.35fr 1fr;
+  border-bottom: 1px solid var(--line);
+}
+.deltaRow:last-child { border-bottom: 0; }
+.deltaRow > * {
+  padding: 20px 22px;
+  border-right: 1px solid var(--line);
+}
+.deltaRow > *:last-child { border-right: 0; }
+.deltaHeader { background: #f3ffe4; }
+.deltaHeader b {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.deltaRow strong {
+  font-size: 17px;
+  letter-spacing: -.03em;
+  line-height: 1.35;
+}
+.deltaRow span {
+  color: var(--muted);
+  line-height: 1.55;
+}
+.deltaRow code {
+  align-self: center;
+  color: #0b1220;
+  background: #edf5ff;
+  border: 1px solid #cbdff8;
+  font-family: var(--font-geist-mono), "SFMono-Regular", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.45;
+}
 .queueGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -543,6 +586,9 @@ h2 { font-size: clamp(40px, 5vw, 69px); line-height: .96; letter-spacing: -.055e
   .judgePathIntro { grid-template-columns: 1fr; gap: 10px; }
   .judgePathGrid { grid-template-columns: repeat(2, 1fr); }
   .demoGrid, .queueGrid, .artifactGrid, .scopeGrid, .faqGrid { grid-template-columns: 1fr; }
+  .deltaRow { grid-template-columns: 1fr; }
+  .deltaRow > * { border-right: 0; border-bottom: 1px solid var(--line); }
+  .deltaRow > *:last-child { border-bottom: 0; }
   .evidenceRow { grid-template-columns: 1fr; }
   .evidenceRow > * { border-right: 0; border-bottom: 1px solid var(--line); }
   .evidenceRow > *:last-child { border-bottom: 0; }

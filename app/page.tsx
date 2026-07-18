@@ -165,6 +165,27 @@ const contextSignals = [
   },
 ];
 
+const decisionComparison = [
+  {
+    request: "REQ-1042 · Acme HVAC renewal",
+    withoutContext: "Send follow-up because value and priority are high.",
+    withContext: "Hold for approval until the missing contact owner is confirmed.",
+    datahubSignal: "owner metadata + outreach policy",
+  },
+  {
+    request: "REQ-1043 · Northline invoice mismatch",
+    withoutContext: "Escalate as a generic customer issue.",
+    withContext: "Queue an internal finance review because owner and contact context are known.",
+    datahubSignal: "schema mapping + finance owner",
+  },
+  {
+    request: "REQ-1044 · Cedar Auto churn risk",
+    withoutContext: "Try to find or guess a customer contact.",
+    withContext: "Block external outreach because the contact field is blank.",
+    datahubSignal: "field completeness + safety guardrail",
+  },
+];
+
 const approvalQueue = [
   {
     item: "REQ-1042 · Acme HVAC",
@@ -381,6 +402,32 @@ export default function Home() {
             </div>
             <pre className="receiptCode">{receiptJson}</pre>
           </article>
+        </div>
+      </section>
+
+      <section className="section shell contextDelta" aria-labelledby="context-delta-heading">
+        <p className="sectionTag">CONTEXT CHANGES THE DECISION</p>
+        <div className="sectionIntro">
+          <h2 id="context-delta-heading">Same messy row, safer outcome.</h2>
+          <p>
+            The demo’s core proof is not that an agent can summarize a CSV. It is that DataHub-style context changes what the agent is allowed to do next.
+          </p>
+        </div>
+        <div className="deltaMatrix" role="table" aria-label="Decision comparison with and without DataHub context">
+          <div className="deltaRow deltaHeader" role="row">
+            <b role="columnheader">Request</b>
+            <b role="columnheader">Without trusted context</b>
+            <b role="columnheader">With DataHub context</b>
+            <b role="columnheader">Signal used</b>
+          </div>
+          {decisionComparison.map((item) => (
+            <div className="deltaRow" role="row" key={item.request}>
+              <strong role="cell">{item.request}</strong>
+              <span role="cell">{item.withoutContext}</span>
+              <span role="cell">{item.withContext}</span>
+              <code role="cell">{item.datahubSignal}</code>
+            </div>
+          ))}
         </div>
       </section>
 
