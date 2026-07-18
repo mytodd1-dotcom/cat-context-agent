@@ -159,6 +159,29 @@ const approvalQueue = [
   },
 ];
 
+const scopeCards = [
+  {
+    title: "Working in this submission",
+    items: [
+      "local decision runner",
+      "DataHub-ready metadata artifacts",
+      "dry-run DataHub bridge plan",
+      "MCP-style context read contract",
+      "approval queue and receipt outputs",
+      "public demo, video, and proof commands",
+    ],
+  },
+  {
+    title: "Planned live integration",
+    items: [
+      "post metadata change proposals to local DataHub GMS",
+      "replace static context packet with DataHub MCP / Agent Context Kit reads",
+      "write approval and blocked receipts back as auditable metadata",
+      "wire safe internal decisions into a production workflow engine",
+    ],
+  },
+];
+
 const receiptJson = `{
   "receipt_id": "cat-demo-REQ-1042",
   "source_asset": "urn:li:dataset:(cat,messy_business_requests,PROD)",
@@ -360,6 +383,26 @@ export default function Home() {
           <ul className="checkList">
             {demoArtifacts.map((item) => <li key={item}><span>✓</span>{item}</li>)}
           </ul>
+        </div>
+      </section>
+
+      <section className="section shell" id="scope">
+        <p className="sectionTag">SCOPE TRANSPARENCY</p>
+        <div className="sectionIntro">
+          <h2>Clear about what is real now and what comes next.</h2>
+          <p>
+            The current submission keeps the core agent-context contract runnable and inspectable. The live DataHub mutation path is documented as an opt-in next step, not hidden inside the demo.
+          </p>
+        </div>
+        <div className="scopeGrid">
+          {scopeCards.map((card) => (
+            <article className="scopeCard" key={card.title}>
+              <h3>{card.title}</h3>
+              <ul>
+                {card.items.map((item) => <li key={item}><span>•</span>{item}</li>)}
+              </ul>
+            </article>
+          ))}
         </div>
       </section>
 

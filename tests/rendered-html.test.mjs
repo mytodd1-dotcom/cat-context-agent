@@ -57,6 +57,11 @@ test("server-renders the CAT Context Agent hackathon shell", async () => {
   assert.match(html, /live-datahub-runbook\.md/);
   assert.match(html, /npm run judge:pack/);
   assert.match(html, /judge-evidence-pack\.md/);
+  assert.match(html, /SCOPE TRANSPARENCY/);
+  assert.match(html, /Working in this submission/);
+  assert.match(html, /Planned live integration/);
+  assert.match(html, /local decision runner/);
+  assert.match(html, /DataHub MCP \/ Agent Context Kit reads/);
   assert.doesNotMatch(html, /Revenue Leak Audit|Get a 3-leak preview|Revenue Leak Scan/i);
 });
 
@@ -81,6 +86,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(page, /receipt-backed action plan/);
   assert.match(page, /messyRows/);
   assert.match(page, /approvalQueue/);
+  assert.match(page, /scopeCards/);
   assert.match(page, /runnableArtifacts/);
   assert.match(page, /generated-mcp-context-read\.json/);
   assert.match(page, /datahub\.get_entity/);
@@ -94,6 +100,7 @@ test("keeps the project shell responsive and repo-ready", async () => {
   assert.match(css, /@media \(max-width: 980px\)/);
   assert.match(css, /@media \(max-width: 620px\)/);
   assert.match(css, /artifactGrid/);
+  assert.match(css, /scopeGrid/);
   assert.match(layout, /CAT Context Agent \| DataHub Hackathon Submission/);
   assert.match(layout, /metadataBase: siteUrl/);
   assert.match(layout, /openGraph/);
