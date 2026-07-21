@@ -18,6 +18,8 @@
     "datahub:checklist": "node scripts/datahub-integration-checklist.mjs",
     "datahub:audit": "node scripts/datahub-claim-audit.mjs",
     "datahub:mcp": "node scripts/datahub-mcp-handoff.mjs",
+    "datahub:mcp:live": "node scripts/datahub-mcp-live-client.mjs",
+    "datahub:remediation:live": "node scripts/generate-live-remediation-packet.mjs",
     "mcp:smoke": "node scripts/mcp-adapter-smoke.mjs",
     "submission:honesty": "node scripts/submission-honesty-audit.mjs",
     "decision:trace": "node scripts/decision-trace.mjs",

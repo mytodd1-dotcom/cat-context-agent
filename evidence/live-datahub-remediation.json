@@ -1,0 +1,56 @@
+{
+  "proof_kind": "official-datahub-mcp-snapshot",
+  "generated_at": "2026-07-21T05:32:23.582Z",
+  "mcp_server": "mcp-server-datahub@0.6.0",
+  "datahub": {
+    "urn": "urn:li:dataset:(urn:li:dataPlatform:demo,analytics.daily_revenue,PROD)",
+    "dataset": "analytics.daily_revenue",
+    "fields": [
+      {
+        "fieldPath": "order_count",
+        "nativeDataType": "BIGINT",
+        "description": "Number of included orders.",
+        "nullable": true
+      },
+      {
+        "fieldPath": "revenue_date",
+        "nativeDataType": "DATE",
+        "description": "UTC aggregation date.",
+        "nullable": true
+      },
+      {
+        "fieldPath": "net_revenue",
+        "nativeDataType": "DECIMAL",
+        "nullable": true
+      }
+    ],
+    "upstreams": [
+      {
+        "urn": "urn:li:dataset:(urn:li:dataPlatform:demo,commerce.raw_orders,PROD)",
+        "name": "commerce.raw_orders",
+        "degree": 1
+      }
+    ]
+  },
+  "finding": {
+    "status": "needs_metadata",
+    "missing_descriptions": [
+      {
+        "field_path": "net_revenue",
+        "native_type": "DECIMAL"
+      }
+    ],
+    "impact_scope": "1 immediate upstream dataset"
+  },
+  "proposed_remediation": {
+    "action": "prepare_description_update",
+    "target_field": "net_revenue",
+    "draft_description": "Net revenue in USD after refunds and discounts; confirm the final business definition with the analytics owner.",
+    "acceptance_checks": [
+      "The field has an approved definition.",
+      "The definition names the unit and adjustment rules.",
+      "A human approves the metadata write before it is sent to DataHub."
+    ]
+  },
+  "safety_boundary": "This snapshot performs read-only MCP calls. CAT prepares a proposed change; it does not write metadata without an explicit human approval."
+}

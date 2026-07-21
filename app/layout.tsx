@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 const siteUrl = new URL("https://cat-context-agent.flyguy.chatgpt.site");
-const title = "CAT Context Agent | DataHub Hackathon Submission";
+const title = "CAT Schema Remediation Agent | DataHub Hackathon Submission";
 const description =
-  "A submitted DataHub Agent Hackathon project that turns messy business requests into safe queues, approval gates, and receipt-backed decisions.";
+  "A DataHub agent that reads real schema and lineage context through the official MCP server, then prepares approval-gated metadata remediation.";
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
@@ -25,11 +25,11 @@ export const metadata: Metadata = {
   keywords: [
     "CAT Context Agent",
     "DataHub",
-    "agent context",
+    "MCP Server",
     "DataHub Agent Hackathon",
     "governance",
-    "workflow automation",
-    "agent receipts",
+    "schema remediation",
+    "metadata governance",
   ],
   alternates: {
     canonical: "/",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "CAT Context Agent social preview showing messy data flowing through DataHub context into safe agent action.",
+        alt: "CAT Schema Remediation Agent social preview showing DataHub context flowing into an approval-gated fix.",
       },
     ],
   },
